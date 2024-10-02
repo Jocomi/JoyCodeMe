@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Joy Code Me</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background-color: black;
+      color: white;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    /* 상단 메뉴바 스타일 */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 50px;
+      background-color: #111;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar ul li {
+      margin: 0 20px;
+    }
+
+    .navbar ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      transition: color 0.3s;
+    }
+
+    .navbar ul li a:hover {
+      color: #00ffff;
+    }
+
+    /* 중앙 고정된 텍스트 */
+    .center-logo {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .center-logo h1 {
+      font-size: 3rem;
+      margin: 0;
+    }
+
+    .center-logo h2 {
+      font-size: 1.5rem;
+      font-weight: 300;
+    }
+
+    /* 점을 배치할 컨테이너 */
+    .dot-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px; /* 컨테이너 크기 */
+      height: 500px; /* 컨테이너 크기 */
+      animation: rotate 10s linear infinite; /* 회전 애니메이션 추가 */
+    }
+
+    @keyframes rotate {
+      0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+      }
+      100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+      }
+    }
+
+    .dot {
+      width: 6px; /* 점 크기 증가 */
+      height: 6px; /* 점 크기 증가 */
+      background-color: white;
+      border-radius: 50%;
+      position: absolute;
+      opacity: 1;
+      animation: blink 1.5s infinite alternate;
+    }
+
+    /* 점 깜빡임 효과 */
+    @keyframes blink {
+      0% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.5;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    /* 원 크기 변화 애니메이션 */
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.2);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- 상단 메뉴바 -->
+  <div class="navbar">
+    <div class="logo">
+      <a href="#">LOGO</a>
+    </div>
+    <ul>
+      <li><a href="#">회사소개</a></li>
+      <li><a href="#">기술소개</a></li>
+      <li><a href="#">웹 제작</a></li>
+      <li><a href="#">고객지원</a></li>
+      <li><a href="#">가이드</a></li>
+    </ul>
+    <div class="user-options">
+      <a href="#">MyPage</a>
+      <a href="#">SIGN UP</a>
+    </div>
+  </div>
+
+  <!-- 중앙 고정 텍스트 -->
+  <div class="center-logo">
+    <h1>JOY CODE ME</h1>
+    <h2>AUTOMATIC CODING</h2>
+  </div>
+
+  <!-- 두 개의 겹치는 원을 그리기 위한 점들 -->
+  <div class="dot-container" id="dot-container">
+    <!-- 점들이 자바스크립트로 추가됩니다 -->
+  </div>
+
+  <script>
+    // 점들이 두 개의 원을 그리도록 좌표 계산
+    const container = document.getElementById('dot-container');
+    const numDots = 200; // 총 점의 개수 (조정)
+    const r = 130; // 원의 반지름 (조정)
+    const centerOffset = r / 2; // 두 원의 중심 간의 거리 = 원의 반지름의 반
+
+    // 첫 번째 원 (위쪽)
+    for (let i = 0; i < numDots / 2; i++) {
+      const dot = document.createElement('div');
+      dot.classList.add('dot');
+
+      // 각 점의 각도를 구함 (2 * pi = 360도)
+      const angle = (i / (numDots / 2)) * 2 * Math.PI;
+
+      // 첫 번째 원의 좌표 계산
+      const x = r * Math.cos(angle);
+      const y = r * Math.sin(angle) - centerOffset; // 위쪽으로 이동
+
+      // 점 위치 지정
+      dot.style.left = `${250 + x}px`; // 250은 컨테이너의 중심에서의 좌우 위치
+      dot.style.top = `${250 + y}px`;  // 250은 컨테이너의 중심에서의 상하 위치
+
+      container.appendChild(dot);
+    }
+
+    // 두 번째 원 (아래쪽)
+    for (let i = 0; i < numDots / 2; i++) {
+      const dot = document.createElement('div');
+      dot.classList.add('dot');
+
+      // 각 점의 각도를 구함 (2 * pi = 360도)
+      const angle = (i / (numDots / 2)) * 2 * Math.PI;
+
+      // 두 번째 원의 좌표 계산
+      const x = r * Math.cos(angle);
+      const y = r * Math.sin(angle) + centerOffset; // 아래쪽으로 이동
+
+      // 점 위치 지정
+      dot.style.left = `${250 + x}px`; // 250은 컨테이너의 중심에서의 좌우 위치
+      dot.style.top = `${250 + y}px`;  // 250은 컨테이너의 중심에서의 상하 위치
+
+      container.appendChild(dot);
+    }
+
+    // 크기 변화를 위한 원점 추가
+    const animateDots = () => {
+      const dots = document.querySelectorAll('.dot');
+      dots.forEach((dot) => {
+        dot.style.animation = 'pulse 1.5s infinite';
+      });
+    };
+
+    // 애니메이션 시작
+    animateDots();
+
+  </script>
+
+</body>
+</html>
