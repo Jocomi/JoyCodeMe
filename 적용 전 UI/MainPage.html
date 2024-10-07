@@ -16,17 +16,23 @@
       overflow: hidden;
     }
 
+    a {
+      text-decoration: none;
+      color: #fff;
+    }
+
     /* 상단 메뉴바 스타일 */
     .navbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 15px 50px;
+      padding: 0px 50px;
       background-color: #111;
       position: fixed;
       top: 0;
       width: 95%;
       z-index: 1000;
+      min-width: 800px;
     }
 
     .navbar ul {
@@ -51,6 +57,20 @@
       color: #00ffff;
     }
 
+    .logo{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      font-size: large;
+      font-weight: 650;
+      letter-spacing: 0.1em;
+    }
+
+    .logoImg {
+      margin: 15px 10px;
+      width: 30px;
+    }
+
     /* 중앙 고정된 텍스트 */
     .center-logo {
       position: absolute;
@@ -69,6 +89,10 @@
       font-size: 2rem;
       font-weight: 300;
       letter-spacing: 0.5em;
+    }
+
+    .user-options a{
+      margin: 0px 10px;
     }
 
     /* 점을 배치할 컨테이너 */
@@ -112,7 +136,8 @@
   <!-- 상단 메뉴바 -->
   <div class="navbar">
     <div class="logo">
-      <a href="#">LOGO</a>
+      <img src="../logoImg/menubar_logo(none).JPG" class="logoImg">
+      <a href="#">JCM</a>
     </div>
     <ul>
       <li><a href="#">회사소개</a></li>
