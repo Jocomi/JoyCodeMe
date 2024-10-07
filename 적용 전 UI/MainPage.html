@@ -5,15 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Joy Code Me</title>
   <style>
-    body, html {
+    body{
       margin: 0;
       padding: 0;
       width: 100%;
-      height: 100%;
       background-color: black;
       color: white;
       font-family: Arial, sans-serif;
-      overflow: hidden;
+      overflow-y: scroll;
     }
 
     a {
@@ -41,22 +40,22 @@
       margin: 0;
       padding: 0;
     }
-
+    
     .navbar ul li {
       margin: 0 20px;
     }
-
+    
     .navbar ul li a {
       color: white;
       text-decoration: none;
       font-size: 18px;
       transition: color 0.3s;
     }
-
+    
     .navbar ul li a:hover {
       color: #00ffff;
     }
-
+    
     .logo{
       display: flex;
       flex-direction: row;
@@ -65,14 +64,22 @@
       font-weight: 650;
       letter-spacing: 0.1em;
     }
-
+    
     .logoImg {
       margin: 15px 10px;
       width: 30px;
     }
+    
+    .user-options a{
+      margin: 0px 10px;
+    }
 
-    /* 중앙 고정된 텍스트 */
-    .center-logo {
+    /* 최상단 메인페이지 고정된 텍스트 */
+    .main-top {
+      height: 100vh;
+    }
+    
+    .main-top .center-logo {
       position: absolute;
       top: 50%;
       left: 50%;
@@ -80,23 +87,20 @@
       text-align: center;
     }
 
-    .center-logo h1 {
+    .main-top .center-logo h1 {
       font-size: 4.5rem;
       margin: 0;
     }
 
-    .center-logo h2 {
+    .main-top .center-logo h2 {
       font-size: 2rem;
       font-weight: 300;
       letter-spacing: 0.5em;
     }
 
-    .user-options a{
-      margin: 0px 10px;
-    }
 
     /* 점을 배치할 컨테이너 */
-    .dot-container {
+    .main-top .dot-container {
       position: absolute;
       top: 50%;
       left: 50%;
@@ -106,7 +110,7 @@
     }
 
     /* 점 스타일 */
-    .dot {
+    .main-top .dot {
       width: 10px;
       height: 10px;
       background-color: #cccc;
@@ -126,11 +130,312 @@
       }
     }
 
+    /* 메인페이지 main-introduce */
+    .main-introduce {
+      height: 60vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .main-introduce .box {
+      border: 2px solid #fff; /* 흰색 테두리 */
+      width: 800px;
+      height: 400px;
+      text-align: center;
+      font-size: 1.5rem; /* 글자 크기 조정 */
+      letter-spacing: 0.2em;
+      line-height: 2em;
+    }
+
+    .main-introduce .box b {
+      font-size: 1.7rem; /* 'JCM' 텍스트 강조 */
+    }
+
+    /* 메인페이지 main-simulation */
+    .main-simulation {
+      height: 80vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .main-simulation .text {
+      width: 90%;
+      text-align: left;
+      margin-bottom: 20px;
+    }
+
+    .main-simulation .text .title {
+      font-size: xx-large;
+      font-weight: 800;
+      margin: 15px;
+      margin-left: 30px;
+    }
+
+    .main-simulation .box {
+      border: 2px solid #fff; /* 흰색 테두리 */
+      width: 800px;
+      height: 400px;
+      text-align: center;
+      font-size: 1.5rem; /* 글자 크기 조정 */
+      letter-spacing: 0.2em;
+      line-height: 2em;
+    }
+
+    .main-simulation .box b {
+      font-size: 1.7rem; /* 'JCM' 텍스트 강조 */
+    }
+
+    /* 메인페이지 main-reference */
+    .main-reference {
+      height: 110vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .main-reference .text {
+      width: 90%;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .main-reference .text .title {
+      font-size: xx-large;
+      font-weight: 800;
+      margin: 15px;
+      margin-left: 30px;
+    }
+
+    .main-reference .box {
+      border: 2px solid #fff;
+      width: 200px;
+      height: 400px;
+      text-align: center;
+      font-size: 1.5rem;
+      letter-spacing: 0.2em;
+      line-height: 2em;
+    }
+
+    .main-reference .box b {
+      font-size: 1.7rem;
+    }
+
+    .main-reference .icon {
+      margin: 100px 0px;
+      border: 1px solid #fff; 
+      width: 1000px;
+      text-align: center;
+    }
+
+    .main-reference .reference-list {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .main-reference .reference-list .box {
+      margin: 10px;
+    }
+
+    /* 메인페이지 main-describe */
+    .main-describe {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .main-describe .text {
+      width: 90%;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .main-describe .text .title {
+      font-size: xx-large;
+      font-weight: 800;
+      margin: 15px;
+      margin-left: 30px;
+    }
+
+    .main-describe .box {
+      border: 2px solid #fff;
+      width: 80%;
+      height: 700px;
+      text-align: center;
+      font-size: 1.5rem;
+      letter-spacing: 0.2em;
+      line-height: 2em;
+    }
+
+    .main-describe .box b {
+      font-size: 1.7rem;
+    }
+
+     /* 메인페이지 main-method */
+     .main-method {
+      height: 120vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .main-method .text {
+      width: 90%;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .main-method .text .title {
+      font-size: xx-large;
+      font-weight: 800;
+      margin: 15px;
+      margin-left: 30px;
+    }
+
+    .main-method .box {
+      border: 2px solid #fff;
+      width: 80%;
+      height: 700px;
+      text-align: center;
+      font-size: 1.5rem;
+      letter-spacing: 0.2em;
+      line-height: 2em;
+    }
+
+    .main-method .box b {
+      font-size: 1.7rem;
+    }
+
+    /* 메인페이지 main-email */
+    .main-email {
+      height: 80vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .main-email .box {
+      border: 2px solid #fff;
+      width: 65%;
+      height: 700px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: baseline;
+      letter-spacing: 0.1em;
+      background-image: linear-gradient(to bottom right, 
+      rgb(255, 117, 100),rgb(255, 117, 150), rgb(240, 86, 149), rgb(60, 103, 215), rgb(33, 136, 222), rgb(153, 50, 197));
+    }
+
+    .main-email .box .text {
+      width: 90%;
+      text-align: left;
+      font-size: medium;
+      margin-left: 30px;
+    }
+
+    .main-email .box .text .title {
+      font-size: large;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .main-email .box input {
+      width: 400px;
+      height: 30px;
+      margin: 10px 0px;
+      border: #888 solid 0.2px;
+      border-radius: 7px;
+      padding: 0px 5px;
+    }
+
+    .main-email .box textarea {
+      width: 400px;
+      height: 100px;
+      margin: 10px 0px;
+      border: #888 solid 0.2px;
+      border-radius: 7px;
+      resize: none;
+      font-family: Arial, sans-serif;
+      padding: 5px;
+    }
+    
+    .main-email .box button {
+      width: 250px;
+      height: 40px;
+      margin: 10px 0px; 
+      background-color: #111;
+      border: none;
+      border-radius: 5px;
+      color: #fff;
+      font-weight: 700;
+      font-size: medium;
+    }
+
+
+    /* 푸터 footer */
+    footer {
+      margin-top: 80px;
+      height: 20vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    footer .link {
+      display: flex;
+      margin-bottom: 20px;
+    }
+    
+    footer .box {
+      width: 300px;
+      height: 100px;
+      color: #888;
+    }
+
+    footer .box a{
+      color: #888;
+    }
+
+    footer .title {
+      color: #fff;
+      font-size: larger;
+    }
+
+    footer .policy {
+      font-size: small;
+      color: #888;
+      margin-top: 60px;
+      margin-bottom: 8px;
+    }
+
+    footer .copywrite {
+      color: #888;
+      margin-bottom: 1px;
+    }
+
   </style>
 </head>
 <body>
   <!-- 두 개의 겹치는 원을 그리기 위한 점들 -->
-  <div class="dot-container" id="dot-container">
+  <div class="main-top">
+    <div class="dot-container" id="dot-container">
+    </div>
+    
+    <!-- 중앙 고정 텍스트 -->
+    <div class="center-logo">
+      <h1>JOY CODE ME</h1>
+      <h2> AUTOMATIC CODING</h2>
+    </div>
   </div>
   
   <!-- 상단 메뉴바 -->
@@ -152,25 +457,168 @@
     </div>
   </div>
 
-  <!-- 중앙 고정 텍스트 -->
-  <div class="center-logo">
-    <h1>JOY CODE ME</h1>
-    <h2> AUTOMATIC CODING</h2>
+  <div class="main-introduce">
+    <div class="box">
+      <b>JCM과 함께라면</b><br>
+      누구나 성장할 수 있습니다
+    </div>
+  </div>
+  
+  
+  <div class="main-simulation">
+
+    <div class="text">
+      <p class="title">조 깟 메</p>
+      쉽고 빠르게 만드는 웹사이트
+    </div>
+
+    <div class="box">
+      <video src=""></video>
+      <p>(웹사이트 제작기능 구동영상 넣고 텍스트 삭제)</p>
+    </div>
+
   </div>
 
+  <div class="main-reference">
+    <div class="text">
+      <p class="title">눈에 띄는 웹사이트를 JCM을 통해 간편하게 만드세요</p>
+      JCM은 AI참여형 개발 툴으로 초급과 고급 개발자의 프론트엔드, 백엔드 디자인 시스템을 제공합니다.<br/>
+      또한, JCM을 통해 디자이너와 개발자 간의 매끄러운 협업을 가능하게 합니다. <br/>
+      AI를 사용한 개발 툴로 빠른 개발과 협업을 경험하세요!
+    </div>
+
+    <div class="icon">
+      <p>(지원한 아이콘들 나열 후 텍스트 삭제)</p>
+      <p>ex) 깃허브, js, react, html5, css5, java, spring</p>
+    </div>
+
+    <div class="reference-list">
+      <div class="box">
+        <p>front-end</p>
+        <p>대충설명</p>
+        <p>아이콘</p>
+      </div>
+      <div class="box">
+        <p>Function</p>
+        <p>대충설명</p>
+        <p>아이콘</p>
+      </div>
+      <div class="box">
+        <p>Database</p>
+        <p>대충설명</p>
+        <p>아이콘</p>
+      </div>
+      <div class="box">
+        <p>Server</p>
+        <p>대충설명</p>
+        <p>아이콘</p>
+      </div>
+    </div>
+    
+  </div>
+
+  <div class="main-describe">
+
+    <div class="text">
+      <p class="title">웹사이트 제작의 모든 고민을 해결해 드립니다</p>
+      간단한 의뢰를 통해 다양한 결과물을 얻으세요!
+    </div>
+
+    <div class="box">
+      <video src=""></video>
+      <p>(웹사이트 제작방법, 사용하는 영상 넣고 텍스트 삭제)</p>
+        ---상세하게는 피그마 보고 이해하세요
+    </div>
+
+  </div>
+
+  <div class="main-method">
+
+    <div class="text">
+      <p class="title">간단한 사용, 결과물 선택</p>
+      마음에 드는 결과물이 나올때 까지 반복할 수 있습니다
+    </div>
+
+    <div class="box">
+      <video src=""></video>
+      <p>(자세히 사용하는 방법 영상 넣고 텍스트 삭제)</p>
+        ---상세하게는 피그마 보고 이해하세요
+    </div>
+  </div>
+
+  <div class="main-email">
+    <div class="box">
+      <div class="text">
+        <p class="title">Contect Us</p>
+        Fill the form and send Email to discuss how<br/>
+        we can help you achieve successful project!
+      </div>
+      <input type="text" name="" placeholder="Name">
+      <input type="text" name="" placeholder="Your Role">
+      <input type="email" name="" placeholder="Email">
+      <input type="text" name="" placeholder="Industry">
+      <textarea type="text" name="" placeholder="Message"></textarea>
+      <button>Let's meet us ▶▶</button>
+    </div>
+
+  </div>
+
+  <hr>
+
+  <footer>
+    <div class="link">
+      <div class="box title">
+        JoyCodeMe
+      </div>
+      <div class="box">
+        Learn
+        <br><br>
+        <a href="#">Introduction</a><br>
+        <a href="#">Practice</a><br>
+        <a href="#">Ask and Questions</a><br>
+      </div>
+      <div class="box">
+        Code
+        <br><br>
+        <a href="#">Code Management</a><br>
+        <a href="#">Libraries</a><br>
+        <a href="#">API</a><br>
+      </div>
+      <div class="box">
+        More
+        <br><br>
+        <a href="#">Logo and Brand</a><br>
+        <a href="#">Code Producer</a><br>
+      </div>
+      <div class="box">
+        Follow
+        <br><br>
+        <a href="#">Instagram</a><br>
+        <a href="#">GitHub</a><br>
+        <a href="#">Discord</a><br>
+      </div>
+    </div>
+    <div class="policy">
+      For web site terms of use, trademark policy and general project policies please see https://jocomi.org
+    </div>
+    <div class="copywrite">
+      CopyWrite @ 2024 Jocomi Foundation. All rights reserved
+    </div>
+
+  </footer>
 
   <script>
     // 점들이 두 개의 원을 그리도록 좌표 계산
     const container = document.getElementById('dot-container');
-    let numDots = 190; // 총 점의 개수 (조정)
-    let r = 160; // 원의 반지름 (조정)
+    let numDots = 190; // 총 점의 개수
+    let r = 160; // 원의 반지름
     let centerOffset = r / 2; // 두 원의 중심 간의 거리 = 원의 반지름의 반
 
     // 지연 시간을 계산하기 위한 변수
     const blinkDuration = 6; // 깜빡임 애니메이션 시간
     const delayStep = blinkDuration / numDots; // 점마다의 지연 시간 계산
 
-    // 첫 번째 원 (위쪽)
+    // 첫 번째 원
     for (let j = 0; j < 17; j++) {
       for (let i = 0; i < numDots / 2; i++) {
         const dot = document.createElement('div');
@@ -192,31 +640,27 @@
 
         container.appendChild(dot);
       }
-      r = r-10;
-      numDots = numDots-10
+      r = r-10;  // 반복 횟수마다 반지름 길이 조정(원 내부 채우기)
+      numDots = numDots-10  // 반복 횟수마다 원 갯수 조정
     }
 
-    numDots = 190; // 총 점의 개수 (조정)
-    r = 160; // 원의 반지름 (조정)
-    centerOffset = r / 2; // 두 원의 중심 간의 거리 = 원의 반지름의 반
-    // 두 번째 원 (아래쪽)
+    numDots = 190; // 총 점의 개수 초기화
+    r = 160; // 원의 반지름 초기화
+
+    // 두 번째 원
     for (let j = 0; j < 17; j++) {
       for (let i = 0; i < numDots / 2; i++) {
         const dot = document.createElement('div');
         dot.classList.add('dot');
 
-        // 각 점의 각도를 구함 (2 * pi = 360도)
         const angle = (i / (numDots / 2)) * 2 * Math.PI + 80.17;
 
-        // 두 번째 원의 좌표 계산
         const x = r * Math.cos(angle);
         const y = r * Math.sin(angle) + centerOffset; // 아래쪽으로 이동
 
-        // 점 위치 지정
-        dot.style.left = `${250 + x}px`; // 250은 컨테이너의 중심에서의 좌우 위치
-        dot.style.top = `${250 + y}px`;  // 250은 컨테이너의 중심에서의 상하 위치
+        dot.style.left = `${250 + x}px`; 
+        dot.style.top = `${250 + y}px`; 
 
-        // 애니메이션 지연 시간 설정
         dot.style.animationDelay = `${i * delayStep}s`;
 
         container.appendChild(dot);
