@@ -41,22 +41,22 @@
       margin: 0;
       padding: 0;
     }
-
+    
     .navbar ul li {
       margin: 0 20px;
     }
-
+    
     .navbar ul li a {
       color: white;
       text-decoration: none;
       font-size: 18px;
       transition: color 0.3s;
     }
-
+    
     .navbar ul li a:hover {
       color: #00ffff;
     }
-
+    
     .logo{
       display: flex;
       flex-direction: row;
@@ -65,14 +65,18 @@
       font-weight: 650;
       letter-spacing: 0.1em;
     }
-
+    
     .logoImg {
       margin: 15px 10px;
       width: 30px;
     }
+    
+    .user-options a{
+      margin: 0px 10px;
+    }
 
-    /* 중앙 고정된 텍스트 */
-    .center-logo {
+    /* 최상단 메인페이지 고정된 텍스트 */
+    .main-top .center-logo {
       position: absolute;
       top: 50%;
       left: 50%;
@@ -80,23 +84,20 @@
       text-align: center;
     }
 
-    .center-logo h1 {
+    .main-top .center-logo h1 {
       font-size: 4.5rem;
       margin: 0;
     }
 
-    .center-logo h2 {
+    .main-top .center-logo h2 {
       font-size: 2rem;
       font-weight: 300;
       letter-spacing: 0.5em;
     }
 
-    .user-options a{
-      margin: 0px 10px;
-    }
 
     /* 점을 배치할 컨테이너 */
-    .dot-container {
+    .main-top .dot-container {
       position: absolute;
       top: 50%;
       left: 50%;
@@ -106,7 +107,7 @@
     }
 
     /* 점 스타일 */
-    .dot {
+    .main-top .dot {
       width: 10px;
       height: 10px;
       background-color: #cccc;
@@ -130,7 +131,15 @@
 </head>
 <body>
   <!-- 두 개의 겹치는 원을 그리기 위한 점들 -->
-  <div class="dot-container" id="dot-container">
+  <div class="main-top">
+    <div class="dot-container" id="dot-container">
+    </div>
+    
+    <!-- 중앙 고정 텍스트 -->
+    <div class="center-logo">
+      <h1>JOY CODE ME</h1>
+      <h2> AUTOMATIC CODING</h2>
+    </div>
   </div>
   
   <!-- 상단 메뉴바 -->
@@ -152,25 +161,39 @@
     </div>
   </div>
 
-  <!-- 중앙 고정 텍스트 -->
-  <div class="center-logo">
-    <h1>JOY CODE ME</h1>
-    <h2> AUTOMATIC CODING</h2>
+  <div class="main-introduce">
   </div>
 
+  <div class="main-simulation">
+  </div>
+
+  <div class="main-reference">
+  </div>
+
+  <div class="main-describe">
+  </div>
+
+  <div class="main-method">
+  </div>
+
+  <div class="main-email">
+  </div>
+
+  <footer>
+  </footer>
 
   <script>
     // 점들이 두 개의 원을 그리도록 좌표 계산
     const container = document.getElementById('dot-container');
-    let numDots = 190; // 총 점의 개수 (조정)
-    let r = 160; // 원의 반지름 (조정)
+    let numDots = 190; // 총 점의 개수
+    let r = 160; // 원의 반지름
     let centerOffset = r / 2; // 두 원의 중심 간의 거리 = 원의 반지름의 반
 
     // 지연 시간을 계산하기 위한 변수
     const blinkDuration = 6; // 깜빡임 애니메이션 시간
     const delayStep = blinkDuration / numDots; // 점마다의 지연 시간 계산
 
-    // 첫 번째 원 (위쪽)
+    // 첫 번째 원
     for (let j = 0; j < 17; j++) {
       for (let i = 0; i < numDots / 2; i++) {
         const dot = document.createElement('div');
@@ -192,31 +215,27 @@
 
         container.appendChild(dot);
       }
-      r = r-10;
-      numDots = numDots-10
+      r = r-10;  // 반복 횟수마다 반지름 길이 조정(원 내부 채우기)
+      numDots = numDots-10  // 반복 횟수마다 원 갯수 조정
     }
 
-    numDots = 190; // 총 점의 개수 (조정)
-    r = 160; // 원의 반지름 (조정)
-    centerOffset = r / 2; // 두 원의 중심 간의 거리 = 원의 반지름의 반
-    // 두 번째 원 (아래쪽)
+    numDots = 190; // 총 점의 개수 초기화
+    r = 160; // 원의 반지름 초기화
+
+    // 두 번째 원
     for (let j = 0; j < 17; j++) {
       for (let i = 0; i < numDots / 2; i++) {
         const dot = document.createElement('div');
         dot.classList.add('dot');
 
-        // 각 점의 각도를 구함 (2 * pi = 360도)
         const angle = (i / (numDots / 2)) * 2 * Math.PI + 80.17;
 
-        // 두 번째 원의 좌표 계산
         const x = r * Math.cos(angle);
         const y = r * Math.sin(angle) + centerOffset; // 아래쪽으로 이동
 
-        // 점 위치 지정
-        dot.style.left = `${250 + x}px`; // 250은 컨테이너의 중심에서의 좌우 위치
-        dot.style.top = `${250 + y}px`;  // 250은 컨테이너의 중심에서의 상하 위치
+        dot.style.left = `${250 + x}px`; 
+        dot.style.top = `${250 + y}px`; 
 
-        // 애니메이션 지연 시간 설정
         dot.style.animationDelay = `${i * delayStep}s`;
 
         container.appendChild(dot);
