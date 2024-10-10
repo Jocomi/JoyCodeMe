@@ -76,7 +76,7 @@
 
     /* 최상단 메인페이지 고정된 텍스트 */
     .main-top {
-      height: 100vh;
+      height: 120vh;
     }
     
     .main-top .center-logo {
@@ -117,7 +117,7 @@
       border-radius: 50%;
       position: absolute;
       opacity: 1;
-      animation: blink 1.5s infinite alternate; /* 깜빡임 애니메이션 */
+      animation: blink 2.5s infinite alternate; /* 깜빡임 애니메이션 */
     }
 
     /* 깜빡임 애니메이션 */
@@ -138,9 +138,8 @@
       align-items: center;
     }
     .main-introduce .box {
-      border: 2px solid #fff; /* 흰색 테두리 */
       width: 800px;
-      height: 400px;
+      height: 500px;
       text-align: center;
       font-size: 1.5rem; /* 글자 크기 조정 */
       letter-spacing: 0.2em;
@@ -150,10 +149,19 @@
     .main-introduce .box b {
       font-size: 1.7rem; /* 'JCM' 텍스트 강조 */
     }
+    .bg-video {
+  position: absolute;
+  top: 110vh;
+  left: -100;
+  width: 100%;
+  z-index: -1;
+  background-size: cover;
+}
+
 
     /* 메인페이지 main-simulation */
     .main-simulation {
-      height: 80vh;
+      height: 150vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -422,6 +430,9 @@
       color: #888;
       margin-bottom: 1px;
     }
+    video {
+      width: 100%;
+    }
 
   </style>
 </head>
@@ -462,6 +473,7 @@
       <b>JCM과 함께라면</b><br>
       누구나 성장할 수 있습니다
     </div>
+    <video class="bg-video" src="main-banner123.mp4" muted autoplay playsinline loop></video>
   </div>
   
   
