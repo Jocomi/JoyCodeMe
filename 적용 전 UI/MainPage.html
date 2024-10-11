@@ -116,8 +116,8 @@
       background-color: #cccc;
       border-radius: 50%;
       position: absolute;
-      opacity: 1;
-      animation: blink 2.2s infinite alternate; /* 깜빡임 애니메이션 */
+      opacity: 0;
+      animation: blink 2.7s infinite alternate; /* 깜빡임 애니메이션 */
     }
 
     .main-top .dot-decoration {
@@ -724,7 +724,7 @@
         dot.style.top = `${250 + y}px`;  // 250은 컨테이너의 중심에서의 상하 위치
 
         // 애니메이션 지연 시간 설정
-        dot.style.animationDelay = `${1 + i * 0.0008}s`;
+        dot.style.animationDelay = `${3 + i * 0.0008}s`;
 
         decoContainer.appendChild(dot);
       }
@@ -745,7 +745,7 @@
         dot.style.top = `${250 + y}px`;  // 250은 컨테이너의 중심에서의 상하 위치
 
         // 애니메이션 지연 시간 설정
-        dot.style.animationDelay = `${2.2 + i * 0.005}s`;
+        dot.style.animationDelay = `${4.2 + i * 0.005}s`;
 
         lineContainer.appendChild(dot);
       }
