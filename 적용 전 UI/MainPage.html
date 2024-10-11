@@ -117,8 +117,19 @@
       border-radius: 50%;
       position: absolute;
       opacity: 1;
-      animation: blink 2.5s infinite alternate; /* 깜빡임 애니메이션 */
+      animation: blink 2.2s infinite alternate; /* 깜빡임 애니메이션 */
     }
+
+    .main-top .dot-decoration {
+      width: 2px;
+      height: 2px;
+      background-color: #ffff;
+      border-radius: 50%;
+      position: absolute;
+      opacity: 0;
+      animation: appear 1s infinite; /* 깜빡임 애니메이션 */
+    }
+    
 
     /* 깜빡임 애니메이션 */
     @keyframes blink {
@@ -129,6 +140,17 @@
         opacity: 0;
       }
     }
+
+    /* 나타남 애니메이션 */
+    @keyframes appear {
+      0% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
 
     /* 메인페이지 main-introduce */
     .main-introduce {
@@ -681,7 +703,56 @@
     numDots = numDots-10
     }
 
+    const decoContainer = document.getElementById('dot-container');
+    let decoNumDots = 3000; // 총 점의 개수
+    let decoR = 100; // 원의 반지름
+    let decoCenterOffset = r / 2; // 두 원의 중심 간의 거리 = 원의 반지름의 반
+
+    for (let i = 0; i < decoNumDots / 2; i++) {
+        const dot = document.createElement('div');
+        dot.classList.add('dot-decoration');
+
+        // 각 점의 각도를 구함 (2 * pi = 360도)
+        const angle = (i / (decoNumDots / 2) ) * 2 * (Math.PI-0.05) - 0.41;
+
+        // 첫 번째 원의 좌표 계산
+        const x = decoR * Math.cos(angle) - 680;
+        const y = decoR * Math.sin(angle) + 300; 
+
+        // 점 위치 지정
+        dot.style.left = `${250 + x}px`; // 250은 컨테이너의 중심에서의 좌우 위치
+        dot.style.top = `${250 + y}px`;  // 250은 컨테이너의 중심에서의 상하 위치
+
+        // 애니메이션 지연 시간 설정
+        dot.style.animationDelay = `${1 + i * 0.0008}s`;
+
+        decoContainer.appendChild(dot);
+      }
+
+    const lineContainer = document.getElementById('dot-container');
+    let lineNumDots = 600; // 총 점의 개수
+
+    for (let i = 0; i < lineNumDots / 2; i++) {
+        const dot = document.createElement('div');
+        dot.classList.add('dot-decoration');
+
+        // 첫 번째 원의 좌표 계산
+        const x = i - 720;
+        const y = 255; 
+
+        // 점 위치 지정
+        dot.style.left = `${250 + x}px`; // 250은 컨테이너의 중심에서의 좌우 위치
+        dot.style.top = `${250 + y}px`;  // 250은 컨테이너의 중심에서의 상하 위치
+
+        // 애니메이션 지연 시간 설정
+        dot.style.animationDelay = `${2.2 + i * 0.005}s`;
+
+        lineContainer.appendChild(dot);
+      }
+
   </script>
+
+  
 
 </body>
 </html>
