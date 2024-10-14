@@ -113,11 +113,11 @@
     .main-top .dot {
       width: 10px;
       height: 10px;
-      background-color: #cccc;
+      background-color: #bbbb;
       border-radius: 50%;
       position: absolute;
       opacity: 0;
-      animation: blink 2.7s infinite alternate; /* 깜빡임 애니메이션 */
+      animation: blink 2.5s infinite alternate; /* 깜빡임 애니메이션 */
     }
 
     .main-top .dot-decoration {
@@ -127,7 +127,19 @@
       border-radius: 50%;
       position: absolute;
       opacity: 0;
-      animation: appear 1s infinite; /* 깜빡임 애니메이션 */
+      animation: appear 1s alternate; /* 깜빡임 애니메이션 */
+      animation-fill-mode: forwards;
+    }
+
+    .main-top .dotted-decoration {
+      width: 10px;
+      height: 10px;
+      background-color: #ffff;
+      border-radius: 50%;
+      position: absolute;
+      opacity: 0;
+      animation: onoff 1s alternate ; /* 깜빡임 애니메이션 */
+      animation-fill-mode: forwards;
     }
     
 
@@ -145,6 +157,33 @@
     @keyframes appear {
       0% {
         opacity: 1;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    @keyframes onoff {
+      0% {
+        opacity: 1;
+      }
+      5% {
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      15% {
+        opacity: 1;
+      }
+      20% {
+        opacity: 0;
+      }
+      35% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0;
       }
       100% {
         opacity: 1;
@@ -704,7 +743,7 @@
     }
 
     const decoContainer = document.getElementById('dot-container');
-    let decoNumDots = 3000; // 총 점의 개수
+    let decoNumDots = 1000; // 총 점의 개수
     let decoR = 100; // 원의 반지름
     let decoCenterOffset = r / 2; // 두 원의 중심 간의 거리 = 원의 반지름의 반
 
@@ -724,7 +763,7 @@
         dot.style.top = `${250 + y}px`;  // 250은 컨테이너의 중심에서의 상하 위치
 
         // 애니메이션 지연 시간 설정
-        dot.style.animationDelay = `${3 + i * 0.0008}s`;
+        dot.style.animationDelay = `${3 + i * 0.0021}s`;
 
         decoContainer.appendChild(dot);
       }
@@ -750,6 +789,9 @@
         lineContainer.appendChild(dot);
       }
 
+
+
+
     // 오른쪽 위 선 애니메이션 추가
     const upperRightLineContainer = document.getElementById('dot-container');
     let upperRightLineNumDots = 600; // 총 점의 개수
@@ -760,27 +802,8 @@
         dot.classList.add('dot-decoration');
 
         // 수평으로 이동하는 부분
-        const x = i + 400; // X 위치를 조정하여 오른쪽으로 이동
-        const y = -100; // Y 위치를 고정하여 수평 이동
-
-        // 점 위치 지정
-        dot.style.left = `${250 + x}px`; // 컨테이너 중심을 기준으로 조정
-        dot.style.top = `${250 + y}px`;  // 컨테이너 중심을 기준으로 조정
-
-        // 부드러운 효과를 위한 애니메이션 지연 시간 설정
-        dot.style.animationDelay = `${2.2 + i * 0.005}s`;
-
-        upperRightLineContainer.appendChild(dot);
-    }
-
-    // 두 번째 대각선 이동
-    for (let i = 0; i < upperRightLineNumDots / 3; i++) {
-        const dot = document.createElement('div');
-        dot.classList.add('dot-decoration');
-
-        // 대각선으로 이동하는 부분
-        const x = i + 600; // X 위치를 조정하여 오른쪽으로 이동
-        const y = -100 - i; // Y 위치를 조정하여 위로 올라감
+        const x = i + 390; // X 위치를 조정하여 오른쪽으로 이동
+        const y = -240; // Y 위치를 고정하여 수평 이동
 
         // 점 위치 지정
         dot.style.left = `${250 + x}px`; // 컨테이너 중심을 기준으로 조정
@@ -792,13 +815,32 @@
         upperRightLineContainer.appendChild(dot);
     }
 
+    // 두 번째 대각선 이동
+    for (let i = 0; i < 60; i++) {
+        const dot = document.createElement('div');
+        dot.classList.add('dot-decoration');
+
+        // 대각선으로 이동하는 부분
+        const x = i + 590; // X 위치를 조정하여 오른쪽으로 이동
+        const y = -240 - i; // Y 위치를 조정하여 위로 올라감
+
+        // 점 위치 지정
+        dot.style.left = `${250 + x}px`; // 컨테이너 중심을 기준으로 조정
+        dot.style.top = `${250 + y}px`;  // 컨테이너 중심을 기준으로 조정
+
+        // 부드러운 효과를 위한 애니메이션 지연 시간 설정
+        dot.style.animationDelay = `${4 + i * 0.005}s`;
+
+        upperRightLineContainer.appendChild(dot);
+    }
+
     // 세 번째 수평 이동
     for (let i = 0; i < upperRightLineNumDots / 3; i++) {
         const dot = document.createElement('div');
         dot.classList.add('dot-decoration');
 
         // 다시 수평으로 이동하는 부분
-        const x = i + 800; // X 위치를 조정하여 오른쪽으로 더 이동
+        const x = i + 650; // X 위치를 조정하여 오른쪽으로 더 이동
         const y = -300; // Y 위치를 고정하여 대각선 이후 수평 이동
 
         // 점 위치 지정
@@ -806,9 +848,46 @@
         dot.style.top = `${250 + y}px`;  // 컨테이너 중심을 기준으로 조정
 
         // 부드러운 효과를 위한 애니메이션 지연 시간 설정
-        dot.style.animationDelay = `${3.6 + i * 0.005}s`;
+        dot.style.animationDelay = `${4.4 + i * 0.005}s`;
 
         upperRightLineContainer.appendChild(dot);
+    }
+
+    // 선 양쪽 점 추가
+    for (let i = 0; i < 2; i++) {
+      const dot = document.createElement('div');
+      dot.classList.add('dotted-decoration');
+
+        // 다시 수평으로 이동하는 부분
+      const x = 386 + i*460; // X 위치를 조정하여 오른쪽으로 더 이동
+      const y = -244 - i*60; // Y 위치를 고정하여 대각선 이후 수평 이동
+
+        // 점 위치 지정
+      dot.style.left = `${250 + x}px`; // 컨테이너 중심을 기준으로 조정
+      dot.style.top = `${250 + y}px`;  // 컨테이너 중심을 기준으로 조정
+
+        // 부드러운 효과를 위한 애니메이션 지연 시간 설정
+      dot.style.animationDelay = `${5.7}s`;
+
+      upperRightLineContainer.appendChild(dot);
+    }
+
+    for (let i = 0; i < 2; i++) {
+      const dot = document.createElement('div');
+      dot.classList.add('dotted-decoration');
+
+        // 다시 수평으로 이동하는 부분
+      const x = -725 + i*300; // X 위치를 조정하여 오른쪽으로 더 이동
+      const y = 251; // Y 위치를 고정하여 대각선 이후 수평 이동
+
+        // 점 위치 지정
+      dot.style.left = `${250 + x}px`; // 컨테이너 중심을 기준으로 조정
+      dot.style.top = `${250 + y}px`;  // 컨테이너 중심을 기준으로 조정
+
+        // 부드러운 효과를 위한 애니메이션 지연 시간 설정
+      dot.style.animationDelay = `${5.9}s`;
+
+      upperRightLineContainer.appendChild(dot);
     }
 
   </script>
