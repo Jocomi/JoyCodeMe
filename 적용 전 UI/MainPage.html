@@ -750,6 +750,67 @@
         lineContainer.appendChild(dot);
       }
 
+    // 오른쪽 위 선 애니메이션 추가
+    const upperRightLineContainer = document.getElementById('dot-container');
+    let upperRightLineNumDots = 600; // 총 점의 개수
+
+    // 첫 번째 수평 이동
+    for (let i = 0; i < upperRightLineNumDots / 3; i++) {
+        const dot = document.createElement('div');
+        dot.classList.add('dot-decoration');
+
+        // 수평으로 이동하는 부분
+        const x = i + 400; // X 위치를 조정하여 오른쪽으로 이동
+        const y = -100; // Y 위치를 고정하여 수평 이동
+
+        // 점 위치 지정
+        dot.style.left = `${250 + x}px`; // 컨테이너 중심을 기준으로 조정
+        dot.style.top = `${250 + y}px`;  // 컨테이너 중심을 기준으로 조정
+
+        // 부드러운 효과를 위한 애니메이션 지연 시간 설정
+        dot.style.animationDelay = `${2.2 + i * 0.005}s`;
+
+        upperRightLineContainer.appendChild(dot);
+    }
+
+    // 두 번째 대각선 이동
+    for (let i = 0; i < upperRightLineNumDots / 3; i++) {
+        const dot = document.createElement('div');
+        dot.classList.add('dot-decoration');
+
+        // 대각선으로 이동하는 부분
+        const x = i + 600; // X 위치를 조정하여 오른쪽으로 이동
+        const y = -100 - i; // Y 위치를 조정하여 위로 올라감
+
+        // 점 위치 지정
+        dot.style.left = `${250 + x}px`; // 컨테이너 중심을 기준으로 조정
+        dot.style.top = `${250 + y}px`;  // 컨테이너 중심을 기준으로 조정
+
+        // 부드러운 효과를 위한 애니메이션 지연 시간 설정
+        dot.style.animationDelay = `${3 + i * 0.005}s`;
+
+        upperRightLineContainer.appendChild(dot);
+    }
+
+    // 세 번째 수평 이동
+    for (let i = 0; i < upperRightLineNumDots / 3; i++) {
+        const dot = document.createElement('div');
+        dot.classList.add('dot-decoration');
+
+        // 다시 수평으로 이동하는 부분
+        const x = i + 800; // X 위치를 조정하여 오른쪽으로 더 이동
+        const y = -300; // Y 위치를 고정하여 대각선 이후 수평 이동
+
+        // 점 위치 지정
+        dot.style.left = `${250 + x}px`; // 컨테이너 중심을 기준으로 조정
+        dot.style.top = `${250 + y}px`;  // 컨테이너 중심을 기준으로 조정
+
+        // 부드러운 효과를 위한 애니메이션 지연 시간 설정
+        dot.style.animationDelay = `${3.6 + i * 0.005}s`;
+
+        upperRightLineContainer.appendChild(dot);
+    }
+
   </script>
 
   
