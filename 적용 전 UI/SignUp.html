@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joy Code Me</title>
+
+    <style>
+        @font-face {
+            font-family: 'DungGeunMo';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000;
+            color: aliceblue;
+            overflow-x: hidden;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        .container h1 {
+            font-size: 5.2em;
+            margin-bottom: 90px;
+            animation: animate 1.5s ease-in-out;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        #id,
+        #pwd {
+            background-color: #000;
+            font-family: 'DungGeunMo';
+            font-size: 1.5em;
+            border: none;
+            border-bottom: 2px solid aliceblue;
+            width: 400px; /* 처음 이미지와 같은 너비 */
+            height: 50px; /* 높이도 동일하게 설정 */
+            text-align: center;
+            color: aliceblue;
+            margin-bottom: 20px;
+            transition: border-bottom 0.3s ease;
+        }
+
+        #id:focus,
+        #pwd:focus {
+            outline: none;
+            border-bottom: 2px solid #00bfff;
+        }
+
+        button {
+            border: 2px solid aliceblue;
+            background-color: #000;
+            color: aliceblue;
+            font-family: 'DungGeunMo';
+            height: 50px;
+            width: 200px; /* 버튼 크기 조정 */
+            font-size: 1.5em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 40px;
+        }
+
+        button:hover {
+            background-color: aliceblue;
+            color: black;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Sign Up</h1>
+        <form action="" method="post">
+            <input type="text" name="id" id="id" placeholder="ID"><br>
+            <input type="password" name="pwd" id="pwd" placeholder="PASSWORD"><br>
+        </form>
+        <button type="submit">SIGN UP</button>
+    </div>
+</body>
+
+</html>
