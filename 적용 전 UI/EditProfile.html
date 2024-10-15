@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Profile - Joy Code Me</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #111;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .edit-profile-container {
+      width: 50%;
+      background-color: #1c1c1c;
+      border-radius: 15px;
+      padding: 40px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .edit-profile-container:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.9);
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      color: #ffffff;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    label {
+      font-size: 1rem;
+      color: #ccc;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    input[type="text"], input[type="email"], input[type="file"] {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      background-color: #333;
+      color: #fff;
+      font-size: 1rem;
+      box-sizing: border-box;
+      margin-bottom: 10px;
+    }
+
+    input[type="text"]:focus, input[type="email"]:focus, input[type="file"]:focus {
+      outline: none;
+      border: 2px solid #ffffff;
+    }
+
+    button {
+      background-color: #333;
+      border: 1px solid #ffffff;
+      color: #fff;
+      padding: 12px 25px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      margin: 10px;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #444;
+      transform: scale(1.05);
+    }
+
+    /* 프로필 사진 스타일 */
+    .profile-picture-container {
+      position: relative;
+      width: 150px;
+      height: 150px;
+      margin: 0 auto 30px;
+      cursor: pointer;
+    }
+
+    .profile-picture {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background-color: #333;
+      background-position: center;
+      background-size: cover;
+      background-image: url('file-Qbq7CHghwCV5tsJxogCXzdTL'); /* 기본 이미지 */
+      border: 2px solid #fff;
+    }
+
+    #profile-picture-input {
+      display: none;
+    }
+
+    .upload-label {
+      cursor: pointer;
+      background-color: #444;
+      color: #fff;
+      padding: 12px 25px; /* 저장/취소 버튼과 동일한 padding 값 */
+      border-radius: 5px;
+      transition: background-color 0.3s;
+      border: 1px solid #ffffff;
+      display: inline-block; /* 버튼이 인라인 블록으로 유지되도록 설정 */
+      text-align: center; /* 텍스트 중앙 정렬 */
+    }
+
+
+
+
+    .upload-label:hover {
+      background-color: #555;
+    }
+
+    /* 드래그 앤 드롭 시 스타일 변경 */
+    .profile-picture.dragging {
+      border-color: #00e6e6;
+      background-color: #222;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- 프로필 수정 페이지 컨테이너 -->
+  <div class="edit-profile-container">
+    <h1>Edit Profile</h1>
+
+    <!-- 프로필 사진 수정 -->
+    <div class="profile-picture-container" id="profile-picture-container" onclick="triggerFileInput()">
+      <div id="profile-picture" class="profile-picture"></div> <!-- 동그란 프로필 사진 -->
+    </div>
+    <label class="upload-label" for="profile-picture-input">프로필 사진 변경</label>
+    <input type="file" id="profile-picture-input" accept="image/*" onchange="previewImage(event)">
+
+    <!-- 이름 수정 -->
+    <div class="form-group">
+      <label for="name">이름</label>
+      <input type="text" id="name" name="name" placeholder="홍길동">
+    </div>
+
+    <!-- 이메일 수정 -->
+    <div class="form-group">
+      <label for="email">이메일</label>
+      <input type="email" id="email" name="email" placeholder="honggildong@example.com">
+    </div>
+
+    <!-- 등급 수정 (읽기 전용) -->
+    <div class="form-group">
+      <label for="rank">등급</label>
+      <input type="text" id="rank" name="rank" value="VIP" readonly>
+    </div>
+
+    <!-- 저장 및 취소 버튼 -->
+    <button type="submit">저장</button>
+    <button type="button" onclick="history.back()">취소</button>
+  </div>
+
+  <!-- JavaScript for Image Preview and Drag-and-Drop -->
+  <script>
+    const profilePictureContainer = document.getElementById('profile-picture-container');
+    const profilePictureInput = document.getElementById('profile-picture-input');
+    const profilePicture = document.getElementById('profile-picture');
+
+    // 이미지 미리보기 기능
+    function previewImage(event) {
+      const reader = new FileReader();
+      reader.onload = function() {
+        profilePicture.style.backgroundImage = `url(${reader.result})`;
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    }
+
+    // 프로필 사진 클릭 시 파일 선택 창 열기
+    function triggerFileInput() {
+      profilePictureInput.click();
+    }
+
+    // 드래그 앤 드롭 기능
+    profilePictureContainer.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      profilePicture.classList.add('dragging');
+    });
+
+    profilePictureContainer.addEventListener('dragleave', () => {
+      profilePicture.classList.remove('dragging');
+    });
+
+    profilePictureContainer.addEventListener('drop', (e) => {
+      e.preventDefault();
+      profilePicture.classList.remove('dragging');
+
+      const file = e.dataTransfer.files[0];
+      if (file && file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = function() {
+          profilePicture.style.backgroundImage = `url(${reader.result})`;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  </script>
+
+</body>
+</html>
