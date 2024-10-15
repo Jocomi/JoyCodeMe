@@ -1,176 +1,219 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Joy Code Me</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Joy Code Me</title>
+  
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  
+  <!-- eye icon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <style>
-        @font-face {
-            font-family: 'DungGeunMo';
-            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
-            font-weight: normal;
-            font-style: normal;
-        }
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #111;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    .container {
+      display: flex;
+      width: 900px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
 
-        body {
-            background-color: #000;
-            color: aliceblue;
-            overflow-x: hidden;
-        }
+    .container .image-section {
+      width: 60%;
+      background-color: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 20px;
-            background-color: #000000;
-            border-bottom: 2px solid aliceblue;
-        }
+    .container .image-section video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px 0 0 10px;
+    }
 
-        .header h2 {
-            color: aliceblue;
-            font-size: 2.5em;
-            font-weight: bold;
-        }
+    .form-section {
+      width: 40%;
+      padding: 40px;
+    }
 
-        .nav ul {
-            list-style-type: none;
-            display: flex;
-        }
+    .form-section h1 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #333;
+    }
 
-        .nav ul li {
-            margin-right: 20px;
-        }
+    .form-section p {
+      font-size: 1rem;
+      margin-bottom: 20px;
+      color: #777;
+    }
 
-        .nav ul li a {
-            color: aliceblue;
-            text-decoration: none;
-            font-size: 1.2em;
-            padding: 5px 10px;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
+    .form-group {
+      position: relative;
+      margin-bottom: 20px;
+    }
 
-        .nav ul li a:hover {
-            background-color: aliceblue;
-            color: black;
-            border-radius: 5px;
-        }
+    .form-group label {
+      position: absolute;
+      top: 12px;
+      left: 10px;
+      font-size: 1rem;
+      color: #999;
+      transition: all 0.3s ease;
+    }
 
-        .content {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            text-align: center;
-        }
+    .form-group input {
+      width: 100%;
+      padding: 12px 10px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      outline: none;
+    }
+    
+    /* input을 focus 했을 때 안쪽 글씨가 위로 올라가게 */
+    .form-group input:focus + label,
+    .form-group input:not(:placeholder-shown) + label {
+      top: -16px;
+      font-size: 0.8rem;
+      color: #333;
+    }
 
-        .content h1 {
-            font-size: 5.2em;
-            margin-bottom: 90px;
-            animation: animate 1.5s ease-in-out;
-        }
+    .show-hide {
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #333;
+    }
 
-        .content h3 {
-            font-size: 2em;
-            margin-top: 20px;
-            animation: animate 1.5s ease-in-out;
-        }
+    .form-btn {
+      width: 100%;
+      padding: 12px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
 
-        #id,
-        #pwd {
-            background-color: #000;
-            font-family: 'DungGeunMo';
-            font-size: 1.2em;
-            border: none;
-            border-bottom: 2px solid aliceblue;
-            width: 500px;
-            height: 50px;
-            text-align: center;
-            color: aliceblue;
-            transition: border-bottom 0.3s ease;
-        }
-        #pwd {
-            margin-bottom: 20px;
-        }
+    .form-btn:hover {
+      background-color: #0056b3;
+      transition: 0.4s;
+    }
 
-        #id:focus,
-        #pwd:focus {
-            outline: none;
-            border-bottom: 2px solid #00bfff;
-        }
+    .toggle-link {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #007bff;
+      cursor: pointer;
+    }
 
-        button {
-            border: 2px solid aliceblue;
-            cursor: pointer;
-            background-color: #000;
-            color: aliceblue;
-            font-family: 'DungGeunMo';
-            height: 50px;
-            width: 200px;
-            font-size: 1.2em;
-            margin-top: 20px;
-            transition: all 0.3s ease;
-            margin: 5px;
-        }
+    .toggle-link:hover {
+      text-decoration: underline;
+    }
 
-        button:hover {
-            background-color: aliceblue;
-            color: black;
-            border-radius: 5px;
-        }
-
-        #signin {
-            width:410px;
-            margin-bottom: 10px;
-        }
-
-        .loginInput {
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        @keyframes animate {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-    </style>
+    .hidden {
+      display: none;
+    }
+  </style>
 </head>
-
 <body>
-    <div class="content">
-        <div class="nav">
-        </div>
-        <h1>Sign In</h1>
-        <form action="" method="post">
-            <div class="loginInput">
-                <input type="text" name="id" id="id" placeholder="ID"><br>
-                <input type="password" name="pwd" id="pwd" placeholder="PASSWORD"><br>
-            </div>
-            <button id="signin">SIGN IN</button><br>
 
-            <button>Google 로그인</button><button>Kakao 로그인</button>
-        </form>
+  <div class="container">
+    <div class="image-section">
+      <video src="login.mp4" alt="Login Image" autoplay muted loop >
     </div>
-</body>
 
+    <div class="form-section" id="signup-form">
+      <h1>Sign Up</h1>
+      <p>Joy Code Me의 Content 를 즐기고 싶다면 로그인하세요.</p>
+      <form id="signupForm">
+        <div class="form-group">
+          <input type="text" id="id" required placeholder=" ">
+          <label for="id">ID</label>
+        </div>
+        <div class="form-group">
+          <input type="password" id="signup_password" required placeholder=" ">
+          <label for="signup_password">Password</label>
+          <i class="fa fa-eye show-hide" onclick="togglePassword('signup_password', this)"></i>
+        </div>
+        <div class="form-group">
+          <input type="password" id="cpass" required placeholder=" ">
+          <label for="cpass">Confirm Password</label>
+        </div>
+        <div class="form-group">
+          <input type="text" id="name" required placeholder=" ">
+          <label for="name">Name</label>
+        </div>
+        <div class="form-group">
+          <input type="email" id="email" required placeholder=" ">
+          <label for="email">Email</label>
+        </div>
+        <button type="submit" class="form-btn">Sign Up</button>
+      </form>
+      <div class="toggle-link" onclick="toggleForms()">I am already a member</div>
+    </div>
+
+    <div class="form-section hidden" id="login-form">
+      <h1>Sign In</h1>
+      <p>Welcome Back!</p>
+      <form id="loginForm">
+        <div class="form-group">
+          <input type="email" id="login_email" required placeholder=" ">
+          <label for="login_email">Email</label>
+        </div>
+        <div class="form-group">
+          <input type="password" id="login_password" required placeholder=" ">
+          <label for="login_password">Password</label>
+          <!-- Font Awesome 눈 아이콘 적용 클래스 -->
+          <i class="fa fa-eye show-hide" onclick="togglePassword('login_password', this)"></i>
+        </div>
+        <button type="submit" class="form-btn">Sign In</button>
+      </form>
+      <div class="toggle-link" onclick="toggleForms()">Create an account?</div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    function toggleForms() {
+      document.getElementById('signup-form').classList.toggle('hidden');
+      document.getElementById('login-form').classList.toggle('hidden');
+    }
+
+    function togglePassword(fieldId, icon) {
+      const field = document.getElementById(fieldId);
+      if (field.type === 'password') {
+        field.type = 'text';
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+      } else {
+        field.type = 'password';
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+      }
+    }
+  </script>
+
+</body>
 </html>
