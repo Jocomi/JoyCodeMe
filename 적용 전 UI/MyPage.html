@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Page - Joy Code Me</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #111;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    /* 중앙에 위치하게 */
+    .mypage-container {
+      width: 50%;
+      background-color: #1c1c1c;
+      border-radius: 15px;
+      padding: 40px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .mypage-container:hover {
+      transform: translateY(-5px); /* 마우스를 올렸을 때 살짝 떠오르는 효과 */
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.9); /* 그림자 강조 */
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      margin-bottom: 30px;
+      color: #ffffff; /* 고급스러운 금색 포인트 */
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      color: #ccc;
+    }
+
+    .profile-picture {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      margin: 20px auto;
+      background-color: #333;
+      background-image: url('profile-pic.jpg'); /* 프로필 사진 */
+      background-size: cover;
+      background-position: center;
+      border: 3px solid #ffffff; /* 프로필 사진 테두리 금색 */
+    }
+
+    .profile-section {
+      margin-bottom: 40px;
+    }
+
+    .profile-section h2 {
+      font-size: 1.6rem;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+
+    .profile-section p {
+      font-size: 1.1rem;
+      color: #888;
+    }
+
+    button {
+      background-color: #333;
+      border: 1px solid #ffffff;
+      color: #fff;
+      padding: 12px 25px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      margin: 10px;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #444;
+      transform: scale(1.05); /* 마우스를 올렸을 때 살짝 확대되는 효과 */
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 마이페이지 컨테이너 -->
+  <div class="mypage-container">
+    <h1>My Page</h1>
+
+    <!-- 프로필 섹션 -->
+    <div class="profile-section">
+      <div class="profile-picture"></div> <!-- 여기에 프로필 사진을 넣을 수 있습니다 -->
+      <h2>홍길동</h2>
+      <p>등급 : VIP</p>
+      <p>이메일: honggildong@example.com</p>
+    </div>
+
+    <!-- 계정 설정 버튼 -->
+    <button>프로필 수정</button>
+    <button>비밀번호 변경</button>
+  </div>
+
+</body>
+</html>
