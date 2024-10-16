@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- Bootstrap CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  
+  <!-- jQuery CDN -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      background-color: black;
+      font-family: Arial, sans-serif;
+      overflow-y: scroll;
+    }
+
+    .navbar a {
+      text-decoration: none;
+      color: #fff;
+    }
+
+    a {
+      text-decoration: none;
+      color: black;
+    }
+
+    /* 상단 메뉴바 스타일 */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0px 50px;
+      background-color: #111;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      min-width: 800px;
+      height: 80px;
+    }
+
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar ul li {
+      margin: 0 20px;
+    }
+
+    .navbar ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      transition: color 0.3s;
+    }
+
+    .navbar ul li a:hover {
+      color: #00ffff;
+    }
+
+    .logo {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      font-size: large;
+      font-weight: 650;
+      letter-spacing: 0.1em;
+    }
+
+    .logoImg {
+      margin: 15px 10px;
+      width: 30px;
+    }
+
+    /* 메뉴바 아래 헤더 부분 */
+    .mainTop-img {
+      width: 100%;
+      height: 120px;
+      margin: auto;
+      position: relative;
+    }
+
+    .mainTop-img img {
+      min-width: 100%;
+      height: 100%;
+      vertical-align: middle;
+      opacity: 0.85;
+    }
+
+    .mainTop-title h1 {
+      color: black;
+    }
+
+    /* 자주하는 질문 부분 css*/
+    .post-table {
+      width: 80%;
+      margin: 0 auto;
+
+    }
+
+    .post-table tr td {
+      border-bottom: 1px solid #888;
+      width: 500px;
+      padding: 20px;
+      font-size: large;
+      font-weight: 1000;
+    }
+
+    .main-div {
+      width: 100%;
+      height: 750px;
+      background-color: white;
+      color: black;
+    }
+    .main-div button{
+        margin-top: 20px;
+        margin-right: 230px;
+        float: right;
+    }
+    .questions-div {
+      width: 100%;
+      height: 400px;
+      background-color: rgb(247, 250, 254);
+      position: relative;
+    }
+
+    .questions-left {
+      min-width: 45%;
+      height: 100%;
+      float: left;
+      background-color: rgb(247, 250, 254);
+      box-sizing: border-box;
+      color: black;
+      padding-top: 50px;
+      text-align: center;
+    
+    }
+    .questions-left h2{
+      cursor: pointer;
+    }
+    .questions-right {
+      min-width: 55%;
+      height: 100%;
+      background-color: rgb(247, 250, 254);
+      color: black;
+      float: right;
+      box-sizing: border-box;
+      padding-top: 50px;
+      padding-left: 100px;
+      display: none;
+    }
+
+    .questions-right ol li {
+      padding: 10px;
+      text-decoration: underline;
+      cursor: pointer;
+
+    }
+
+    /*게시글 관련*/
+    .postContent-div {
+      float: right;
+      width: 70%;
+      height: 500px;
+    }
+
+    .postContent-div ul li {
+      list-style: none;
+    }
+    .menubar-div ul li {
+      list-style: none;
+      margin-top: 30px;
+      margin-left: 50px;
+    }
+    .menubar-div{
+      padding: 50px;
+      min-width: 30%;
+      height: 100%;
+      float: left;
+      box-sizing: border-box;
+      
+    }
+  
+    .menubar-div ul li a{
+      margin-left: 60px;
+      font-size: large;
+    }
+    
+
+    /*게시글 관련*/
+
+    .postContent-table {
+      
+      width: 80%;
+      
+    }
+
+    .postContent-table tr {
+      height: 45px;
+      border-bottom: 1px solid #888;
+    }
+
+    .postContent-table tr td:nth-child(3) {
+      width: 20%;
+
+    }
+
+    .postContent-table tr td:nth-child(2) {
+      width: 60%;
+    }
+
+    .postContent-table tr td:nth-child(1) {
+      width: 20%;
+      padding-left: 20px;
+    }
+  
+    .page-foword {
+      margin-top: 70px;
+      display: flex;
+      justify-content: center;
+    }
+
+    header {
+      /* 헤더의 높이와 일치시킴 */
+      padding-top: 80px;
+    }
+
+
+
+    /* 푸터 footer */
+    footer {
+      margin-top: 80px;
+      height: 20vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    footer .link {
+      display: flex;
+      margin-bottom: 20px;
+    }
+
+    footer .box {
+      width: 300px;
+      height: 100px;
+      color: #888;
+    }
+
+    footer .box a {
+      color: #888;
+    }
+
+    footer .title {
+      color: #fff;
+      font-size: larger;
+    }
+
+    footer .policy {
+      font-size: small;
+      color: #888;
+      margin-top: 60px;
+      margin-bottom: 8px;
+    }
+
+    footer .copywrite {
+      color: #888;
+      margin-bottom: 1px;
+    }
+
+    video {
+      width: 100%;
+      
+    }
+    /* 자주하는 질문 접었다 펼쳤다 하는 css*/
+    .answer {
+    display: none;
+    background-color: #f0f0f0;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    position: absolute;
+    z-index: 100;
+    width: 50%;
+    left: 25%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+  .question-item {
+    position: relative;
+    cursor: pointer;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+  }
+  .question-item:hover {
+    background-color: #e0e0e0;
+  }
+
+  </style>
+</head>
+
+<body>
+  <div class="navbar">
+    <div class="logo">
+      <img src="../logoImg/menubar_logo(none).JPG" class="logoImg">
+      <a href="#">JCM</a>
+    </div>
+    <ul>
+      <li><a href="#">회사소개</a></li>
+      <li><a href="#">기술소개</a></li>
+      <li><a href="#">웹 제작</a></li>
+      <li><a href="#">고객지원</a></li>
+      <li><a href="#">가이드</a></li>
+    </ul>
+    <div class="user-options">
+      <a href="#">MyPage | </a>
+      <a href="#"> SIGN IN</a>
+    </div>
+  </div>
+  <header>
+    <div class="mainTop-img">
+      <img src="후보 3.jpg" alt="logoImg">
+    </div>
+  
+
+  </header>
+  <main>
+    <div class="menubar-div">
+        <ul>
+          <li><h2>고객 지원</h2></li>
+          <li><a href="" style="text-decoration: underline;">공지사항</a></li>
+          <li><a href="">자유 게시판</a></li>
+          <li><a href="">프로젝트 게시판</a></li>
+          <li><a href="">문의사항</a></li>
+        </ul>
+
+     
+    </div>
+    
+    <div class="main-div">
+      <!-- 추후에 리엑트를 사용하면 menubar로 바뀔 수 있음-->
+     <br><br>
+      <div class="postContent-div">
+        <table class="postContent-table">
+          <tr>
+            <td>종류</td>
+            <td>제목</td>
+            <td>날짜</td>
+          </tr>
+          <tr>
+            <td>종류</td>
+            <td>제목</td>
+            <td>날짜</td>
+          </tr>
+          <tr>
+            <td>종류</td>
+            <td>제목</td>
+            <td>날짜</td>
+          </tr>
+          <tr>
+            <td>종류</td>
+            <td>제목</td>
+            <td>날짜</td>
+          </tr>
+          <tr>
+            <td>종류</td>
+            <td>제목</td>
+            <td>날짜</td>
+          </tr>
+          <tr>
+            <td>종류</td>
+            <td>제목</td>
+            <td>날짜</td>
+          </tr>
+          <tr>
+            <td>종류</td>
+            <td>제목</td>
+            <td>날짜</td>
+          </tr>
+          <tr>
+            <td>종류</td>
+            <td>제목</td>
+            <td>날짜</td>
+          </tr>
+          <tr>
+            <td>종류</td>
+            <td>제목</td>
+            <td>날짜</td>
+          </tr>
+          <tr>
+            <td>종류</td>
+            <td>제목</td>
+            <td>날짜</td>
+          </tr>
+          <tr>
+            <td>종류</td>
+            <td>제목</td>
+            <td>날짜</td>
+          </tr>
+       
+        </table>
+
+        <button type="button" class="btn btn-primary">작성 하기</button>
+        <nav class="page-foword" aria-label="...">
+          
+          <ul class="pagination">
+            <li class="page-item disabled">
+              <a class="page-link">Previous</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item active" aria-current="page">
+              <a class="page-link" href="#">2</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#">Next</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </main>
+    <div class="questions-div">
+      <div class="questions-left">
+        <h2>자주 하는 질문을 확인하세요!</h2>
+      </div>
+      <div class="questions-right">
+        <ol>
+          <li class="question-item">LEVEL마다 제공되는게 뭐가 다른지 정확히 알고 싶어요.
+            <div class="answer">
+              각 LEVEL에 따라 제공되는 기능과 혜택이 다릅니다. 자세한 정보는 고객센터에 문의하세요.
+            </div>
+          </li>
+          <li class="question-item">미리보기 부분이 나오지 않아요.
+            <div class="answer">
+              각 LEVEL에 따라 제공되는 기능과 혜택이 다릅니다. 자세한 정보는 고객센터에 문의하세요.
+            </div>
+          </li>
+          <li class="question-item">게시판에 글이 올라가지 않는데 왜그런가요?
+            <div class="answer">
+              각 LEVEL에 따라 제공되는 기능과 혜택이 다릅니다. 자세한 정보는 고객센터에 문의하세요.
+            </div>
+          </li>
+          <li class="question-item">사용법을 잘 모르겠어요.
+            <div class="answer">
+              각 LEVEL에 따라 제공되는 기능과 혜택이 다릅니다. 자세한 정보는 고객센터에 문의하세요.
+            </div>
+          </li>
+          <li class="question-item">기능사용 횟수에 제한이 있나요?
+            <div class="answer">
+              각 LEVEL에 따라 제공되는 기능과 혜택이 다릅니다. 자세한 정보는 고객센터에 문의하세요.
+            </div>
+          </li class="question-item">
+          <li>결제를 했는데 기능 사용이 안돼요.
+            <div class="answer">
+              각 LEVEL에 따라 제공되는 기능과 혜택이 다릅니다. 자세한 정보는 고객센터에 문의하세요.
+            </div>
+          </li>
+          <li class="question-item">환불을 하고 싶은데 환불은 어떻게 하나요?
+            <div class="answer">
+              각 LEVEL에 따라 제공되는 기능과 혜택이 다릅니다. 자세한 정보는 고객센터에 문의하세요.
+            </div>
+          </li>
+        </ol>
+      </div>
+    </div>
+    <footer>
+      <div class="link">
+        <div class="box title">
+          JoyCodeMe
+        </div>
+        <div class="box">
+          Learn
+          <br><br>
+          <a href="#">Introduction</a><br>
+          <a href="#">Practice</a><br>
+          <a href="#">Ask and Questions</a><br>
+        </div>
+        <div class="box">
+          Code
+          <br><br>
+          <a href="#">Code Management</a><br>
+          <a href="#">Libraries</a><br>
+          <a href="#">API</a><br>
+        </div>
+        <div class="box">
+          More
+          <br><br>
+          <a href="#">Logo and Brand</a><br>
+          <a href="#">Code Producer</a><br>
+        </div>
+        <div class="box">
+          Follow
+          <br><br>
+          <a href="#">Instagram</a><br>
+          <a href="#">GitHub</a><br>
+          <a href="#">Discord</a><br>
+        </div>
+      </div>
+      <div class="policy">
+        For web site terms of use, trademark policy and general project policies please see https://jocomi.org
+      </div>
+      <div class="copywrite">
+        CopyWrite @ 2024 Jocomi Foundation. All rights reserved
+      </div>
+
+    </footer>
+ <script>
+   $(document).ready(function(){
+  $('.question-item').click(function() {
+    // 다른 열려있는 답변은 닫고, 클릭한 항목만 열리도록 설정
+    $('.answer').slideUp();
+    if ($(this).find('.answer').is(':hidden')) {
+      $(this).find('.answer').slideDown();
+    }
+  });
+});
+
+
+$(document).ready(function () {
+      // "자주 하는 질문" 영역을 클릭하면 questions-right를 슬라이드 다운
+      $('.questions-left h2').click(function () {
+        $('.questions-right').slideToggle();
+      });
+
+      // 질문을 클릭하면 해당 답변이 열리고, 다른 답변은 닫힘
+      $('.questions-left h2').click(function () {
+        $('.answer').slideUp();
+        if ($(this).find('.answer').is(':hidden')) {
+          $(this).find('.answer').slideDown();
+        }
+      });
+    });
+ </script>
+</body>
+
+</html>
