@@ -98,8 +98,72 @@
       opacity: 0.85;
     }
 
-    .mainTop-title h1 {
-      color: black;
+
+
+
+    /*게시글 관련*/
+    .postContent-div {
+      float: right;
+      width: 70%;
+      height: 500px;
+    }
+
+    .postContent-div ul li {
+      list-style: none;
+    }
+    .menubar-div ul li {
+      list-style: none;
+      margin-top: 30px;
+      margin-left: 50px;
+    }
+    .menubar-div{
+      padding: 50px;
+      min-width: 30%;
+      height: 100%;
+      float: left;
+      box-sizing: border-box;
+      
+    }
+  
+    .menubar-div ul li a{
+      margin-left: 60px;
+      font-size: large;
+    }
+
+    .postContent-table {
+      
+      width: 80%;
+      
+    }
+
+    .postContent-table tr {
+      height: 45px;
+      border-bottom: 1px solid #888;
+    }
+
+    .postContent-table tr td:nth-child(3) {
+      width: 20%;
+
+    }
+
+    .postContent-table tr td:nth-child(2) {
+      width: 60%;
+    }
+
+    .postContent-table tr td:nth-child(1) {
+      width: 20%;
+      padding-left: 20px;
+    }
+  
+    .page-foword {
+      margin-top: 70px;
+      display: flex;
+      justify-content: center;
+    }
+
+    header {
+      /* 헤더의 높이와 일치시킴 */
+      padding-top: 80px;
     }
 
     /* 자주하는 질문 부분 css*/
@@ -167,76 +231,28 @@
       cursor: pointer;
 
     }
-
-    /*게시글 관련*/
-    .postContent-div {
-      float: right;
-      width: 70%;
-      height: 500px;
-    }
-
-    .postContent-div ul li {
-      list-style: none;
-    }
-    .menubar-div ul li {
-      list-style: none;
-      margin-top: 30px;
-      margin-left: 50px;
-    }
-    .menubar-div{
-      padding: 50px;
-      min-width: 30%;
-      height: 100%;
-      float: left;
-      box-sizing: border-box;
-      
-    }
-  
-    .menubar-div ul li a{
-      margin-left: 60px;
-      font-size: large;
-    }
-    
-
-    /*게시글 관련*/
-
-    .postContent-table {
-      
-      width: 80%;
-      
-    }
-
-    .postContent-table tr {
-      height: 45px;
-      border-bottom: 1px solid #888;
-    }
-
-    .postContent-table tr td:nth-child(3) {
-      width: 20%;
-
-    }
-
-    .postContent-table tr td:nth-child(2) {
-      width: 60%;
-    }
-
-    .postContent-table tr td:nth-child(1) {
-      width: 20%;
-      padding-left: 20px;
-    }
-  
-    .page-foword {
-      margin-top: 70px;
-      display: flex;
-      justify-content: center;
-    }
-
-    header {
-      /* 헤더의 높이와 일치시킴 */
-      padding-top: 80px;
-    }
-
-
+        /* 자주하는 질문 접었다 펼쳤다 하는 css*/
+        .answer {
+    display: none;
+    background-color: #f0f0f0;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    position: absolute;
+    z-index: 100;
+    width: 50%;
+    left: 25%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+  .question-item {
+    position: relative;
+    cursor: pointer;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+  }
+  .question-item:hover {
+    background-color: #e0e0e0;
+  }
 
     /* 푸터 footer */
     footer {
@@ -285,33 +301,13 @@
       width: 100%;
       
     }
-    /* 자주하는 질문 접었다 펼쳤다 하는 css*/
-    .answer {
-    display: none;
-    background-color: #f0f0f0;
-    padding: 10px;
-    margin-top: 5px;
-    border-radius: 5px;
-    position: absolute;
-    z-index: 100;
-    width: 50%;
-    left: 25%;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  }
-  .question-item {
-    position: relative;
-    cursor: pointer;
-    padding: 10px;
-    transition: background-color 0.3s ease;
-  }
-  .question-item:hover {
-    background-color: #e0e0e0;
-  }
+
 
   </style>
 </head>
 
 <body>
+  <header>
   <div class="navbar">
     <div class="logo">
       <img src="../logoImg/menubar_logo(none).JPG" class="logoImg">
@@ -329,14 +325,13 @@
       <a href="#"> SIGN IN</a>
     </div>
   </div>
-  <header>
-    <div class="mainTop-img">
-      <img src="후보 3.jpg" alt="logoImg">
-    </div>
-  
+ 
 
   </header>
   <main>
+    <div class="mainTop-img">
+      <img src="img/후보 3.jpg" alt="logoImg">
+    </div>
     <div class="menubar-div">
         <ul>
           <li><h2>고객 지원</h2></li>
@@ -434,7 +429,7 @@
   </main>
     <div class="questions-div">
       <div class="questions-left">
-        <h2>자주 하는 질문을 확인하세요!</h2>
+        <h2>자주 묻는 질문을 확인하세요!</h2>
       </div>
       <div class="questions-right">
         <ol>
