@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 사이드바 -->
+        <nav class="sidebar">
+            <a id="mainText" href="AdminPage.html"><h2>ADMIN</h2></a>
+            <ul>
+                <li><a href="AdminPage.html">Dashboard</a></li>
+                <li><a href="subscribe.html">Subscribe</a></li>
+                <li><a href="customer.html">Customer</a></li>
+                <li><a href="posts.html">Posts</a></li>
+                <li><a href="chat.html">Chat</a></li>
+                <li><a href="qna.html">Q & A</a></li>
+            </ul>
+        </nav>
+
+        <!-- 메인 콘텐츠 -->
+        <div class="main-content">
+            <header class="topbar">
+                <input type="text" placeholder="Search...">
+                <div class="profile">
+                    <span>UserName</span>
+                    <img src="source.gif" alt="Profile Image">
+                </div>
+            </header>
+
+            <section class="customer">
+                <h1>회원 관리</h1>
+                <div class="customer-list">
+                    <table>
+                        <tr>
+                            <th>이름</th>
+                            <th>상태</th>
+                            <th>이메일</th>
+                            <th>더보기</th>
+                        </tr>
+                        <tr>
+                            <td>엄희윤</td>
+                            <td>Y</td>
+                            <td>rocomi@gmail.com</td>
+                            <td><button>View</button></td>
+                        </tr>
+                        <tr>
+                            <td>기다운</td>
+                            <td>Y</td>
+                            <td>rlekdns@gmail.com</td>
+                            <td><button>View</button></td>
+                        </tr>
+                        <tr>
+                            <td>양준혁</td>
+                            <td>Y</td>
+                            <td>zeus@gmail.com</td>
+                            <td><button>View</button></td>
+                        </tr>
+                        <tr>
+                            <td>이주원</td>
+                            <td>Y</td>
+                            <td>2week@gmail.com</td>
+                            <td><button>View</button></td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
+</html>
