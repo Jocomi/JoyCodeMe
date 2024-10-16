@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 사이드바 -->
+        <nav class="sidebar">
+            <a id="mainText" href="AdminPage.html"><h2>ADMIN</h2></a>
+            <ul>
+                <li><a href="AdminPage.html">Dashboard</a></li>
+                <li><a href="subscribe.html">Subscribe</a></li>
+                <li><a href="customer.html">Customer</a></li>
+                <li><a href="posts.html">Posts</a></li>
+                <li><a href="chat.html">Chat</a></li>
+                <li><a href="qna.html">Q & A</a></li>
+            </ul>
+        </nav>
+
+        <!-- 메인 콘텐츠 -->
+        <div class="main-content">
+            <!-- 상단 네비게이션 -->
+            <header class="topbar">
+                <input type="text" placeholder="Search...">
+                <div class="profile">
+                    <span>UserName</span>
+                    <img src="source.gif" alt="Profile Image">
+                </div>
+            </header>
+
+            <!-- 대시보드 섹션 -->
+            <section class="dashboard">
+                <div class="dashboard-cards">
+                    <div class="card">
+                        <h3>Total Earnings</h3>
+                        <p>$12,500</p>
+                    </div>
+                    <div class="card">
+                        <h3>Total Users</h3>
+                        <p>70</p>
+                    </div>
+                    <div class="card">
+                        <h3>Total Visitor</h3>
+                        <p>255</p>
+                    </div>
+                    <div class="card">
+                        <h3>Total Tasks</h3>
+                        <p>25</p>
+                    </div>
+                </div>
+                
+                <!-- 그래프 및 프로젝트 리스트 -->
+                <div class="charts-projects">
+                    <div class="chart">
+                        <canvas id="salesChart"></canvas>
+                    </div>
+                    <div class="chartTwo">
+                        <canvas id="testChart"></canvas>
+                    </div>
+                    <div class="chart3">
+                        <canvas id="testChart2"></canvas>
+                    </div>
+                    <div class="projects">
+                        <h3>Latest Function</h3>
+                        <ul>
+                            <li>Open AI - Status: <span style="color:rgb(0, 175, 0)">Work</span></li>
+                            <li>Open API - Status: <span style="color:rgb(0, 175, 0)">Work</span></li>
+                            <li>Web Server - Status: <span style="color:rgb(0, 175, 0)">Work</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // 차트 1 - Bar Chart
+        const ctx = document.getElementById('salesChart').getContext('2d');
+        const salesChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+                datasets: [{
+                    label: '접속자',
+                    data: [300, 500, 400, 600, 700, 800],
+                    backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // 차트 2 - Doughnut Chart
+        const ctxTwo = document.getElementById('testChart').getContext('2d');
+        const testChart = new Chart(ctxTwo, {
+            type: 'doughnut',
+            data: {
+                labels: ['일반회원', 'Level1', 'Level2', 'Level3', 'Level4', 'Level5'],
+                datasets: [{
+                    label: 'User',
+                    data: [70, 50, 25, 12, 10, 20],
+                    backgroundColor: ['#ff6384', '#36a2eb', '#cc65fe', '#ffce56', '#32a852', '#f77825']
+                }]
+            }
+        });
+
+        // 차트 3 - Line Chart
+        const ctx3 = document.getElementById('testChart2').getContext('2d');
+        const testChart2 = new Chart(ctx3, {
+            type: 'line',
+            data: {
+                labels: ['회원 1', '회원 2', '회원 3', '회원 4'],
+                datasets: [{
+                    label: '회원관리',
+                    data: [10, 15, 20, 25],
+                    borderColor: 'rgb(75, 192, 192)',
+                    tension: 0.1
+                }]
+            }
+        });
+    </script>
+</body>
+</html>
