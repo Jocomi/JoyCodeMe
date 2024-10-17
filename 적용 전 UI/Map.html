@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <title>Joy Code Me</title>
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            height: 100vh;
+        }
+
+        h1 {
+            font-size: 30px;
+            text-align: center;
+            color: #333;
+            padding-bottom: 10px;
+            margin-bottom: 100px;
+            border-bottom: 3px solid #0078ff;
+        }
+
+        #map {
+            width: 100%;
+            height: 500px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .iw_inner {
+            font-size: 14px;
+            color: #333;
+            padding: 15px;
+        }
+
+        .iw_inner h3 {
+            font-size: 18px;
+            color: #0078ff;
+            margin-bottom: 5px;
+        }
+
+        .iw_inner img {
+            float: left;
+            margin-right: 10px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .iw_inner a {
+            color: #0078ff;
+            text-decoration: none;
+        }
+
+        .address {
+            font-size: 16px;
+            text-align: center;
+            color: #666;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+            margin-top: 50px;
+        }
+
+        .address p {
+            margin-bottom: 5px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+    <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=srbxbvs7lt"></script>
+</head>
+<body>
+
+<div class="container">
+    <h1>찾아오시는길</h1>
+
+    <div id="map"></div>
+
+    <div class="address">
+        <p><strong>주소:</strong> 서울특별시 강남구 테헤란로 10길 09</p>
+        <p>KH 정보교육원 강남지원 2관</p>
+        <p>02-120 | 공공, 사회기관</p>
+    </div>
+</div>
+
+<script>
+    var HOME_PATH = window.HOME_PATH || '.';
+
+    var cityhall = new naver.maps.LatLng(37.4985399, 127.0326428),
+        map = new naver.maps.Map('map', {
+            center: cityhall.destinationPoint(0, 500),
+            zoom: 15
+        }),
+        marker = new naver.maps.Marker({
+            map: map,
+            position: cityhall
+        });
+
+    var contentString = [
+            '<div class="iw_inner">',
+            '   <h3>KH 정보교육원</h3>',
+            '   <p>서울특별시 강남구 테헤란로 10길 09 | KH 정보교육원 강남지원 2관 <br />',
+            '       <img src="../logoImg/logo.jpg" width="55" height="55" alt="교육원" /><br />',
+            '       02-120 | 공공, 사회기관 <br />',
+            '       <a href="http://www.joycodme.com" target="_blank">www.joycodme.com/</a>',
+            '   </p>',
+            '</div>'
+        ].join('');
+
+    var infowindow = new naver.maps.InfoWindow({
+        content: contentString
+    });
+
+    naver.maps.Event.addListener(marker, "click", function(e) {
+        if (infowindow.getMap()) {
+            infowindow.close();
+        } else {
+            infowindow.open(map, marker);
+        }
+    });
+
+    infowindow.open(map, marker);
+</script>
+
+</body>
+</html>
