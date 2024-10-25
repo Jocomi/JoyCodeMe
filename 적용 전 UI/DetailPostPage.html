@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <title>Document</title>
@@ -97,6 +99,7 @@
     .detailPost-header{
         display: flex;
         justify-content: flex-start;
+        
     }
       /* 첨부파일 div 스타일 */
     .attachment {
@@ -106,15 +109,22 @@
         overflow: hidden;
         transition: height 0.5s ease, opacity 0.5s ease;
         position: absolute;
-        padding-left: 40px;
         text-decoration: underline;
     }
     .attachment.open {
+
     height: 50px; /* 트랜지션 후 보이는 높이 */
     opacity: 1;
     }
-    .file{
-      padding: 11px;
+    .file button{
+      padding-right: 30px;
+      padding-bottom: 20px;
+      font-weight: bold;
+    }
+    .viewCount{
+      font-weight: bold;
+      margin-top: 22px;
+      
     }
   
     .detailPost-header button{
@@ -130,16 +140,17 @@
         margin-right: 20px;
     }
     table tr td{
-        width: 10%;
+       width: 10%;
         border-bottom: solid 1px;
     }
   
     .detailPost{
         min-width: 700px;
-        width: 100%;
+        width: 70%;
         justify-content: center;
-        height: 1200px;
+     
         background-color: white;
+        margin-left: 400px;
       
     }
     .detailPost-content{
@@ -156,7 +167,7 @@
         width: 100px;
         height: 100px;
         border-radius: 50%;
-        margin-left: 20px;
+     
     }
     .detailPost-coment{
         padding: 20px;
@@ -167,10 +178,46 @@
     .detailPost-mainContent{
         padding: 10px;
        background-color: rgb(236, 236, 236);
-       height: 350px;
-       min-width: 80%;
+        height: 350px;
+       min-width: 70%;  
+       border-radius: 20px;
     }
+    .detailPost-items{
+      display: flex;
+      justify-content: flex-end;
 
+    }
+    .detailPost-items a{
+      margin-left: 8px;
+      font-size: 13px;
+    }
+    .detailPost-items a:hover{
+      text-decoration: underline;
+      cursor: pointer;
+    }
+    /*추천 commend*/
+    .commend{
+      padding: 20px;
+      width: 70%;
+      
+      border: solid 1px black;
+      margin: 0 auto;
+      border-bottom: none;
+      border-top: none;
+      display: flex;
+      justify-content: center;
+    }
+    .commend img{
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+    }
+    .commend div{
+      display: flex;
+      align-items: center;
+     
+    }
+  
     /* 댓글 comment*/
     .comment {
       border-bottom: solid 1px black;
@@ -254,10 +301,34 @@
       scrollbar-width: none;
     }
 
+      /* 게시물 목록 postList */
+      .postList{
+        padding: 20px;
+        width: 70%;
+        border: solid 1px black;
+        margin: 0 auto;
+        border-top: none;
+        
+      }
+
+      .postContent-table {
+   
+      margin-left: 60px;
+    }
+      
+    .postContent-table tr {
+      height: 45px;
+      border-bottom: 1px solid #888;
+      padding: 100px;
+    }
+
+
+
+
         /* 푸터 footer */
         footer {
       margin-top: 300px;
-      height: 30vh;
+      height: 50vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -267,7 +338,6 @@
 
     footer .link {
       display: flex;
-      
       background-color: black;
     }
 
@@ -300,6 +370,30 @@
       margin-bottom: 1px;
     }
 
+
+    .menubar-div ul li {
+      list-style: none;
+      margin-top: 30px;
+      margin-left: 50px;
+    }
+    .menubar-div{
+      position: absolute;
+      padding: 50px;
+      min-width: 30%;
+      height: 100%;
+      float: left;
+      box-sizing: border-box;
+      
+    }
+  
+    .menubar-div ul li a{
+      margin-left: 60px;
+      font-size: large;
+    }
+    .menubar-div ul li a:hover{
+      text-decoration: underline;
+    }
+
  
         
     
@@ -322,44 +416,52 @@
           </ul>
           <div class="user-options">
             <a href="#">MyPage</a>
-            <a href="#"> SIGN IN</a>
+            <a href="#">SIGN IN</a>
           </div>
         </div>
        
       
         </header>
         <main>
+          <div class="menubar-div">
+            <ul>
+              <li><h2>고객 지원</h2></li>
+              <li><a href="">공지사항</a></li>
+              <li><a href="">자유 게시판</a></li>
+              <li><a href="">프로젝트 게시판</a></li>
+              <li><a href="">문의사항</a></li>
+            </ul>
+    
+         
+        </div>
             <div class="detailPost">
             <div class="detailPost-content">
                 <div class="detailPost-header">
                   <h2>공지사항📢</h2>
                   <h4 class="post-date" >작성일 : 2024년 10월 24일 </h4>
                   <div>
+                    <p class="viewCount">조회수 :</p>
                   <div class="file">
-                    <button onclick="toggleAttachment()">&nbsp;첨부파일</button>
+                    
+                    <button onclick="toggleAttachment()">첨부파일</button>
                   </div>
                   <div class="attachment" id="attachment">
                     <a href="img/후보 3.jpg" download>사진</a><br>
-                    <a href="#" download>file</a>
+                    <a href="#" download>첨부파일이 어디까지 늘어날 수 있을 지 실험</a>
                   </div>
                 </div>
                 </div>
                 
                 <table>
                     <tr>
-                        <td class="post-title"><h3>제목</h3></td>
+                        <td><h2>10월 23일 공지사항 입니다.</h2></td>
+                    </tr>
+                    <tr>
+                      <td><h3>양준혁</h3></td>
+                    </tr>
+                    <tr>
                       
-                        
-                    </tr>
-                    <tr>
-                        <td><h3>10월 23일 공지사항 입니다.</h3></td>
-                       
-                    </tr>
-                    <tr>
-                        <td><h4>작성자</h4></td>
-                    </tr>
-                    <tr>
-                        <td><h3>양준혁<br><img src="img/후보 3.jpg" alt="프로필사진"></h3></td>
+                      <td><img src="img/후보 3.jpg" alt="프로필사진"></td>
                     </tr>
                 </table>
                
@@ -371,7 +473,18 @@
                 <div class="detailPost-mainContent">
                 ㅇㅇㅇㅇ
                 </div>
+                <div class="detailPost-items">
+                <a>수정</a>
+                <a>삭제</a>
+              </div>
+             
             </div>
+            <div class="commend">
+                
+                <div class="commend-img"><a href=""><img src="https://www.shutterstock.com/image-vector/thumbs-icon-black-thumb-on-260nw-2460119409.jpg" alt=""></a></div>
+                <div class="commend-count">3</div>
+                
+              </div>
             
             <div class="detailPost-coment">
                 <h4>댓글</h4>
@@ -417,7 +530,40 @@
                   <button onclick="enrollComment()">등록</button>
                 </div>
             </div>
+            
+            <div class="postList">
+              <div class="postList-title"><h4>목록</h4></div>
+            <table class="postContent-table">
+              
+              <tr>
+                <td>작성자</td>
+                <td>제목</td>
+                <td>작성시간</td>
+              </tr>
+              <tr>
+                <td>작성자</td>
+                <td>제목</td>
+                <td>작성시간</td>
+              </tr>
+              <tr>
+                <td>작성자</td>
+                <td>제목</td>
+                <td>작성시간</td>
+              </tr>
+              <tr>
+                <td>작성자</td>
+                <td>제목</td>
+                <td>작성시간</td>
+              </tr>
+              <tr>
+                <td>작성자</td>
+                <td>제목</td>
+                <td>작성시간</td>
+              </tr>
+            </table>
             </div>
+            </div>
+           
         </main>
         <footer>
             <div class="link">
