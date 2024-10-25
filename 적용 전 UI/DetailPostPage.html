@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <title>Document</title>
+    <style>
+        /* 상단 메뉴바 스타일 */
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      font-family: Arial, sans-serif;
+      overflow-y: scroll;
+    }
+    ul li{
+          list-style: none;
+        }
+    .navbar {
+      
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0px 50px;
+      background-color: #111;
+      position: fixed;
+      top: 0;
+      width: 95%;
+      z-index: 1000;
+      min-width: 800px;
+      height: 80px;
+    }
+
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar ul li {
+      margin: 0 20px;
+    }
+
+    .navbar ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      transition: color 0.3s;
+    }
+
+    .navbar ul li a:hover {
+      color: #00ffff;
+    }
+
+    .logo {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      font-size: large;
+      font-weight: 650;
+      letter-spacing: 0.1em;
+    }
+
+    .logoImg {
+      margin: 15px 10px;
+      width: 30px;
+    }
+
+    /* 메뉴바 아래 헤더 부분 */
+    .mainTop-img {
+      width: 100%;
+      height: 120px;
+      margin: auto;
+      position: relative;
+    }
+
+    .mainTop-img img {
+      min-width: 100%;
+      height: 100%;
+      vertical-align: middle;
+      opacity: 0.85;
+    }
+    
+    .navbar a {
+      text-decoration: none;
+      color: #fff;
+    }
+
+    a {
+      text-decoration: none;
+      color: black;
+    }
+    /* 상세 게시물 영역*/
+    .detailPost-header{
+        display: flex;
+        justify-content: flex-start;
+    }
+      /* 첨부파일 div 스타일 */
+    .attachment {
+        display: block; /* display를 block으로 설정 */
+        height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: height 0.5s ease, opacity 0.5s ease;
+        position: absolute;
+        padding-left: 40px;
+        text-decoration: underline;
+    }
+    .attachment.open {
+    height: 50px; /* 트랜지션 후 보이는 높이 */
+    opacity: 1;
+    }
+    .file{
+      padding: 11px;
+    }
+  
+    .detailPost-header button{
+        width: 100px;
+        height: 40px;
+        background-color: white;
+        border: none; 
+        cursor: pointer;
+        font-size: 15px;
+    }
+    .post-date{
+        margin-left: auto;
+        margin-right: 20px;
+    }
+    table tr td{
+        width: 10%;
+        border-bottom: solid 1px;
+    }
+  
+    .detailPost{
+        min-width: 700px;
+        width: 100%;
+        justify-content: center;
+        height: 1200px;
+        background-color: white;
+      
+    }
+    .detailPost-content{
+        padding: 20px;
+        width: 70%;
+        height: 900px;
+        border: solid 1px black;
+        margin: 0 auto;
+        margin-top: 100px;
+        border-bottom: none;
+    }
+
+    .detailPost-content img{
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        margin-left: 20px;
+    }
+    .detailPost-coment{
+        padding: 20px;
+        width: 70%;
+        border: solid 1px black;
+        margin: 0 auto;
+    }
+    .detailPost-mainContent{
+        padding: 10px;
+       background-color: rgb(236, 236, 236);
+       height: 350px;
+       min-width: 80%;
+    }
+
+    /* 댓글 comment*/
+    .comment {
+      border-bottom: solid 1px black;
+    }
+
+    .comment-header {
+      display: flex;
+      align-items: center; /* 수직 중앙 정렬 */
+      justify-content: flex-start; /* 왼쪽 정렬 */
+      padding-bottom: 8px;
+    }
+
+    .comment-userId {
+      margin-right: 10px; /* userId와 content 사이 간격 */
+      font-weight: bold;
+    }
+
+    .comment-content {
+      flex-grow: 1; /* 남은 공간을 차지 */
+      cursor: pointer;
+    }
+
+    .comment-time {
+      margin-right: 5px;
+      margin-top: 5px;
+      display: flex;
+      font-size: 12px;
+      color: gray;
+      justify-content: flex-end;
+    }
+
+    .comment-items{
+        display: flex;
+        flex-direction: column;
+
+    }
+    .comment-items a{
+      font-size: 12px;
+      margin: 3px;
+      color: gray;
+      border: none;
+      background-color: white;
+      cursor: pointer;
+      
+    }
+    .comment-items a:hover{
+      text-decoration: underline;
+      color: rgb(0, 50, 200);
+    }
+    comment-ul{
+      text-decoration: underline;
+    }
+    .wirteComment{
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 10px;
+    }
+    #comment_textarea {
+      width: 85%;
+      height: 50px;
+      font-size: 15px;
+      background-color: #8b8b8b1c;
+      resize: none;
+      color: black;
+      border: none;
+      border-bottom: 2px solid #0000007e;
+      outline: none;
+      scrollbar-width: none;
+      
+    } 
+    #reply_textarea {
+      width: 100%;
+      height: 50px;
+      font-size: 15px;
+      background-color: #8b8b8b1c;
+      resize: none;
+      color: black;
+      border: none;
+      border-bottom: 2px solid #0000007e;
+      outline: none;
+      scrollbar-width: none;
+    }
+
+        /* 푸터 footer */
+        footer {
+      margin-top: 300px;
+      height: 30vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: black;
+    }
+
+    footer .link {
+      display: flex;
+      
+      background-color: black;
+    }
+
+    footer .box {
+        background-color: black;
+      width: 300px;
+      height: 100px;
+      color: #888;
+    }
+
+    footer .box a {
+      color: #888;
+    }
+
+    footer .title {
+      color: #fff;
+      font-size: larger;
+      background-color: black;
+    }
+
+    footer .policy {
+      font-size: small;
+      color: #888;
+      margin-top: 60px;
+      margin-bottom: 8px;
+    }
+
+    footer .copywrite {
+      color: #888;
+      margin-bottom: 1px;
+    }
+
+ 
+        
+    
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+          <div class="logo">
+            <img src="../logoImg/menubar_logo(none).JPG" class="logoImg">
+            <a href="#">JCM</a>
+          </div>
+          <ul>
+            <li><a href="#">회사소개</a></li>
+            <li><a href="#">기술소개</a></li>
+            <li><a href="#">웹 제작</a></li>
+            <li><a href="#">고객지원</a></li>
+            <li><a href="#">가이드</a></li>
+          </ul>
+          <div class="user-options">
+            <a href="#">MyPage</a>
+            <a href="#"> SIGN IN</a>
+          </div>
+        </div>
+       
+      
+        </header>
+        <main>
+            <div class="detailPost">
+            <div class="detailPost-content">
+                <div class="detailPost-header">
+                  <h2>공지사항📢</h2>
+                  <h4 class="post-date" >작성일 : 2024년 10월 24일 </h4>
+                  <div>
+                  <div class="file">
+                    <button onclick="toggleAttachment()">&nbsp;첨부파일</button>
+                  </div>
+                  <div class="attachment" id="attachment">
+                    <a href="img/후보 3.jpg" download>사진</a><br>
+                    <a href="#" download>file</a>
+                  </div>
+                </div>
+                </div>
+                
+                <table>
+                    <tr>
+                        <td class="post-title"><h3>제목</h3></td>
+                      
+                        
+                    </tr>
+                    <tr>
+                        <td><h3>10월 23일 공지사항 입니다.</h3></td>
+                       
+                    </tr>
+                    <tr>
+                        <td><h4>작성자</h4></td>
+                    </tr>
+                    <tr>
+                        <td><h3>양준혁<br><img src="img/후보 3.jpg" alt="프로필사진"></h3></td>
+                    </tr>
+                </table>
+               
+                
+                
+               
+                
+                <h4>내용</h4>
+                <div class="detailPost-mainContent">
+                ㅇㅇㅇㅇ
+                </div>
+            </div>
+            
+            <div class="detailPost-coment">
+                <h4>댓글</h4>
+                <div class="comment">
+                  <ul id="comment-li">
+                    <li >
+                        <div class="comment-header">
+                          <div class="comment-userId">희윤엄</div>
+                          <div class="comment-content" onclick="inquires()">생각 다 하고 정리해서 말해 </div>
+                            <div class="comment-items">
+                              <div class="comment-time">2024.10.24</div>
+                              <div class="comment-right">
+                                  <a>수정</a>
+                                  <a>삭제</a>
+                                  <a onclick="writeReply()">답글</a>
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+                        <ul>
+                        <li id="reply-li">
+                          <div class="reply" id="reply" style="display: none;">
+                            <div class="comment-header">
+                              <div class="comment-userId">희윤엄</div>
+                              <div class="comment-content">생각 다 하고 정리해서 말해 </div>
+                                <div class="comment-items">
+                                  <div class="comment-time">2024.10.24</div>
+                                </div>
+                              </div>
+                          </div>
+                        </li>
+                      </ul>
+                      <div id="writeReply" style="display: none;">
+                        <textarea name="enrollReply" id="reply_textarea" placeholder="답글작성"></textarea>
+                        <button onclick="enrollReply()">등록</button>
+                      </div>
+                      
+                  </ul>
+                 
+                </div>
+                <div class="wirteComment">
+                  <textarea name="enrollComment" id="comment_textarea" placeholder="댓글작성"></textarea>
+                  <button onclick="enrollComment()">등록</button>
+                </div>
+            </div>
+            </div>
+        </main>
+        <footer>
+            <div class="link">
+                <div class="box title">
+                  JoyCodeMe
+                </div>
+                <div class="box">
+                  Learn
+                  <br><br>
+                  <a href="#">Introduction</a><br>
+                  <a href="#">Practice</a><br>
+                  <a href="#">Ask and Questions</a><br>
+                </div>
+                <div class="box">
+                  Code
+                  <br><br>
+                  <a href="#">Code Management</a><br>
+                  <a href="#">Libraries</a><br>
+                  <a href="#">API</a><br>
+                </div>
+                <div class="box">
+                  More
+                  <br><br>
+                  <a href="#">Logo and Brand</a><br>
+                  <a href="#">Code Producer</a><br>
+                </div>
+                <div class="box">
+                  Follow
+                  <br><br>
+                  <a href="#">Instagram</a><br>
+                  <a href="#">GitHub</a><br>
+                  <a href="#">Discord</a><br>
+                </div>
+              </div>
+              <div class="policy">
+                For web site terms of use, trademark policy and general project policies please see https://jocomi.org
+              </div>
+              <div class="copywrite">
+                CopyWrite @ 2024 Jocomi Foundation. All rights reserved
+              </div>
+              
+        </footer>
+
+        <script>
+           function toggleAttachment() {
+    const attachmentDiv = document.getElementById("attachment");
+    // 클래스에 따라 열리고 닫히게 설정
+    if (attachmentDiv.classList.contains("open")) {
+        attachmentDiv.classList.remove("open");
+    } else {
+        attachmentDiv.classList.add("open");
+    }
+}
+            function inquires() {
+              const reply = document.getElementById("reply");
+              if( reply.style.display==="none" ){
+                reply.style.display ="block";
+              }else{
+                reply.style.display ="none";
+              }
+              
+            }
+            function writeReply() {
+              const writeReply = document.getElementById("writeReply");
+          
+              if(writeReply.style.display === "none"){
+                writeReply.style.display = "block";
+              }else{
+                writeReply.style.display = "none";
+              }
+            }
+        </script>
+</body>
+</html>

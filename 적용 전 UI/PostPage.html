@@ -106,6 +106,7 @@
       float: right;
       width: 70%;
       height: 500px;
+      box-sizing: border-box;
     }
 
     .postContent-div ul li {
@@ -133,6 +134,7 @@
     .postContent-table {
       
       width: 80%;
+      min-width: 1000px;
       
     }
 
@@ -142,16 +144,16 @@
     }
 
     .postContent-table tr td:nth-child(3) {
-      width: 20%;
+      min-width: 20%;
 
     }
 
     .postContent-table tr td:nth-child(2) {
-      width: 60%;
+      min-width: 60%;
     }
 
     .postContent-table tr td:nth-child(1) {
-      width: 20%;
+      min-width: 20%;
       padding-left: 20px;
     }
   
@@ -159,6 +161,7 @@
       margin-top: 70px;
       display: flex;
       justify-content: center;
+      
     }
 
     header {
@@ -168,9 +171,9 @@
 
     /* 자주하는 질문 부분 css*/
     .post-table {
-      width: 80%;
+      min-width: 80%;
       margin: 0 auto;
-
+      
     }
 
     .post-table tr td {
@@ -179,9 +182,11 @@
       padding: 20px;
       font-size: large;
       font-weight: 1000;
+      
     }
 
     .main-div {
+      min-width: 1000px;
       width: 100%;
       height: 750px;
       background-color: white;
@@ -193,6 +198,7 @@
         float: right;
     }
     .questions-div {
+      box-sizing: border-box;
       width: 100%;
       height: 400px;
       background-color: rgb(247, 250, 254);
@@ -200,7 +206,8 @@
     }
 
     .questions-left {
-      min-width: 45%;
+     width: 45%;
+     min-width: 600px;
       height: 100%;
       float: left;
       background-color: rgb(247, 250, 254);
@@ -214,7 +221,8 @@
       cursor: pointer;
     }
     .questions-right {
-      min-width: 55%;
+      width: 55%;
+      min-width: 800px;
       height: 100%;
       background-color: rgb(247, 250, 254);
       color: black;
@@ -404,7 +412,7 @@
             <td>제목</td>
             <td>날짜</td>
           </tr>
-       
+                  
         </table>
 
         <button type="button" class="btn btn-primary">작성 하기</button>
