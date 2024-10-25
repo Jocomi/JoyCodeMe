@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>결제 수단 관리</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      background-color: #f5f5f5;
+      font-family: 'Arial', sans-serif;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* 상단 메뉴바 스타일 */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 50px;
+      background-color: black;
+      position: fixed;
+      top: 0;
+      min-width: 900px;
+      width: 95%;
+      z-index: 1000;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar .logo {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0; /* 로고 영역은 고정 */
+    }
+
+    .navbar .logo img {
+      width: 30px;
+      margin-right: 10px;
+    }
+
+    .navbar .logo a {
+      color: white;
+      font-size: 24px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+      flex-grow: 1; /* 중앙 메뉴가 화면에 맞게 확장 */
+      justify-content: center;
+    }
+
+    .navbar ul li {
+      margin: 0 20px;
+    }
+
+    .navbar ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      transition: color 0.3s;
+    }
+
+    .navbar ul li a:hover {
+      color: #00ffff;
+    }
+
+    .navbar .user-options {
+      position: relative;
+      display: flex;
+      flex-shrink: 0; /* 우측 옵션이 화면에서 넘치지 않도록 고정 */
+    }
+
+    .navbar .user-options a {
+      color: white;
+      margin: 0 10px;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: bold;
+      white-space: nowrap; /* 글씨가 화면을 넘지 않게 */
+    }
+
+    .navbar .user-options a:hover {
+      color: #00ffff;
+    }
+
+    /* 서브 메뉴 스타일 */
+    .user-options .submenu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background-color: white;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+      z-index: 1000;
+    }
+
+    .user-options .submenu a {
+      display: block;
+      padding: 10px;
+      color: black;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    .user-options .submenu a:hover {
+      background-color: #f0f0f0;
+    }
+
+    .user-options:hover .submenu {
+      display: block;
+    }
+
+    /* 결제수단 관리 섹션 */
+    .content {
+      margin-top: 120px;
+      padding: 20px;
+      max-width: 1200px; /* 결제수단 관리 섹션을 더 넓게 설정 */
+      margin-left: auto;
+      margin-right: auto;
+      flex-grow: 1; /* 중간 부분이 화면에 맞게 확장되도록 */
+    }
+
+    .content h1 {
+      font-size: 36px;
+      margin-bottom: 20px;
+      text-align: center;
+      color: #333;
+    }
+
+    .payment-section {
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      max-width: 100%; /* 흰색 div를 화면 전체로 확장 */
+    }
+
+    .payment-section h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .payment-section button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-right: 10px;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
+
+    .payment-section button:hover {
+      background-color: #0056b3;
+    }
+
+    .payment-list {
+      margin-top: 20px;
+    }
+
+    .payment-list table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .payment-list table th, .payment-list table td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: center;
+    }
+
+    .payment-list table th {
+      background-color: #f0f0f0;
+    }
+
+    .payment-list table td button {
+      padding: 5px 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-right: 5px;
+    }
+
+    .payment-list table td .edit-btn {
+      background-color: #007bff; /* 수정 버튼 파란색 */
+      color: white;
+    }
+
+    .payment-list table td .delete-btn {
+      background-color: #dc3545; /* 삭제 버튼 빨간색 */
+      color: white;
+    }
+
+    .payment-list table td button:hover {
+      opacity: 0.8;
+    }
+
+    /* 푸터 스타일 */
+    .footer {
+      background-color: black;
+      padding: 20px;
+      text-align: center;
+      color: white;
+      margin-top: auto; /* 푸터가 항상 페이지 하단에 위치하도록 함 */
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 상단 네비게이션 바 -->
+  <div class="navbar">
+    <div class="logo">
+      <img src="../logoImg/logo.jpg" alt="Logo">
+      <a href="#">JCM</a>
+    </div>
+    <ul>
+      <li><a href="#">회사소개</a></li>
+      <li><a href="#">기술소개</a></li>
+      <li><a href="#">웹 제작</a></li>
+      <li><a href="#">고객지원</a></li>
+      <li><a href="#">가이드</a></li>
+    </ul>
+    <div class="user-options">
+      <a href="#">MyPage</a>
+      <!-- 서브 메뉴 -->
+      <div class="submenu">
+        <a href="#">프로필 수정</a>
+        <a href="#">프로젝트</a>
+        <a href="#">결제수단 관리</a>
+      </div>
+      <a href="#">Logout</a>
+    </div>
+  </div>
+
+  <!-- 결제수단 관리 섹션 -->
+  <div class="content">
+    <h1>결제 수단 관리</h1>
+    <div class="payment-section">
+      <h2>일반 결제</h2>
+      <button>계좌이체</button>
+      <button>카드결제</button>
+      <div class="payment-list">
+        <h2>결제 정보</h2>
+        <table>
+          <tr>
+            <th>카드 명칭</th>
+            <th>카드 번호</th>
+            <th>이름</th>
+            <th>카드사</th>
+            <th>유효기간</th>
+            <th>관리</th>
+          </tr>
+          <tr>
+            <td>내 카드</td>
+            <td>5594 1000 2293 9044</td>
+            <td>홍길동</td>
+            <td>신한카드</td>
+            <td>29/06</td>
+            <td>
+              <button class="edit-btn">수정</button>
+              <button class="delete-btn">삭제</button>
+            </td>
+          </tr>
+          <tr>
+            <td>회사 카드</td>
+            <td>2131 2341 2112 7895</td>
+            <td>고길동</td>
+            <td>비씨카드</td>
+            <td>27/01</td>
+            <td>
+              <button class="edit-btn">수정</button>
+              <button class="delete-btn">삭제</button>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- 푸터 -->
+  <div class="footer">
+    <p>© 2024 Joy Code Me. All rights reserved.</p>
+  </div>
+
+</body>
+</html>

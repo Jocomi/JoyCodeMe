@@ -189,7 +189,125 @@
         opacity: 1;
       }
     }
+    /* 오른쪽 아래 채팅 아이콘 */
+    .chat-icon {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #007bff;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 30px;
+      cursor: pointer;
+      z-index: 1001;
+    }
 
+    .chat-icon:hover {
+      background-color: #0056b3;
+    }
+
+    /* 채팅 팝업 */
+    .chat-popup {
+      display: none;
+      position: fixed;
+      bottom: 90px; /* 채팅 아이콘 위에 뜨도록 설정 */
+      right: 20px;
+      width: 300px;
+      background-color: #333;
+      border: 1px solid #444;
+      border-radius: 10px;
+      box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+      z-index: 1001;
+      overflow: hidden;
+    }
+
+    .chat-popup-header {
+      background-color: #444;
+      color: white;
+      padding: 10px;
+      border-bottom: 1px solid #555;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .chat-popup-header .close-btn {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .chat-popup-body {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      padding: 10px;
+      height: 200px;
+      overflow-y: auto;
+      background-color: #444;
+      color: white;
+    }
+
+    .chat-popup-footer {
+      display: flex;
+      padding: 10px;
+      background-color: #444;
+    }
+
+    .chat-popup-footer input {
+      flex-grow: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #555;
+      color: white;
+      margin-right: 10px;
+    }
+
+    .chat-popup-footer button {
+      padding: 10px;
+      background-color: #007bff;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .chat-popup-footer button:hover {
+      background-color: #0056b3;
+    }
+
+    /* 채팅 메시지 스타일 */
+    .chat-message {
+      background-color: #007bff;
+      color: white;
+      padding: 10px;
+      border-radius: 10px;
+      margin: 5px 0;
+      max-width: 80%;
+      word-wrap: break-word;
+      text-align: end;
+      display: inline-block;
+      align-self: flex-end; /* 오른쪽에 정렬 */
+      font-size: small;
+    }
+
+    /* 스크롤 조정 */
+    .chat-popup-body::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .chat-popup-body::-webkit-scrollbar-thumb {
+      background-color: #888;
+      border-radius: 5px;
+    }
 
     /* 메인페이지 main-introduce */
     .main-introduce {
@@ -211,13 +329,13 @@
       font-size: 1.7rem; /* 'JCM' 텍스트 강조 */
     }
     .bg-video {
-  position: absolute;
-  top: 110vh;
-  left: -100;
-  width: 100%;
-  z-index: -1;
-  background-size: cover;
-}
+    position: absolute;
+    top: 110vh;
+    left: -100;
+    width: 100%;
+    z-index: -1;
+    background-size: cover;
+    }
 
 
     /* 메인페이지 main-simulation */
@@ -345,7 +463,7 @@
     }
 
      /* 메인페이지 main-method */
-     .main-method {
+    .main-method {
       height: 120vh;
       display: flex;
       flex-direction: column;
@@ -526,6 +644,24 @@
     <div class="user-options">
       <a href="#">MyPage</a>
       <a href="#">SIGN IN</a>
+    </div>
+  </div>
+
+  <!-- 오른쪽 아래 채팅 아이콘 -->
+  <div class="chat-icon" onclick="toggleChatPopup()">💬</div>
+
+  <!-- 채팅 팝업 -->
+  <div class="chat-popup" id="chatPopup">
+    <div class="chat-popup-header">
+      <span>채팅</span>
+      <button class="close-btn" onclick="toggleChatPopup()">×</button>
+    </div>
+    <div class="chat-popup-body" id="chatBody">
+      <!-- 메시지가 표시될 곳 -->
+    </div>
+    <div class="chat-popup-footer">
+      <input type="text" id="chatInput" placeholder="메시지를 입력하세요" onkeydown="checkEnterKey(event)">
+      <button onclick="sendMessage()">전송</button>
     </div>
   </div>
 
@@ -890,6 +1026,42 @@
       upperRightLineContainer.appendChild(dot);
     }
 
+    function toggleChatPopup() {
+    const chatPopup = document.getElementById('chatPopup');
+    chatPopup.style.display = chatPopup.style.display === 'none' || chatPopup.style.display === '' ? 'block' : 'none';
+    }
+
+    function sendMessage() {
+      const input = document.getElementById('chatInput');
+      const chatBody = document.getElementById('chatBody');
+      const message = input.value.trim();
+
+      if (message) {
+        const messageElement = document.createElement('div');
+        messageElement.classList.add('chat-message');
+        messageElement.textContent = message;
+        chatBody.appendChild(messageElement);
+        chatBody.scrollTop = chatBody.scrollHeight;
+        input.value = '';
+      }
+    }
+
+  // 엔터 키로 전송
+    function checkEnterKey(event) {
+      if (event.key === 'Enter') {
+        sendMessage();
+      }
+    }
+
+    // 채팅 팝업 내에서 스크롤 이벤트를 처리
+    document.getElementById('chatBody').addEventListener('wheel', function(event) {
+      // 스크롤이 채팅창에서만 작동하고 메인 페이지 스크롤로 전파되지 않도록 막음
+      const chatBody = document.getElementById('chatBody');
+      if ((event.deltaY > 0 && chatBody.scrollTop + chatBody.clientHeight >= chatBody.scrollHeight) ||
+          (event.deltaY < 0 && chatBody.scrollTop <= 0)) {
+        event.preventDefault();
+      }
+    });
   </script>
 
   
