@@ -1,0 +1,73 @@
+.password-container {
+    margin: 100px auto;
+    width: 50%;
+    background-color: #1c1c1c;
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+    text-align: center;
+  }
+
+  .password-container h1 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    color: #ffffff;
+  }
+
+  .password-container .form-group {
+    margin-bottom: 20px;
+    position: relative;
+    text-align: left;
+  }
+
+  .password-container label {
+    font-size: 1rem;
+    color: #ccc;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .password-container input[type="password"], .password-container input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+    font-size: 1rem;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+
+  .password-container input[type="password"]:focus, .password-container input[type="text"]:focus {
+    border: 2px solid #ffffff;
+  }
+
+  /* 눈 모양 아이콘을 비밀번호 입력 창 안에 배치 */
+  .password-container .show-hide {
+    position: absolute;
+    top: 65%; /* 아이콘을 좀 더 아래로 내려서 중앙에 위치 */
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #aaa;
+  }
+
+  .password-container button {
+    background-color: #333;
+    border: 1px solid #ffffff;
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin: 10px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+
+  .password-container button:hover {
+    background-color: #444;
+    transform: scale(1.05);
+  }
