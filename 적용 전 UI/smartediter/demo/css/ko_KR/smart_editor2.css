@@ -24,13 +24,13 @@ body,#smart_editor2,#smart_editor2 p,#smart_editor2 h1,#smart_editor2 h2,#smart_
 #smart_editor2 .se2_input_area{position:relative;z-index:22;height:400px;margin:0;padding:0;*zoom:1}
 #smart_editor2 .se2_input_wysiwyg,#smart_editor2 .se2_input_syntax{display:block;overflow:auto;width:100%;height:100%;margin:0;*margin:-1px 0 0 0;border:0}
 /* EDITINGMODE */
-#smart_editor2 .se2_conversion_mode{position:relative;height:15px;padding-top:1px;border-top:1px solid #b5b5b5;background:url("../../img/icon_set.gif?141007") 0 -896px repeat-x}
-#smart_editor2 .controller_on span{background-position:0 -21px;color:#249c04}
-#smart_editor2 .ly_controller{display:block;position:absolute;bottom:2px;left:50%;width:287px;margin-left:-148px;padding:8px 0 7px 9px;border:1px solid #827f7c;background:#fffdef}
-#smart_editor2 .ly_controller p{color:#666;font-size:11px;letter-spacing:-1px;line-height:11px}
-#smart_editor2 .ly_controller .bt_clse,#smart_editor2 .ly_controller .ic_arr{position:absolute;background:url("../../img/ico_extend.png") no-repeat}
-#smart_editor2 .ly_controller .bt_clse{top:5px;right:4px;width:14px;height:15px;background-position:1px -43px}
-#smart_editor2 .ly_controller .ic_arr{top:25px;left:50%;width:10px;height:6px;margin-left:-5px;background-position:0 -65px}
+#smart_editor2 .se2_conversion_mode{display: none; position:relative;height:15px;padding-top:1px;border-top:1px solid #b5b5b5;background:url("../../img/icon_set.gif?141007") 0 -896px repeat-x}
+#smart_editor2 .controller_on span{display: none;background-position:0 -21px;color:#249c04}
+#smart_editor2 .ly_controller{display: none;position:absolute;bottom:2px;left:50%;width:287px;margin-left:-148px;padding:8px 0 7px 9px;border:1px solid #827f7c;background:#fffdef}
+#smart_editor2 .ly_controller p{color:#666;font-size:11px;letter-spacing:-1px;line-height:11px; display: none;}
+#smart_editor2 .ly_controller .bt_clse,#smart_editor2 .ly_controller .ic_arr{display: none;position:absolute;background:url("../../img/ico_extend.png") no-repeat}
+#smart_editor2 .ly_controller .bt_clse{display: none;top:5px;right:4px;width:14px;height:15px;background-position:1px -43px}
+#smart_editor2 .ly_controller .ic_arr{display: none; top:25px;left:50%;width:10px;height:6px;margin-left:-5px;background-position:0 -65px}
 #smart_editor2 .se2_converter{float:left;position:absolute;top:-1px;right:3px;z-index:20}
 #smart_editor2 .se2_converter li{float:left}
 #smart_editor2 .se2_converter .se2_to_editor{width:59px;height:15px;background:url("../../img/ko_KR/btn_set.png?160622") 0 -85px no-repeat;vertical-align:top}
