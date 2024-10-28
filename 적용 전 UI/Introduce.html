@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 타이핑 효과 js -->
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <!-- Map js -->
+    <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=srbxbvs7lt"></script>
+    <style>
+        /* Poppins 폰트 링크 */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            background: #000000;
+        }
+
+        /* timeline css*/
+
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 100px auto;
+        }
+
+        .timeline-container {
+            padding: 10px 50px;
+            position: relative;
+            width: 50%;
+            animation: movedown 1s linear forwards;
+            opacity: 0;
+        }
+
+        @keyframes movedown {
+            0% {
+                opacity: 1;
+                transform: translateY(-30px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0px);
+            }
+        }
+
+        .timeline-container:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .timeline-container:nth-child(2) {
+            animation-delay: 1s;
+        }
+
+        .timeline-container:nth-child(3) {
+            animation-delay: 2s;
+        }
+
+        .timeline-container:nth-child(4) {
+            animation-delay: 3s;
+        }
+
+        .timeline-container:nth-child(5) {
+            animation-delay: 4s;
+        }
+
+        .timeline-container:nth-child(6) {
+            animation-delay: 5s;
+        }
+
+        .text-box {
+            padding: 20px 30px;
+            background: #fff;
+            position: relative;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        .left-container {
+            left: 0;
+        }
+
+        .right-container {
+            left: 50%;
+        }
+
+        .timeline-container img {
+            position: absolute;
+            width: 40px;
+            border-radius: 50%;
+            right: -20px;
+            top: 32px;
+            z-index: 10;
+        }
+
+        .right-container img {
+            left: -20px;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            height: 100%;
+            background: #fff;
+            top: 0;
+            left: 50%;
+            margin-left: -3px;
+            z-index: -1;
+            animation: moveline 6s linear forwards;
+        }
+
+        @keyframes moveline {
+            0% {
+                height: 0;
+            }
+
+            100% {
+                height: 100%;
+            }
+        }
+
+        .text-box h2 {
+            font-weight: 600;
+        }
+
+        .text-box small {
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .left-container-arrow {
+            height: 0;
+            width: 0;
+            position: absolute;
+            top: 28px;
+            z-index: 1;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-left: 15px solid #fff;
+            right: -15px;
+        }
+
+        .right-container-arrow {
+            height: 0;
+            width: 0;
+            position: absolute;
+            top: 28px;
+            z-index: 1;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-right: 15px solid #fff;
+            left: -15px;
+        }
+
+        /* header css */
+
+        .header-container {
+            width: 100%;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header-container h1 {
+            font-size: 4.4em;
+            color: #fff;
+        }
+
+        .header-container span {
+            color: #fff724;
+        }
+
+
+        /* header css 끝 */
+
+
+        /* 팀원 소개 섹션 스타일 */
+        .introduce {
+            max-width: 1200px;
+            margin: 50px auto;
+            text-align: center;
+        }
+
+        .introduce h2 {
+            font-size: 3em;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .team-container {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .team-card {
+            background: #0c0c0c;
+            border-radius: 10px;
+            width: 500px;
+            height: 400px;
+            margin: 20px;
+            padding: 20px;
+            animation: slideIn 1s ease forwards;
+            animation-delay: 2.5s;
+            opacity: 0;
+        }
+
+        .team-card img {
+            width: 200px;
+            height: 250px;
+            border-radius: 10px;
+            margin: 0 auto;
+            object-fit: cover;
+        }
+
+        .team-card h3 {
+            color: #fff;
+            margin-top: 15px;
+            font-size: 1.5em;
+        }
+
+        .team-card p {
+            color: #888;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+
+        /* Map 관련 css */
+        .map-container {
+            display: flex;
+            width: 100%;
+            height: 700px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .map-left h1 {
+            color: #fff;
+            font-size: 50px;
+        }
+
+        .map-left h2 {
+            color: #fff;
+            margin-bottom: 30px;
+        }
+
+        .map-left p {
+            margin: 10px 0;
+            color: #fff;
+        }
+
+
+        .iw_inner h1 {
+            font-size: 30px;
+            text-align: center;
+            color: #333;
+            padding-bottom: 10px;
+            margin-bottom: 100px;
+            border-bottom: 3px solid #0078ff;
+        }
+
+        #map {
+            width: 500px;
+            height: 300px;
+            margin-top: 100px;
+            margin-left: 20%;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .iw_inner {
+            font-size: 14px;
+            color: #333;
+            padding: 15px;
+        }
+
+        .iw_inner h3 {
+            color: #0078ff;
+            margin-bottom: 5px;
+        }
+
+        /* 푸터 footer 스타일을 미디어 쿼리 밖으로 이동하여 모든 화면 크기에 적용되도록 변경 */
+        footer {
+            margin-top: 80px;
+            height: 20vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        footer .link {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        footer .box {
+            width: 300px;
+            height: 100px;
+            color: #888;
+        }
+
+        footer .box a {
+            color: #888;
+        }
+
+        footer .title {
+            color: #fff;
+            font-size: larger;
+        }
+
+        footer .policy {
+            font-size: small;
+            color: #888;
+            margin-top: 60px;
+            margin-bottom: 8px;
+        }
+
+        footer .copywrite {
+            color: #888;
+            margin-bottom: 1px;
+        }
+
+        /* 푸터 footer 끝 */
+
+        /* 글자 애니메이션 */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Team Container 반응형 */
+        @media (max-width: 600px) {
+            .team-container {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            .timeline {
+                margin: 50px auto;
+            }
+
+            .timeline::after {
+                left: 31px;
+            }
+
+            .timeline-container {
+                width: 100%;
+                padding-left: 80px;
+                padding-right: 25px;
+            }
+
+            .text-box {
+                font-size: 13px;
+            }
+
+            .text-box small {
+                margin-bottom: 10px;
+            }
+
+            .right-container {
+                left: 0;
+            }
+
+            .left-container img,
+            .right-container img {
+                left: 10px;
+            }
+
+            .left-container-arrow,
+            .right-container-arrow {
+                border-right: 15px solid #fff;
+                border-left: 0;
+                left: -15px;
+            }
+
+            .map-left {
+                display: none;
+            }
+
+            #map {
+                margin-left: 0px;
+                width: 100%;
+            }
+
+        }
+
+        /* timeline css 끝 */
+    </style>
+</head>
+
+<body>
+    <!-- /* timeline div */ -->
+
+    <div class="timeline">
+        <div class="timeline-container left-container">
+            <img src="img/timeline01.png"> <!-- 각자 사진으로 넣어주쉐요 ^ㅜ^ -->
+            <div class="text-box">
+                <h2>Project personnel</h2>
+                <small>24.09.20 - 24.09.24</small>
+                <p>Made up a group of four members <br>
+                    Rocomi, Zeus, Download, and 2weeks.</p>
+                <span class="left-container-arrow"></span>
+            </div>
+        </div>
+
+        <div class="timeline-container right-container">
+            <img src="img/timeline02.png">
+            <div class="text-box">
+                <h2>Create a team name</h2>
+                <small>24.09.24 - 24.09.26</small>
+                <p>The project team name is Jocomi.</p>
+                <span class="right-container-arrow"></span>
+            </div>
+        </div>
+
+        <div class="timeline-container left-container">
+            <img src="img/timeline03.png">
+            <div class="text-box">
+                <h2>Project planning</h2>
+                <small>24.09.26 - 24.09.30</small>
+                <p>Plan based on open AI API web services.</p>
+                <span class="left-container-arrow"></span>
+            </div>
+        </div>
+
+        <div class="timeline-container right-container">
+            <img src="img/timeline04.png">
+            <div class="text-box">
+                <h2>Configuring a Project</h2>
+                <small>24.09.30 - 24.10.28</small>
+                <p>Configure the project based on React.</p>
+                <span class="right-container-arrow"></span>
+            </div>
+        </div>
+
+        <div class="timeline-container left-container">
+            <img src="img/timeline05.png">
+            <div class="text-box">
+                <h2>Project completion</h2>
+                <small>24.10.28 - 24.11.25</small>
+                <p>Complete and deploy the project.</p>
+                <span class="left-container-arrow"></span>
+            </div>
+        </div>
+    </div>
+    <!-- /* timeline div 끝 */ -->
+
+    <!-- /* logo header */ -->
+    <div class="header-container">
+        <h1>I'm a <span class="auto-type">Programmer</span></h1>
+    </div>
+    <!-- /* logo header 끝 -->
+
+    <!-- /* assisted */  -->
+
+
+    <!-- /* assisted 끝 */  -->
+
+
+    <!-- 팀원 소개 -->
+    <div class="introduce">
+        <h2>Our Team</h2>
+        <div class="team-container">
+            <div class="team-card">
+                <img src="img/man.png">
+                <h3>Rocomi</h3>
+                <p>Project Manager</p>
+            </div>
+            <div class="team-card">
+                <img src="img/man.png">
+                <h3>Zeus</h3>
+                <p>Project Member</p>
+            </div>
+            <div class="team-card">
+                <img src="img/man.png">
+                <h3>Download</h3>
+                <p>Project Member</p>
+            </div>
+            <div class="team-card">
+                <img src="img/woman.png">
+                <h3>2weeks</h3>
+                <p>Project Member</p>
+            </div>
+        </div>
+    </div>
+    <div class="map-container">
+    <div class="map-left">
+        <h1>Joy Code Me</h1>
+        <h2>조이 코드 미</h2>
+        <p>Jocomi, Teheran-ro 14-gil, Gangnam-gu</p>
+        <p>02 - 123 - 4567</p>
+        <p>joycodeme@gmail.com</p>
+    </div>
+    <div id="map"></div>
+    </div>
+
+
+    <!-- /* footer div */ -->
+    <footer>
+        <div class="link">
+            <div class="box title">
+                JoyCodeMe
+            </div>
+            <div class="box">
+                Learn
+                <br><br>
+                <a href="#">Introduction</a><br>
+                <a href="#">Practice</a><br>
+                <a href="#">Ask and Questions</a><br>
+            </div>
+            <div class="box">
+                Code
+                <br><br>
+                <a href="#">Code Management</a><br>
+                <a href="#">Libraries</a><br>
+                <a href="#">API</a><br>
+            </div>
+            <div class="box">
+                More
+                <br><br>
+                <a href="#">Logo and Brand</a><br>
+                <a href="#">Code Producer</a><br>
+            </div>
+            <div class="box">
+                Follow
+                <br><br>
+                <a href="#">Instagram</a><br>
+                <a href="#">GitHub</a><br>
+                <a href="#">Discord</a><br>
+            </div>
+        </div>
+        <div class="policy">
+            For web site terms of use, trademark policy and general project policies please see https://jocomi.org
+        </div>
+        <div class="copywrite">
+            CopyWrite @ 2024 Jocomi Foundation. All rights reserved
+        </div>
+
+    </footer>
+    <!-- /* footer div 끝 */ -->
+
+    <script>
+        // 글자 타이핑 script 시작
+        const typed = new Typed(".auto-type", {
+            strings: ["Programmer", "Desinger", "Full-stack Developer"],
+            typeSpeed: 80,
+            backSpeed: 80,
+            loop: true
+        });
+
+        // Map script 시작
+        var HOME_PATH = window.HOME_PATH || '.';
+
+        var cityhall = new naver.maps.LatLng(37.4985399, 127.0326428),
+            map = new naver.maps.Map('map', {
+                center: cityhall.destinationPoint(0, 500),
+                zoom: 15
+            }),
+            marker = new naver.maps.Marker({
+                map: map,
+                position: cityhall
+            });
+
+        var contentString = [
+            '<div class="iw_inner">',
+            '   <h3>Joy Code Me</h3>',
+            '   <p>서울특별시 강남구 테헤란로 10길 09 <br />',
+            '   </p>',
+            '</div>'
+        ].join('');
+
+        var infowindow = new naver.maps.InfoWindow({
+            content: contentString
+        });
+
+        naver.maps.Event.addListener(marker, "click", function (e) {
+            if (infowindow.getMap()) {
+                infowindow.close();
+            } else {
+                infowindow.open(map, marker);
+            }
+        });
+
+        infowindow.open(map, marker);
+
+    </script>
+</body>
+
+</html>
