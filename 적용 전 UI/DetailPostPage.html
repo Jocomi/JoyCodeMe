@@ -96,7 +96,7 @@
       color: black;
     }
     /* 상세 게시물 영역*/
-    .detailPost-header{
+    .detail-post-header{
         display: flex;
         justify-content: flex-start;
         
@@ -121,13 +121,13 @@
       padding-bottom: 20px;
       font-weight: bold;
     }
-    .viewCount{
+    .view-count{
       font-weight: bold;
       margin-top: 22px;
       
     }
   
-    .detailPost-header button{
+    .detail-post-header button{
         width: 100px;
         height: 40px;
         background-color: white;
@@ -144,7 +144,7 @@
         border-bottom: solid 1px;
     }
   
-    .detailPost{
+    .detail-post{
         min-width: 700px;
         width: 70%;
         justify-content: center;
@@ -153,7 +153,7 @@
         margin-left: 400px;
       
     }
-    .detailPost-content{
+    .detail-post-content{
         padding: 20px;
         width: 70%;
         height: 900px;
@@ -163,35 +163,35 @@
         border-bottom: none;
     }
 
-    .detailPost-content img{
+    .detail-post-content img{
         width: 100px;
         height: 100px;
         border-radius: 50%;
      
     }
-    .detailPost-coment{
+    .detail-post-coment{
         padding: 20px;
         width: 70%;
         border: solid 1px black;
         margin: 0 auto;
     }
-    .detailPost-mainContent{
+    .detail-post-main-content{
         padding: 10px;
        background-color: rgb(236, 236, 236);
         height: 350px;
        min-width: 70%;  
        border-radius: 20px;
     }
-    .detailPost-items{
+    .detail-post-items{
       display: flex;
       justify-content: flex-end;
 
     }
-    .detailPost-items a{
+    .detail-post-items a{
       margin-left: 8px;
       font-size: 13px;
     }
-    .detailPost-items a:hover{
+    .detail-post-items a:hover{
       text-decoration: underline;
       cursor: pointer;
     }
@@ -270,12 +270,12 @@
     comment-ul{
       text-decoration: underline;
     }
-    .wirteComment{
+    .wirte-comment{
       display: flex;
       justify-content: flex-end;
       margin-top: 10px;
     }
-    #comment_textarea {
+    #comment-textarea {
       width: 85%;
       height: 50px;
       font-size: 15px;
@@ -288,7 +288,7 @@
       scrollbar-width: none;
       
     } 
-    #reply_textarea {
+    #reply-textarea {
       width: 100%;
       height: 50px;
       font-size: 15px;
@@ -322,16 +322,21 @@
       .postList tr td:nth-child(4){
         width: 15%;
       }
-      .postContent-table {
+      .post-content-table {
         width: 80%;
         min-width: 400px;
       margin-left: 60px;
     }
       
-    .postContent-table tr {
+    .post-content-table tr {
       height: 45px;
       border-bottom: 1px solid #888;
       padding: 100px;
+    }
+    .postList-title{
+      padding: 30px;
+      display: flex;
+      justify-content: space-between;
     }
 
 
@@ -446,13 +451,13 @@
     
          
         </div>
-            <div class="detailPost">
-            <div class="detailPost-content">
-              <div class="detailPost-header">
+            <div class="detail-post">
+            <div class="detail-post-content">
+              <div class="detail-post-header">
                   <h2>공지사항📢</h2>
                   <h4 class="post-date" >작성일 : 2024년 10월 24일 </h4>
                   <div>
-                    <p class="viewCount">조회수 :</p>
+                    <p class="view-count">조회수 :</p>
                   <div class="file">
                     
                     <button onclick="toggleAttachment()">첨부파일</button>
@@ -476,10 +481,10 @@
                     </tr>
                 </table>
                 <h4>내용</h4>
-                <div class="detailPost-mainContent">
+                <div class="detail-post-main-content">
                 ㅇㅇㅇㅇ
                 </div>
-                <div class="detailPost-items">
+                <div class="detail-post-items">
                   <a>수정</a>
                   <a>삭제</a>
               </div>
@@ -492,7 +497,7 @@
               
               </div>
             
-            <div class="detailPost-coment">
+            <div class="detail-post-coment">
                 <h4>댓글</h4>
                 <div class="comment">
                   <ul id="comment-li">
@@ -523,24 +528,24 @@
                           </div>
                         </li>
                       </ul>
-                      <div id="writeReply" style="display: none;">
-                        <textarea name="enrollReply" id="reply_textarea" placeholder="답글작성"></textarea>
+                      <div id="write-reply" style="display: none;">
+                        <textarea name="enrollReply" id="reply-textarea" placeholder="답글작성"></textarea>
                         <button onclick="enrollReply()">등록</button>
                       </div>
                       
                   </ul>
                  
                 </div>
-                <div class="wirteComment">
-                  <textarea name="enrollComment" id="comment_textarea" placeholder="댓글작성"></textarea>
+                <div class="wirte-comment">
+                  <textarea name="enroll-comment" id="comment-textarea" placeholder="댓글작성"></textarea>
                   <button onclick="enrollComment()">등록</button>
                 </div>
             </div>
             
             <div class="postList">
-              <div class="postList-title"><h4>목록</h4></div>
-            <table class="postContent-table">
-              
+              <div class="postList-title"><h4>목록</h4><a href=""><h4>목록으로</h4></a></div>
+            <table class="post-content-table">
+            
               <tr>
                 <td>작성자</td>
                 <td>제목</td>
@@ -638,7 +643,7 @@
               
             }
             function writeReply() {
-              const writeReply = document.getElementById("writeReply");
+              const writeReply = document.getElementById("write-reply");
           
               if(writeReply.style.display === "none"){
                 writeReply.style.display = "block";
