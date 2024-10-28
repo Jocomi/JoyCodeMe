@@ -103,7 +103,7 @@
     }
     .menubar-div{
       position: absolute;
-      padding: 50px;
+      padding: 10px;
       min-width: 30%;
       height: 100%;
       float: left;
@@ -143,8 +143,8 @@
         margin-bottom: 20px;
     }
     .enroll-btn{
-      display: flex;
-      justify-content: end;
+     float: right;
+     padding: 10px;
     }
 
  
@@ -282,8 +282,16 @@
                           </div>
                           <div class="mb-3">
                             <input class="form-control" type="file" id="formFileMultiple" multiple>
-                            <div class="enroll-btn"><input class="btn btn-primary" type="submit" value="작성하기" ></div>
+                            <div class="enroll-items">
+                            <div class="enroll-btn">
+                              <input class="btn btn-danger" type="submit" value="취소" >
+                            </div>
+                            <div class="enroll-btn">
+                              <input class="btn btn-primary" type="submit" value="작성하기" >
+                            </div>
+                          </div>
                           </div> 
+                          
                     </div>
                 </form>
                 
