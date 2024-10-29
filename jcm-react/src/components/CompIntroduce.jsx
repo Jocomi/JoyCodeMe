@@ -1,6 +1,6 @@
 import '../css/CompIntroduce.css';
-
 import { useEffect } from 'react';
+import { Helmet } from 'react-helmet';
 import { Typed } from 'react-typed';
 
 const CompIntroduce = () => {
@@ -18,8 +18,59 @@ const CompIntroduce = () => {
         };
     }, []);
 
+    useEffect(() => {
+        const onLoadMap = () => {
+            const cityhall = new window.naver.maps.LatLng(37.4985399, 127.0326428);
+            const map = new window.naver.maps.Map('map', {
+                center: cityhall.destinationPoint(0, 500),
+                zoom: 15,
+            });
+
+            const marker = new window.naver.maps.Marker({
+                map: map,
+                position: cityhall,
+            });
+
+            const contentString = `
+                <div class="iw_inner">
+                    <h3>KH 정보교육원</h3>
+                    <p>서울특별시 강남구 테헤란로 10길 09 | KH 정보교육원 강남지원 2관 <br />
+                    02-120 | 공공, 사회기관 <br />
+                    </p>
+                </div>`;
+
+            const infowindow = new window.naver.maps.InfoWindow({
+                content: contentString,
+            });
+
+            window.naver.maps.Event.addListener(marker, 'click', function () {
+                if (infowindow.getMap()) {
+                    infowindow.close();
+                } else {
+                    infowindow.open(map, marker);
+                }
+            });
+
+            infowindow.open(map, marker);
+        };
+
+        // Naver Maps API가 이미 로드되었는지 확인하고, 없다면 스크립트를 추가합니다.
+        if (window.naver && window.naver.maps) {
+            onLoadMap(); // 스크립트가 이미 로드된 경우 바로 지도 생성
+        } else {
+            const script = document.createElement('script');
+            script.src = 'https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=srbxbvs7lt';
+            script.async = true;
+            script.onload = onLoadMap;
+            document.head.appendChild(script);
+        }
+    }, []);
+
     return (
-        <div className="introduce-area">
+            <div className="introduce-area">
+                <Helmet>
+                    <title>Joy Code Me</title>
+                </Helmet>
             <div className="timeline">
                 <div className="timeline-container left-container">
                     <img src="/img/timeline01.png" alt="타임라인"/> 
@@ -113,15 +164,18 @@ const CompIntroduce = () => {
                     </div>
                 </div>
             </div>
-            <div className="map-container">
-            <div className="map-left">
-                <h1>Joy Code Me</h1>
-                <h2>조이 코드 미</h2>
-                <p>Jocomi, Teheran-ro 14-gil, Gangnam-gu</p>
-                <p>02 - 123 - 4567</p>
-                <p>joycodeme@gmail.com</p>
+            <div className="map-header">
+                <h1>찾아오시는길</h1>
             </div>
-            <div id="map"></div>
+
+            <div className="map-container">
+                <div id="map"></div>
+            </div>
+
+            <div className="address-info">
+                <p><strong>주소:</strong> 서울특별시 강남구 테헤란로 10길 09</p>
+                <p>KH 정보교육원 강남지원 2관</p>
+                <p>02-120 | 공공, 사회기관</p>
             </div>
         </div>
     );
