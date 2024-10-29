@@ -26,21 +26,21 @@ const ChangePwd = () => {
 
                 {/* <!-- 현재 비밀번호 --> */}
                 <div className="form-group">
-                <label for="current-password">현재 비밀번호</label>
+                <label htmlFor="current-password">현재 비밀번호</label>
                 <input type="password" id="current-password" placeholder="현재 비밀번호"/>
                 <i className="fa fa-eye show-hide" onClick={(e) => togglePassword('current-password', e.currentTarget)}></i>
                 </div>
 
                 {/* <!-- 새로운 비밀번호 --> */}
                 <div className="form-group">
-                <label for="new-password">새로운 비밀번호</label>
+                <label htmlFor="new-password">새로운 비밀번호</label>
                 <input type="password" id="new-password" placeholder="새로운 비밀번호"/>
                 <i className="fa fa-eye show-hide" onClick={(e) => togglePassword('new-password', e.currentTarget)}></i>
                 </div>
 
                 {/* <!-- 비밀번호 확인 --> */}
                 <div className="form-group">
-                <label for="confirm-password">새로운 비밀번호 확인</label>
+                <label htmlFor="confirm-password">새로운 비밀번호 확인</label>
                 <input type="password" id="confirm-password" placeholder="새로운 비밀번호 확인"/>
                 <i className="fa fa-eye show-hide" onClick={(e) => togglePassword('confirm-password', e.currentTarget)}></i>                </div>
 
