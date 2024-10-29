@@ -19,65 +19,65 @@ const CompIntroduce = () => {
     }, []);
 
     return (
-        <div class="introduce-area">
-            <div class="timeline">
-                <div class="timeline-container left-container">
+        <div className="introduce-area">
+            <div className="timeline">
+                <div className="timeline-container left-container">
                     <img src="/img/timeline01.png" alt="타임라인"/> 
                     {/* <!-- 각자 사진으로 넣어주쉐요 ^ㅜ^ --> */}
-                    <div class="text-box">
+                    <div className="text-box">
                         <h2>Project personnel</h2>
                         <small>24.09.20 - 24.09.24</small>
                         <p>Made up a group of four members <br/>
                             Rocomi, Zeus, Download, and 2weeks.</p>
-                        <span class="left-container-arrow"></span>
+                        <span className="left-container-arrow"></span>
                     </div>
                 </div>
 
-                <div class="timeline-container right-container">
+                <div className="timeline-container right-container">
                     <img src="/img/timeline02.png" alt="타임라인"/>
-                    <div class="text-box">
+                    <div className="text-box">
                         <h2>Create a team name</h2>
                         <small>24.09.24 - 24.09.26</small>
                         <p>The project team name is Jocomi.</p>
-                        <span class="right-container-arrow"></span>
+                        <span className="right-container-arrow"></span>
                     </div>
                 </div>
 
-                <div class="timeline-container left-container">
+                <div className="timeline-container left-container">
                     <img src="/img/timeline03.png" alt="타임라인"/>
-                    <div class="text-box">
+                    <div className="text-box">
                         <h2>Project planning</h2>
                         <small>24.09.26 - 24.09.30</small>
                         <p>Plan based on open AI API web services.</p>
-                        <span class="left-container-arrow"></span>
+                        <span className="left-container-arrow"></span>
                     </div>
                 </div>
 
-                <div class="timeline-container right-container">
+                <div className="timeline-container right-container">
                     <img src="/img/timeline04.png" alt="타임라인"/>
-                    <div class="text-box">
+                    <div className="text-box">
                         <h2>Configuring a Project</h2>
                         <small>24.09.30 - 24.10.28</small>
                         <p>Configure the project based on React.</p>
-                        <span class="right-container-arrow"></span>
+                        <span className="right-container-arrow"></span>
                     </div>
                 </div>
 
-                <div class="timeline-container left-container">
+                <div className="timeline-container left-container">
                     <img src="/img/timeline05.png" alt="타임라인"/>
-                    <div class="text-box">
+                    <div className="text-box">
                         <h2>Project completion</h2>
                         <small>24.10.28 - 24.11.25</small>
                         <p>Complete and deploy the project.</p>
-                        <span class="left-container-arrow"></span>
+                        <span className="left-container-arrow"></span>
                     </div>
                 </div>
             </div>
             {/* <!-- timeline div 끝 --> */}
 
             {/* <!-- /* logo header */ }
-            <div class="header-container">
-                <h1>I'm a <span class="auto-type">Programmer</span></h1>
+            <div className="header-container">
+                <h1>I'm a <span className="auto-type">Programmer</span></h1>
             </div>
             {/* <!-- /* logo header 끝 --> */}
 
@@ -88,33 +88,33 @@ const CompIntroduce = () => {
 
 
             {/* <!-- 팀원 소개 --> */}
-            <div class="introduce">
+            <div className="introduce">
                 <h2>Our Team</h2>
-                <div class="team-container">
-                    <div class="team-card">
+                <div className="team-container">
+                    <div className="team-card">
                         <img src="/img/man.png" alt="프로필사진"/>
                         <h3>Rocomi</h3>
                         <p>Project Manager</p>
                     </div>
-                    <div class="team-card">
+                    <div className="team-card">
                         <img src="/img/man.png" alt="프로필사진"/>
                         <h3>Zeus</h3>
                         <p>Project Member</p>
                     </div>
-                    <div class="team-card">
+                    <div className="team-card">
                         <img src="/img/man.png" alt="프로필사진"/>
                         <h3>Download</h3>
                         <p>Project Member</p>
                     </div>
-                    <div class="team-card">
+                    <div className="team-card">
                         <img src="/img/woman.png" alt="프로필사진"/>
                         <h3>2weeks</h3>
                         <p>Project Member</p>
                     </div>
                 </div>
             </div>
-            <div class="map-container">
-            <div class="map-left">
+            <div className="map-container">
+            <div className="map-left">
                 <h1>Joy Code Me</h1>
                 <h2>조이 코드 미</h2>
                 <p>Jocomi, Teheran-ro 14-gil, Gangnam-gu</p>

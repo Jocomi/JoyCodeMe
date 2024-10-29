@@ -21,28 +21,28 @@ const ChangePwd = () => {
     return ( 
         <>
             {/* <!-- 비밀번호 변경 컨테이너 --> */}
-            <div class="password-container">
+            <div className="password-container">
                 <h1>비밀번호 변경</h1>
 
                 {/* <!-- 현재 비밀번호 --> */}
-                <div class="form-group">
+                <div className="form-group">
                 <label for="current-password">현재 비밀번호</label>
                 <input type="password" id="current-password" placeholder="현재 비밀번호"/>
-                <i class="fa fa-eye show-hide" onClick={(e) => togglePassword('current-password', e.currentTarget)}></i>
+                <i className="fa fa-eye show-hide" onClick={(e) => togglePassword('current-password', e.currentTarget)}></i>
                 </div>
 
                 {/* <!-- 새로운 비밀번호 --> */}
-                <div class="form-group">
+                <div className="form-group">
                 <label for="new-password">새로운 비밀번호</label>
                 <input type="password" id="new-password" placeholder="새로운 비밀번호"/>
-                <i class="fa fa-eye show-hide" onClick={(e) => togglePassword('new-password', e.currentTarget)}></i>
+                <i className="fa fa-eye show-hide" onClick={(e) => togglePassword('new-password', e.currentTarget)}></i>
                 </div>
 
                 {/* <!-- 비밀번호 확인 --> */}
-                <div class="form-group">
+                <div className="form-group">
                 <label for="confirm-password">새로운 비밀번호 확인</label>
                 <input type="password" id="confirm-password" placeholder="새로운 비밀번호 확인"/>
-                <i class="fa fa-eye show-hide" onClick={(e) => togglePassword('confirm-password', e.currentTarget)}></i>                </div>
+                <i className="fa fa-eye show-hide" onClick={(e) => togglePassword('confirm-password', e.currentTarget)}></i>                </div>
 
                 {/* <!-- 저장 및 취소 버튼 --> */}
                 <button type="submit">저장</button>
