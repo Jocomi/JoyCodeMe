@@ -157,7 +157,7 @@ const CompIntroduce = () => {
                         <p>Project Member</p>
                     </div>
                     <div className="team-card">
-                        <img src="/img/woman.png" alt="프로필사진"/>
+                        <img src="/img/2weeks.jpg" alt="프로필사진"/>
                         <h3>2weeks</h3>
                         <p>Project Member</p>
                     </div>
