@@ -25,6 +25,15 @@ const SignIn = () => {
     }
 
     return (
+<<<<<<< HEAD
+            <div className="signIn-container">
+                <div className="image-section">
+                    <video muted autoPlay loop>
+                        <source src='/resources/login.mp4' type="video/mp4" />
+                    </video>
+                </div>
+                <div className="form-section hidden" id="signup-form">
+=======
         <div className="signIn-container">
             <div className="image-section">
                 <video muted autoPlay loop>
@@ -33,6 +42,7 @@ const SignIn = () => {
             </div>
 
             <div className="form-section hidden" id="signup-form">
+>>>>>>> ab1e3ef2986d6dc876ba07b6889f1322fe39ff6d
                 <h1>Sign Up</h1>
                 <p>Joy Code Me의 Content 를 즐기고 싶다면 로그인하세요.</p>
                 <form id="signupForm">
