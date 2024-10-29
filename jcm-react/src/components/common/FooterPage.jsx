@@ -12,7 +12,7 @@ const Footer = () => {
                 <br /><br />
                 <a href="#">Introduction</a><br />
                 <a href="#">Practice</a><br />
-                <a href="#">Ask and Questions</a><br />
+                <a href="/Support/Questions">Ask and Questions</a><br />
             </div>
             <div className="box">
                 Code
@@ -24,15 +24,15 @@ const Footer = () => {
             <div className="box">
                 More
                 <br/><br/>
-                <a href="#">Logo and Brand</a><br/>
+                <a href="/introduce">Logo and Brand</a><br/>
                 <a href="#">Code Producer</a><br/>
             </div>
             <div className="box">
                 Follow
                 <br/><br/>
-                <a href="#">Instagram</a><br/>
-                <a href="#">GitHub</a><br/>
-                <a href="#">Discord</a><br/>
+                <a href="https://instagram.com/romi_coby">Instagram</a><br/>
+                <a href="https://github.com/Jocomi/JoyCodeMe">GitHub</a><br/>
+                <a href="https://discord.com/channels/1275023698314919997/1275023698314920000">Discord</a><br/>
             </div>
             </div>
             <div className="policy">
