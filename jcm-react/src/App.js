@@ -4,7 +4,7 @@ import './App.css';
 
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import MenuBar from './components/common/MenuBar';
-import MainPage from './components/Main';
+import Main from './components/Main';
 import Footer from './components/common/FooterPage';
 import MyPage from './components/user/MyPage';
 import SignIn from './components/user/SignIn';
@@ -27,7 +27,7 @@ function App() {
 
       <main>
         <Routes>
-          <Route path="/" element={<MainPage />} />
+          <Route path="/" element={<Main />} />
           <Route path="/MyPage" element={<MyPage />} />
           <Route path="/SignIn" element={<SignIn />} />
           <Route path="/EditProfile" element={<EditProfile />} />

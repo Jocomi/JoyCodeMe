@@ -1,5 +1,5 @@
 import '../css/Main.css';
-import PageMain from './mainPage/PageMain';
+import MainPage from './mainPage/MainPage';
 import Chat from './mainPage/Chat';
 import MainInfo from './mainPage/MainInfo';
 import MainSimulation from './mainPage/MainSimulation';
@@ -8,11 +8,11 @@ import MainDescribe from './mainPage/MainDescribe';
 import MainMethod from './mainPage/MainMethod';
 import MainEmail from './mainPage/MainEmail';
 
-const MainPage = () => {
+const Main = () => {
 
     return (
         <>
-            <PageMain/>
+            <MainPage/>
             <Chat/>
             <MainInfo/>
             <MainSimulation/>
@@ -25,4 +25,4 @@ const MainPage = () => {
     );
 };
 
-export default MainPage;
+export default Main;
