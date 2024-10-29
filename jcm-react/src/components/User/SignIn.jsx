@@ -32,24 +32,24 @@ const SignIn = () => {
                 <form id="signupForm">
                     <div className="form-group">
                     <input type="text" id="id" required placeholder=" "/>
-                    <label for="id">ID</label>
+                    <label htmlFor="id">ID</label>
                     </div>
                     <div className="form-group">
                     <input type="password" id="signup_password" required placeholder=" "/>
-                    <label for="signup_password">Password</label>
+                    <label htmlFor="signup_password">Password</label>
                     <i className="fa fa-eye show-hide" onClick={(e) => togglePassword('signup_password', e.currentTarget)}></i>
                     </div>
                     <div className="form-group">
                     <input type="password" id="cpass" required placeholder=" "/>
-                    <label for="cpass">Confirm Password</label>
+                    <label htmlFor="cpass">Confirm Password</label>
                     </div>
                     <div className="form-group">
                     <input type="text" id="name" required placeholder=" "/>
-                    <label for="name">Name</label>
+                    <label htmlFor="name">Name</label>
                     </div>
                     <div className="form-group">
                     <input type="email" id="email" required placeholder=" "/>
-                    <label for="email">Email</label>
+                    <label htmlFor="email">Email</label>
                     </div>
                     <button type="submit" className="form-btn">Sign Up</button>
                 </form>
@@ -62,11 +62,11 @@ const SignIn = () => {
                 <form id="loginForm">
                     <div className="form-group">
                     <input type="email" id="login_email" required placeholder=" "/>
-                    <label for="login_email">ID</label>
+                    <label htmlFor="login_email">ID</label>
                     </div>
                     <div className="form-group">
                     <input type="password" id="login_password" required placeholder=" "/>
-                    <label for="login_password">Password</label>
+                    <label htmlFor="login_password">Password</label>
                     {/* <!-- Font Awesome 눈 아이콘 적용 클래스 --> */}
                     <i className="fa fa-eye show-hide" onClick={(e) => togglePassword('login_password', e.currentTarget)}></i>
                     </div>
