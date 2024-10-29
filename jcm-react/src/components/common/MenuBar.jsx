@@ -1,11 +1,11 @@
 import {Link} from 'react-router-dom';
-import '../../css/MenuBar.css'
+import '../../css/common/MenuBar.css';
 
 const MenuBar = () => {
     return(
         <div className="navbar">
             <div className="logo">
-            <img src="/logoImg/menubar_logo(none).jpg" className="logoImg"/>
+            <img src="/logoImg/menubar_logo(none).jpg" alt="로고" className="logoImg"/>
             <Link to="/">JCM</Link>
             </div>
             <ul>

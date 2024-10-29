@@ -1,4 +1,4 @@
-import '../../css/Notice.css';
+import '../../css/post/Notice.css';
 import Pagination from 'react-bootstrap/Pagination';
 import Table from 'react-bootstrap/Table';
 import { NavLink } from 'react-router-dom';

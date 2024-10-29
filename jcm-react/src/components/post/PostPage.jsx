@@ -1,4 +1,4 @@
-import '../../css/PostPage.css';
+import '../../css/post/PostPage.css';
 import Pagination from 'react-bootstrap/Pagination';
 import Table from 'react-bootstrap/Table';
 import { NavLink } from 'react-router-dom';
