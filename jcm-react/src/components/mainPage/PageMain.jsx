@@ -53,6 +53,7 @@ const PageMain = () => {
                 <h1>JOY CODE ME</h1>
                 <h2>AUTOMATIC CODING</h2>
             </div>
+            <video className="bg-video" src="resources/main.mp4" muted autoPlay playsInline loop></video>
         </div>
     )
 }

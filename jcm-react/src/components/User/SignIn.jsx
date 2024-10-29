@@ -23,7 +23,7 @@ const SignIn = () => {
             <div className="signIn-container">
                 <div className="image-section">
                     <video muted autoPlay loop>
-                        <source src='/references/login.mp4' type="video/mp4" />
+                        <source src='/resources/login.mp4' type="video/mp4" />
                     </video>
                 </div>
                 <div className="form-section hidden" id="signup-form">

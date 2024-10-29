@@ -21,6 +21,15 @@
     letter-spacing: 0.5em;
   }
 
+  .main-top .bg-video {
+    position: absolute;
+    top: 5vh;
+    left: -100;
+    width: 100%;
+    z-index: -1;
+    background-size: cover;
+    }
+
 
  /* 점을 배치할 SVG 스타일 */
 .dot-container {
@@ -188,7 +197,8 @@
   .main-introduce .box b {
     font-size: 1.7rem; /* 'JCM' 텍스트 강조 */
   }
-  .bg-video {
+
+  .main-introduce .bg-video {
   position: absolute;
   top: 110vh;
   left: -100;
