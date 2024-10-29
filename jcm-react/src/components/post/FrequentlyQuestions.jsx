@@ -1,4 +1,4 @@
-import '../../css/FrequentlyQuestions.css';
+import '../../css/post/FrequentlyQuestions.css';
 
 const FrequentlyQuestions = () => {
     return (

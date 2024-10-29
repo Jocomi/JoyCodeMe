@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../../css/EditProfile.css';
+import '../../css/user/EditProfile.css';
 
 const EditProfile = () => {
     const profilePictureContainerRef = useRef(null);

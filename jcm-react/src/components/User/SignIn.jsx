@@ -1,10 +1,10 @@
-import '../../css/SignIn.css'
+import '../../css/user/SignIn.css'
 import 'font-awesome/css/font-awesome.min.css';
-import { useState } from 'react';
+
 
 const SignIn = () => {
     // 초기 아이콘 상태를 useState로 관리
-    const [isPasswordVisible, setPasswordVisible] = useState(false);
+
 
     function toggleForms() {
         document.getElementById('signup-form').classList.toggle('hidden');

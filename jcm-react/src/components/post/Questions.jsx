@@ -1,4 +1,4 @@
-import '../../css/Questions.css';
+import '../../css/post/Questions.css';
 import Pagination from 'react-bootstrap/Pagination';
 import Table from 'react-bootstrap/Table';
 import { NavLink } from 'react-router-dom';

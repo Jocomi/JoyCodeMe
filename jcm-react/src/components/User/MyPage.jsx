@@ -1,4 +1,4 @@
-import '../../css/MyPage.css'
+import '../../css/user/MyPage.css'
 import {Link} from 'react-router-dom';
 
 const MyPage =() => {

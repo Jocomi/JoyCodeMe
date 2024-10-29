@@ -1,4 +1,4 @@
-import '../../css/ChangePwd.css';
+import '../../css/user/ChangePwd.css';
 import 'font-awesome/css/font-awesome.min.css';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
