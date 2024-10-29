@@ -1,9 +1,9 @@
 const MainEmail =() => {
     return (
-        <div class="main-email">
-                <div class="box">
-                <div class="text">
-                    <p class="title">Contect Us</p>
+        <div className="main-email">
+                <div className="box">
+                <div className="text">
+                    <p className="title">Contect Us</p>
                     Fill the form and send Email to discuss how<br/>
                     we can help you achieve successful project!
                 </div>
