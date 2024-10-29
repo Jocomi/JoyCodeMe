@@ -9,26 +9,31 @@ const MainReferences =() => {
       const iconWidth = iconsRef.current[0].offsetWidth;
       const totalIcons = iconsRef.current.length;
   
+      const iconSpacing = (containerWidth+50) / totalIcons;
       // 초기 위치 설정
       iconsRef.current.forEach((icon, index) => {
-        icon.style.left = `${index * ((containerWidth+50) / totalIcons) }px`;
+        if(icon){
+            icon.style.left = `${index * iconSpacing}px`;
+        }
       });
   
       // 아이콘 이동 함수
       const moveIcons = () => {
         iconsRef.current.forEach((icon) => {
-          let currentPosition = parseFloat(icon.style.left);
-  
-          // 아이콘이 왼쪽 끝에 도달하면 오른쪽 끝으로 이동
-          if (currentPosition <= -iconWidth) {
-            icon.style.transition = "none";
-            icon.style.left = `${containerWidth}px`; // 오른쪽 끝으로 이동
-          } else {
-            icon.style.left = `${currentPosition-0.5}px`; // 일정 속도로 왼쪽으로 이동
-          }
-        });
-        requestAnimationFrame(moveIcons);
-      };
+            if (icon) {
+              let currentPosition = parseFloat(icon.style.left);
+    
+              // 아이콘이 왼쪽 끝에 도달하면 오른쪽 끝으로 이동
+              if (currentPosition <= -iconWidth) {
+                icon.style.transition = "none";
+                icon.style.left = `${containerWidth}px`; // 오른쪽 끝으로 이동
+              } else {
+                icon.style.left = `${currentPosition - 0.5}px`; // 일정 속도로 왼쪽으로 이동
+              }
+            }
+          });
+          requestAnimationFrame(moveIcons);
+        };
   
       moveIcons(); // 아이콘 이동 시작
   
