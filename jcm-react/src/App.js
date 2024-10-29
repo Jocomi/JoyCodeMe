@@ -16,6 +16,7 @@ import FreeBoard from './components/post/FreeBoard';
 import ProjectBoard from './components/post/ProjectBoard';
 import Questions from './components/post/Questions';
 import Notice from './components/post/Notice';
+import FrequentlyQuestions from './components/post/FrequentlyQuestions';
 
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
           <Route path="/Support/FreeBoard" element={<FreeBoard />} />
           <Route path="/Support/ProjectBoard" element={<ProjectBoard />} />
           <Route path="/Support/Questions" element={<Questions />} />
+          <Route path='/FrequentlyQuestions' element={<FrequentlyQuestions/>} />
         </Routes>
       </main>
           
