@@ -22,86 +22,33 @@
   }
 
 
-  /* 점들을 배치할 컨테이너 */
-.main-top .dot-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 500px;
-    height: 500px;
-  }
-  
-  /* 점 스타일 및 애니메이션 */
-  .main-top .dot {
-    width: 8px;
-    height: 8px;
-    background-color: #bbbbbb;
-    border-radius: 50%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform-origin: 200px -200px;
-    animation: blink 3s infinite alternate ease-in-out;
-  }
-  
-  /* 각 점에 회전 적용 */
-  .main-top .dot:nth-child(odd) {
-    animation-delay: calc(var(--i) * 0.1s);
-  }
-  
-  .main-top .dot:nth-child(even) {
-    animation-delay: calc(var(--i) * 0.1s);
-  }
-  
-  /* 깜빡임 애니메이션 */
-  @keyframes blink {
-    0% {
-      transform: scale(1);
-      opacity: 1;
-    }
-    100% {
-      transform: scale(0.5);
-      opacity: 0;
-    }
-  }
+ /* 점을 배치할 SVG 스타일 */
+.dot-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 500px;
+  height: 500px;
+  transform: translate(-50%, -50%);
+}
 
-  /* 나타남 애니메이션 */
-  @keyframes appear {
-    0% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
+.dot {
+  width: 10px;
+  height: 10px;
+  fill: #bbbb;
+  opacity: 0;
+  animation: blink 2s infinite alternate;
+}
 
-  @keyframes onoff {
-    0% {
-      opacity: 1;
-    }
-    5% {
-      opacity: 0;
-    }
-    10% {
-      opacity: 1;
-    }
-    15% {
-      opacity: 1;
-    }
-    20% {
-      opacity: 0;
-    }
-    35% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
+@keyframes blink {
+  0% {
+    opacity: 1;
   }
+  100% {
+    opacity: 0;
+  }
+}
+
   /* 오른쪽 아래 채팅 아이콘 */
   .chat-icon {
     position: fixed;
