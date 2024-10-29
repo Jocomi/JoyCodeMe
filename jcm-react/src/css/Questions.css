@@ -1,0 +1,109 @@
+.questions-container {
+    width: 100%;
+    min-height: 100vh;
+    background: white;
+}
+
+.questions-container .questions-banner {
+    position: relative;
+    text-align: center;
+}
+
+.questions-container .questions-banner img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.questions-container .questions-banner h1 {
+    position: absolute;
+    top: 60%;
+    left: 10%;
+    transform: translate(-50%, -50%);
+    color: #ffffff;
+    font-size: 2.5rem;
+    font-weight: 900;
+}
+
+.questions-container .questions-header {
+    padding: 20px 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.questions-container .questions-header ul {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+    color: rgb(70, 70, 70);
+    font-weight: bold;
+}
+
+.questions-container .questions-header ul li {
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.questions-container .questions-header ul li:hover {
+    color: #007bff;
+}
+
+.questions-container .questions-table {
+    padding: 20px 50px;
+}
+
+.questions-container .questions-table table tbody tr {
+    border-bottom: 1px solid #ddd;
+}
+
+.questions-container .questions-table table tbody tr td {
+    padding: 30px 10px;
+    font-size: 1rem;
+    color: #555;
+    cursor: pointer;
+}
+
+.questions-container .questions-table table tbody tr td:first-child {
+    color: #333;
+    font-weight: bold;
+}
+
+.questions-container .questions-table table tbody tr td:last-child {
+    text-align: right;
+}
+
+.questions-container .btn {
+    float: right;
+    margin-top: 30px;
+    margin-right: 40px;
+}
+
+.questions-container .pagination-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+.menubar-div ul li {
+    list-style: none;
+    margin-top: 30px;
+    margin-left: 50px;
+  }
+
+  .menubar-div {
+    padding: 50px;
+    min-width: 300px;
+    height: 100%;
+    float: left;
+    box-sizing: border-box;
+    color: black;
+
+  }
+
+  .menubar-div ul li a {
+    margin-left: 60px;
+    font-size: large;
+  }
+
+  .menubar-div ul li a:hover {
+    text-decoration: underline;
+  }

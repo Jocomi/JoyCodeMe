@@ -1,0 +1,110 @@
+.free-container {
+    width: 100%;
+    min-height: 100vh;
+    background: white;
+}
+
+.free-container .free-banner {
+    position: relative;
+    text-align: center;
+}
+
+.free-container .free-banner img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.free-container .free-banner h1 {
+    position: absolute;
+    top: 60%;
+    left: 10%;
+    transform: translate(-50%, -50%);
+    color: #ffffff;
+    font-size: 2.5rem;
+    font-weight: 900;
+}
+
+.free-container .free-header {
+    padding: 20px 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.free-container .free-header ul {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+    color: rgb(70, 70, 70);
+    font-weight: bold;
+}
+
+.free-container .free-header ul li {
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.free-container .free-header ul li:hover {
+    color: #007bff;
+}
+
+.free-container .free-table {
+    padding: 20px 50px;
+}
+
+.free-container .free-table table tbody tr {
+    border-bottom: 1px solid #ddd;
+}
+
+.free-container .free-table table tbody tr td {
+    padding: 30px 10px;
+    font-size: 1rem;
+    color: #555;
+    cursor: pointer;
+}
+
+.free-container .free-table table tbody tr td:first-child {
+    color: #333;
+    font-weight: bold;
+}
+
+.free-container .free-table table tbody tr td:last-child {
+    text-align: right;
+}
+
+.free-container .btn {
+    float: right;
+    margin-top: 30px;
+    margin-right: 40px;
+}
+
+.free-container .pagination-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+.menubar-div ul li {
+    list-style: none;
+    margin-top: 30px;
+    margin-left: 50px;
+  }
+
+  .menubar-div {
+    padding: 50px;
+    min-width: 300px;
+    height: 100%;
+    float: left;
+    box-sizing: border-box;
+    color: black;
+
+  }
+
+  .menubar-div ul li a {
+    margin-left: 60px;
+    font-size: large;
+    color: black;
+  }
+
+  .menubar-div ul li a:hover {
+    text-decoration: underline;
+  }
