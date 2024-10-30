@@ -16,7 +16,7 @@ const MyPage =() => {
             </div>
 
             {/* <!-- 계정 설정 버튼 --> */}
-            <Link to='/#'><button>사용 기록</button></Link>
+            <Link to='/projectHistory'><button>사용 기록</button></Link>
             <Link to='/EditProfile'><button>프로필 수정</button></Link>
             <Link to='/ChangePwd'><button>비밀번호 변경</button></Link>
         </div>

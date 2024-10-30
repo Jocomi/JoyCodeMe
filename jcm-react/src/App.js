@@ -24,6 +24,7 @@ import AdminChat from './components/admin/AdminChat';
 import FooterPage from './components/common/FooterPage';
 import QnA from './components/admin/QnA';
 import Guide from './components/Guide';
+import ProjectHistory from './components/user/ProjectHistory';
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
           <Route path="/signIn" element={<SignIn />} />
           <Route path="/editProfile" element={<EditProfile />} />
           <Route path="/changePwd" element={<ChangePwd />} />
+          <Route path="/projectHistory" element={<ProjectHistory/>}/>
 
           <Route path="/introduce" element={<CompIntroduce />} />
           <Route path="/guide" element={<Guide />} />

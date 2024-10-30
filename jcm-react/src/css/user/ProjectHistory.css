@@ -1,0 +1,51 @@
+.history-main{
+    height: 100vh;
+    background-color: white;
+    color: black;
+    padding: 100px;
+}
+.history-list {
+
+    margin-top: 20px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+ 
+  }
+
+  .history-list table {
+    width: 1000px;
+    border-collapse: collapse;
+  }
+
+  .history-list table th, .history-list table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+  }
+
+  .history-list table th {
+    background-color: #f0f0f0;
+  }
+
+  .history-list table td button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 5px;
+  }
+
+  .history-list table td .edit-btn {
+    background-color: #007bff; /* 수정 버튼 파란색 */
+    color: white;
+  }
+
+  .history-list table td .delete-btn {
+    background-color: #dc3545; /* 삭제 버튼 빨간색 */
+    color: white;
+  }
+
+  .history-list table td button:hover {
+    opacity: 0.8;
+  }
