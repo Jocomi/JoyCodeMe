@@ -5,7 +5,6 @@ import './App.css';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import MenuBar from './components/common/MenuBar';
 import Main from './components/Main';
-import Footer from './components/common/FooterPage';
 import MyPage from './components/user/MyPage';
 import SignIn from './components/user/SignIn';
 import EditProfile from './components/user/EditProfile';
@@ -17,6 +16,7 @@ import ProjectBoard from './components/post/ProjectBoard';
 import Questions from './components/post/Questions';
 import Notice from './components/post/Notice';
 import FrequentlyQuestions from './components/post/FrequentlyQuestions';
+import FooterPage from './components/common/FooterPage';
 
 
 function App() {
@@ -43,7 +43,7 @@ function App() {
         </Routes>
       </main>
           
-      <Footer/>
+      <FooterPage/>
     </BrowserRouter>
   );
 }

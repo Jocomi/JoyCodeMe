@@ -1,3 +1,5 @@
+import FooterPage from "../common/FooterPage";
+
 const MainEmail =() => {
     return (
         <div className="main-email">
@@ -14,8 +16,7 @@ const MainEmail =() => {
                 <textarea type="text" name="" placeholder="Message"></textarea>
                 <button>Let's meet us ▶▶</button>
                 </div>
-
-            </div>
+        </div>
     )
 }
 export default MainEmail;

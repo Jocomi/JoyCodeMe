@@ -1,11 +1,16 @@
+::-webkit-scrollbar{
+  display: none;
+}
+
 .main-top {
-    height: 120vh;
+    height: 100vh;
+    width: 100vw;
   }
   
   .main-top .center-logo {
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 50vh;
+    left: 50vw;
     transform: translate(-50%, -50%);
     text-align: center;
   }
@@ -22,20 +27,19 @@
   }
 
   .main-top .bg-video {
-    position: absolute;
-    top: 5vh;
-    left: -100;
-    width: 100%;
+    height: 98vh;
+    width: 100vw;
     z-index: -1;
     background-size: cover;
+    object-fit: cover;
     }
 
 
  /* 점을 배치할 SVG 스타일 */
 .dot-container {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 50vh;
+  left: 50vw;
   width: 500px;
   height: 500px;
   transform: translate(-50%, -50%);
@@ -180,14 +184,15 @@
 
   /* 메인페이지 main-introduce */
   .main-introduce {
-    height: 60vh;
+    width: 100vw;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
   }
   .main-introduce .box {
-    width: 800px;
-    height: 500px;
+    width: 500px;
+    height: 600px;
     text-align: center;
     font-size: 1.5rem; /* 글자 크기 조정 */
     letter-spacing: 0.2em;
@@ -200,9 +205,9 @@
 
   .main-introduce .bg-video {
   position: absolute;
-  top: 110vh;
-  left: -100;
-  width: 100%;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
   z-index: -1;
   background-size: cover;
   }
@@ -210,7 +215,8 @@
 
   /* 메인페이지 main-simulation */
   .main-simulation {
-    height: 150vh;
+    width: 100vw;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -246,7 +252,8 @@
 
   /* 메인페이지 main-reference */
   .main-reference {
-    height: 110vh;
+    height: 100vh;
+    width: 100vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -332,6 +339,7 @@
   /* 메인페이지 main-describe */
   .main-describe {
     height: 100vh;
+    width: 100vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -367,7 +375,8 @@
 
    /* 메인페이지 main-method */
   .main-method {
-    height: 120vh;
+    height: 100vh;
+    width: 100vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -403,12 +412,14 @@
 
   /* 메인페이지 main-email */
   .main-email {
-    height: 80vh;
+    height: 95vh;
+    width: 95vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin-bottom: 20px;
+    overflow: hidden;
   }
   
   .main-email .box {
@@ -468,3 +479,5 @@
     font-weight: 700;
     font-size: medium;
   }
+
+  .Section {}

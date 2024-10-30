@@ -1,6 +1,6 @@
-import '../../css/common/Footer.css'
+import '../../css/common/FooterPage.css'
 
-const Footer = () => {
+const FooterPage = () => {
     return(
         <footer>
             <div className="link">
@@ -45,4 +45,4 @@ const Footer = () => {
         </footer>
     )
 }
-export default Footer;
+export default FooterPage;
