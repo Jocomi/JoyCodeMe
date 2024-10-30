@@ -20,10 +20,10 @@ const Notice = () => {
             <div className="menubar-div">
                     <ul>
                         <li><h2>고객 지원</h2></li>
-                        <li><NavLink to="/Support/Notice">공지사항</NavLink></li>
-                        <li><NavLink to="/Support/FreeBoard">자유 게시판</NavLink></li>
-                        <li><NavLink to="/Support/ProjectBoard">프로젝트 게시판</NavLink></li>
-                        <li><NavLink to="/Support/Questions">문의사항</NavLink></li>
+                        <li><NavLink to="/support/notice">공지사항</NavLink></li>
+                        <li><NavLink to="/support/freeBoard">자유 게시판</NavLink></li>
+                        <li><NavLink to="/support/projectBoard">프로젝트 게시판</NavLink></li>
+                        <li><NavLink to="/support/questions">문의사항</NavLink></li>
                     </ul>
                 </div>
             <div className="project-table">

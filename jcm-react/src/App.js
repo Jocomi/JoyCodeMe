@@ -22,7 +22,8 @@ import Customer from './components/admin/Customer';
 import Posts from './components/admin/Posts';
 import AdminChat from './components/admin/AdminChat';
 import QnA from './components/admin/QnA';
-
+import FooterPage from './components/common/FooterPage';
+import Guide from './components/Guide';
 
 function App() {
   return (
@@ -33,24 +34,25 @@ function App() {
       <main>
         <Routes>
           <Route path="/" element={<Main />} />
-          <Route path="/MyPage" element={<MyPage />} />
-          <Route path="/SignIn" element={<SignIn />} />
-          <Route path="/EditProfile" element={<EditProfile />} />
-          <Route path="/ChangePwd" element={<ChangePwd />} />
+          <Route path="/myPage" element={<MyPage />} />
+          <Route path="/signIn" element={<SignIn />} />
+          <Route path="/editProfile" element={<EditProfile />} />
+          <Route path="/changePwd" element={<ChangePwd />} />
 
-          <Route path="/Introduce" element={<CompIntroduce />} />       
-          <Route path="/Support" element={<PostPage />} />
-          <Route path="/Support/Notice" element={<Notice />} />
-          <Route path="/Support/FreeBoard" element={<FreeBoard />} />
-          <Route path="/Support/ProjectBoard" element={<ProjectBoard />} />
-          <Route path="/Support/Questions" element={<Questions />} />
-          <Route path='/FrequentlyQuestions' element={<FrequentlyQuestions/>} />
-          <Route path="/Admin/AdminDashboard" element={<AdminDashboard/>} />
-          <Route path='/Admin/subscribe' element={<Subscribe/>}/>
-          <Route path='/Admin/Customer' element={<Customer/>}/>
-          <Route path='/Admin/Posts' element={<Posts/>} />
-          <Route path='/Admin/AdminChat' element={<AdminChat/>} />
-          <Route path='/Admin/QnA' element={<QnA/>}/>
+          <Route path="/introduce" element={<CompIntroduce />} />
+          <Route path="/guide" element={<Guide />} />
+          <Route path="/support" element={<PostPage />} />
+          <Route path="/support/notice" element={<Notice />} />
+          <Route path="/support/freeBoard" element={<FreeBoard />} />
+          <Route path="/support/projectBoard" element={<ProjectBoard />} />
+          <Route path="/support/questions" element={<Questions />} />
+          <Route path='/frequentlyQuestions' element={<FrequentlyQuestions/>} />
+          <Route path="/admin/adminDashboard" element={<AdminDashboard/>} />
+          <Route path='/admin/subscribe' element={<Subscribe/>}/>
+          <Route path='/admin/customer' element={<Customer/>}/>
+          <Route path='/admin/posts' element={<Posts/>} />
+          <Route path='/admin/adminChat' element={<AdminChat/>} />
+          <Route path='/admin/questions' element={<QnA/>}/>
         </Routes>
       </main>
           

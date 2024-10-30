@@ -12,7 +12,7 @@ const FooterPage = () => {
                 <br /><br />
                 <a href="#">Introduction</a><br />
                 <a href="#">Practice</a><br />
-                <a href="/Support/Questions">Ask and Questions</a><br />
+                <a href="/support/questions">Ask and Questions</a><br />
             </div>
             <div className="box">
                 Code

@@ -8,7 +8,7 @@ import MainDescribe from './mainPage/MainDescribe';
 import MainMethod from './mainPage/MainMethod';
 import MainEmail from './mainPage/MainEmail';
 
-import {SectionsContainer, Section, Footer} from 'react-fullpage';
+import {SectionsContainer, Section} from 'react-fullpage';
 import FooterPage from './common/FooterPage';
 
 
@@ -16,7 +16,7 @@ import FooterPage from './common/FooterPage';
 const Main = () => {
 
     let options = {
-        anchors: ['sectionOne', 'sectionTwo', 'sectionThree','sectionFour','sectionFive','sectionSix','sectionSeven'],
+        anchors: ['', 'info', 'simulation','references','describe','method','email'],
       };
 
     return (
