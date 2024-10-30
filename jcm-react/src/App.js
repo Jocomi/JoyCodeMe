@@ -23,7 +23,6 @@ import Posts from './components/admin/Posts';
 import AdminChat from './components/admin/AdminChat';
 import FooterPage from './components/common/FooterPage';
 import QnA from './components/admin/QnA';
-import FooterPage from './components/common/FooterPage';
 import Guide from './components/Guide';
 
 function App() {
