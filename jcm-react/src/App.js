@@ -5,7 +5,6 @@ import './App.css';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import MenuBar from './components/common/MenuBar';
 import Main from './components/Main';
-import Footer from './components/common/FooterPage';
 import MyPage from './components/user/MyPage';
 import SignIn from './components/user/SignIn';
 import EditProfile from './components/user/EditProfile';
@@ -23,6 +22,7 @@ import Customer from './components/admin/Customer';
 import Posts from './components/admin/Posts';
 import AdminChat from './components/admin/AdminChat';
 import QnA from './components/admin/QnA';
+
 
 function App() {
   return (
@@ -54,7 +54,7 @@ function App() {
         </Routes>
       </main>
           
-      <Footer/>
+      <FooterPage/>
     </BrowserRouter>
   );
 }
