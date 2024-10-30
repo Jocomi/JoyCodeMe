@@ -12,7 +12,8 @@ const MenuBar = () => {
             <li><Link to="Introduce">회사소개</Link></li>
             <li><Link to="#">기술소개</Link></li>
             <li><Link to="#">웹 제작</Link></li>
-            <li><Link to="Support">고객 지원</Link></li>
+            <li><Link to="#">결제관리</Link></li>
+            <li><Link to="Support">고객지원</Link></li>
             <li><Link to="#">가이드</Link></li>
             </ul>
             <div className="user-options">
