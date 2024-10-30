@@ -21,6 +21,7 @@ import Subscribe from './components/admin/Subscribe';
 import Customer from './components/admin/Customer';
 import Posts from './components/admin/Posts';
 import AdminChat from './components/admin/AdminChat';
+import FooterPage from './components/common/FooterPage';
 import QnA from './components/admin/QnA';
 
 
