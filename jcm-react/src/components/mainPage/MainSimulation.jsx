@@ -3,7 +3,7 @@ const MainSimulation = () => {
         <div className="main-simulation">
 
             <div className="text">
-            <p className="title">조 깟 메</p>
+            <p className="title">Joy Code Me</p>
             쉽고 빠르게 만드는 웹사이트
             </div>
             <div className="box">

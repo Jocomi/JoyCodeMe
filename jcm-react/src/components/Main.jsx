@@ -8,19 +8,46 @@ import MainDescribe from './mainPage/MainDescribe';
 import MainMethod from './mainPage/MainMethod';
 import MainEmail from './mainPage/MainEmail';
 
+import {SectionsContainer, Section, Footer} from 'react-fullpage';
+import FooterPage from './common/FooterPage';
+
+
+
 const Main = () => {
+
+    let options = {
+        anchors: ['sectionOne', 'sectionTwo', 'sectionThree','sectionFour','sectionFive','sectionSix','sectionSeven'],
+      };
 
     return (
         <>
-            <MainPage/>
             <Chat/>
-            <MainInfo/>
-            <MainSimulation/>
-            <MainReferences/>
-            <MainDescribe/>
-            <MainMethod/>
-            <MainEmail/>
+            <SectionsContainer {...options}>
+            <Section>
+                <MainPage/>
+            </Section>
+            <Section>
+                <MainInfo/>
+            </Section>
+            <Section>
+                <MainSimulation/>
+            </Section>
+            <Section>
+                <MainReferences/>
+            </Section>
+            <Section>
+                <MainDescribe/>
+            </Section>
+            <Section>
+                <MainMethod/>
+            </Section>
+            <Section>
+                <MainEmail/>
+                <FooterPage/>
+            </Section>
+            </SectionsContainer>
             <hr></hr>
+            
         </>
     );
 };
