@@ -16,7 +16,7 @@ import FooterPage from './common/FooterPage';
 const Main = () => {
 
     let options = {
-        anchors: ['sectionOne', 'sectionTwo', 'sectionThree','sectionFour','sectionFive','sectionSix','sectionSeven'],
+        anchors: ['', 'info', 'simulation','references','describe','method','email'],
       };
 
     return (
