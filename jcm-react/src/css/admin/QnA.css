@@ -1,0 +1,24 @@
+.QnA-main{
+    display: flex;
+    margin-top: 70px;
+}
+.QnA-main .main-content {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: white;
+    height: 100vh;
+    color: black;
+}
+.QnA-main button {
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.QnA-main button:hover {
+    background-color: #45a049;
+    
+}
