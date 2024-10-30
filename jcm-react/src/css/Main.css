@@ -191,7 +191,7 @@
     align-items: center;
   }
   .main-introduce .box {
-    width: 500px;
+    width: 700px;
     height: 600px;
     text-align: center;
     font-size: 1.5rem; /* 글자 크기 조정 */
@@ -224,7 +224,7 @@
   }
   
   .main-simulation .text {
-    width: 90%;
+  
     text-align: left;
     margin-bottom: 20px;
   }
@@ -232,14 +232,13 @@
   .main-simulation .text .title {
     font-size: xx-large;
     font-weight: 800;
-    margin: 15px;
-    margin-left: 30px;
+
   }
 
   .main-simulation .box {
     border: 2px solid #fff; /* 흰색 테두리 */
-    width: 800px;
-    height: 400px;
+    width: 1000px;
+    height: 600px;
     text-align: center;
     font-size: 1.5rem; /* 글자 크기 조정 */
     letter-spacing: 0.2em;
@@ -362,8 +361,8 @@
 
   .main-describe .box {
     border: 2px solid #fff;
-    width: 80%;
-    height: 700px;
+    width: 1000px;
+    height: 600px;
     text-align: center;
     font-size: 1.5rem;
     letter-spacing: 0.2em;
@@ -399,8 +398,8 @@
 
   .main-method .box {
     border: 2px solid #fff;
-    width: 80%;
-    height: 700px;
+    width: 1000px;
+    height: 600px;
     text-align: center;
     font-size: 1.5rem;
     letter-spacing: 0.2em;
@@ -426,7 +425,7 @@
   .main-email .box {
     border: 2px solid #fff;
     width: 65%;
-    height: 700px;
+    height: 650px;
     display: flex;
     flex-direction: column;
     justify-content: center;

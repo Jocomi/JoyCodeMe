@@ -4,7 +4,7 @@ const MainSimulation = () => {
 
             <div className="text">
             <p className="title">Joy Code Me</p>
-            쉽고 빠르게 만드는 웹사이트
+            <p>쉽고 빠르게 만드는 웹사이트</p>
             </div>
             <div className="box">
             <video src=""></video>
