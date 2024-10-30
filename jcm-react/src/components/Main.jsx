@@ -8,7 +8,7 @@ import MainDescribe from './mainPage/MainDescribe';
 import MainMethod from './mainPage/MainMethod';
 import MainEmail from './mainPage/MainEmail';
 
-import {SectionsContainer, Section, Footer} from 'react-fullpage';
+import {SectionsContainer, Section} from 'react-fullpage';
 import FooterPage from './common/FooterPage';
 
 
