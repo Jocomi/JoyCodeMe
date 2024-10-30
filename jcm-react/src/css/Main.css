@@ -315,9 +315,10 @@
    
   }
   .main-reference .box p:nth-child(2){
-    font-size: 12px;
+    font-size: 13px;
     line-height: 30px;
     margin: 10px;
+    word-break: keep-all;
   }
   .main-reference .box p:nth-child(3){
     display: flex;
@@ -480,4 +481,4 @@
     font-size: medium;
   }
 
-  .Section {}
+
