@@ -1,9 +1,9 @@
 import {Link} from 'react-router-dom';
-import '../css/Guide.css';
+import '../../css/guide/Guide.css'
 
 const Guide = () => {
     return(
-        <div>
+        <div className='guide-container'>
             테스트테스트원투쓰리!
         </div>
     )
