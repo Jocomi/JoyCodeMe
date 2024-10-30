@@ -15,6 +15,7 @@ const MenuBar = () => {
             <li><Link to="#">결제관리</Link></li>
             <li><Link to="support">고객지원</Link></li>
             <li><Link to="guide">가이드</Link></li>
+            <li><Link to ="admin/AdminDashboard">관리자</Link></li>
             </ul>
             <div className="user-options">
             <Link to="/myPage">MyPage</Link>
