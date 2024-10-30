@@ -1,4 +1,5 @@
 import '../css/Main.css';
+import React, { useState } from "react";
 import MainPage from './mainPage/MainPage';
 import Chat from './mainPage/Chat';
 import MainInfo from './mainPage/MainInfo';
@@ -15,14 +16,26 @@ import FooterPage from './common/FooterPage';
 
 const Main = () => {
 
+    const [initialActiveSection, setInitialActiveSection] = useState(null);
+  const onScroll = (p) => {
+    if (initialActiveSection === null) setInitialActiveSection(p.activeSection);
+    };
+
     let options = {
-        anchors: ['', 'info', 'simulation','references','describe','method','email'],
+        scrollCallback: onScroll,
+        sectionClassName: "section",
+        anchors: ['home', 'info', 'simulation','references','describe','method','email'],
+        scrollBar: false,
+        navigation: true,
+        verticalAlign: false,
+        arrowNavigation: true,
       };
+      
 
     return (
         <>
             <Chat/>
-            <SectionsContainer {...options}>
+            <SectionsContainer {...options} activeSection={initialActiveSection}>
             <Section>
                 <MainPage/>
             </Section>
