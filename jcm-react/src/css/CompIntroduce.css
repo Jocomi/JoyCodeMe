@@ -181,9 +181,6 @@
     height: 400px;
     margin: 20px;
     padding: 20px;
-    animation: slideIn 1s ease forwards;
-    animation-delay: 2.5s;
-    opacity: 0;
 }
 
 .introduce-area .team-card img {

@@ -1,4 +1,5 @@
 import '../../css/guide/Guide.css';
+import { motion } from 'framer-motion';
 
 const Guide = () => {
     return (
@@ -10,97 +11,96 @@ const Guide = () => {
                 </div>
 
                 {/* <!-- Purple Table --> */}
-                <div className="col-md-4">
+                                {/* Purple Table */}
+                                <motion.div
+                    className="col-md-4"
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: false }}
+                    transition={{ ease: 'easeInOut', duration: 1 }}
+                >
                     <div className="pricing-table purple">
-                        {/* <!-- Table Head --> */}
                         <div className="pricing-label">Fixed Price</div>
                         <h2>Beginner Pack 2024</h2>
                         <h5>Made for starters</h5>
-
-                        {/* <!-- Features --> */}
                         <div className="pricing-features">
-                            <div className="feature">Bandwith<span>50 GB</span></div>
+                            <div className="feature">Bandwidth<span>50 GB</span></div>
                             <div className="feature">Add-On Domains<span>10</span></div>
                             <div className="feature">SSD Storage<span>250 GB</span></div>
-                            <div className="feature">Mail Adresses<span>25</span></div>
+                            <div className="feature">Mail Addresses<span>25</span></div>
                             <div className="feature">SEO Optimization<span>Basic</span></div>
                             <div className="feature">Customizable Design Templates<span>None</span></div>
-                            <div className="feature">Site Backup<span>Montly</span></div>
+                            <div className="feature">Site Backup<span>Monthly</span></div>
                         </div>
-                        {/* <!-- Price --> */}
                         <div className="price-tag">
                             <span className="symbol">$</span>
                             <span className="amount">7.99</span>
                             <span className="after">/month</span>
                         </div>
-
-                        {/* <!-- Button --> */}
                         <a className="price-button" href="#">Get Started</a>
                     </div>
-                </div>
+                </motion.div>
 
-                {/* <!-- Turquoise Table --> */}
-                <div className="col-md-4">
+                    {/* Turquoise Table */}
+                    <motion.div
+                    className="col-md-4"
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: false }}
+                    transition={{ ease: 'easeInOut', duration: 1 }}
+                >
                     <div className="pricing-table turquoise">
-
-                        {/* <!-- Table Head --> */}
                         <div className="pricing-label">Fixed Price</div>
                         <h2>Intermediate Pack 2024</h2>
                         <h5>Made for experienced users</h5>
-
-                        {/* <!-- Features --> */}
                         <div className="pricing-features">
-                            <div className="feature">Bandwith<span>150 GB</span></div>
+                            <div className="feature">Bandwidth<span>150 GB</span></div>
                             <div className="feature">Add-On Domains<span>25</span></div>
                             <div className="feature">SSD Storage<span>500 GB</span></div>
-                            <div className="feature">Mail Adresses<span>50</span></div>
+                            <div className="feature">Mail Addresses<span>50</span></div>
                             <div className="feature">SEO Optimization<span>Enhanced</span></div>
                             <div className="feature">Customizable Design Templates<span>Support</span></div>
                             <div className="feature">Site Backup<span>Weekly</span></div>
                         </div>
-
-                        {/* <!-- Price --> */}
                         <div className="price-tag">
                             <span className="symbol">$</span>
                             <span className="amount">9.99</span>
                             <span className="after">/month</span>
                         </div>
-
-                        {/* <!-- Button --> */}
                         <a className="price-button" href="#">Get Started</a>
                     </div>
-                </div>
+                </motion.div>
 
-                {/* <!-- Red Table --> */}
-                <div className="col-md-4">
+                          {/* Red Table */}
+                <motion.div
+                    className="col-md-4"
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: false }}
+                    transition={{ ease: 'easeInOut', duration: 1 }}
+                >
                     <div className="pricing-table red">
-
-                        {/* <!-- Table Head --> */}
                         <div className="pricing-label">Fixed Price</div>
                         <h2>Advanced Pack 2024</h2>
                         <h5>Made for professionals/agencies users</h5>
-
-                        {/* <!-- Features --> */}
                         <div className="pricing-features">
-                            <div className="feature">Bandwith<span>250 GB</span></div>
+                            <div className="feature">Bandwidth<span>250 GB</span></div>
                             <div className="feature">Add-On Domains<span>50</span></div>
                             <div className="feature">SSD Storage<span>1 TB</span></div>
-                            <div className="feature">Mail Adresses<span>75</span></div>
+                            <div className="feature">Mail Addresses<span>75</span></div>
                             <div className="feature">SEO Optimization<span>Advanced</span></div>
                             <div className="feature">Customizable Design Templates<span>Support</span></div>
                             <div className="feature">Site Backup<span>Automated Daily</span></div>
-
                         </div>
-                        {/* <!-- Price --> */}
                         <div className="price-tag">
                             <span className="symbol">$</span>
                             <span className="amount">12.99</span>
                             <span className="after">/month</span>
                         </div>
-                        {/* <!-- Button --> */}
                         <a className="price-button" href="#">Get Started</a>
                     </div>
-                </div>
+                </motion.div>
+                
                 {/* <!-- All plans Include --> */}
                 <div className="col-md-12 mt-5">
                     <h3 className="section-head">All plans include</h3>
