@@ -62,43 +62,7 @@
     background-color: #0056b3;
   }
 
-  .payment-list {
-    margin-top: 20px;
-  }
 
-  .payment-list table {
-    width: 100%;
-    border-collapse: collapse;
-  }
 
-  .payment-list table th, .payment-list table td {
-    border: 1px solid #ddd;
-    padding: 12px;
-    text-align: center;
-  }
 
-  .payment-list table th {
-    background-color: #f0f0f0;
-  }
-
-  .payment-list table td button {
-    padding: 5px 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-right: 5px;
-  }
-
-  .payment-list table td .edit-btn {
-    background-color: #007bff; /* 수정 버튼 파란색 */
-    color: white;
-  }
-
-  .payment-list table td .delete-btn {
-    background-color: #dc3545; /* 삭제 버튼 빨간색 */
-    color: white;
-  }
-
-  .payment-list table td button:hover {
-    opacity: 0.8;
-  }
+  
