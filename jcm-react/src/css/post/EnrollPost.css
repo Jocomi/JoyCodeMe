@@ -1,6 +1,7 @@
    /* 게시물 작성 div*/
 .enroll-post .main-div{
-   margin-top: 50px;
+ 
+    
     width: 100%;
     min-width: 1500px;
     height: 100vh;
@@ -40,15 +41,16 @@
     border: 1px solid #b1b1b1;
     margin-right: 100px;
     border-radius: 15px;
-    margin-bottom: 50px;
+    margin-bottom: 200px;
   }
   .enroll-post .post-content-div h2{
       margin-top: 30px;
       margin-bottom: 30px;
   }
-  .enroll-post .input-group textarea{
+  .enroll-post .input-group .react-quill{
       width: 99.7%;
-      height: 400px;
+      height: 300px;
+      margin-bottom: 50px;
   }
 
   .enroll-post #formFileMultiple{

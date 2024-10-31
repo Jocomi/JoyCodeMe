@@ -1,8 +1,21 @@
 import { NavLink } from 'react-router-dom';
 import '../../css/post/EnrollPost.css';
-
+import { useState } from 'react';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 const EnrollPost = () => {
+    const [content, setContent] = useState('');
+
+    const handleContentChange = (value) => {
+        setContent(value);
+    };
+
+    const handleSubmit = () => {
+        // 작성된 내용을 서버에 제출하거나 다른 작업을 수행
+        console.log("Submitted Content: ", content);
+    };
+
     return(
         <>
             <div className="enroll-post">
@@ -61,7 +74,7 @@ const EnrollPost = () => {
                             </div>
                           </div>      
                           <div class="input-group">
-                            <textarea rows="13" cols="40" id="textTest" name="textTest"></textarea> 
+                          <ReactQuill className='react-quill' value={content} onChange={handleContentChange} />
                           </div>
                           <div class="mb-3">
                             <input class="form-control" type="file" id="formFileMultiple" multiple/>
