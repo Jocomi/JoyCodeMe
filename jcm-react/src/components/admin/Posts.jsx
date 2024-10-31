@@ -5,17 +5,17 @@ import AdminTopBar from "./AdminTopBar";
 const Posts = () => {
     return(
         <>
-        <div class="posts-main">
+        <div className="posts-main">
   
        <AdminSideBar/>
 
    
-        <div class="main-content">
+        <div className="main-content">
         <AdminTopBar/>
 
-            <section class="posts">
+            <section className="posts">
                 <h1>게시글 관리</h1>
-                <div class="post-list">
+                <div className="post-list">
                     <table>
                         <tr>
                             <th>제목</th>

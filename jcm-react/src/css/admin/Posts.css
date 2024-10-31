@@ -1,6 +1,7 @@
 .posts-main{
     display: flex;
     margin-top: 70px;
+    color: black;
 }
 /* 메인 콘텐츠 */
 .posts-main .main-content {
@@ -9,10 +10,14 @@
     background-color: white;
     height: 100vh;
 }
-
+.posts-main h1{
+    margin-bottom: 30px;
+    font-size: 28px;
+    color: black;
+}
 
 .posts-main table {
-    width: 100%;
+    width: 80%;
     border-collapse: collapse;
     text-align: center;
     table-layout: auto;

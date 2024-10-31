@@ -2,6 +2,7 @@
 .subscribe-main{
     display: flex;
     margin-top: 70px;
+    color: black;
 }
 
 
@@ -20,7 +21,9 @@
 /* 대시보드 카드 */
 .subscribe-main .dashboard-cards {
     display: flex;
+    justify-content: space-around;
     gap: 20px;
+    margin: 0 auto;
 }
 
 .subscribe-main .card {

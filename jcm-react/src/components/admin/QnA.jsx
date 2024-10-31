@@ -5,20 +5,33 @@ import '../../css/admin/QnA.css';
 const QnA = () => {
     return(
         <>
-        <div class="QnA-main">
+        <div className="QnA-main">
         
         <AdminSideBar/>
 
       
-        <div class="main-content">
+        <div className="main-content">
         <AdminTopBar/>
 
-            <section class="qna">
-                <h1>문의게시판</h1>
-                <ul>
-                    <li>결제는 무통장 입금만 가능한가요? <button>답변하기</button></li>
-                    <li>체험판은 따로 없나요? <button>답변하기</button></li>
-                </ul>
+            <section className="qna">
+            <table className="qna-table">
+                    <thead>
+                        <tr>
+                            <th>문의 내용</th>
+                            <th>답변</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>결제는 무통장 입금만 가능한가요?</td>
+                            <td><button>답변하기</button></td>
+                        </tr>
+                        <tr>
+                            <td>체험판은 따로 없나요?</td>
+                            <td><button>답변하기</button></td>
+                        </tr>
+                    </tbody>
+                </table>
             </section>
         </div>
     </div>
