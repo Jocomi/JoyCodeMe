@@ -10,7 +10,6 @@ import SignIn from './components/user/SignIn';
 import EditProfile from './components/user/EditProfile';
 import ChangePwd from './components/user/ChangePwd';
 import CompIntroduce from './components/CompIntroduce';
-import PostPage from './components/post/PostPage';
 import FreeBoard from './components/post/FreeBoard';
 import ProjectBoard from './components/post/ProjectBoard';
 import Questions from './components/post/Questions';
@@ -46,13 +45,12 @@ function App() {
 
           <Route path="/introduce" element={<CompIntroduce />} />
           <Route path="/guide" element={<Guide />} />
-          <Route path="/support" element={<PostPage />} />
-          <Route path="/support/notice" element={<Notice />} />
-          <Route path="/support/freeBoard" element={<FreeBoard />} />
-          <Route path="/support/projectBoard" element={<ProjectBoard />} />
-          <Route path="/support/questions" element={<Questions />} />
+          <Route path="/notice" element={<Notice />} />
+          <Route path="/freeBoard" element={<FreeBoard />} />
+          <Route path="/projectBoard" element={<ProjectBoard />} />
+          <Route path="/questions" element={<Questions />} />
           <Route path='/frequentlyQuestions' element={<FrequentlyQuestions/>} />
-          <Route path='/support/enrollPost' element={<EnrollPost/>} />
+          <Route path='/enrollPost' element={<EnrollPost/>} />
 
           <Route path="/admin/adminDashboard" element={<AdminDashboard/>} />
           <Route path='/admin/subscribe' element={<Subscribe/>}/>

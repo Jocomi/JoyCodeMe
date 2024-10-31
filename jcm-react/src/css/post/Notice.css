@@ -17,7 +17,7 @@
 
 .notice-container .notice-banner h1 {
     position: absolute;
-    top: 60%;
+    top: 67%;
     left: 10%;
     transform: translate(-50%, -50%);
     color: #ffffff;
@@ -36,6 +36,7 @@
     gap: 30px;
     color: rgb(70, 70, 70);
     font-weight: bold;
+    margin-left: 250px;
 }
 
 .notice-container .notice-header ul li {
@@ -82,29 +83,3 @@
     justify-content: center;
     padding: 20px 0;
 }
-
-.menubar-div ul li {
-    list-style: none;
-    margin-top: 30px;
-    margin-left: 50px;
-  }
-
-  .menubar-div {
-    padding: 50px;
-    min-width: 300px;
-    height: 100%;
-    float: left;
-    box-sizing: border-box;
-    color: black;
-
-  }
-
-  .menubar-div ul li a {
-    margin-left: 60px;
-    font-size: large;
-    color: black;
-  }
-
-  .menubar-div ul li a:hover {
-    text-decoration: underline;
-  }
