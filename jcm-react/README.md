@@ -9,3 +9,5 @@
 # [2024.10.30] react-fullpage
 
 # [2024.10.31] framer-motion
+# [2024.10.31] react-quill
+# [2024.10.31] chart.js
