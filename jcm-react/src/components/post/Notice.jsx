@@ -1,32 +1,25 @@
 import '../../css/post/Notice.css';
 import Pagination from 'react-bootstrap/Pagination';
 import Table from 'react-bootstrap/Table';
-import { NavLink } from 'react-router-dom';
+import PostMenu from './PostMenu';
+
 
 const Notice = () => {
     return (
-        <div className="project-container">
-            <div className="project-banner">
+        <div className="notice-container">
+            <div className="notice-banner">
                 <img src="/img/banner.png" alt="Banner" />
                 <h1>공지사항</h1>
             </div>
-            <div className="project-header">
+            <div className="notice-header">
                 <ul>
                     <li>전체</li>
                     <li>작업</li>
                     <li>업데이트</li>
                 </ul>
             </div>
-            <div className="menubar-div">
-                    <ul>
-                        <li><h2>고객 지원</h2></li>
-                        <li><NavLink to="/support/notice">공지사항</NavLink></li>
-                        <li><NavLink to="/support/freeBoard">자유 게시판</NavLink></li>
-                        <li><NavLink to="/support/projectBoard">프로젝트 게시판</NavLink></li>
-                        <li><NavLink to="/support/questions">문의사항</NavLink></li>
-                    </ul>
-                </div>
-            <div className="project-table">
+                <PostMenu/>
+            <div className="notice-table">
                 <Table hover responsive borderless>
                     <tbody>
                         <tr>
