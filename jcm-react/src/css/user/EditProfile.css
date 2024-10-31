@@ -1,17 +1,25 @@
-.edit-profile-container {
-  margin: 100px auto;
+.edit-profile-container{
+  background-color: white;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
+.edit-profile-main {
+  
   width: 50%;
-  background-color: #1c1c1c;
+  background-color: #ffffff;
   border-radius: 15px;
   padding: 40px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
   text-align: center;
 }
 
-.edit-profile-container h1 {
+.edit-profile-main h1 {
   font-size: 2.5rem;
   margin-bottom: 30px;
-  color: #ffffff;
+  color: #000000;
 }
 
 .edit-form-group {
@@ -19,38 +27,39 @@
   text-align: left;
 }
 
-.edit-profile-container label {
+.edit-profile-main label {
   font-size: 1rem;
-  color: #ccc;
+  color: #000000;
   display: block;
   margin-bottom: 8px;
 }
 
-.edit-profile-container input[type="text"],
-.edit-profile-container input[type="email"],
-.edit-profile-container input[type="file"] {
+.edit-profile-main input[type="text"],
+.edit-profile-main input[type="email"],
+.edit-profile-main input[type="file"] {
   width: 100%;
   padding: 12px;
   border: none;
   border-radius: 5px;
-  background-color: #333;
-  color: #fff;
+  background-color: #ffffff;
+  color: #000000;
   font-size: 1rem;
   box-sizing: border-box;
   margin-bottom: 10px;
+  border: 1px black solid;
 }
 
-.edit-profile-container input[type="text"]:focus,
-.edit-profile-container input[type="email"]:focus,
+.edit-profile-main input[type="text"]:focus,
+.edit-profile-main input[type="email"]:focus,
 input[type="file"]:focus {
   outline: none;
-  border: 2px solid #ffffff;
+  border: 2px solid #414141;
 }
 
-.edit-profile-container button {
-  background-color: #333;
-  border: 1px solid #ffffff;
-  color: #fff;
+.edit-profile-main button {
+  background-color:  #ffffff;
+  border: 1px solid #000000;
+  color: #000000;
   padding: 12px 25px;
   border-radius: 5px;
   cursor: pointer;
@@ -59,52 +68,56 @@ input[type="file"]:focus {
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.edit-profile-container button:hover {
-  background-color: #444;
+.edit-profile-main button:hover {
+  background-color: #c5c5c5;
   transform: scale(1.05);
 }
 
 /* 프로필 사진 스타일 */
-.edit-profile-container .profile-picture-container {
+.edit-profile-main .profile-picture-main {
   position: relative;
   width: 150px;
   height: 150px;
   margin: 0 auto 30px;
   cursor: pointer;
 }
-
-.edit-profile-container .profile-picture {
-  width: 100%;
-  height: 100%;
+.profile-picture-container{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+.edit-profile-main .profile-picture {
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
-  background-color: #333;
+  background-color: #ffffff;
   background-position: center;
   background-size: cover;
-  border: 2px solid #fff;
+  border: 2px solid #000000;
 }
 
-.edit-profile-container #profile-picture-input {
+.edit-profile-main #profile-picture-input {
   display: none;
 }
 
-.edit-profile-container .upload-label {
+.edit-profile-main .upload-label {
   cursor: pointer;
-  background-color: #444;
-  color: #fff;
+  background-color: #ffffff;
+  color: #000000;
   padding: 12px 25px;
   border-radius: 5px;
   transition: background-color 0.3s;
-  border: 1px solid #ffffff;
+  border: 1px solid #000000;
   display: inline-block;
   text-align: center;
 }
 
-.edit-profile-container .upload-label:hover {
-  background-color: #555;
+.edit-profile-main .upload-label:hover {
+  background-color: #c9c9c9;
 }
 
 /* 드래그 앤 드롭 시 스타일 변경 */
-.edit-profile-container .profile-picture.dragging {
-  border-color: #00e6e6;
+.edit-profile-main .profile-picture.dragging {
+  border-color: #eeeeee;
   background-color: #222;
 }

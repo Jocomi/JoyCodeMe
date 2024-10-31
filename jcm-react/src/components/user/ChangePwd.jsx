@@ -13,8 +13,9 @@ const ChangePwd = () => {
 
     return ( 
         <>
+            <div className='password-container'>
             {/* 비밀번호 변경 컨테이너 */}
-            <div className="password-container">
+            <div className="password-main">
                 <h1>비밀번호 변경</h1>
 
                 {/* 현재 비밀번호 */}
@@ -62,6 +63,7 @@ const ChangePwd = () => {
                 {/* 저장 및 취소 버튼 */}
                 <button type="submit">저장</button>
                 <button type="button" onClick={() => navigate(-1)}>취소</button>
+            </div>
             </div>
         </>
     );
