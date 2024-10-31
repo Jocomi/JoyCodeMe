@@ -5,7 +5,9 @@
     color: black;
 }
 
-
+.Customer-main h1{
+    color: rgb(156, 156, 156);
+}
 
 /* 메인 콘텐츠 */
 .Customer-main .main-content {

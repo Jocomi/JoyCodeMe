@@ -1,7 +1,6 @@
 import { ArcElement, Chart, DoughnutController, Legend, Tooltip } from 'chart.js';
 import '../../css/admin/Subscribe.css';
 import AdminSideBar from './AdminSideBar';
-import AdminTopBar from './AdminTopBar';
 import { useEffect, useRef } from 'react';
 
 Chart.register(DoughnutController, ArcElement, Tooltip, Legend);
@@ -60,10 +59,12 @@ const Subscribe = () => {
 
         
         <div className="main-content">
-        <AdminTopBar/>
+        
 
             <section className="subscribe">
                 <h1>Subscribe</h1>
+                <hr />
+                <h2>Subscribe</h2>
                 <div className="dashboard-cards">
                     <div className="card">
                         <h3>총 회원</h3>

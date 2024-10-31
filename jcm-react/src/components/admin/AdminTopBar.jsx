@@ -7,7 +7,7 @@ const AdminTopBar = () =>{
                     <input type="text" placeholder="Search..."/>
                     <div div className="profile">
                         <span>UserName</span>
-                        <img src="source.gif" alt="Profile Image"/>
+                        <img src="" alt="Profile Image"/>
                     </div>
         </header>
         </>
