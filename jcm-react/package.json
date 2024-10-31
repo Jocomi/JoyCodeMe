@@ -15,6 +15,7 @@
     "react-dom": "^18.3.1",
     "react-fullpage": "^0.1.19",
     "react-helmet": "^6.1.0",
+    "react-quill": "^2.0.0",
     "react-router-dom": "^6.27.0",
     "react-scripts": "5.0.1",
     "react-typed": "^2.0.12",
