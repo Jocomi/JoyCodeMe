@@ -39,9 +39,10 @@
   .password-main input[type="password"], .password-main input[type="text"] {
     width: 100%;
     padding: 12px;
-    border: none;
+
     border-radius: 5px;
-    background-color: #c4c4c4;
+    background-color: #ffffff;
+    
     color: #707070;
     font-size: 1rem;
     box-sizing: border-box;
@@ -50,9 +51,7 @@
     transition: border-color 0.3s ease;
   }
 
-  .password-main input[type="password"]:focus, .password-main input[type="text"]:focus {
-    border: 2px solid #ffffff;
-  }
+
 
   /* 눈 모양 아이콘을 비밀번호 입력 창 안에 배치 */
   .password-main .show-hide {
@@ -65,9 +64,9 @@
   }
 
   .password-main button {
-    background-color: #a8a8a8;
-    border: 1px solid #ffffff;
-    color: #fff;
+    background-color: #ffffff;
+    border: 1px solid #000000;
+    color: #000000;
     padding: 12px 25px;
     border-radius: 5px;
     cursor: pointer;
@@ -77,6 +76,6 @@
   }
 
   .password-main button:hover {
-    background-color: #444;
+    background-color: #d1d1d1;
     transform: scale(1.05);
   }
