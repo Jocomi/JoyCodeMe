@@ -2,9 +2,11 @@ import '../css/CompIntroduce.css';
 import { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { Typed } from 'react-typed';
+import { motion, useAnimation } from 'framer-motion';
+
 
 const CompIntroduce = () => {
-
+    const controls = useAnimation();
     useEffect(() => {
         const typed = new Typed(".auto-type", {
             strings: ["Programmer", "Designer", "Full-stack Developer"],
@@ -138,31 +140,41 @@ const CompIntroduce = () => {
 
 
             {/* <!-- 팀원 소개 --> */}
-            <div className="introduce">
+        <motion.div
+                className="introduce"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false }}
+                transition={{
+                  ease: 'easeInOut',
+                  duration: 1,
+                  y: { duration: 1 },
+                }}
+            >
                 <h2>Our Team</h2>
                 <div className="team-container">
                     <div className="team-card">
-                        <img src="img/Rocomi.jpg" alt="프로필사진"/>
+                        <img src="img/Rocomi.jpg" alt="프로필사진" />
                         <h3>Rocomi</h3>
                         <p>Project Manager</p>
                     </div>
                     <div className="team-card">
-                        <img src="/img/Zeus.jpg" alt="프로필사진"/>
+                        <img src="/img/Zeus.jpg" alt="프로필사진" />
                         <h3>Zeus</h3>
                         <p>Project Member</p>
                     </div>
                     <div className="team-card">
-                        <img src="/img/Download.jpg" alt="프로필사진"/>
+                        <img src="/img/Download.jpg" alt="프로필사진" />
                         <h3>Download</h3>
                         <p>Project Member</p>
                     </div>
                     <div className="team-card">
-                        <img src="/img/2weeks.jpg" alt="프로필사진"/>
+                        <img src="/img/2weeks.jpg" alt="프로필사진" />
                         <h3>2weeks</h3>
                         <p>Project Member</p>
                     </div>
                 </div>
-            </div>
+            </motion.div>
             <div className="map-header">
                 <h1>찾아오시는길</h1>
             </div>
