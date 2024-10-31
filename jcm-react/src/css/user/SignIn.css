@@ -27,18 +27,19 @@
   .signIn-container .form-section {
     width: 40%;
     padding: 40px;
+    background-color: #131313;
   }
 
   .signIn-container .form-section h1 {
     font-size: 2rem;
     margin-bottom: 20px;
-    color: #333;
+    color: #ffffff;
   }
 
   .signIn-container .form-section p {
     font-size: 1rem;
     margin-bottom: 20px;
-    color: #777;
+    color: #ffffff;
   }
 
   .signIn-container .form-group {
@@ -59,7 +60,8 @@
     width: 100%;
     padding: 12px 10px;
     font-size: 1rem;
-    border: 1px solid #ccc;
+    border: 1px solid #747474;
+    background-color: #141414;
     border-radius: 5px;
     outline: none;
   }
@@ -73,7 +75,7 @@
   .signIn-container .form-group input:not(:placeholder-shown) + label {
     top: -16px;
     font-size: 0.8rem;
-    color: #333;
+    color: #ccc;
   }
 
   .signIn-container .show-hide {
