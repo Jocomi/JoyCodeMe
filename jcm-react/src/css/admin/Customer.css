@@ -2,6 +2,7 @@
 .Customer-main{
     display: flex;
     margin-top: 70px;
+    color: black;
 }
 
 
@@ -27,6 +28,7 @@
 .Customer-main .customer h1 {
     margin-bottom: 30px;
     font-size: 28px;
+    color: black;
 }
 
 .Customer-main .customer-list {

@@ -27,6 +27,7 @@ import Guide from './components/guide/Guide';
 import ProjectHistory from './components/user/ProjectHistory';
 import PaymentHistory from './components/payment/PaymentHistory';
 import PaymentMethod from './components/payment/PaymentMethod';
+import EnrollPost from './components/post/EnrollPost';
 
 function App() {
   return (
@@ -51,6 +52,8 @@ function App() {
           <Route path="/support/projectBoard" element={<ProjectBoard />} />
           <Route path="/support/questions" element={<Questions />} />
           <Route path='/frequentlyQuestions' element={<FrequentlyQuestions/>} />
+          <Route path='/support/enrollPost' element={<EnrollPost/>} />
+
           <Route path="/admin/adminDashboard" element={<AdminDashboard/>} />
           <Route path='/admin/subscribe' element={<Subscribe/>}/>
           <Route path='/admin/customer' element={<Customer/>}/>

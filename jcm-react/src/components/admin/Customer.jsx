@@ -5,17 +5,17 @@ import AdminTopBar from './AdminTopBar';
 const Customer = () => {
     return(
         <>
-         <div class="Customer-main">
+         <div className="Customer-main">
       
          <AdminSideBar/>
 
  
-        <div class="main-content">
+        <div className="main-content">
         <AdminTopBar/>
 
-            <section class="customer">
+            <section className="customer">
                 <h1>회원 관리</h1>
-                <div class="customer-list">
+                <div className="customer-list">
                     <table>
                         <tr>
                             <th>이름</th>

@@ -58,7 +58,7 @@ const FreeBoard = () => {
                 </Table>
 
             </div>
-                <button type="button" className="btn btn-primary">작성 하기</button>
+                <button type="button" className="btn btn-primary"><a href="/support/enrollPost">작성 하기</a></button>
             <div className="pagination-container">
             <Pagination>
                     <Pagination.First />

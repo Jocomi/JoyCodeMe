@@ -1,6 +1,7 @@
 .chat-main{
     display: flex;
     margin-top: 70px;
+    color: black;
 }
 /* 메인 콘텐츠 */
 .chat-main .main-content {
