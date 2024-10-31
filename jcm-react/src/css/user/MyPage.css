@@ -1,56 +1,65 @@
+  .mypage-container{
+    width: 100%;
+    background-color: rgb(243, 243, 243);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+ 
+    align-items: center;
+  }
   /* 중앙에 위치하게 */
-  .mypage-container {
-    margin: 100px auto;
+  .mypage-main {
+    height: 60%;
     width: 50%;
-    background-color: #1c1c1c;
+    background-color: #ffffff;
     border-radius: 15px;
     padding: 40px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+    box-shadow: 0 10px 30px rgba(82, 82, 82, 0.7);
     text-align: center;
   }
 
-  .mypage-container h1 {
+  .mypage-main h1 {
     font-size: 2.8rem;
     margin-bottom: 30px;
-    color: #ffffff; /* 고급스러운 금색 포인트 */
+    color: #000000; /* 고급스러운 금색 포인트 */
   }
 
-  .mypage-container p {
+  .mypage-main p {
     font-size: 1.2rem;
     margin-bottom: 20px;
     color: #ccc;
   }
 
-  .mypage-container .profile-picture {
+  .mypage-main .profile-picture {
     width: 150px;
     height: 150px;
     border-radius: 50%;
     margin: 20px auto;
-    background-color: #333;
+    background-color: #ffffff;
     background-size: cover;
     background-position: center;
-    border: 3px solid #ffffff; /* 프로필 사진 테두리 금색 */
+    border: 2px solid #000000; /* 프로필 사진 테두리 금색 */
   }
 
-  .mypage-container .profile-section {
+  .mypage-main .profile-section {
     margin-bottom: 40px;
   }
 
-  .mypage-container .profile-section h2 {
+  .mypage-main .profile-section h2 {
     font-size: 1.6rem;
     margin-bottom: 10px;
-    color: #fff;
+    color: #000000;
   }
 
-  .mypage-container .profile-section p {
+  .mypage-main .profile-section p {
     font-size: 1.1rem;
-    color: #888;
+    color: #000000;
   }
 
-  .mypage-container button {
-    background-color: #333;
-    border: 1px solid #ffffff;
-    color: #fff;
+  .mypage-main button {
+    background-color: #ffffff;
+    border: 1px solid #bdbdbd;
+    color: #000000;
     padding: 12px 25px;
     border-radius: 5px;
     cursor: pointer;
@@ -59,7 +68,7 @@
     transition: background-color 0.3s ease, transform 0.3s ease;
   }
 
-  .mypage-container button:hover {
-    background-color: #444;
+  .mypage-main button:hover {
+    background-color: #cacaca;
     transform: scale(1.05); /* 마우스를 올렸을 때 살짝 확대되는 효과 */
   }

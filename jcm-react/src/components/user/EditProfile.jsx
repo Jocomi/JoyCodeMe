@@ -68,8 +68,9 @@ const EditProfile = () => {
 
     return (
         <>
+        <div className='edit-profile-container'>
             {/* 프로필 수정 페이지 컨테이너 */}
-            <div className="edit-profile-container">
+            <div className="edit-profile-main">
                 <h1>Edit Profile</h1>
 
                 {/* 프로필 사진 수정 */}
@@ -112,7 +113,9 @@ const EditProfile = () => {
                 <button type="submit">저장</button>
                 <button type="button" onClick={() => navigate(-1)}>취소</button>
             </div>
+            </div>
         </>
+
     );
 };
 
