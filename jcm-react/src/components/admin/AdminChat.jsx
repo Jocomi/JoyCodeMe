@@ -1,6 +1,6 @@
 import AdminSideBar from "./AdminSideBar";
 import '../../css/admin/Chat.css';
-import AdminTopBar from "./AdminTopBar";
+
 
 const AdminChat = () =>{
     return(
@@ -8,9 +8,10 @@ const AdminChat = () =>{
         <div className="chat-main">
             <AdminSideBar/>
             <div className="main-content">
-                <AdminTopBar/>
+                <h1>Chat</h1>
+                <hr />
                 <section className="chat">
-                    <h1>Chat with Customers</h1>
+                    <h2>Chat with Customers</h2>
                     <p>No new messages at the moment.</p>
                 </section>
             </div>

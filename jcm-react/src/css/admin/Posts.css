@@ -3,6 +3,9 @@
     margin-top: 70px;
     color: black;
 }
+.posts-main h1{
+    color: rgb(156, 156, 156);
+}
 /* 메인 콘텐츠 */
 .posts-main .main-content {
     flex-grow: 1;
@@ -10,11 +13,7 @@
     background-color: white;
     height: 100vh;
 }
-.posts-main h1{
-    margin-bottom: 30px;
-    font-size: 28px;
-    color: black;
-}
+
 
 .posts-main table {
     width: 80%;

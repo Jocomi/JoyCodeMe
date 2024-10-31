@@ -1,6 +1,6 @@
 import AdminSideBar from "./AdminSideBar";
 import '../../css/admin/Posts.css';
-import AdminTopBar from "./AdminTopBar";
+
 
 const Posts = () => {
     return(
@@ -11,10 +11,12 @@ const Posts = () => {
 
    
         <div className="main-content">
-        <AdminTopBar/>
+     
 
             <section className="posts">
-                <h1>게시글 관리</h1>
+                <h1>Posts</h1>
+                <hr />
+                <h2>게시글 관리</h2>
                 <div className="post-list">
                     <table>
                         <tr>

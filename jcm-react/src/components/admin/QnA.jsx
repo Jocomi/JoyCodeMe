@@ -1,5 +1,5 @@
 import AdminSideBar from "./AdminSideBar";
-import AdminTopBar from "./AdminTopBar";
+
 import '../../css/admin/QnA.css';
 
 const QnA = () => {
@@ -9,11 +9,13 @@ const QnA = () => {
         
         <AdminSideBar/>
 
-      
+        
         <div className="main-content">
-        <AdminTopBar/>
 
             <section className="qna">
+            <h1>Q & A</h1>
+            <hr />
+            <h2>문의 게시판</h2>
             <table className="qna-table">
                     <thead>
                         <tr>
