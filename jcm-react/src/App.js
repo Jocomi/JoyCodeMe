@@ -25,6 +25,8 @@ import FooterPage from './components/common/FooterPage';
 import QnA from './components/admin/QnA';
 import Guide from './components/guide/Guide';
 import ProjectHistory from './components/user/ProjectHistory';
+import PaymentHistory from './components/payment/PaymentHistory';
+import PaymentMethod from './components/payment/PaymentMethod';
 
 function App() {
   return (
@@ -54,7 +56,12 @@ function App() {
           <Route path='/admin/customer' element={<Customer/>}/>
           <Route path='/admin/posts' element={<Posts/>} />
           <Route path='/admin/adminChat' element={<AdminChat/>} />
+
           <Route path='/admin/qna' element={<QnA/>}/>
+
+          <Route path='/paymentHistory' element={<PaymentHistory/>} />
+          <Route path='/paymentMethod' element={<PaymentMethod/>}/>
+
         </Routes>
       </main>
           
