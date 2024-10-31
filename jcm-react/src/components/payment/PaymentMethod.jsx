@@ -4,10 +4,14 @@ import '../../css/payment/PaymentMethod.css';
 const PayHistory = () => {
     return(
         <>
+          <div className="payment-banner">
+                    <img src="/img/paymentBaner.png" alt="paymentbanner" />
+                </div>
         <div class="payment-method">
+            <h3>결제 관리</h3>
             <ul>        
-                <li><NavLink to="/paymentmethod"> <h3>결제 수단 관리</h3></NavLink></li>
-                <li><NavLink to="/paymenthistory"> <h3>결제 기록</h3></NavLink></li>
+                <li><NavLink to="/paymentmethod"> <h4 className='method-menu'>결제 수단 관리</h4></NavLink></li>
+                <li><NavLink to="/paymenthistory"> <h4 className='history-menu'>결제 기록</h4></NavLink></li>
             </ul>
             <div class="payment-section">
                 <h2>일반 결제</h2>

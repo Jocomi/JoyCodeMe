@@ -12,11 +12,11 @@ const Posts = () => {
    
         <div className="main-content">
      
-
+        <h1>Posts</h1>
+        <hr/>
             <section className="posts">
-                <h1>Posts</h1>
-                <hr />
-                <h2>게시글 관리</h2>
+             
+                
                 <div className="post-list">
                     <table>
                         <tr>

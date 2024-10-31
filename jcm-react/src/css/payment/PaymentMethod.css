@@ -1,5 +1,5 @@
 .payment-method{
-    margin-top: 70px;
+   
     padding: 100px;
     width: 100%;
     min-width: 1000px;
@@ -9,14 +9,26 @@
     background-color: white;
     height: 100vh;
   }
-
+  .payment-method ul{
+    display: flex;
+  }
+  .payment-method ul li{
+    margin: 10px;
+  }
   .payment-method h3{
+    color: black;
+    margin-bottom: 50px;
+  }
+  .payment-method .method-menu{
+    text-decoration: underline;
+  }
+  .payment-method h4{
 
     margin-bottom: 30px;
     color: black;
   }
-  .payment-method h3:hover {
-    text-decoration: underline;
+  .payment-method h4:hover {
+    font-size: xx-large;
   }
 
   .payment-section {
