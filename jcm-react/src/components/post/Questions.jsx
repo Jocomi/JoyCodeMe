@@ -2,6 +2,7 @@ import '../../css/post/Questions.css';
 import Pagination from 'react-bootstrap/Pagination';
 import Table from 'react-bootstrap/Table';
 import { NavLink } from 'react-router-dom';
+import FrequentlyQuestions from './FrequentlyQuestions';
 
 const Questions = () => {
     return (
@@ -73,6 +74,7 @@ const Questions = () => {
                     <Pagination.Last />
                 </Pagination>
             </div>
+            <FrequentlyQuestions />
         </div>
     );
 };

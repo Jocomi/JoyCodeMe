@@ -321,7 +321,7 @@
     line-height: 30px;
     margin: 10px;
     padding: 6px;
-    text-wrap: wrap;
+    word-break: keep-all;
   }
   .main-reference .box p:nth-child(3){
     display: flex;
