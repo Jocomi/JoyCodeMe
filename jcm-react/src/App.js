@@ -54,7 +54,7 @@ function App() {
           <Route path='/admin/customer' element={<Customer/>}/>
           <Route path='/admin/posts' element={<Posts/>} />
           <Route path='/admin/adminChat' element={<AdminChat/>} />
-          <Route path='/admin/questions' element={<QnA/>}/>
+          <Route path='/admin/qna' element={<QnA/>}/>
         </Routes>
       </main>
           

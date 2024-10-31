@@ -227,11 +227,14 @@
   
     text-align: left;
     margin-bottom: 20px;
+    margin-top: 20px;
+    font-size: 1.4em;
   }
 
   .main-simulation .text .title {
     font-size: xx-large;
     font-weight: 800;
+    text-align: center;
 
   }
 
@@ -275,15 +278,15 @@
   .main-reference .box {
     border: 2px solid #fff;
     width: 250px;
-    height: 550px;
+    height: 460px;
     text-align: center;
     font-size: 1.5rem;
-    letter-spacing: 0.2em;
-    line-height: 2em;
+    line-height: 1em;
+    padding: 20px;
     display: flex;
     flex-direction: column;
   }
-  .main-reference .box  img{
+  .main-reference .box img{
     display: flex; 
     align-items: flex-end;
     width: 45px;
@@ -314,10 +317,11 @@
    
   }
   .main-reference .box p:nth-child(2){
-    font-size: 13px;
+    font-size: 12px;
     line-height: 30px;
     margin: 10px;
-    word-break: keep-all;
+    padding: 6px;
+    text-wrap: wrap;
   }
   .main-reference .box p:nth-child(3){
     display: flex;
@@ -326,6 +330,12 @@
     height: 100%; /* 전체 높이 차지 */
     position: relative;
   }
+
+  .main-reference .box p img{
+    width: 50px;
+    height: auto;
+  }
+
 
   .main-reference .reference-list {
     display: flex;
@@ -353,7 +363,7 @@
   }
 
   .main-describe .text .title {
-    font-size: xx-large;
+    font-size: 1.8em;
     font-weight: 800;
     margin: 15px;
     margin-left: 30px;
@@ -390,7 +400,7 @@
   }
 
   .main-method .text .title {
-    font-size: xx-large;
+    font-size: 1.8em;
     font-weight: 800;
     margin: 15px;
     margin-left: 30px;
@@ -412,20 +422,20 @@
 
   /* 메인페이지 main-email */
   .main-email {
-    height: 95vh;
-    width: 95vw;
+    height: 100vh;
+    width: 100vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-bottom: 20px;
     overflow: hidden;
   }
   
   .main-email .box {
     border: 2px solid #fff;
     width: 65%;
-    height: 650px;
+    height: 550px;
+    margin-top: 50px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -449,29 +459,30 @@
   }
 
   .main-email .box input {
-    width: 400px;
+    width: 40%;
     height: 30px;
     margin: 10px 0px;
     border: #888 solid 0.2px;
     border-radius: 7px;
-    padding: 0px 5px;
+    padding: 0px 10px;
   }
 
   .main-email .box textarea {
-    width: 400px;
+    width: 40%;
     height: 100px;
     margin: 10px 0px;
     border: #888 solid 0.2px;
     border-radius: 7px;
     resize: none;
     font-family: Arial, sans-serif;
-    padding: 5px;
+    padding: 0 5px;
   }
   
   .main-email .box button {
     width: 250px;
     height: 40px;
     margin: 10px 0px; 
+    padding: 0 5px;
     background-color: #111;
     border: none;
     border-radius: 5px;

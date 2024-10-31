@@ -13,7 +13,7 @@ const AdminSideBar = () => {
                 <li><NavLink to="/Admin/Customer">Customer</NavLink></li>
                 <li><NavLink to="/Admin/Posts">Posts</NavLink></li>
                 <li><NavLink to="/Admin/AdminChat">Chat</NavLink></li>
-                <li><NavLink to="/Admin/QnA">Q & A</NavLink></li>
+                <li><NavLink to="/Admin/qna">Q & A</NavLink></li>
                 </ul>
             </nav>
         </>
