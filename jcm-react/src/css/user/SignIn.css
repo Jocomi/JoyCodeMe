@@ -1,8 +1,17 @@
 
   .signIn-container {
-    margin: 100px auto;
+    height: 100vh;
+    width: 100vw;
+    background: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .signIn-container .signIn-main {
+    margin: auto;
     display: flex;
     width: 900px;
+    margin-top: auto;
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
