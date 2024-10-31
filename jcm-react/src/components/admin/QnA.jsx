@@ -11,12 +11,12 @@ const QnA = () => {
 
         
         <div className="main-content">
-
+        <h1>문의 게시판</h1>
+        <hr />
             <section className="qna">
-            <h1>Q & A</h1>
-            <hr />
-            <h2>문의 게시판</h2>
-            <table className="qna-table">
+           
+           <div className="qna-table">
+            <table>
                     <thead>
                         <tr>
                             <th>문의 내용</th>
@@ -34,6 +34,7 @@ const QnA = () => {
                         </tr>
                     </tbody>
                 </table>
+                </div>
             </section>
         </div>
     </div>

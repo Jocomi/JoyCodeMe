@@ -13,10 +13,22 @@
     background-color: white;
     height: 100vh;
 }
-
-
-.posts-main table {
+.posts-main .posts{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+}
+.posts-main .post-list {
     width: 80%;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+.posts-main table {
+    width: 100%;
     border-collapse: collapse;
     text-align: center;
     table-layout: auto;

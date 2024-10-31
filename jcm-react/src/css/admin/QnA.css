@@ -9,6 +9,20 @@
     height: 100vh;
     color: black;
 }
+.QnA-main .qna{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+}
+.QnA-main .qna-table {
+    width: 80%;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
 .QnA-main button {
     padding: 8px 16px;
     background-color: #4CAF50;

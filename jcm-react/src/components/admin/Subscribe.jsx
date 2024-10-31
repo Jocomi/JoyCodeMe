@@ -60,11 +60,11 @@ const Subscribe = () => {
         
         <div className="main-content">
         
-
+        <h1>Subscribe</h1>
+        <hr />
             <section className="subscribe">
-                <h1>Subscribe</h1>
-                <hr />
-                <h2>Subscribe</h2>
+                
+            
                 <div className="dashboard-cards">
                     <div className="card">
                         <h3>총 회원</h3>
