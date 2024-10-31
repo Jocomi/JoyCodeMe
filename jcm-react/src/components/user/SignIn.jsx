@@ -1,11 +1,7 @@
-import '../../css/user/SignIn.css'
+import '../../css/user/SignIn.css';
 import 'font-awesome/css/font-awesome.min.css';
 
-
 const SignIn = () => {
-    // 초기 아이콘 상태를 useState로 관리
-
-
     function toggleForms() {
         document.getElementById('signup-form').classList.toggle('hidden');
         document.getElementById('login-form').classList.toggle('hidden');
@@ -32,6 +28,7 @@ const SignIn = () => {
                         <source src='/resources/login.mp4' type="video/mp4" />
                     </video>
                 </div>
+
                 <div className="form-section hidden" id="signup-form">
                     <h1>Sign Up</h1>
                     <p>Joy Code Me의 Content 를 즐기고 싶다면 로그인하세요.</p>
@@ -41,9 +38,9 @@ const SignIn = () => {
                             <label htmlFor="id">ID</label>
                         </div>
                         <div className="form-group">
-                            <input type="password" id="signup_password" required placeholder=" " />
-                            <label htmlFor="signup_password">Password</label>
-                            <i className="fa fa-eye-slash show-hide" onClick={(e) => togglePassword('signup_password', e.currentTarget)}></i>
+                            <input type="password" id="signup-password" required placeholder=" " />
+                            <label htmlFor="signup-password">Password</label>
+                            <i className="fa fa-eye-slash show-hide" onClick={(e) => togglePassword('signup-password', e.currentTarget)}></i>
                         </div>
                         <div className="form-group">
                             <input type="password" id="cpass" required placeholder=" " />
@@ -54,7 +51,7 @@ const SignIn = () => {
                             <label htmlFor="name">Name</label>
                         </div>
                         <div className="form-group">
-                            <input type="email" id="email" required placeholder=" " />
+                            <input type="text" id="email" required placeholder=" " />
                             <label htmlFor="email">Email</label>
                         </div>
                         <button type="submit" className="form-btn">Sign Up</button>
@@ -67,14 +64,13 @@ const SignIn = () => {
                     <p>Welcome Back!</p>
                     <form id="loginForm">
                         <div className="form-group">
-                            <input type="email" id="login_email" required placeholder=" " />
-                            <label htmlFor="login_email">ID</label>
+                            <input type="text" id="userId" required placeholder=" " />
+                            <label htmlFor="userId">ID</label>
                         </div>
                         <div className="form-group">
-                            <input type="password" id="login_password" required placeholder=" " />
-                            <label htmlFor="login_password">Password</label>
-                            {/* 눈 모양 아이콘의 기본 상태를 짝대기 있는 아이콘으로 설정 */}
-                            <i className="fa fa-eye-slash show-hide" onClick={(e) => togglePassword('login_password', e.currentTarget)}></i>
+                            <input type="password" id="login-password" required placeholder=" " />
+                            <label htmlFor="login-password">Password</label>
+                            <i className="fa fa-eye-slash show-hide" onClick={(e) => togglePassword('login-password', e.currentTarget)}></i>
                         </div>
                         <button type="submit" className="form-btn">Sign In</button>
                     </form>
