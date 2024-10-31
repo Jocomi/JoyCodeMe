@@ -5,27 +5,32 @@
     padding: 100px;
 }
 .history-list {
-
+    min-width: 1000px;
     margin-top: 20px;
     background-color: white;
-    display: flex;
-    justify-content: center;
- 
+    width: 100%;
+    padding: 20px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
   }
 
   .history-list table {
-    width: 1000px;
+    width: 100%;
+    min-width: 900px;
     border-collapse: collapse;
+    text-align: center;
+    table-layout: auto;
   }
 
   .history-list table th, .history-list table td {
-    border: 1px solid #ddd;
+
     padding: 12px;
     text-align: center;
   }
 
-  .history-list table th {
-    background-color: #f0f0f0;
+ table th {
+    background-color: #000000;
+    color: white;
   }
 
   .history-list table td button {
