@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import '../../css/post/DetailPost.css';
+import PostMenu from './PostMenu';
 
 const DetailPost = () => {
   const [isAttachmentOpen, setIsAttachmentOpen] = useState(false);
@@ -37,6 +38,7 @@ const DetailPost = () => {
 
   return (
     <div className="detail-post-main">
+      <PostMenu/>
       <div className="detail-post">
         <div className="detail-post-header">
           <h2>공지사항📢</h2>
@@ -90,7 +92,7 @@ const DetailPost = () => {
                     <div className="comment-metadata">
                       <span className="comment-time">2024.10.24</span>
                       <div className="comment-actions">
-                        <a href="#" onClick={() => toggleReply(comment.id)}>답글</a>
+                        <a  onClick={() => toggleReply(comment.id)}>답글</a>
                       </div>
                     </div>
                   </div>
