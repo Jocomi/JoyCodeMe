@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import '../../css/post/EnrollPost.css';
 import { useState } from 'react';
 import ReactQuill from 'react-quill';
@@ -15,7 +15,11 @@ const EnrollPost = () => {
         // 작성된 내용을 서버에 제출하거나 다른 작업을 수행
         console.log("Submitted Content: ", content);
     };
+    const navigate = useNavigate();
 
+    const handleBackClick = () => {
+        navigate('/notice'); // 이전 페이지로 이동
+    };
     return(
         <>
             <div className="enroll-post">
@@ -80,7 +84,7 @@ const EnrollPost = () => {
                             <input class="form-control" type="file" id="formFileMultiple" multiple/>
                             <div class="enroll-items">
                             <div class="enroll-btn">
-                              <input class="btn btn-danger" type="submit" value="취소" />
+                              <button class="btn btn-danger" onClick={handleBackClick} >취소</button>
                             </div>
                             <div class="enroll-btn">
                               <input class="btn btn-primary" type="submit" value="작성하기" />
