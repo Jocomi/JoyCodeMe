@@ -49,7 +49,9 @@
 }
 
 .project-container .project-table {
-    padding: 20px 50px;
+    margin-left: 500px;
+    margin-right: 100px;
+    padding:  50px;
 }
 
 .project-container .project-table table tbody tr {

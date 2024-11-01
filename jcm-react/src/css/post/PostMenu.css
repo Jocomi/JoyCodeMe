@@ -4,12 +4,13 @@
   }
 
   .menubar-div {
+    margin-left: 20px;
     min-width: 300px;
     height: 100%;
     float: left;
     box-sizing: border-box;
     color: black;
-
+    margin-right: 200px;
   }
 
   .menubar-div ul li a {

@@ -45,7 +45,7 @@ function App() {
           <Route path="/editProfile" element={<EditProfile />} />
           <Route path="/changePwd" element={<ChangePwd />} />
           <Route path="/projectHistory" element={<ProjectHistory />} />
-
+        
           <Route path='/detailpost' element={<DetailPost/>}/>
           <Route path="/introduce" element={<CompIntroduce />} />
           <Route path="/guide" element={<Guide />} />
