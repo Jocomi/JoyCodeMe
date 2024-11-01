@@ -27,7 +27,11 @@ import ProjectHistory from './components/user/ProjectHistory';
 import PaymentHistory from './components/payment/PaymentHistory';
 import PaymentMethod from './components/payment/PaymentMethod';
 import EnrollPost from './components/post/EnrollPost';
+
+import DetailPost from './components/post/DetailPost';
+
 import TechIntro from './components/techIntro/TechIntro';
+
 
 function App() {
   return (
@@ -42,6 +46,7 @@ function App() {
           <Route path="/changePwd" element={<ChangePwd />} />
           <Route path="/projectHistory" element={<ProjectHistory />} />
 
+          <Route path='/detailpost' element={<DetailPost/>}/>
           <Route path="/introduce" element={<CompIntroduce />} />
           <Route path="/guide" element={<Guide />} />
           <Route path="/notice" element={<Notice />} />
