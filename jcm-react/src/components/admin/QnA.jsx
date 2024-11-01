@@ -11,7 +11,7 @@ const QnA = () => {
 
         
         <div className="main-content">
-        <h1>문의 게시판</h1>
+        <h1>Q & A</h1>
         <hr />
             <section className="qna">
            

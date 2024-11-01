@@ -1,13 +1,13 @@
+.main-content h1 {
+    color: rgb(156, 156, 156);
+}
+
 /* Reset & 기본 스타일 */
 .admin-main{
     display: flex;
     margin-top: 70px;
     color: black;
 }
-
-
-
-
 
 /* 메인 콘텐츠 */
 .admin-main .main-content {
@@ -17,8 +17,6 @@
     height: 100vh;
     
 }
-
-
 
 /* 대시보드 카드 */
 .admin-main .dashboard-cards {
