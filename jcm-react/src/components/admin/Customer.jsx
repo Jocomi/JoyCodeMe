@@ -12,7 +12,7 @@ const Customer = () => {
  
         <div className="main-content">
       
-        <h1>회원 관리</h1>
+        <h1>Customer</h1>
         <hr />
             <section className="customer">
                 

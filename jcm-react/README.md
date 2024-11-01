@@ -11,3 +11,5 @@
 # [2024.10.31] framer-motion
 # [2024.10.31] react-quill
 # [2024.10.31] chart.js
+
+# [2024.11.01] react-icons

@@ -10,7 +10,7 @@ const MenuBar = () => {
             </div>
             <ul>
             <li><Link to="introduce">회사소개</Link></li>
-            <li><Link to="#">기술소개</Link></li>
+            <li><Link to="techIntro">기술소개</Link></li>
             <li><Link to="#">웹 제작</Link></li>
             <li><Link to="paymentMethod">결제관리</Link></li>
             <li><Link to="notice">고객지원</Link></li>
