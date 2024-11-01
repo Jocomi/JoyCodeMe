@@ -1,14 +1,19 @@
 import { useState } from 'react';
 import '../../css/post/DetailPost.css';
 import PostMenu from './PostMenu';
+import { useNavigate } from 'react-router-dom';
 
 const DetailPost = () => {
+  const navigate = useNavigate(); // navigate 함수 생성
   const [isAttachmentOpen, setIsAttachmentOpen] = useState(false);
   const [commentText, setCommentText] = useState('');
   const [comments, setComments] = useState([]);
   const [replyText, setReplyText] = useState('');
   const [isWriteReplyVisible, setIsWriteReplyVisible] = useState(null);
-
+ 
+  const goBack = () => {
+    navigate('/notice'); // 이전 페이지로 이동
+  };
   const toggleAttachment = () => {
     setIsAttachmentOpen(!isAttachmentOpen);
   };
@@ -53,6 +58,7 @@ const DetailPost = () => {
               </div>
             )}
           </div>
+          <button className="go-back-button"  onClick={goBack}>X</button> {/* 뒤로가기 버튼 추가 */}
         </div>
 
         <div className="detail-post-content">
