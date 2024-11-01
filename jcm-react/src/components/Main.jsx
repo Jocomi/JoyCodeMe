@@ -1,5 +1,5 @@
 import '../css/Main.css';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import MainPage from './mainPage/MainPage';
 import Chat from './mainPage/Chat';
 import MainInfo from './mainPage/MainInfo';
@@ -9,15 +9,27 @@ import MainDescribe from './mainPage/MainDescribe';
 import MainMethod from './mainPage/MainMethod';
 import MainEmail from './mainPage/MainEmail';
 
-import {SectionsContainer, Section} from 'react-fullpage';
+import { SectionsContainer, Section } from 'react-fullpage';
 import FooterPage from './common/FooterPage';
 
 const Main = () => {
-
     const [initialActiveSection, setInitialActiveSection] = useState(null);
+
     const onScroll = (p) => {
         if (initialActiveSection === null) setInitialActiveSection(p.activeSection);
     };
+
+    useEffect(() => {
+        const handleHashChange = () => {
+            window.history.replaceState(null, null, window.location.pathname);
+        };
+
+        window.addEventListener("hashchange", handleHashChange);
+
+        return () => {
+            window.removeEventListener("hashchange", handleHashChange);
+        };
+    }, []);
 
     let options = {
         scrollCallback: onScroll,

@@ -1,8 +1,8 @@
-
+// App.js
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MenuBar from './components/common/MenuBar';
 import Main from './components/Main';
 import MyPage from './components/user/MyPage';
@@ -27,14 +27,16 @@ import ProjectHistory from './components/user/ProjectHistory';
 import PaymentHistory from './components/payment/PaymentHistory';
 import PaymentMethod from './components/payment/PaymentMethod';
 import EnrollPost from './components/post/EnrollPost';
+
 import DetailPost from './components/post/DetailPost';
+
+import TechIntro from './components/techIntro/TechIntro';
+
 
 function App() {
   return (
     <BrowserRouter>
-
       <MenuBar />
-
       <main>
         <Routes>
           <Route path="/" element={<Main />} />
@@ -42,7 +44,7 @@ function App() {
           <Route path="/signIn" element={<SignIn />} />
           <Route path="/editProfile" element={<EditProfile />} />
           <Route path="/changePwd" element={<ChangePwd />} />
-          <Route path="/projectHistory" element={<ProjectHistory/>}/>
+          <Route path="/projectHistory" element={<ProjectHistory />} />
 
           <Route path='/detailpost' element={<DetailPost/>}/>
           <Route path="/introduce" element={<CompIntroduce />} />
@@ -51,24 +53,23 @@ function App() {
           <Route path="/freeBoard" element={<FreeBoard />} />
           <Route path="/projectBoard" element={<ProjectBoard />} />
           <Route path="/questions" element={<Questions />} />
-          <Route path='/frequentlyQuestions' element={<FrequentlyQuestions/>} />
-          <Route path='/enrollPost' element={<EnrollPost/>} />
+          <Route path="/frequentlyQuestions" element={<FrequentlyQuestions />} />
+          <Route path="/enrollPost" element={<EnrollPost />} />
+          
+          <Route path="/admin/adminDashboard" element={<AdminDashboard />} />
+          <Route path="/admin/subscribe" element={<Subscribe />} />
+          <Route path="/admin/customer" element={<Customer />} />
+          <Route path="/admin/posts" element={<Posts />} />
+          <Route path="/admin/adminChat" element={<AdminChat />} />
+          <Route path="/admin/qna" element={<QnA />} />
 
-          <Route path="/admin/adminDashboard" element={<AdminDashboard/>} />
-          <Route path='/admin/subscribe' element={<Subscribe/>}/>
-          <Route path='/admin/customer' element={<Customer/>}/>
-          <Route path='/admin/posts' element={<Posts/>} />
-          <Route path='/admin/adminChat' element={<AdminChat/>} />
+          <Route path="/paymentHistory" element={<PaymentHistory />} />
+          <Route path="/paymentMethod" element={<PaymentMethod />} />
 
-          <Route path='/admin/qna' element={<QnA/>}/>
-
-          <Route path='/paymentHistory' element={<PaymentHistory/>} />
-          <Route path='/paymentMethod' element={<PaymentMethod/>}/>
-
+          <Route path="/techIntro" element={<TechIntro />} />
         </Routes>
       </main>
-          
-      <FooterPage/>
+      <FooterPage />
     </BrowserRouter>
   );
 }

@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from 'react';
 import { Chart } from 'chart.js/auto';
 import '../../css/admin/Admin.css';
 import AdminSideBar from './AdminSideBar';
-import AdminTopBar from './AdminTopBar';
 
 const AdminDashboard= ()=> {
   const salesChartRef = useRef(null);
@@ -80,7 +79,8 @@ const AdminDashboard= ()=> {
 
       {/* 메인 콘텐츠 */}
       <div className="main-content">
-      <AdminTopBar/>
+      <h1>Dashboard</h1>
+      <hr />
 
         {/* 대시보드 섹션 */}
         <section className="dashboard">
