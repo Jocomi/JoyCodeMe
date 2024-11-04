@@ -13,3 +13,6 @@
 # [2024.10.31] chart.js
 
 # [2024.11.01] react-icons
+
+## 채팅 API 관련 모듈 설치
+# [2024.11.04] npm --% install @channel.io/channel-web-sdk-loader 
