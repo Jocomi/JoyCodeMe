@@ -1,10 +1,10 @@
 import { NavLink } from 'react-router-dom';
 import '../../css/payment/PaymentMethod.css';
 
-const PayHistory = () => {
+const PaymentMethod = () => {
     return(
         <>
-          <div className="payment-banner">
+        <div className="payment-banner">
                     <img src="/img/paymentBaner.png" alt="paymentbanner" />
                 </div>
         <div class="payment-method">
@@ -58,4 +58,4 @@ const PayHistory = () => {
     )
 }
 
-export default PayHistory;
+export default PaymentMethod;
