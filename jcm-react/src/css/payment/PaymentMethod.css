@@ -20,7 +20,10 @@
     margin-bottom: 50px;
   }
   .payment-method .method-menu{
-    text-decoration: underline;
+    text-shadow: #333;
+  }
+  .payment-method .method-menu{
+    font-weight: bold;
   }
   .payment-method h4{
 
@@ -28,7 +31,7 @@
     color: black;
   }
   .payment-method h4:hover {
-    font-size: xx-large;
+    text-decoration: underline;
   }
 
   .payment-section {

@@ -1,24 +1,73 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import '../../css/post/EnrollPost.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import 'summernote/dist/summernote-lite.css';
+import $ from 'jquery';
+import 'summernote/dist/summernote-lite';
 
 const EnrollPost = () => {
     const [content, setContent] = useState('');
+    const [image, setImage] = useState(null); // 이미지 상태 추가
 
     const handleContentChange = (value) => {
         setContent(value);
     };
 
     const handleSubmit = () => {
-        // 작성된 내용을 서버에 제출하거나 다른 작업을 수행
         console.log("Submitted Content: ", content);
     };
-    const navigate = useNavigate();
 
+    const navigate = useNavigate();
     const handleBackClick = () => {
-        navigate('/notice'); // 이전 페이지로 이동
+        navigate('/notice');
+    };
+
+    useEffect(() => {
+        const config = {
+            tabDisable: true,
+            height: 300, // 에디터의 높이 설정
+            width: '90%', // 에디터의 너비 설정
+            disableResizeEditor: true, // 창 크기 조절 비활성화
+            toolbar: [
+                ["font", ["bold", "italic", "underline", "superscript"]],
+                ["fontsize", ["fontsize", "fontname", "color"]],
+                ["insert", ["picture"]], // 이미지 삽입 버튼 추가
+            ],
+            fontSizes: ["10", "12", "14", "16"],
+            colors: [[["red"]], [["black"]], [["yellow"]]],
+            fontSizeUnits: ["px"],
+            placeholder: "내용을 입력해 주세요.",
+            lang: "ko-KR",
+            callbacks: {
+                onChange: (contents) => {
+                    setContent(contents); // Summernote 내용을 상태로 설정
+                },
+                onImageUpload: (files) => {
+                    handleImageUpload(files[0]); // 이미지 업로드 핸들러 호출
+                }
+            },
+        };
+
+        $('#summernote').summernote(config);
+
+        return () => {
+            $('#summernote').summernote('destroy'); // 컴포넌트 언마운트 시 제거
+        };
+    }, []);
+    const handleImageUpload = (file) => {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            setImage(reader.result); // 이미지 미리보기 URL 설정
+            $('#summernote').summernote('insertImage', reader.result, 'uploaded image'); // 에디터에 이미지 삽입
+        };
+        reader.readAsDataURL(file);
+    };
+
+    const onEditorSaveHandler = () => {
+        const content = $('#summernote').summernote('code');
+        console.log(content);
     };
     return(
         <>
@@ -77,9 +126,9 @@ const EnrollPost = () => {
                                 </div>
                             </div>
                           </div>      
-                          <div class="input-group">
-                          <ReactQuill className='react-quill' value={content} onChange={handleContentChange} />
-                          </div>
+                          <div>
+                                <div id="summernote"></div>
+                            </div>
                           <div class="mb-3">
                             <input class="form-control" type="file" id="formFileMultiple" multiple/>
                             <div class="enroll-items">
