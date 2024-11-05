@@ -12,4 +12,9 @@
 	   INSERT INTO MEMBER (MEMBER_ID, MEMBER_PWD, MEMBER_NAME, EMAIL, PHONE, BIRTH, ADDRESS)
     	VALUES (#{memberId}, #{memberPwd}, #{memberName}, #{email}, #{phone}, #{birth}, #{address})
     </insert>
+    
+     <select id="selectId" parameterType="String"  resultType="int">
+        SELECT COUNT(*) FROM MEMBER
+        WHERE MEMBER_ID = #{memberId}
+    </select>
 </mapper>

@@ -16,12 +16,14 @@ import lombok.extern.slf4j.Slf4j;
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class MemberController {
+	
 
     private final MemberService mService;
-
+    
     @Autowired 
     public MemberController(MemberService mService) {
         this.mService = mService;
+   
     }
 
     @ResponseBody
@@ -41,8 +43,19 @@ public class MemberController {
     public String signupMember(@RequestBody Member member) {
     	
     	log.info("data --> {}", member);
-    	int result = mService.registerMember(member);
-    	System.out.println(result);
-        return new Gson().toJson("회원가입 기능은 현재 사용할 수 없습니다.");
-    }
+    	System.out.println(mService.selectId(member));
+    	if(mService.selectId(member) == 0) {
+    		int result = mService.registerMember(member);
+        	
+        	if(result == 1) {
+        		return new Gson().toJson("회원가입에 성공했습니다.");
+        	}else {
+        		
+        	}
+            return new Gson().toJson("회원가입에 실패 했습니다.");
+        }else {
+        	return new Gson().toJson("중복된 아이디 입니다.");
+        }
+    	}
+    	
 }
