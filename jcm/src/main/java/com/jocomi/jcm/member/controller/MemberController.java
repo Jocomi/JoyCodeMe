@@ -11,6 +11,8 @@ import com.google.gson.Gson;
 import com.jocomi.jcm.member.vo.Member;
 import com.jocomi.jcm.service.MemberService;
 
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class MemberController {
@@ -34,8 +36,13 @@ public class MemberController {
     }
 
     // 회원가입 기능 비활성화
+   
     @PostMapping(value = "/signup", produces = "application/json;charset=UTF-8")
     public String signupMember(@RequestBody Member member) {
+    	
+    	log.info("data --> {}", member);
+    	int result = mService.registerMember(member);
+    	System.out.println(result);
         return new Gson().toJson("회원가입 기능은 현재 사용할 수 없습니다.");
     }
 }

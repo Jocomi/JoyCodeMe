@@ -1,71 +1,132 @@
-.payment-method{
-   
-    padding: 100px;
-    width: 100%;
-    min-width: 1000px;
-    margin-left: auto;
-    margin-right: auto;
-    flex-grow: 1; /* 중간 부분이 화면에 맞게 확장되도록 */
-    background-color: white;
-    height: 100vh;
-  }
-  .payment-method ul{
-    display: flex;
-  }
-  .payment-method ul li{
-    margin: 10px;
-  }
-  .payment-method h3{
-    color: black;
-    margin-bottom: 50px;
-  }
-  .payment-method .method-menu{
-    text-shadow: #333;
-  }
-  .payment-method .method-menu{
-    font-weight: bold;
-  }
-  .payment-method h4{
+.payment-method {
+  padding: 100px;
+  width: 100%;
+  min-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  flex-grow: 1; /* 중간 부분이 화면에 맞게 확장되도록 */
+  background-color: white;
+  height: 100vh;
+}
 
-    margin-bottom: 30px;
-    color: black;
-  }
-  .payment-method h4:hover {
-    text-decoration: underline;
-  }
+.payment-method ul {
+  display: flex;
+}
 
-  .payment-section {
+.payment-method ul li {
+  margin: 10px;
+}
 
-    color: #333;
-    background-color: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    max-width: 100%; /* 흰색 div를 화면 전체로 확장 */
-  }
+.payment-method h3 {
+  color: black;
+  margin-bottom: 50px;
+}
 
-  .payment-section h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
+.payment-method .method-menu {
+  text-shadow: #333;
+  font-weight: bold;
+}
 
-  .payment-section button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-right: 10px;
-    font-size: 16px;
-    transition: background-color 0.3s;
-  }
+.payment-method h4 {
+  margin-bottom: 30px;
+  color: black;
+}
 
-  .payment-section button:hover {
-    background-color: #0056b3;
-  }
+.payment-method h4:hover {
+  text-decoration: underline;
+}
 
+.payment-section {
+  color: #333;
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  max-width: 100%; /* 흰색 div를 화면 전체로 확장 */
+}
 
+.payment-section h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
 
+.payment-section button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
 
-  
+.payment-section button:hover {
+  background-color: #0056b3;
+}
+
+/* 테이블 스타일 */
+.payment-section table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.payment-section th,
+.payment-section td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: center;
+  font-size: 16px;
+}
+
+.payment-section th {
+  background-color: #f5f5f5;
+  font-weight: bold;
+  color: #333;
+}
+
+.payment-section td {
+  background-color: #ffffff;
+  color: #555;
+}
+
+/* 버튼 스타일 */
+.edit-btn,
+.delete-btn,
+.add-btn {
+  padding: 6px 12px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.edit-btn {
+  background-color: #ffc107;
+  color: #333;
+}
+
+.edit-btn:hover {
+  background-color: #e0a800;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.delete-btn:hover {
+  background-color: #c82333;
+}
+
+.add-btn {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.add-btn:hover {
+  background-color: #218838;
+}

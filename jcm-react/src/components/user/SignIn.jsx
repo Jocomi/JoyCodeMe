@@ -13,24 +13,37 @@ const SignIn = () => {
         event.preventDefault();
         const form = event.target;
         const formData = new FormData(form);
-
+    
         const data = {
             memberId: formData.get('id') || formData.get('userId'),
             memberPwd: formData.get('signup-password') || formData.get('login-password'),
             memberName: formData.get('name'),
             email: formData.get('email'),
+            phone: formData.get('phone'),     // 추가된 필드
+            birth: formData.get('birth'),     // 추가된 필드
+            address: formData.get('address')  // 추가된 필드
         };
 
+    
         const endpoint = isSignup ? 'http://localhost:7777/signup' : 'http://localhost:7777/login';
-        
-        const response = await fetch(endpoint, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data),
-        });
-
-        const result = await response.json();
-        alert(result);
+    
+        try {
+            const response = await fetch(endpoint, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data),
+            });
+    
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+    
+            const result = await response.json();
+            alert(JSON.stringify(result));
+        } catch (error) {
+            console.error("Failed to fetch:", error);
+            alert("요청 실패: 서버가 응답하지 않거나 네트워크 문제가 발생했습니다.");
+        }
     };
 
     return (
@@ -61,6 +74,18 @@ const SignIn = () => {
                         <div className="form-group">
                             <input type="email" name="email" required placeholder=" " />
                             <label htmlFor="email">Email</label>
+                        </div>
+                        <div className="form-group">
+                            <input type="phone" name="phone" required placeholder=" " />
+                            <label htmlFor="phone">Phone</label>
+                        </div>
+                        <div className="form-group">
+                            <input type="birth" name="birth" required placeholder=" " />
+                            <label htmlFor="email">Birth</label>
+                        </div>
+                        <div className="form-group">
+                            <input type="address" name="address" required placeholder=" " />
+                            <label htmlFor="address">Address</label>
                         </div>
                         <button type="submit" className="form-btn">Sign Up</button>
                     </form>

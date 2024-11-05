@@ -9,7 +9,7 @@
 
     <!-- 회원가입 쿼리 -->
     <insert id="insertMember" parameterType="com.jocomi.jcm.member.vo.Member">
-        INSERT INTO MEMBER (MEMBER_ID, MEMBER_PWD, MEMBER_NAME, EMAIL, PHONE, BIRTH, ADDRESS, STATUS, P_IMG)
-        VALUES (#{memberId}, #{memberPwd}, #{memberName}, #{email}, #{phone}, #{birth}, #{address}, #{status}, #{pImg})
+	   INSERT INTO MEMBER (MEMBER_ID, MEMBER_PWD, MEMBER_NAME, EMAIL, PHONE, BIRTH, ADDRESS)
+    	VALUES (#{memberId}, #{memberPwd}, #{memberName}, #{email}, #{phone}, #{birth}, #{address})
     </insert>
 </mapper>
