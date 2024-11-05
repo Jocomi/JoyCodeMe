@@ -19,5 +19,8 @@ public class MemberService {
 
          return mMapper.insertMember(member);
     
-}
+    }
+    public int selectId(Member member) {
+    	return mMapper.selectId(member.getMemberId());
+    }
 }
