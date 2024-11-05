@@ -8,20 +8,16 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class MemberService {
-    private final MemberMapper mapper;
+    private final MemberMapper mMapper;
 
     public Member loginMember(Member member) {
-        return mapper.loginMember(member.getMemberId(), member.getMemberPwd());
+        return mMapper.loginMember(member.getMemberId(), member.getMemberPwd());
     }
 
     // 회원가입 기능 유지 (필요 시 사용 가능)
-    public boolean registerMember(Member member) {
-        try {
-            mapper.insertMember(member);
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
+    public int registerMember(Member member) {
+
+         return mMapper.insertMember(member);
+    
+}
 }
