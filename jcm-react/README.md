@@ -16,3 +16,5 @@
 
 ## 채팅 API 관련 모듈 설치
 # [2024.11.04] npm --% install @channel.io/channel-web-sdk-loader 
+
+# [2024.11.05] npm add summernote jquery
