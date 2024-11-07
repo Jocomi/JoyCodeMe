@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface MemberMapper {
-    Member loginMember(String memberId, String memberPwd);
+    Member loginMember(Member member);
     
     int insertMember(Member member); // 회원가입 메서드 유지
     

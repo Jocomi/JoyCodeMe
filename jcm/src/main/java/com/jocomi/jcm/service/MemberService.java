@@ -11,7 +11,8 @@ public class MemberService {
     private final MemberMapper mMapper;
 
     public Member loginMember(Member member) {
-        return mMapper.loginMember(member.getMemberId(), member.getMemberPwd());
+    	
+        return mMapper.loginMember(member);
     }
 
     // 회원가입 기능 유지 (필요 시 사용 가능)

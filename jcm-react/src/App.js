@@ -36,11 +36,16 @@ import WebSetUp from './components/setup/WebSetUp';
 import WebSetUpForm from './components/setup/WebSetUpForm'
 import { createContext, useState } from 'react';
 
-export const loginUser = createContext();
+export const LoginUser = createContext();
 let defaultUser ={
   user:""
 };
 function App() {
+  const[user, setUser] = useState(defaultUser);
+  const defaultContext = {
+    data: user,
+    setData: setUser
+  }
 
   const handleLogout = () => {
     window.location.href = '/'; // 메인 페이지로 이동
@@ -48,43 +53,45 @@ function App() {
 
   return (
     <BrowserRouter>
-      <MenuBar isLoggedIn={loginUser.id !== ""} onLogout={handleLogout} />
-      <main>
-        <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/signIn" element={<SignIn />} />
-          <Route path="/myPage" element={<MyPage />} />
-          <Route path="/signIn" element={<SignIn />} />
-          <Route path="/editProfile" element={<EditProfile />} />
-          <Route path="/changePwd" element={<ChangePwd />} />
-          <Route path="/projectHistory" element={<ProjectHistory />} />
-        
-          <Route path='/detailpost' element={<DetailPost/>}/>
-          <Route path="/introduce" element={<CompIntroduce />} />
-          <Route path="/guide" element={<Guide />} />
-          <Route path="/notice" element={<Notice />} />
-          <Route path="/freeBoard" element={<FreeBoard />} />
-          <Route path="/projectBoard" element={<ProjectBoard />} />
-          <Route path="/questions" element={<Questions />} />
-          <Route path="/frequentlyQuestions" element={<FrequentlyQuestions />} />
-          <Route path="/enrollPost" element={<EnrollPost />} />
+      <LoginUser.Provider value={defaultContext}>
+        <MenuBar isLoggedIn={LoginUser.id === ""} onLogout={handleLogout} />
+        <main>
+          <Routes>
+            <Route path="/" element={<Main />} />
+            <Route path="/signIn" element={<SignIn />} />
+            <Route path="/myPage" element={<MyPage />} />
+            <Route path="/signIn" element={<SignIn />} />
+            <Route path="/editProfile" element={<EditProfile />} />
+            <Route path="/changePwd" element={<ChangePwd />} />
+            <Route path="/projectHistory" element={<ProjectHistory />} />
           
-          <Route path="/admin/adminDashboard" element={<AdminDashboard />} />
-          <Route path="/admin/subscribe" element={<Subscribe />} />
-          <Route path="/admin/customer" element={<Customer />} />
-          <Route path="/admin/posts" element={<Posts />} />
-          <Route path="/admin/adminChat" element={<AdminChat />} />
-          <Route path="/admin/qna" element={<QnA />} />
+            <Route path='/detailpost' element={<DetailPost/>}/>
+            <Route path="/introduce" element={<CompIntroduce />} />
+            <Route path="/guide" element={<Guide />} />
+            <Route path="/notice" element={<Notice />} />
+            <Route path="/freeBoard" element={<FreeBoard />} />
+            <Route path="/projectBoard" element={<ProjectBoard />} />
+            <Route path="/questions" element={<Questions />} />
+            <Route path="/frequentlyQuestions" element={<FrequentlyQuestions />} />
+            <Route path="/enrollPost" element={<EnrollPost />} />
+            
+            <Route path="/admin/adminDashboard" element={<AdminDashboard />} />
+            <Route path="/admin/subscribe" element={<Subscribe />} />
+            <Route path="/admin/customer" element={<Customer />} />
+            <Route path="/admin/posts" element={<Posts />} />
+            <Route path="/admin/adminChat" element={<AdminChat />} />
+            <Route path="/admin/qna" element={<QnA />} />
 
-          <Route path="/paymentHistory" element={<PaymentHistory />} />
-          <Route path="/paymentMethod" element={<PaymentMethod />} />
+            <Route path="/paymentHistory" element={<PaymentHistory />} />
+            <Route path="/paymentMethod" element={<PaymentMethod />} />
 
-          <Route path="/techIntro" element={<TechIntro />} />
-          <Route path="/webSetUp" element={<WebSetUp />} />
-          <Route path="/webSetUp/form" element={<WebSetUpForm />} />
-        </Routes>
-      </main>
-      <FooterPage />
+            <Route path="/techIntro" element={<TechIntro />} />
+            <Route path="/webSetUp" element={<WebSetUp />} />
+            <Route path="/webSetUp/form" element={<WebSetUpForm />} />
+          </Routes>
+        </main>
+        <FooterPage />
+      </LoginUser.Provider>
     </BrowserRouter>
   );
 }

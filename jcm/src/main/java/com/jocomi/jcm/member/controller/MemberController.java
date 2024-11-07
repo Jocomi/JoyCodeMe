@@ -29,7 +29,11 @@ public class MemberController {
     @ResponseBody
     @PostMapping(value = "/login", produces = "application/json;charset=UTF-8")
     public String loginMember(@RequestBody Member member) {
+    	
         Member loginMember = mService.loginMember(member);
+        
+        System.out.println(loginMember);
+        
         if (loginMember != null) {
             return new Gson().toJson("로그인 성공");
         } else {
