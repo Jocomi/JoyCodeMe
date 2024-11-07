@@ -27,8 +27,8 @@ const EnrollPost = () => {
     useEffect(() => {
         const config = {
             tabDisable: true,
-            height: 300, // 에디터의 높이 설정
-            width: '90%', // 에디터의 너비 설정
+            height: 500, // 에디터의 높이 설정
+            width: '100%', // 에디터의 너비 설정
             disableResizeEditor: true, // 창 크기 조절 비활성화
             toolbar: [
                 ["font", ["bold", "italic", "underline", "superscript"]],
@@ -72,38 +72,10 @@ const EnrollPost = () => {
     return(
         <>
             <div className="enroll-post">
-             
-                <div className="menubar-div">
-                     <ul>
-                        <li><h2>고객 지원</h2></li>
-                        <li><NavLink to="/notice">공지사항</NavLink></li>
-                        <li><NavLink to="/freeBoard">자유 게시판</NavLink></li>
-                        <li><NavLink to="/projectBoard">프로젝트 게시판</NavLink></li>
-                        <li><NavLink to="/questions">문의사항</NavLink></li>
-                    </ul>
-                </div>
-          
             <div class="main-div">
                 <form action="">
                     <div class="post-content-div">
                         <h2>게시물 작성</h2>
-                        <div class="row">
-                            <div class="col">
-                                <div class="mb-3">
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon3">제목</span>
-                                        <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3 basic-addon4"/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text" id="basic-addon1">작성자</span>
-                                    <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" readonly/>
-                                </div>
-                            </div>
-                        </div>
-                       
                         <div class="row" >
                             <div class="col">
                                 <div class="input-group mb-3">
@@ -125,7 +97,25 @@ const EnrollPost = () => {
                                     </select>
                                 </div>
                             </div>
-                          </div>      
+                          </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="mb-3">
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon3">제목</span>
+                                        <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3 basic-addon4"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">작성자</span>
+                                    <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" readonly/>
+                                </div>
+                            </div>
+                        </div>
+                       
+                          
                           <div>
                                 <div id="summernote"></div>
                             </div>
