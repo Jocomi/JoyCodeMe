@@ -1,29 +1,30 @@
    /* 게시물 작성 div*/
 .enroll-post .main-div{
- 
     
-    width: 100%;
-    min-width: 1500px;
-    height: 100vh;
+    height: 130vh;
     background-color: white;
     color: black;
     margin-bottom: 100px;
+    padding: 50px;
+
+  } 
+  .enroll-post .post-content-div {
+    margin-top: 50px;
+    width: 100%;
+    padding: 30px;
+    height: 950px;
+    box-sizing: border-box;
+    border: 1px solid #b1b1b1;
+    border-radius: 15px;
+   
   }
+
   .enroll-post .menubar-div ul li {
     list-style: none;
     margin-top: 30px;
     margin-left: 50px;
   }
-  .enroll-post .menubar-div{
-    margin-top: 100px;
-    position: absolute;
-    padding: 10px;
-    min-width: 30%;
-    height: 100%;
-    float: left;
-    box-sizing: border-box;
-  
-  }
+
 
   .enroll-post .menubar-div ul li a{
     margin-left: 60px;
@@ -32,26 +33,12 @@
   .enroll-post .menubar-div ul li a:hover{
     text-decoration: underline;
   }
-  .enroll-post .post-content-div {
-    margin-top: 100px;
-    float: right;
-    width: 70%;
-    padding: 30px;
-    box-sizing: border-box;
-    border: 1px solid #b1b1b1;
-    margin-right: 100px;
-    border-radius: 15px;
-    margin-bottom: 200px;
-  }
+
   .enroll-post .post-content-div h2{
       margin-top: 30px;
       margin-bottom: 30px;
   }
-  .enroll-post .input-group .react-quill{
-      width: 99.7%;
-      height: 300px;
-      margin-bottom: 50px;
-  }
+
 
   .enroll-post #formFileMultiple{
       margin-top: 15px;
