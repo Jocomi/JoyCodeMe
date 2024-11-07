@@ -1,68 +1,190 @@
-.payment-method{
-   
-    padding: 100px;
-    width: 100%;
-    min-width: 1000px;
-    margin-left: auto;
-    margin-right: auto;
-    flex-grow: 1; /* 중간 부분이 화면에 맞게 확장되도록 */
-    background-color: white;
-    height: 100vh;
-  }
-  .payment-method ul{
-    display: flex;
-  }
-  .payment-method ul li{
-    margin: 10px;
-  }
-  .payment-method h3{
-    color: black;
-    margin-bottom: 50px;
-  }
-  .payment-method .method-menu{
-    text-decoration: underline;
-  }
-  .payment-method h4{
+/* 공통 스타일 */
+.nav-header {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+  flex-wrap: wrap; /* 작은 화면에서도 자연스럽게 줄 바꿈 */
+}
 
-    margin-bottom: 30px;
-    color: black;
+.header-link {
+  margin-right: 20px;
+  text-decoration: none;
+  font-size: 18px;
+  color: #007bff;
+  transition: color 0.3s ease;
+}
+
+.header-link.active {
+  font-weight: bold;
+  color: #0056b3;
+}
+
+.header-link:hover {
+  color: #0056b3;
+}
+
+.payment-method, .payment-history {
+  padding: 20px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: white;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.payment-banner img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.payment-method ul, .payment-history ul {
+  display: flex;
+  flex-wrap: wrap; /* 작은 화면에서 줄 바꿈 허용 */
+  padding: 0;
+  list-style: none;
+}
+
+.payment-method ul li, .payment-history ul li {
+  margin: 10px;
+}
+
+.method-menu {
+  padding: 10px 20px;
+  margin-right: 10px;
+  border-radius: 20px;
+  text-decoration: none;
+  background-color: #f0f0f0;
+  color: #000;
+  transition: all 0.3s ease-in-out;
+  flex-grow: 1;
+  text-align: center;
+}
+
+.method-menu.active {
+  background-color: #007bff;
+  color: white;
+}
+
+.method-menu:hover {
+  background-color: #0056b3;
+  color: white;
+}
+
+.payment-method h3, .payment-history h3 {
+  color: black;
+  margin-bottom: 20px;
+}
+
+.payment-section {
+  color: #333;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  max-width: 100%;
+  margin-top: 20px;
+}
+
+.payment-section h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.payment-section button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+  font-size: 16px;
+  transition: background-color 0.3s;
+  width: auto; /* 버튼이 너무 넓어지지 않도록 자동 너비 설정 */
+}
+
+.payment-section button:hover {
+  background-color: #0056b3;
+}
+
+.payment-section table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.payment-section th, .payment-section td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: center;
+  font-size: 14px;
+}
+
+.payment-section th {
+  background-color: #f5f5f5;
+  font-weight: bold;
+  color: #333;
+}
+
+.payment-section tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.payment-section tr:hover {
+  background-color: #f1f1f1;
+}
+
+.payment-section input[type="text"], .payment-section button.add-btn {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box; /* 패딩을 포함한 박스 모델 */
+  width: 100%; /* 작은 화면에서도 입력 필드가 화면에 맞게 늘어남 */
+  margin-bottom: 10px; /* 입력 필드 간 간격 */
+}
+
+.payment-section input[type="text"] {
+  max-width: 100%; /* 입력 필드가 부모 컨테이너 너비를 초과하지 않도록 */
+}
+
+.payment-section button.add-btn {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  max-width: 120px; /* 버튼의 최대 너비 제한 */
+}
+
+.payment-section button.add-btn:hover {
+  background-color: #218838;
+}
+
+/* 미디어 쿼리 - 작은 화면 대응 */
+@media (max-width: 768px) {
+  .payment-section table {
+      display: block; /* 테이블이 줄어들지 않도록 블록으로 변경 */
+      overflow-x: auto; /* 작은 화면에서 수평 스크롤 허용 */
   }
-  .payment-method h4:hover {
-    font-size: xx-large;
+
+  .payment-section input[type="text"], .payment-section button.add-btn {
+      width: 100%; /* 작은 화면에서 입력 필드와 버튼이 한 줄에 맞게 조정 */
   }
 
-  .payment-section {
-
-    color: #333;
-    background-color: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    max-width: 100%; /* 흰색 div를 화면 전체로 확장 */
+  .payment-section tr, .payment-section td, .payment-section th {
+      display: block; /* 작은 화면에서 테이블 셀 블록화 */
+      width: 100%; /* 테이블 셀의 너비가 부모 컨테이너에 맞게 */
   }
 
-  .payment-section h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
+  .payment-section input[type="text"] {
+      margin-bottom: 10px;
   }
 
-  .payment-section button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-right: 10px;
-    font-size: 16px;
-    transition: background-color 0.3s;
+  .payment-section button.add-btn {
+      width: 100%; /* 버튼도 한 줄 전체 차지 */
+      max-width: none; /* 최대 너비 제한 해제 */
   }
-
-  .payment-section button:hover {
-    background-color: #0056b3;
-  }
-
-
-
-
-  
+}

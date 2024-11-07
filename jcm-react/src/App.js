@@ -32,6 +32,9 @@ import DetailPost from './components/post/DetailPost';
 
 import TechIntro from './components/techIntro/TechIntro';
 
+import WebSetUp from './components/setup/WebSetUp';
+import WebSetUpForm from './components/setup/WebSetUpForm'
+
 
 function App() {
   return (
@@ -67,6 +70,8 @@ function App() {
           <Route path="/paymentMethod" element={<PaymentMethod />} />
 
           <Route path="/techIntro" element={<TechIntro />} />
+          <Route path="/webSetUp" element={<WebSetUp />} />
+          <Route path="/webSetUp/form" element={<WebSetUpForm />} />
         </Routes>
       </main>
       <FooterPage />
