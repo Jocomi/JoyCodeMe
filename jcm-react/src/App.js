@@ -34,15 +34,25 @@ import TechIntro from './components/techIntro/TechIntro';
 
 import WebSetUp from './components/setup/WebSetUp';
 import WebSetUpForm from './components/setup/WebSetUpForm'
+import { createContext, useState } from 'react';
 
-
+export const loginUser = createContext();
+let defaultUser ={
+  user:""
+};
 function App() {
+
+  const handleLogout = () => {
+    window.location.href = '/'; // 메인 페이지로 이동
+  };
+
   return (
     <BrowserRouter>
-      <MenuBar />
+      <MenuBar isLoggedIn={loginUser.id !== ""} onLogout={handleLogout} />
       <main>
         <Routes>
           <Route path="/" element={<Main />} />
+          <Route path="/signIn" element={<SignIn />} />
           <Route path="/myPage" element={<MyPage />} />
           <Route path="/signIn" element={<SignIn />} />
           <Route path="/editProfile" element={<EditProfile />} />

@@ -1,11 +1,19 @@
-import React, { useState } from 'react';
-import '../../css/user/SignIn.css'; // CSS 파일 경로 확인
+// SignIn.jsx
+import React, { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import '../../css/user/SignIn.css';
 import 'font-awesome/css/font-awesome.min.css';
 
 const SignIn = () => {
-    const [isSignup, setIsSignup] = useState(false);
+    const navigate = useNavigate();
+
+    const userCtx = useContext(loginUser);
 
     const toggleForms = () => setIsSignup(!isSignup);
+
+    const handlerLogin = () => {
+        userCtx.setData({user: user});
+    }
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -15,11 +23,6 @@ const SignIn = () => {
         const data = {
             memberId: formData.get('id') || formData.get('userId'),
             memberPwd: formData.get('signup-password') || formData.get('login-password'),
-            memberName: formData.get('name'),
-            email: formData.get('email'),
-            phone: formData.get('phone'),
-            birth: formData.get('birth'),
-            address: formData.get('address')
         };
 
         const endpoint = isSignup ? 'http://localhost:7777/signup' : 'http://localhost:7777/login';
@@ -36,11 +39,14 @@ const SignIn = () => {
             }
 
             const result = await response.json();
-            alert(JSON.stringify(result));
+            console.log(result);  // 서버 응답을 확인
 
-            // 회원가입 성공 시 로그인 페이지로 이동
-            if (result === "회원가입에 성공했습니다.") {
-                setIsSignup(false); // 로그인 페이지로 전환
+            if (result.message === "로그인 성공") {  // 로그인 성공 시 처리
+                const user = { result }; // 사용자 정보 저장
+                userCtx.setData({user: user});
+                navigate('/'); // 로그인 성공 후 메인 페이지로 이동
+            } else {
+                alert("로그인 실패: 아이디와 비밀번호를 확인하세요.");
             }
         } catch (error) {
             console.error("Failed to fetch:", error);
@@ -113,7 +119,7 @@ const SignIn = () => {
             </div>
         </div>
     );
-}
+};
 
 function togglePassword(fieldId, icon) {
     const field = document.getElementById(fieldId);

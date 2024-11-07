@@ -1,5 +1,5 @@
 import '../css/Main.css';
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, createContext } from "react";
 import MainPage from './mainPage/MainPage';
 import Chat from './mainPage/Chat';
 import MainInfo from './mainPage/MainInfo';
@@ -13,6 +13,7 @@ import { SectionsContainer, Section } from 'react-fullpage';
 import FooterPage from './common/FooterPage';
 
 const Main = () => {
+
     const [initialActiveSection, setInitialActiveSection] = useState(null);
 
     const onScroll = (p) => {
