@@ -1,4 +1,4 @@
-package com.jocomi.jcm.member.vo;
+package com.jocomi.jcm.model.vo;
 
 import lombok.Data;
 

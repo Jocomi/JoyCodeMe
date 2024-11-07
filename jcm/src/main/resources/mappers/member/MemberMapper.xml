@@ -2,13 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jocomi.jcm.model.mapper.MemberMapper">
     <!-- 로그인 쿼리 -->
-    <select id="loginMember" resultType="com.jocomi.jcm.member.vo.Member">
+    <select id="loginMember" resultType="Member">
         SELECT * FROM MEMBER
         WHERE MEMBER_ID = #{memberId} AND MEMBER_PWD = #{memberPwd}
     </select>
 
     <!-- 회원가입 쿼리 -->
-    <insert id="insertMember" parameterType="com.jocomi.jcm.member.vo.Member">
+    <insert id="insertMember" parameterType="Member">
 	   INSERT INTO MEMBER (MEMBER_ID, MEMBER_PWD, MEMBER_NAME, EMAIL, PHONE, BIRTH, ADDRESS)
     	VALUES (#{memberId}, #{memberPwd}, #{memberName}, #{email}, #{phone}, #{birth}, #{address})
     </insert>

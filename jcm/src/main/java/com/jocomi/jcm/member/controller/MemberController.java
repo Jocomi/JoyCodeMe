@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
-import com.jocomi.jcm.member.vo.Member;
+import com.jocomi.jcm.model.vo.Member;
 import com.jocomi.jcm.service.MemberService;
 
 import lombok.extern.slf4j.Slf4j;

@@ -1,7 +1,8 @@
 package com.jocomi.jcm.model.mapper;
 
-import com.jocomi.jcm.member.vo.Member;
 import org.apache.ibatis.annotations.Mapper;
+
+import com.jocomi.jcm.model.vo.Member;
 
 @Mapper
 public interface MemberMapper {
