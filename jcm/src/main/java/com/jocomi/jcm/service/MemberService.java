@@ -1,8 +1,10 @@
 package com.jocomi.jcm.service;
 
 import org.springframework.stereotype.Service;
-import com.jocomi.jcm.member.vo.Member;
+
 import com.jocomi.jcm.model.mapper.MemberMapper;
+import com.jocomi.jcm.model.vo.Member;
+
 import lombok.RequiredArgsConstructor;
 
 @Service
