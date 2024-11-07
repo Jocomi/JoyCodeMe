@@ -1,5 +1,4 @@
 import '../../css/post/Notice.css';
-import Pagination from 'react-bootstrap/Pagination';
 import PostMenu from './PostMenu';
 import BoardTable from './BoardTable';
 

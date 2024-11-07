@@ -6,7 +6,8 @@ const PaymentHistory = () => {
     return (
         <>
             <div className="payment-banner">
-                <img src="/img/paymentBaner.png" alt="paymentbanner" />
+                <img src="/img/paymentBanner.png" alt="paymentBanner" />
+                <h1>결제 관리</h1>
             </div>
             <div className="payment-history">
                 <div className="nav-header">
@@ -14,7 +15,6 @@ const PaymentHistory = () => {
                     <Link to="/paymenthistory" className="header-link active">결제 내역</Link>
                 </div>
 
-                <h3>결제 관리</h3>
                 <div className="payment-section">
                     <div className="payment-list">
                         <h2>결제 내역</h2>
