@@ -5,6 +5,8 @@ import 'font-awesome/css/font-awesome.min.css';
 const SignIn = () => {
     const [isSignup, setIsSignup] = useState(false);
 
+    const [ date, setDate] = useState('');
+
     const toggleForms = () => setIsSignup(!isSignup);
 
     const handleSubmit = async (event) => {
@@ -18,7 +20,7 @@ const SignIn = () => {
             memberName: formData.get('name'),
             email: formData.get('email'),
             phone: formData.get('phone'),
-            birth: formData.get('birth'),
+            date: formData.get('date'),
             address: formData.get('address')
         };
 
@@ -47,6 +49,11 @@ const SignIn = () => {
             alert("요청 실패: 서버가 응답하지 않거나 네트워크 문제가 발생했습니다.");
         }
     };
+
+    const changeBirthday = (e) => {
+        setDate(e.target.value);
+        e.target.style.color = "black";
+      };
 
     return (
         <div className="signIn-container">
@@ -82,8 +89,8 @@ const SignIn = () => {
                             <label htmlFor="phone">Phone</label>
                         </div>
                         <div className="form-group">
-                            <input type="birth" name="birth" required placeholder=" " />
-                            <label htmlFor="birth">Birth</label>
+                        <input type="date" name="date" onChange={(e) => changeBirthday(e)} />
+
                         </div>
                         <div className="form-group">
                             <input type="address" name="address" required placeholder=" " />
