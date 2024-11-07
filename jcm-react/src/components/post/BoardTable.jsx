@@ -33,7 +33,7 @@ const BoardTable = ({ className }) => {
           ))}
         </tbody>
       </Table>
-      <button type="button" className="btn btn-primary"><a href="/enrollPost">작성 하기</a></button>
+      <a href="/enrollPost"><button type="button" className="btn btn-primary">작성 하기</button></a>    
       <div className="pagination-container">
             <Pagination>
                     <Pagination.First />
