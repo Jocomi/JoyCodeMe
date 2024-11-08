@@ -14,6 +14,6 @@ public interface ProjectBoardMapper {
 	ArrayList<ProjectBoard> selectPB();
 	
 	@Select("SELECT * FROM PROJECT_BOARD WHERE POST_NO = #{postNo}")
-	ProjectBoard getProjectBoard(int postNo);
 	
+	ProjectBoard getProjectBoard(int postNo);
 }

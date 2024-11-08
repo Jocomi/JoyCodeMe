@@ -32,11 +32,6 @@ public class EnquiryController {
 	 @GetMapping(value = "/enquiry/{postNo}", produces = "application/json;charset=UTF-8")
 	 public EnquiryBoard getEnquiryById(@PathVariable("postNo") int postNo) {
 		 EnquiryBoard enquiry = eService.getEnquiryById(postNo);
-		 if (enquiry != null) {
-		     System.out.println(enquiry);
-		 } else {
-		     System.out.println("해당 번호의 게시글을 찾을 수 없습니다.");
-		 }
 		 return enquiry;
 	 }
 }

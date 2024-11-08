@@ -31,11 +31,6 @@ public class ProjectController {
 	 @GetMapping(value = "/project/{postNo}", produces = "application/json;charset=UTF-8")
 	 public ProjectBoard detailProject(@PathVariable("postNo") int postNo) {
 		 ProjectBoard frojectBoard = pService.getProjectBoard(postNo);
-		 if (frojectBoard != null) {
-		     System.out.println(frojectBoard);
-		 } else {
-		     System.out.println("해당 번호의 게시글을 찾을 수 없습니다.");
-		 }
 		 return frojectBoard;
 	 }
 }
