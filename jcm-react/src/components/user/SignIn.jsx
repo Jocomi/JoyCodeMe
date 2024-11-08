@@ -1,7 +1,6 @@
-import { useContext, useState } from 'react';
+import {  useState } from 'react';
 import '../../css/user/SignIn.css';
 import 'font-awesome/css/font-awesome.min.css';
-import { LoginUser } from '../../App';
 import { useNavigate } from 'react-router-dom';
 
 const SignIn = () => {
