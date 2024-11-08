@@ -1,6 +1,5 @@
 import '../../css/post/Notice.css';
 import PostMenu from './PostMenu';
-import BoardTable from './BoardTable';
 import AnnouncementBoard from './AnnouncementBoardTable';
 
 

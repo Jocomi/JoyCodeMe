@@ -41,7 +41,7 @@ const ProjectBoardTable = ({ className }) => {
                 onClick={() => navigate(`/detailpost/project/${post.postNo}`)} // 상세보기 페이지로 이동
               >
                 <td>{post.postNo}</td>
-                <td>{post.id}</td>
+                <td>{post.memberId}</td>
                 <td>{post.postTitle}</td>
                 <td>{post.postTime}</td>
                 <td>{post.countView}</td>

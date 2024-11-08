@@ -90,7 +90,7 @@ const DetailPost = () => {
                 <td><h2>{post.postTitle}</h2></td>
               </tr>
               <tr>
-                <td><h3>{post.id}</h3></td>
+                <td><h3>{post.memberId}</h3></td>
               </tr>
               <tr>
                 <td>
