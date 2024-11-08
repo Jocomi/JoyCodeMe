@@ -125,7 +125,8 @@ const PaymentMethod = () => {
     return (
         <>
             <div className="payment-banner">
-                <img src="/img/paymentBaner.png" alt="paymentbanner" />
+                <img src="/img/paymentBanner.png" alt="paymentbanner" />
+                <h1>결제 관리</h1>
             </div>
             <div className="payment-method">
                 <div className="nav-header">
@@ -133,7 +134,6 @@ const PaymentMethod = () => {
                     <Link to="/paymenthistory" className="header-link">결제 내역</Link>
                 </div>
 
-                <h3>결제 관리</h3>
                 <ul>
                     <li>
                         <button onClick={() => setActiveTab('card')} className={`method-menu ${activeTab === 'card' ? 'active' : ''}`}>

@@ -2,7 +2,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import MenuBar from './components/common/MenuBar';
 import Main from './components/Main';
 import MyPage from './components/user/MyPage';
@@ -34,9 +34,19 @@ import TechIntro from './components/techIntro/TechIntro';
 
 import WebSetUp from './components/setup/WebSetUp';
 import WebSetUpForm from './components/setup/WebSetUpForm'
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 
 export const LoginUser = createContext();
+
+  function ScrollToTop() {
+    const { pathname } = useLocation();
+
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, [pathname]);
+
+    return null;
+  }
 
 function App() {
   const loginUser = sessionStorage.getItem('loginUser')
@@ -49,6 +59,8 @@ function App() {
 
   return (
     <BrowserRouter>
+
+    <ScrollToTop />
       <LoginUser.Provider value={defaultContext}>
         <MenuBar/>
         <main>
@@ -70,22 +82,33 @@ function App() {
             <Route path="/questions" element={<Questions />} />
             <Route path="/frequentlyQuestions" element={<FrequentlyQuestions />} />
             <Route path="/enrollPost" element={<EnrollPost />} />
+
             
-            <Route path="/admin/adminDashboard" element={<AdminDashboard />} />
-            <Route path="/admin/subscribe" element={<Subscribe />} />
-            <Route path="/admin/customer" element={<Customer />} />
-            <Route path="/admin/posts" element={<Posts />} />
-            <Route path="/admin/adminChat" element={<AdminChat />} />
-            <Route path="/admin/qna" element={<QnA />} />
+              <Route path='/detailpost' element={<DetailPost/>}/>
+              <Route path="/introduce" element={<CompIntroduce />} />
+              <Route path="/guide" element={<Guide />} />
+              <Route path="/notice" element={<Notice />} />
+              <Route path="/freeBoard" element={<FreeBoard />} />
+              <Route path="/projectBoard" element={<ProjectBoard />} />
+              <Route path="/questions" element={<Questions />} />
+              <Route path="/frequentlyQuestions" element={<FrequentlyQuestions />} />
+              <Route path="/enrollPost" element={<EnrollPost />} />
+              
+              <Route path="/admin/adminDashboard" element={<AdminDashboard />} />
+              <Route path="/admin/subscribe" element={<Subscribe />} />
+              <Route path="/admin/customer" element={<Customer />} />
+              <Route path="/admin/posts" element={<Posts />} />
+              <Route path="/admin/adminChat" element={<AdminChat />} />
+              <Route path="/admin/qna" element={<QnA />} />
 
-            <Route path="/paymentHistory" element={<PaymentHistory />} />
-            <Route path="/paymentMethod" element={<PaymentMethod />} />
+              <Route path="/paymentHistory" element={<PaymentHistory />} />
+              <Route path="/paymentMethod" element={<PaymentMethod />} />
 
-            <Route path="/techIntro" element={<TechIntro />} />
-            <Route path="/webSetUp" element={<WebSetUp />} />
-            <Route path="/webSetUp/form" element={<WebSetUpForm />} />
-          </Routes>
-        </main>
+              <Route path="/techIntro" element={<TechIntro />} />
+              <Route path="/webSetUp" element={<WebSetUp />} />
+              <Route path="/webSetUp/form" element={<WebSetUpForm />} />
+            </Routes>
+          </main>
         <FooterPage />
       </LoginUser.Provider>
     </BrowserRouter>
