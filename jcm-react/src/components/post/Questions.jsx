@@ -1,9 +1,7 @@
 import '../../css/post/Questions.css';
-import Pagination from 'react-bootstrap/Pagination';
-import Table from 'react-bootstrap/Table';
 import FrequentlyQuestions from './FrequentlyQuestions';
 import PostMenu from './PostMenu';
-import BoardTable from './BoardTable';
+import EnquiryBoard from './EnquiryBoard';
 
 const Questions = () => {
     return (
@@ -16,7 +14,7 @@ const Questions = () => {
 
             </div>
             <PostMenu/>
-            <BoardTable className="questions-table"/>
+            <EnquiryBoard className="questions-table"/>
               
  
             <FrequentlyQuestions />
