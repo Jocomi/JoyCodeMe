@@ -10,10 +10,8 @@ const SignIn = () => {
     const [id,setId] = useState('');
     const[password, setPassword] = useState('');
     
-    const userCtx = useContext(LoginUser);
-    
     const userLogin = (user) => {
-        userCtx.setData(user)
+        sessionStorage.setItem('loginUser', user);
     }
     const data = {
         memberId: id,
@@ -34,6 +32,7 @@ const SignIn = () => {
             if (result.memberId !== "") {  // 로그인 성공 시 처리
                 userLogin(result);
                 navigate('/'); // 로그인 성공 후 메인 페이지로 이동
+                window.location.reload();
             } else {
                 alert("로그인 실패: 아이디와 비밀번호를 확인하세요.");
             }

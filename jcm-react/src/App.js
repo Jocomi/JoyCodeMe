@@ -49,31 +49,40 @@ export const LoginUser = createContext();
   }
 
 function App() {
-  const[user, setUser] = useState(null);
-  alert(user);
+  const loginUser = sessionStorage.getItem('loginUser')
+  const[user, setUser] = useState(loginUser);
+
   const defaultContext = {
     data: user,
     setData: setUser
   }
 
-  const handleLogout = () => {
-    window.location.href = '/'; // 메인 페이지로 이동
-  };
-
   return (
     <BrowserRouter>
-      <ScrollToTop />
-        <LoginUser.Provider value={defaultContext}>
-          <MenuBar onLogout={handleLogout} />
-          <main>
-            <Routes>
-              <Route path="/" element={<Main />} />
-              <Route path="/signIn" element={<SignIn />} />
-              <Route path="/myPage" element={<MyPage />} />
-              <Route path="/signIn" element={<SignIn />} />
-              <Route path="/editProfile" element={<EditProfile />} />
-              <Route path="/changePwd" element={<ChangePwd />} />
-              <Route path="/projectHistory" element={<ProjectHistory />} />
+
+    <ScrollToTop />
+      <LoginUser.Provider value={defaultContext}>
+        <MenuBar/>
+        <main>
+          <Routes>
+            <Route path="/" element={<Main />} />
+            <Route path="/signIn" element={<SignIn />} />
+            <Route path="/myPage" element={<MyPage />} />
+            <Route path="/signIn" element={<SignIn />} />
+            <Route path="/editProfile" element={<EditProfile />} />
+            <Route path="/changePwd" element={<ChangePwd />} />
+            <Route path="/projectHistory" element={<ProjectHistory />} />
+          
+            <Route path='/detailpost' element={<DetailPost/>}/>
+            <Route path="/introduce" element={<CompIntroduce />} />
+            <Route path="/guide" element={<Guide />} />
+            <Route path="/notice" element={<Notice />} />
+            <Route path="/freeBoard" element={<FreeBoard />} />
+            <Route path="/projectBoard" element={<ProjectBoard />} />
+            <Route path="/questions" element={<Questions />} />
+            <Route path="/frequentlyQuestions" element={<FrequentlyQuestions />} />
+            <Route path="/enrollPost" element={<EnrollPost />} />
+
             
               <Route path='/detailpost' element={<DetailPost/>}/>
               <Route path="/introduce" element={<CompIntroduce />} />
