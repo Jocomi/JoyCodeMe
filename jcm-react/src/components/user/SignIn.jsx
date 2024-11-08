@@ -12,6 +12,9 @@ const SignIn = () => {
     
     const userCtx = useContext(LoginUser);
     
+    const userLogin = (user) => {
+        userCtx.setData(user)
+    }
     const data = {
         memberId: id,
         memberPwd: password
@@ -24,9 +27,12 @@ const SignIn = () => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
             });
+
             const result = await response.json();
-            if (result.message === "로그인 성공") {  // 로그인 성공 시 처리
-                userCtx.setData({user: result}); // 사용자 정보 저장
+
+            console.log(result);
+            if (result.memberId !== "") {  // 로그인 성공 시 처리
+                userLogin(result);
                 navigate('/'); // 로그인 성공 후 메인 페이지로 이동
             } else {
                 alert("로그인 실패: 아이디와 비밀번호를 확인하세요.");
