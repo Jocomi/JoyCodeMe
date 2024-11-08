@@ -1,18 +1,21 @@
-import {  useState } from 'react';
+import {  useContext, useState } from 'react';
 import '../../css/user/SignIn.css';
 import 'font-awesome/css/font-awesome.min.css';
 import { useNavigate } from 'react-router-dom';
 import AddressModal from './AddressModal';
+import { LoginUser } from '../../App';
 
 const SignIn = () => {
     const navigate = useNavigate();
-    
     const [id,setId] = useState('');
     const[password, setPassword] = useState('');
+    const userCtx = useContext(LoginUser);
     
     const userLogin = (user) => {
-        sessionStorage.setItem('loginUser', user);
-    }
+        userCtx.setData(user);
+        sessionStorage.setItem('loginUser', JSON.stringify(user)); // 로그인 정보 sessionStorage에 저장
+    };
+
     const data = {
         memberId: id,
         memberPwd: password
@@ -46,21 +49,17 @@ const SignIn = () => {
             const result = await response.json();
 
             console.log(result);
-            if (result.memberId !== "") {  // 로그인 성공 시 처리
+            if (result.memberId) {  // 로그인 성공 시 처리
                 userLogin(result);
                 navigate('/'); // 로그인 성공 후 메인 페이지로 이동
-                window.location.reload();
             } else {
                 alert("로그인 실패: 아이디와 비밀번호를 확인하세요.");
             }
-
-
-        } catch(e) {
+        } catch (e) {
             console.log(e);
-            throw new Error("test3 :: 통신 실패@!")
+            alert("로그인 중 오류가 발생했습니다.");
         }
-        
-    }
+    };
 
     function toggleForms() {
         document.getElementById('signup-form').classList.toggle('hidden');
@@ -142,7 +141,7 @@ const SignIn = () => {
                 </div>
             </div>
              {/* Address Modal 렌더링 */}
-             {popup && (
+            {popup && (
     <>
         <div className="addressmodal-overlay" onClick={handleComplete}></div>
         <AddressModal company={enroll_company} setcompany={setEnroll_company} />
