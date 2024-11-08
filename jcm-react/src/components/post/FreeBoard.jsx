@@ -1,7 +1,5 @@
 import '../../css/post/FreeBoard.css';
-import Pagination from 'react-bootstrap/Pagination';
 import PostMenu from './PostMenu';
-import BoardTable from './BoardTable';
 import FreeBoardTable from './FreeBoardTable';
 
 const FreeBoard = () => {

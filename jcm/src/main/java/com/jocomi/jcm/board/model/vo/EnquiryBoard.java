@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class EnquiryBoard {
 	   private int postNo;
-	    private String id;
+	    private String memberId;
 	    private String postTitle;
 	    private String postContent;
 	    private String imgFile;
