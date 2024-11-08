@@ -39,21 +39,18 @@ import { createContext, useState } from 'react';
 export const LoginUser = createContext();
 
 function App() {
-  const[user, setUser] = useState(null);
-  alert(user);
+  const loginUser = sessionStorage.getItem('loginUser')
+  const[user, setUser] = useState(loginUser);
+
   const defaultContext = {
     data: user,
     setData: setUser
   }
 
-  const handleLogout = () => {
-    window.location.href = '/'; // 메인 페이지로 이동
-  };
-
   return (
     <BrowserRouter>
       <LoginUser.Provider value={defaultContext}>
-        <MenuBar onLogout={handleLogout} />
+        <MenuBar/>
         <main>
           <Routes>
             <Route path="/" element={<Main />} />

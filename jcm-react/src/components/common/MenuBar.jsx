@@ -7,8 +7,12 @@ import { LoginUser } from '../../App';
 const MenuBar = () => {
 
     const userCtx = useContext(LoginUser);
-    const loginUser = userCtx.data;
-    alert(loginUser);
+    const loginUser = sessionStorage.getItem('loginUser');
+
+    const logout =() => {
+        sessionStorage.removeItem('loginUser');
+        window.location.href = '/'; // 메인 페이지로 이동
+    }
 
     return (
         <div className="navbar">
@@ -32,7 +36,7 @@ const MenuBar = () => {
                     <>
                         <Link to="/myPage">MyPage</Link>
                         &nbsp;
-                        <span onClick={userCtx.setData("")} style={{ cursor: 'pointer' }}>Logout</span>
+                        <span onClick={logout} style={{ cursor: 'pointer' }}>Logout</span>
                     </>
                 ) : (
                     <Link to="signIn">SIGN IN</Link>
