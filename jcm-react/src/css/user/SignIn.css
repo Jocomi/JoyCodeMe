@@ -1,142 +1,149 @@
+.signIn-container {
+  height: 100vh;
+  width: 100vw;
+  background: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  .signIn-container {
-    height: 100vh;
-    width: 100vw;
-    background: #f0f0f0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .signIn-container .signIn-main {
-    margin: auto;
-    display: flex;
-    width: 900px;
-    margin-top: auto;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-  }
+.signIn-container .signIn-main {
+  margin: auto;
+  display: flex;
+  width: 700px; /* UI 크기를 줄임 */
+  margin-top: auto;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
 
-  .signIn-container .image-section {
-    width: 60%;
-    background-color: #f0f0f0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+.signIn-container .image-section {
+  width: 50%; /* 비율 조정 */
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  .signIn-container .image-section video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 10px 0 0 10px;
-  }
+.signIn-container .image-section video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px 0 0 10px;
+}
 
-  .signIn-container .form-section {
-    width: 40%;
-    padding: 40px;
-  }
+.signIn-container .form-section {
+  width: 50%; /* 비율 조정 */
+  padding: 20px; /* padding 줄임 */
+}
 
-  .signIn-container .form-section h1 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-    color: #333;
-  }
+.signIn-container .form-section h1 {
+  font-size: 1.8rem; /* 폰트 크기 조정 */
+  margin-bottom: 15px; /* 간격 조정 */
+  color: #333;
+}
 
-  .signIn-container .form-section p {
-    font-size: 1rem;
-    margin-bottom: 20px;
-    color: #777;
-  }
+.signIn-container .form-section p {
+  font-size: 0.9rem; /* 폰트 크기 조정 */
+  margin-bottom: 15px; /* 간격 조정 */
+  color: #777;
+}
 
-  .signIn-container .form-group {
-    position: relative;
-    margin-bottom: 20px;
-  }
+.signIn-container .form-group {
+  position: relative;
+  margin-bottom: 15px; /* 간격 줄임 */
+}
 
-  .signIn-container .form-group label {
-    position: absolute;
-    top: 12px;
-    left: 10px;
-    font-size: 1rem;
-    color: #999;
-    transition: all 0.3s ease;
-  }
+.signIn-container .form-group label {
+  position: absolute;
+  top: 12px;
+  left: 10px;
+  font-size: 0.9rem; /* 폰트 크기 조정 */
+  color: #999;
+  transition: all 0.3s ease;
+}
 
-  .signIn-container .form-group input {
-    width: 100%;
-    padding: 12px 10px;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    outline: none;
-  }
+.signIn-container .form-group input {
+  width: 100%;
+  padding: 10px 8px; /* padding 줄임 */
+  font-size: 0.9rem; /* 폰트 크기 조정 */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+}
 
-  .signIn-container #loginForm {
-    margin: 118px auto;
-  }
+.signIn-container #loginForm {
+  margin: 80px auto;
+}
 
-  .signIn-container .address_btn {
-    padding: 10px;
-    border: none;
-    height: 40px;
-    border-radius: 5px;
-    float: right;
-    margin: 10px 0;
-  }
+.signIn-container .address_btn {
+  padding: 8px;
+  border: none;
+  height: 35px; /* 버튼 크기 조정 */
+  border-radius: 5px;
+  float: right;
+  margin: 8px 0;
+}
 
-  .signIn-container .address_btn:hover {
-    cursor: pointer;
-    transition: all 0.4s;
-    background-color: #ccc;
-  }
-  
-  /* input을 focus 했을 때 안쪽 글씨가 위로 올라가게 */
-  .signIn-container .form-group input:focus + label,
-  .signIn-container .form-group input:not(:placeholder-shown) + label {
-    top: -16px;
-    font-size: 0.8rem;
-    color: #333;
-  }
+.signIn-container .address_btn:hover {
+  cursor: pointer;
+  transition: all 0.4s;
+  background-color: #ccc;
+}
 
-  .signIn-container .show-hide {
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
-    cursor: pointer;
-    color: #333;
-  }
+/* input을 focus 했을 때 안쪽 글씨가 위로 올라가게 */
+.signIn-container .form-group input:focus + label,
+.signIn-container .form-group input:not(:placeholder-shown) + label {
+  top: -14px;
+  font-size: 0.8rem;
+  color: #333;
+}
 
-  .signIn-container .form-btn {
-    width: 100%;
-    padding: 12px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    cursor: pointer;
-    margin-bottom: 10px;
-  }
+.signIn-container .show-hide {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #333;
+}
 
-  .signIn-container .form-btn:hover {
-    background-color: #0056b3;
-    transition: 0.4s;
-  }
+.signIn-container .form-btn {
+  width: 100%;
+  padding: 10px; /* 버튼 크기 조정 */
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 0.9rem; /* 폰트 크기 조정 */
+  cursor: pointer;
+  margin-bottom: 10px;
+}
 
-  .signIn-container .toggle-link {
-    text-align: center;
-    font-size: 0.9rem;
-    color: #007bff;
-    cursor: pointer;
-  }
+.signIn-container .form-btn:hover {
+  background-color: #0056b3;
+  transition: 0.4s;
+}
 
-  .signIn-container .toggle-link:hover {
-    text-decoration: underline;
-  }
+.signIn-container .toggle-link {
+  text-align: center;
+  font-size: 0.85rem; /* 폰트 크기 조정 */
+  color: #007bff;
+  cursor: pointer;
+}
 
-  .hidden {
-    display: none;
-  }
+.signIn-container .toggle-link:hover {
+  text-decoration: underline;
+}
+
+.hidden {
+  display: none;
+}
+
+/* 비밀번호 불일치 시 오류 메시지 스타일 */
+.error-text {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 5px;
+}

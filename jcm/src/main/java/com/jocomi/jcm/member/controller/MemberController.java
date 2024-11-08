@@ -41,22 +41,17 @@ public class MemberController {
 		return new Gson().toJson(loginMember);
 	}
 
-	@ResponseBody
-	@PostMapping(value = "/signup", produces = "application/json;charset=UTF-8")
-	public String signupMember(@RequestBody Member member) {
-		log.info("data --> {}", member);
-		System.out.println(mService.selectId(member));
-		if (mService.selectId(member) == 0) {
-			int result = mService.registerMember(member);
-			if (result == 1) {
-				return new Gson().toJson("회원가입에 성공했습니다.");
-			} else {
-				return new Gson().toJson("회원가입에 실패 했습니다.");
-			}
-		} else {
-			return new Gson().toJson("중복된 아이디 입니다.");
-		}
-	}
+    @ResponseBody
+    @PostMapping(value = "/signup", produces = "application/json;charset=UTF-8")
+    public String signupMember(@RequestBody Member member) {
+        log.info("Received signup data: {}", member);
+        if (mService.selectId(member) == 0) {
+            int result = mService.registerMember(member);
+            return result == 1 ? new Gson().toJson("회원가입에 성공했습니다.") : new Gson().toJson("회원가입에 실패 했습니다.");
+        } else {
+            return new Gson().toJson("중복된 아이디 입니다.");
+        }
+    }
 
 	@ResponseBody
 	@GetMapping(value = "/profile", produces = "application/json;charset=UTF-8")
