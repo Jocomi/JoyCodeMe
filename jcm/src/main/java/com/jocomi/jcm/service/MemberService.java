@@ -26,8 +26,4 @@ public class MemberService {
     public int selectId(Member member) {
     	return mMapper.selectId(member.getMemberId());
     }
-    
-    public Member memberProfile(String memberId) {
-        return mMapper.memberProfile(memberId);
-    }
 }

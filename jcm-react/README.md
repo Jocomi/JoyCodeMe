@@ -19,5 +19,4 @@
 
 # [2024.11.05] npm add summernote jquery
 
-# [2024.11.08] axios
-# [2024.11.08] react-daum-postcode
+# [2024.11.08] npm add react-spinners

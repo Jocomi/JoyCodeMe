@@ -1,6 +1,8 @@
 import '../../css/post/ProjectBoard.css';
+import Pagination from 'react-bootstrap/Pagination';
+import Table from 'react-bootstrap/Table';
 import PostMenu from './PostMenu';
-import ProjectBoardTable from './ProjectBoardTable';
+import BoardTable from './BoardTable';
 
 
 
@@ -14,7 +16,7 @@ const ProjectBoard = () => {
             <div className="project-header">
             </div>
             <PostMenu/>
-            <ProjectBoardTable className="project-table"/>
+            <BoardTable className="project-table"/>
                
             <div className="pagination-container">
  

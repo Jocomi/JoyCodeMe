@@ -18,3 +18,4 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .addPathPatterns("/counsel");  // /counsel 경로에 대해 인터셉터 적용
     }
 }
+

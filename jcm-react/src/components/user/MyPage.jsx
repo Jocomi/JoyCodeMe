@@ -1,21 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { LoginUser } from '../../App';
-import { Link } from 'react-router-dom';
-import '../../css/user/MyPage.css';
+import '../../css/user/MyPage.css'
+import {Link} from 'react-router-dom';
+
 const MyPage =() => {
-    const { data: loginUser } = useContext(LoginUser);
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [profileImage, setProfileImage] = useState('');
-
-    useEffect(() => {
-        if (loginUser) {
-            setName(loginUser.memberName);
-            setEmail(loginUser.email);
-            setProfileImage(loginUser.pImg);
-        }
-    }, [loginUser]);
-
     return(
         <div className="mypage-container">
             <div className='mypage-main'>
@@ -23,15 +9,11 @@ const MyPage =() => {
 
             {/* <!-- 프로필 섹션 --> */}
             <div className="profile-section">
-                {profileImage ? (
-                    <img src={profileImage} alt="프로필 사진" className="profile-picture" />
-                ) : (
-                    <div className="profile-picture-placeholder"></div>
-                )}
-
-            <h2>이름 : {name}</h2><br />
+            <div className="profile-picture"></div> 
+            {/* <!-- 여기에 프로필 사진을 넣을 수 있습니다 --> */}
+            <h2>홍길동</h2>
             <p>등급 : VIP</p>
-            <p>이메일: {email}</p>
+            <p>이메일: honggildong@example.com</p>
             </div>
 
             {/* <!-- 계정 설정 버튼 --> */}
