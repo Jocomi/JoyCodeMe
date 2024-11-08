@@ -32,11 +32,6 @@ public class FreeController {
 	 @GetMapping(value = "/free/{postNo}", produces = "application/json;charset=UTF-8")
 	 public FreeBoard freeById(@PathVariable("postNo") int postNo) {
 		 FreeBoard freeBoard = fService.getfreeById(postNo);
-		 if (freeBoard != null) {
-		     System.out.println(freeBoard);
-		 } else {
-		     System.out.println("해당 번호의 게시글을 찾을 수 없습니다.");
-		 }
 		 return freeBoard;
 	 }
 }

@@ -22,4 +22,9 @@ public class AnnouncementService {
     public AnnouncementBoard getAnnouncementById(int postNo) {
         return aMapper.selectAnnouncementById(postNo);
     }
+
+    public boolean deactivatePost(String boardType, int postNo) {
+        int result = aMapper.deactivatePost(boardType, postNo);
+        return result > 0; // STATUS 값 업데이트 성공 여부 반환
+    }
 }
