@@ -37,11 +37,10 @@ import WebSetUpForm from './components/setup/WebSetUpForm'
 import { createContext, useState } from 'react';
 
 export const LoginUser = createContext();
-let defaultUser ={
-  user:""
-};
+
 function App() {
-  const[user, setUser] = useState(defaultUser);
+  const[user, setUser] = useState(null);
+  alert(user);
   const defaultContext = {
     data: user,
     setData: setUser
@@ -54,7 +53,7 @@ function App() {
   return (
     <BrowserRouter>
       <LoginUser.Provider value={defaultContext}>
-        <MenuBar isLoggedIn={LoginUser.id === ""} onLogout={handleLogout} />
+        <MenuBar onLogout={handleLogout} />
         <main>
           <Routes>
             <Route path="/" element={<Main />} />
