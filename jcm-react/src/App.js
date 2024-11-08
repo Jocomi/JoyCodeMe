@@ -84,7 +84,7 @@ function App() {
             <Route path="/enrollPost" element={<EnrollPost />} />
 
             
-              <Route path='/detailpost' element={<DetailPost/>}/>
+            <Route path='/detailpost/:boardType/:postNo' element={<DetailPost />} />
               <Route path="/introduce" element={<CompIntroduce />} />
               <Route path="/guide" element={<Guide />} />
               <Route path="/notice" element={<Notice />} />

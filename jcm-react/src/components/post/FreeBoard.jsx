@@ -2,6 +2,7 @@ import '../../css/post/FreeBoard.css';
 import Pagination from 'react-bootstrap/Pagination';
 import PostMenu from './PostMenu';
 import BoardTable from './BoardTable';
+import FreeBoardTable from './FreeBoardTable';
 
 const FreeBoard = () => {
     return (
@@ -14,7 +15,7 @@ const FreeBoard = () => {
 
             </div>
                 <PostMenu/>
-            <BoardTable className="free-table"/>
+            <FreeBoardTable className="free-table"/>
               
             <div className="pagination-container">
         

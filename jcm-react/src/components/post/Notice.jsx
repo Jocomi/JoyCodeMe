@@ -1,6 +1,7 @@
 import '../../css/post/Notice.css';
 import PostMenu from './PostMenu';
 import BoardTable from './BoardTable';
+import AnnouncementBoard from './AnnouncementBoardTable';
 
 
 const Notice = () => {
@@ -18,7 +19,7 @@ const Notice = () => {
                 </ul>
             </div>
                 <PostMenu/>
-                <BoardTable className="notice-table"/>
+                <AnnouncementBoard className="notice-table"/>
               
             <div className="pagination-container">
   
