@@ -85,15 +85,16 @@
 		<dependency>
 			<groupId>com.oracle.database.jdbc</groupId>
 			<artifactId>ojdbc8</artifactId>
+			<version>19.3.0.0</version>
 			<scope>runtime</scope>
 		</dependency>
-		
-		<!-- org.json 레포지토리 관련 설정 -->
-		<dependency>
-	        <groupId>org.json</groupId>
-	        <artifactId>json</artifactId>
-	        <version>20240303</version>
-	    </dependency>
+		        
+        <!-- org.json 레포지토리 관련 설정 -->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20240303</version>
+        </dependency>
 
 
 	</dependencies>

@@ -31,8 +31,6 @@
     font-weight: bold;
     color: #ffffff;
   }
-
-
   
   /* Content area styling */
   .websetupform-container .content-area {
@@ -68,7 +66,6 @@
     margin-bottom: 10px;
   }
   
-  /* Placeholder elements */
   .websetupform-container .viewPage {
     border: 1px solid #000;
     width: 80%;

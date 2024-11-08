@@ -26,8 +26,6 @@ const WebSetUpForm = (props) => {
         } else {
             alert("요청 실패... 요청을 확인하세요!");
         }
-
-       
     },[]);
 
     return (
@@ -42,7 +40,6 @@ const WebSetUpForm = (props) => {
                 <p className="setup-description">Create a customized, professional website with just a few steps. Fill in the details below to start setting up your online presence.</p>
 
                 <div className="section-title">WEBSITE Preview</div>
-
                 {/* 여기에 응답 내용을 출력 */}
                 <div className='viewPage' align="center">
                     {responseData !== "" ? (

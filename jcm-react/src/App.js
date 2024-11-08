@@ -39,25 +39,36 @@ import { createContext, useEffect, useState } from 'react';
 export const LoginUser = createContext();
 export const Requested = createContext();
 
-  function ScrollToTop() {
-    const { pathname } = useLocation();
+function ScrollToTop() {
+  const { pathname } = useLocation();
 
-    useEffect(() => {
-      window.scrollTo(0, 0);
-    }, [pathname]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
-    return null;
-  }
+  return null;
+}
 
 function App() {
-  const loginUser = sessionStorage.getItem('loginUser')
-  const[user, setUser] = useState(loginUser);
-  const[question, setQuestion] = useState("");
+const [question, setQuestion] = useState("");
+
+  const [user, setUser] = useState(() => {
+    const loginUser = sessionStorage.getItem('loginUser');
+    return loginUser ? JSON.parse(loginUser) : null;
+  });
+
+  useEffect(() => {
+    if (user) {
+      sessionStorage.setItem('loginUser', JSON.stringify(user));
+    } else {
+      sessionStorage.removeItem('loginUser');
+    }
+  }, [user]);
 
   const defaultContext = {
     data: user,
     setData: setUser
-  }
+  };
 
   const defaultQuestion = {
     data: question,
@@ -68,57 +79,46 @@ function App() {
     <BrowserRouter>
 
     <ScrollToTop />
-    <Requested.Provider value={defaultQuestion}>
-      <LoginUser.Provider value={defaultContext}>
-        <MenuBar/>
-        <main>
-          <Routes>
-            <Route path="/" element={<Main />} />
-            <Route path="/signIn" element={<SignIn />} />
-            <Route path="/myPage" element={<MyPage />} />
-            <Route path="/signIn" element={<SignIn />} />
-            <Route path="/editProfile" element={<EditProfile />} />
-            <Route path="/changePwd" element={<ChangePwd />} />
-            <Route path="/projectHistory" element={<ProjectHistory />} />
-          
-            <Route path='/detailpost' element={<DetailPost/>}/>
-            <Route path="/introduce" element={<CompIntroduce />} />
-            <Route path="/guide" element={<Guide />} />
-            <Route path="/notice" element={<Notice />} />
-            <Route path="/freeBoard" element={<FreeBoard />} />
-            <Route path="/projectBoard" element={<ProjectBoard />} />
-            <Route path="/questions" element={<Questions />} />
-            <Route path="/frequentlyQuestions" element={<FrequentlyQuestions />} />
-            <Route path="/enrollPost" element={<EnrollPost />} />
-
-            
-              <Route path='/detailpost' element={<DetailPost/>}/>
-              <Route path="/introduce" element={<CompIntroduce />} />
-              <Route path="/guide" element={<Guide />} />
-              <Route path="/notice" element={<Notice />} />
-              <Route path="/freeBoard" element={<FreeBoard />} />
-              <Route path="/projectBoard" element={<ProjectBoard />} />
-              <Route path="/questions" element={<Questions />} />
-              <Route path="/frequentlyQuestions" element={<FrequentlyQuestions />} />
-              <Route path="/enrollPost" element={<EnrollPost />} />
+      <Requested.Provider value={defaultQuestion}>
+        <LoginUser.Provider value={defaultContext}>
+          <MenuBar/>
+          <main>
+            <Routes>
+              <Route path="/" element={<Main />} />
+              <Route path="/signIn" element={<SignIn />} />
+              <Route path="/myPage" element={<MyPage />} />
+              <Route path="/signIn" element={<SignIn />} />
+              <Route path="/editProfile" element={<EditProfile />} />
+              <Route path="/changePwd" element={<ChangePwd />} />
+              <Route path="/projectHistory" element={<ProjectHistory />} />
               
-              <Route path="/admin/adminDashboard" element={<AdminDashboard />} />
-              <Route path="/admin/subscribe" element={<Subscribe />} />
-              <Route path="/admin/customer" element={<Customer />} />
-              <Route path="/admin/posts" element={<Posts />} />
-              <Route path="/admin/adminChat" element={<AdminChat />} />
-              <Route path="/admin/qna" element={<QnA />} />
+              <Route path='/detailpost/:boardType/:postNo' element={<DetailPost />} />
+                <Route path="/introduce" element={<CompIntroduce />} />
+                <Route path="/guide" element={<Guide />} />
+                <Route path="/notice" element={<Notice />} />
+                <Route path="/freeBoard" element={<FreeBoard />} />
+                <Route path="/projectBoard" element={<ProjectBoard />} />
+                <Route path="/questions" element={<Questions />} />
+                <Route path="/frequentlyQuestions" element={<FrequentlyQuestions />} />
+                <Route path="/enrollPost" element={<EnrollPost />} />
+                
+                <Route path="/admin/adminDashboard" element={<AdminDashboard />} />
+                <Route path="/admin/subscribe" element={<Subscribe />} />
+                <Route path="/admin/customer" element={<Customer />} />
+                <Route path="/admin/posts" element={<Posts />} />
+                <Route path="/admin/adminChat" element={<AdminChat />} />
+                <Route path="/admin/qna" element={<QnA />} />
 
-              <Route path="/paymentHistory" element={<PaymentHistory />} />
-              <Route path="/paymentMethod" element={<PaymentMethod />} />
+                <Route path="/paymentHistory" element={<PaymentHistory />} />
+                <Route path="/paymentMethod" element={<PaymentMethod />} />
 
-              <Route path="/techIntro" element={<TechIntro />} />
-              <Route path="/webSetUp" element={<WebSetUp />} />
-              <Route path="/webSetUp/form" element={<WebSetUpForm question={question}/>} />
-            </Routes>
-          </main>
-        <FooterPage />
-      </LoginUser.Provider>
+                <Route path="/techIntro" element={<TechIntro />} />
+                <Route path="/webSetUp" element={<WebSetUp />} />
+                <Route path="/webSetUp/form" element={<WebSetUpForm question={question}/>} />
+              </Routes>
+            </main>
+          <FooterPage />
+        </LoginUser.Provider>
       </Requested.Provider>
     </BrowserRouter>
   );

@@ -26,4 +26,12 @@ public class MemberService {
     public int selectId(Member member) {
     	return mMapper.selectId(member.getMemberId());
     }
+    
+    public Member memberProfile(String memberId) {
+        return mMapper.memberProfile(memberId);
+    }
+    
+    public int editProfile(Member member) {
+        return mMapper.editProfile(member);
+    }
 }
