@@ -1,17 +1,18 @@
-import { useContext, useState } from 'react';
+import {  useState } from 'react';
 import '../../css/user/SignIn.css';
 import 'font-awesome/css/font-awesome.min.css';
-import { LoginUser } from '../../App';
 import { useNavigate } from 'react-router-dom';
 import AddressModal from './AddressModal';
 
 const SignIn = () => {
     const navigate = useNavigate();
     
-    const [id, setId] = useState('');
-    const [password, setPassword] = useState('');
-    const userCtx = useContext(LoginUser);
+    const [id,setId] = useState('');
+    const[password, setPassword] = useState('');
     
+    const userLogin = (user) => {
+        sessionStorage.setItem('loginUser', user);
+    }
     const data = {
         memberId: id,
         memberPwd: password
@@ -29,31 +30,37 @@ const SignIn = () => {
             [e.target.name]: e.target.value,
         });
     };
-    
+
     const handleComplete = () => {
         setPopup(!popup);
     };
 
     const handlerLogin = async () => {
-        try {
-            const response = await fetch("http://localhost:7777/login", {
+        try{
+            const response = await fetch("http://localhost:7777/login",{
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
             });
+
             const result = await response.json();
 
-            if (result.message === "로그인 성공") { // 로그인 성공 시 처리
-                userCtx.setData({ user: result }); // 사용자 정보 저장
+            console.log(result);
+            if (result.memberId !== "") {  // 로그인 성공 시 처리
+                userLogin(result);
                 navigate('/'); // 로그인 성공 후 메인 페이지로 이동
+                window.location.reload();
             } else {
                 alert("로그인 실패: 아이디와 비밀번호를 확인하세요.");
             }
-        } catch (e) {
+
+
+        } catch(e) {
             console.log(e);
-            throw new Error("test3 :: 통신 실패@!");
+            throw new Error("test3 :: 통신 실패@!")
         }
-    };
+        
+    }
 
     function toggleForms() {
         document.getElementById('signup-form').classList.toggle('hidden');
@@ -75,14 +82,13 @@ const SignIn = () => {
 
     return (
         <div className="signIn-container">
-            <div className="signIn-main">
+            <div className='signIn-main'>
                 <div className="image-section">
                     <video muted autoPlay loop>
                         <source src='resources/login.mp4' type="video/mp4" />
                     </video>
                 </div>
 
-                {/* Sign Up Form */}
                 <div className="form-section hidden" id="signup-form">
                     <h1>Sign Up</h1>
                     <p>Joy Code Me의 Content 를 즐기고 싶다면 로그인하세요.</p>
@@ -117,30 +123,28 @@ const SignIn = () => {
                     <div className="toggle-link" onClick={toggleForms}>I am already a member</div>
                 </div>
 
-                {/* Sign In Form */}
                 <div className="form-section" id="login-form">
                     <h1>Sign In</h1>
                     <p>Welcome Back!</p>
-                    <form id="loginForm">
-                        <div className="form-group">
-                            <input type="text" id="userId" required placeholder=" " value={id} onChange={(e) => setId(e.target.value)} />
-                            <label htmlFor="userId">ID</label>
-                        </div>
-                        <div className="form-group">
-                            <input type="password" id="login-password" required placeholder=" " value={password} onChange={(e) => setPassword(e.target.value)} />
-                            <label htmlFor="login-password">Password</label>
-                            <i className="fa fa-eye-slash show-hide" onClick={(e) => togglePassword('login-password', e.currentTarget)}></i>
-                        </div>
-                        <button type="button" className="form-btn" onClick={handlerLogin}>Sign In</button>
-                    </form>
+                        <form id="loginForm">
+                            <div className="form-group">
+                                <input type="text" id="userId" required placeholder=" " vlaue={id} onChange={(e)=>setId(e.target.value)}/>
+                                <label htmlFor="userId">ID</label>
+                            </div>
+                            <div className="form-group">
+                                <input type="password" id="login-password" required placeholder=" " vlaue={password} onChange={(e)=>setPassword(e.target.value)}/>
+                                <label htmlFor="login-password">Password</label>
+                                <i className="fa fa-eye-slash show-hide" onClick={(e) => togglePassword('login-password', e.currentTarget)}></i>
+                            </div>
+                            <button type="button" className="form-btn" onClick={handlerLogin}>Sign In</button>
+                        </form>
                     <div className="toggle-link" onClick={toggleForms}>Create an account?</div>
                 </div>
             </div>
-
-            {/* Address Modal 렌더링 */}
-            {popup && <AddressModal company={enroll_company} setcompany={setEnroll_company} />}
+             {/* Address Modal 렌더링 */}
+             {popup && <AddressModal company={enroll_company} setcompany={setEnroll_company} />}
         </div>
-    );
-};
+    )
+}
 
 export default SignIn;
