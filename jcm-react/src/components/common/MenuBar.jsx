@@ -1,9 +1,14 @@
 // MenuBar.jsx
 import { Link } from 'react-router-dom';
 import '../../css/common/MenuBar.css';
+import { useContext } from 'react';
+import { LoginUser } from '../../App';
 
-const MenuBar = ({ isLoggedIn, userInfo, onLogout }) => {
-    console.log(userInfo); // userInfo에 status가 포함되어 있는지 확인
+const MenuBar = () => {
+
+    const userCtx = useContext(LoginUser);
+    const loginUser = userCtx.data;
+    alert(loginUser);
 
     return (
         <div className="navbar">
@@ -18,16 +23,16 @@ const MenuBar = ({ isLoggedIn, userInfo, onLogout }) => {
                 <li><Link to="paymentMethod">결제관리</Link></li>
                 <li><Link to="notice">고객지원</Link></li>
                 <li><Link to="guide">가이드</Link></li>
-                {isLoggedIn && userInfo && userInfo.status === 'A' && (
+                {loginUser=== 'A' && (
                     <li><Link to="admin/AdminDashboard">관리자</Link></li>
                 )}
             </ul>
             <div className="user-options">
-                {isLoggedIn ? (
+                {loginUser != null ? (
                     <>
                         <Link to="/myPage">MyPage</Link>
                         &nbsp;
-                        <span onClick={onLogout} style={{ cursor: 'pointer' }}>Logout</span>
+                        <span onClick={userCtx.setData("")} style={{ cursor: 'pointer' }}>Logout</span>
                     </>
                 ) : (
                     <Link to="signIn">SIGN IN</Link>
