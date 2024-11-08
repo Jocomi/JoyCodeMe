@@ -1,37 +1,19 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState } from 'react';
 import '../../css/post/DetailPost.css';
 import PostMenu from './PostMenu';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const DetailPost = () => {
-  const navigate = useNavigate();
-  const { boardType, postNo } = useParams(); // URL에서 boardType과 postNo 가져오기
-  const [post, setPost] = useState(null); // 게시글 데이터를 저장할 상태
+  const navigate = useNavigate(); // navigate 함수 생성
   const [isAttachmentOpen, setIsAttachmentOpen] = useState(false);
   const [commentText, setCommentText] = useState('');
   const [comments, setComments] = useState([]);
   const [replyText, setReplyText] = useState('');
   const [isWriteReplyVisible, setIsWriteReplyVisible] = useState(null);
-
-  // 게시글 데이터를 서버에서 가져오는 useEffect
-  useEffect(() => {
-    const fetchPost = async () => {
-      try {
-        let url = `http://localhost:7777/${boardType}/${postNo}`; // 게시판 타입에 따라 URL 결정
-        const response = await axios.get(url); // 특정 게시글 가져오기
-        setPost(response.data);
-      } catch (error) {
-        console.error("게시글 데이터를 가져오는 데 실패했습니다:", error);
-      }
-    };
-    fetchPost();
-  }, [boardType, postNo]);
-
+ 
   const goBack = () => {
-    navigate('/notice');
+    navigate('/notice'); // 이전 페이지로 이동
   };
-
   const toggleAttachment = () => {
     setIsAttachmentOpen(!isAttachmentOpen);
   };
@@ -59,48 +41,44 @@ const DetailPost = () => {
     setIsWriteReplyVisible(null);
   };
 
-  if (!post) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <div className="detail-post-main">
-      <PostMenu />
+      <PostMenu/>
       <div className="detail-post">
         <div className="detail-post-header">
           <h2>공지사항📢</h2>
           <div className="post-info">
-            <span className="post-date">작성일 : {post.postTime}</span>
-            <span className="view-count">조회수 : {post.countView}</span>
+            <span className="post-date">작성일 : 2024년 10월 24일</span>
+            <span className="view-count">조회수 :</span>
             <button className="file-button" onClick={toggleAttachment}>첨부파일</button>
             {isAttachmentOpen && (
               <div className="attachment">
-                <a href={`img/${post.imgFile}`} download>사진</a><br />
+                <a href="img/후보 3.jpg" download>사진</a><br />
                 <a href="#" download>첨부파일이 어디까지 늘어날 수 있을 지 실험</a>
               </div>
             )}
           </div>
-          <button className="go-back-button" onClick={goBack}>X</button> {/* 뒤로가기 버튼 추가 */}
+          <button className="go-back-button"  onClick={goBack}>X</button> {/* 뒤로가기 버튼 추가 */}
         </div>
 
         <div className="detail-post-content">
           <table>
             <tbody>
               <tr>
-                <td><h2>{post.postTitle}</h2></td>
+                <td><h2>10월 23일 공지사항 입니다.</h2></td>
               </tr>
               <tr>
-                <td><h3>{post.memberId}</h3></td>
+                <td><h3>양준혁</h3></td>
               </tr>
               <tr>
                 <td>
-                  <img src={`img/${post.imgFile}`} alt="프로필사진" className="profile-image" />
+                  <img src="img/후보 3.jpg" alt="프로필사진" className="profile-image" />
                 </td>
               </tr>
             </tbody>
           </table>
           <h4>내용</h4>
-          <div className="main-content">{post.postContent}</div>
+          <div className="main-content">ㅇㅇㅇㅇ</div>
           <div className="post-actions">
             <a href="#">수정</a>
             <a href="#">삭제</a>
@@ -120,7 +98,7 @@ const DetailPost = () => {
                     <div className="comment-metadata">
                       <span className="comment-time">2024.10.24</span>
                       <div className="comment-actions">
-                        <a onClick={() => toggleReply(comment.id)}>답글</a>
+                        <a  onClick={() => toggleReply(comment.id)}>답글</a>
                       </div>
                     </div>
                   </div>

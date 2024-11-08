@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import DaumPostcode from "react-daum-postcode";
 import '../../css/user/AddressModal.css';
 
@@ -25,9 +26,8 @@ const AddressModal = (props) => {
             address:fullAddress,
         })
     }
-
     return (
-        <div >
+        <div className="address-main">
             <DaumPostcode
                 className="addressmodal"
                 autoClose

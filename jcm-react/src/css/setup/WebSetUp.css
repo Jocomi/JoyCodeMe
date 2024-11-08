@@ -94,3 +94,7 @@
     text-decoration: underline;
   }
   
+  .websetup-container .viewPage {
+    height: auto;
+    border: 1px solid #000;
+  }

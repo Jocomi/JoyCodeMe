@@ -1,41 +1,20 @@
-import {  useContext, useState } from 'react';
+import {  useState } from 'react';
 import '../../css/user/SignIn.css';
 import 'font-awesome/css/font-awesome.min.css';
 import { useNavigate } from 'react-router-dom';
-import AddressModal from './AddressModal';
-import { LoginUser } from '../../App';
 
 const SignIn = () => {
     const navigate = useNavigate();
+    
     const [id,setId] = useState('');
     const[password, setPassword] = useState('');
-    const userCtx = useContext(LoginUser);
     
     const userLogin = (user) => {
-        userCtx.setData(user);
-        sessionStorage.setItem('loginUser', JSON.stringify(user)); // 로그인 정보 sessionStorage에 저장
-    };
-
+        sessionStorage.setItem('loginUser', user);
+    }
     const data = {
         memberId: id,
         memberPwd: password
-    };
-
-    // Address modal 관련 상태와 함수
-    const [enroll_company, setEnroll_company] = useState({
-        address: '',
-    });
-    const [popup, setPopup] = useState(false);
-    
-    const handleInput = (e) => {
-        setEnroll_company({
-            ...enroll_company,
-            [e.target.name]: e.target.value,
-        });
-    };
-
-    const handleComplete = () => {
-        setPopup(!popup);
     };
 
     const handlerLogin = async () => {
@@ -49,17 +28,21 @@ const SignIn = () => {
             const result = await response.json();
 
             console.log(result);
-            if (result.memberId) {  // 로그인 성공 시 처리
+            if (result.memberId !== "") {  // 로그인 성공 시 처리
                 userLogin(result);
                 navigate('/'); // 로그인 성공 후 메인 페이지로 이동
+                window.location.reload();
             } else {
                 alert("로그인 실패: 아이디와 비밀번호를 확인하세요.");
             }
-        } catch (e) {
+
+
+        } catch(e) {
             console.log(e);
-            alert("로그인 중 오류가 발생했습니다.");
+            throw new Error("test3 :: 통신 실패@!")
         }
-    };
+        
+    }
 
     function toggleForms() {
         document.getElementById('signup-form').classList.toggle('hidden');
@@ -113,10 +96,6 @@ const SignIn = () => {
                             <input type="text" id="email" required placeholder=" " />
                             <label htmlFor="email">Email</label>
                         </div>
-                        <div className="form-group">
-                            <input className="user_enroll_text" placeholder="주소" type="text" required name="address" onChange={handleInput} value={enroll_company.address} />
-                            <button type="button" className="address_btn" onClick={handleComplete}>우편번호 찾기</button>
-                        </div>
                         <button type="submit" className="form-btn">Sign Up</button>
                     </form>
                     <div className="toggle-link" onClick={toggleForms}>I am already a member</div>
@@ -140,14 +119,6 @@ const SignIn = () => {
                     <div className="toggle-link" onClick={toggleForms}>Create an account?</div>
                 </div>
             </div>
-             {/* Address Modal 렌더링 */}
-            {popup && (
-    <>
-        <div className="addressmodal-overlay" onClick={handleComplete}></div>
-        <AddressModal company={enroll_company} setcompany={setEnroll_company} />
-    </>
-)}
-
         </div>
     )
 }

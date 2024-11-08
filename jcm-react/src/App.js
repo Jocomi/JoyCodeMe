@@ -37,40 +37,38 @@ import WebSetUpForm from './components/setup/WebSetUpForm'
 import { createContext, useEffect, useState } from 'react';
 
 export const LoginUser = createContext();
+export const Requested = createContext();
 
-function ScrollToTop() {
-  const { pathname } = useLocation();
+  function ScrollToTop() {
+    const { pathname } = useLocation();
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, [pathname]);
 
-  return null;
-}
+    return null;
+  }
 
 function App() {
-  const [user, setUser] = useState(() => {
-    const loginUser = sessionStorage.getItem('loginUser');
-    return loginUser ? JSON.parse(loginUser) : null;
-  });
-
-  useEffect(() => {
-    if (user) {
-      sessionStorage.setItem('loginUser', JSON.stringify(user));
-    } else {
-      sessionStorage.removeItem('loginUser');
-    }
-  }, [user]);
+  const loginUser = sessionStorage.getItem('loginUser')
+  const[user, setUser] = useState(loginUser);
+  const[question, setQuestion] = useState("");
 
   const defaultContext = {
     data: user,
     setData: setUser
-  };
+  }
+
+  const defaultQuestion = {
+    data: question,
+    setData: setQuestion
+  }
 
   return (
     <BrowserRouter>
 
     <ScrollToTop />
+    <Requested.Provider value={defaultQuestion}>
       <LoginUser.Provider value={defaultContext}>
         <MenuBar/>
         <main>
@@ -82,8 +80,19 @@ function App() {
             <Route path="/editProfile" element={<EditProfile />} />
             <Route path="/changePwd" element={<ChangePwd />} />
             <Route path="/projectHistory" element={<ProjectHistory />} />
+          
+            <Route path='/detailpost' element={<DetailPost/>}/>
+            <Route path="/introduce" element={<CompIntroduce />} />
+            <Route path="/guide" element={<Guide />} />
+            <Route path="/notice" element={<Notice />} />
+            <Route path="/freeBoard" element={<FreeBoard />} />
+            <Route path="/projectBoard" element={<ProjectBoard />} />
+            <Route path="/questions" element={<Questions />} />
+            <Route path="/frequentlyQuestions" element={<FrequentlyQuestions />} />
+            <Route path="/enrollPost" element={<EnrollPost />} />
+
             
-            <Route path='/detailpost/:boardType/:postNo' element={<DetailPost />} />
+              <Route path='/detailpost' element={<DetailPost/>}/>
               <Route path="/introduce" element={<CompIntroduce />} />
               <Route path="/guide" element={<Guide />} />
               <Route path="/notice" element={<Notice />} />
@@ -105,11 +114,12 @@ function App() {
 
               <Route path="/techIntro" element={<TechIntro />} />
               <Route path="/webSetUp" element={<WebSetUp />} />
-              <Route path="/webSetUp/form" element={<WebSetUpForm />} />
+              <Route path="/webSetUp/form" element={<WebSetUpForm question={question}/>} />
             </Routes>
           </main>
         <FooterPage />
       </LoginUser.Provider>
+      </Requested.Provider>
     </BrowserRouter>
   );
 }
