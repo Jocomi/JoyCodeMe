@@ -31,9 +31,14 @@ public class MemberController {
     public String loginMember(@RequestBody Member member) {
     	
         Member loginMember = mService.loginMember(member);
-      
-        return new Gson().toJson(loginMember);
         
+        System.out.println(loginMember);
+        
+        if (loginMember != null) {
+            return new Gson().toJson("로그인 성공");
+        } else {
+            return new Gson().toJson("로그인 실패");
+        }
     }
 
     // 회원가입 기능 비활성화

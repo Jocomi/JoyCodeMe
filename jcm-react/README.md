@@ -18,3 +18,5 @@
 # [2024.11.04] npm --% install @channel.io/channel-web-sdk-loader 
 
 # [2024.11.05] npm add summernote jquery
+
+# [2024.11.08] react-daum-postcode
