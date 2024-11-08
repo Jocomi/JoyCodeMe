@@ -142,7 +142,13 @@ const SignIn = () => {
                 </div>
             </div>
              {/* Address Modal 렌더링 */}
-             {popup && <AddressModal company={enroll_company} setcompany={setEnroll_company} />}
+             {popup && (
+    <>
+        <div className="addressmodal-overlay" onClick={handleComplete}></div>
+        <AddressModal company={enroll_company} setcompany={setEnroll_company} />
+    </>
+)}
+
         </div>
     )
 }
