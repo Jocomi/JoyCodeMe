@@ -26,8 +26,9 @@ const AddressModal = (props) => {
             address:fullAddress,
         })
     }
+
     return (
-        <div className="address-main">
+        <div >
             <DaumPostcode
                 className="addressmodal"
                 autoClose

@@ -2,6 +2,7 @@ import {  useState } from 'react';
 import '../../css/user/SignIn.css';
 import 'font-awesome/css/font-awesome.min.css';
 import { useNavigate } from 'react-router-dom';
+import AddressModal from './AddressModal';
 
 const SignIn = () => {
     const navigate = useNavigate();
@@ -9,13 +10,16 @@ const SignIn = () => {
     const [id,setId] = useState('');
     const[password, setPassword] = useState('');
     
+    const userCtx = useContext(LoginUser);
+    
     const userLogin = (user) => {
-        sessionStorage.setItem('loginUser', user);
+        userCtx.setData(user)
     }
     const data = {
         memberId: id,
         memberPwd: password
     };
+
 
     const handlerLogin = async () => {
         try{
@@ -31,7 +35,6 @@ const SignIn = () => {
             if (result.memberId !== "") {  // 로그인 성공 시 처리
                 userLogin(result);
                 navigate('/'); // 로그인 성공 후 메인 페이지로 이동
-                window.location.reload();
             } else {
                 alert("로그인 실패: 아이디와 비밀번호를 확인하세요.");
             }
@@ -43,6 +46,26 @@ const SignIn = () => {
         }
         
     }
+
+        /* /////////////////address 모달 함수 추가////////////////////// */
+        const [enroll_company, setEnroll_company] = useState({
+            address:'',
+        });
+        
+        const [popup, setPopup] = useState(false);
+        
+        const handleInput = (e) => {
+            setEnroll_company({
+                ...enroll_company,
+                [e.target.name]:e.target.value,
+            })
+        }
+        
+        const handleComplete = (data) => {
+            setPopup(!popup);
+        }
+    
+        /* //////////////////////////////////////////////////////////////// */
 
     function toggleForms() {
         document.getElementById('signup-form').classList.toggle('hidden');
@@ -96,11 +119,15 @@ const SignIn = () => {
                             <input type="text" id="email" required placeholder=" " />
                             <label htmlFor="email">Email</label>
                         </div>
+                        <div className="form-group">
+                            <input className="user_enroll_text" placeholder="주소"  type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address}/>
+                            <button className="address_btn" onClick={handleComplete}>우편번호 찾기</button>
+                        </div>
                         <button type="submit" className="form-btn">Sign Up</button>
                     </form>
                     <div className="toggle-link" onClick={toggleForms}>I am already a member</div>
                 </div>
-
+            
                 <div className="form-section" id="login-form">
                     <h1>Sign In</h1>
                     <p>Welcome Back!</p>
@@ -119,6 +146,7 @@ const SignIn = () => {
                     <div className="toggle-link" onClick={toggleForms}>Create an account?</div>
                 </div>
             </div>
+            {popup && <AddressModal company={enroll_company} setcompany={setEnroll_company}></AddressModal>}
         </div>
     )
 }
