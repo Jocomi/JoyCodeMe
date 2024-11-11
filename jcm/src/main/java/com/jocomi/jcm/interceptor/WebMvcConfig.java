@@ -13,13 +13,13 @@ public class WebMvcConfig implements WebMvcConfigurer {
         this.loginInterceptor = loginInterceptor;
     }
     
- 
-    public void addCorsMapping(CorsRegistry registry) {
-    	registry.addMapping("/**")
-    		.allowedOrigins("*")
-    		.allowedMethods("GET","POST","PUT","DELETE")
-    		.allowedHeaders("*")
-    		.allowCredentials(false);
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+            .allowedOrigins("*")
+            .allowedMethods("GET", "POST", "PUT", "DELETE")
+            .allowedHeaders("*")
+            .allowCredentials(false);
     }
 
     @Override

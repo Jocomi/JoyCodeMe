@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -41,17 +41,54 @@ public class MemberController {
 		return new Gson().toJson(loginMember);
 	}
 
-    @ResponseBody
-    @PostMapping(value = "/signup", produces = "application/json;charset=UTF-8")
-    public String signupMember(@RequestBody Member member) {
-        log.info("Received signup data: {}", member);
-        if (mService.selectId(member) == 0) {
-            int result = mService.registerMember(member);
-            return result == 1 ? new Gson().toJson("회원가입에 성공했습니다.") : new Gson().toJson("회원가입에 실패 했습니다.");
-        } else {
-            return new Gson().toJson("중복된 아이디 입니다.");
-        }
-    }
+	@ResponseBody
+	@PostMapping(value = "/signup", produces = "application/json;charset=UTF-8")
+	public String signupMember(@RequestBody Member member) {
+	    log.info("Received signup data: {}", member);
+
+	    // ID 중복 체크
+	    if (mService.checkUserById(member.getMemberId()) > 0) {
+	        return new Gson().toJson("중복된 아이디 입니다.");
+	    }
+
+	    // 이메일 중복 체크
+	    if (mService.checkUserByEmail(member.getEmail()) > 0) {
+	        return new Gson().toJson("중복된 이메일 입니다.");
+	    }
+
+	    // 전화번호 중복 체크
+	    if (mService.checkUserByPhone(member.getPhone()) > 0) {	
+	        return new Gson().toJson("중복된 전화번호 입니다.");
+	    }
+
+	    // 중복이 없으면 회원가입 진행
+	    int result = mService.registerMember(member);
+	    return result == 1 ? new Gson().toJson("회원가입에 성공했습니다.") : new Gson().toJson("회원가입에 실패했습니다.");
+	}
+
+	// 필드별 중복 확인 메서드
+	@ResponseBody
+	@PostMapping(value = "/checkUser", produces = "application/json;charset=UTF-8")
+	public String checkUser(@RequestBody Map<String, String> checkData) {
+	    String field = checkData.get("field");
+	    String value = checkData.get("value");
+
+	    int count = 0;
+	    switch (field) {
+	        case "id":
+	            count = mService.checkUserById(value);
+	            break;
+	        case "email":
+	            count = mService.checkUserByEmail(value);
+	            break;
+	        case "phone":
+	            count = mService.checkUserByPhone(value);
+	            break;
+	        default:
+	            throw new IllegalArgumentException("Invalid field: " + field);
+	    }
+	    return new Gson().toJson(count > 0); // true: 중복, false: 중복 아님
+	}
 
 	@ResponseBody
 	@GetMapping(value = "/profile", produces = "application/json;charset=UTF-8")
@@ -63,37 +100,31 @@ public class MemberController {
 		return new Gson().toJson(member);
 	}
 
-	// 프로필 이미지 업로드
-	// MemberController.java 내의 uploadProfileImage 메서드 수정
 	@ResponseBody
 	@PostMapping(value = "/uploadProfileImage", produces = "application/json;charset=UTF-8")
 	public String uploadProfileImage(
 	        @RequestParam("file") MultipartFile file,
 	        @RequestParam("memberId") String memberId) {
 
-	    // 프론트엔드의 실제 파일 저장 경로
 	    String frontendUploadDir = "C:\\Users\\user1\\Desktop\\새 폴더\\public\\img\\";
 	    String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
 
 	    try {
-	        // 프론트엔드 경로가 있는지 확인하고 없으면 생성
 	        Path frontendPath = Paths.get(frontendUploadDir);
 	        if (!Files.exists(frontendPath)) {
 	            Files.createDirectories(frontendPath);
 	        }
 
-	        // 파일을 프론트엔드 경로에 저장
 	        Path frontendFilePath = frontendPath.resolve(fileName);
 	        file.transferTo(frontendFilePath.toFile());
 
-	        // DB에 파일명만 저장
-	        Member member = mService.memberProfile(memberId); // 기존 프로필 데이터를 가져와서 사용
+	        Member member = mService.memberProfile(memberId);
 	        if (member != null) {
-	            member.setPImg(fileName); // 파일명만 업데이트
+	            member.setPImg(fileName);
 	            int updateResult = mService.editProfile(member);
 
 	            if (updateResult > 0) {
-	                return new Gson().toJson(fileName); // 프론트에서 접근 가능한 파일명 반환
+	                return new Gson().toJson(fileName);
 	            } else {
 	                log.error("DB 업데이트 실패");
 	                return new Gson().toJson("db-fail");
@@ -110,17 +141,15 @@ public class MemberController {
 	    }
 	}
 
-
 	@ResponseBody
 	@PostMapping(value = "/editProfile", produces = "application/json;charset=UTF-8")
 	public String editProfile(@RequestBody Member member) {
-		int result = mService.editProfile(member); // DB 업데이트
+		int result = mService.editProfile(member);
 		if (result > 0) {
 			Member updatedMember = mService.memberProfile(member.getMemberId());
-			return new Gson().toJson(updatedMember); // 업데이트된 사용자 정보 반환
+			return new Gson().toJson(updatedMember);
 		} else {
 			return new Gson().toJson("프로필 변경에 실패했습니다.");
 		}
 	}
-
 }
