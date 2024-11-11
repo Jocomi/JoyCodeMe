@@ -10,27 +10,44 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class MemberService {
-    private final MemberMapper mMapper;
+	private final MemberMapper mMapper;
 
-    public Member loginMember(Member member) {
-    	
-        return mMapper.loginMember(member);
+	public Member loginMember(Member member) {
+		return mMapper.loginMember(member);
+	}
+
+	// 회원가입 기능 유지 (필요 시 사용 가능)
+	public int registerMember(Member member) {
+		return mMapper.insertMember(member);
+	}
+
+	// ID 중복 체크 메서드
+    public int checkUserById(String id) {
+        return mMapper.checkUserById(id);
     }
 
-    // 회원가입 기능 유지 (필요 시 사용 가능)
-    public int registerMember(Member member) {
-        return mMapper.insertMember(member);
+    // 이메일 중복 체크 메서드
+    public int checkUserByEmail(String email) {
+        return mMapper.checkUserByEmail(email);
     }
-    
-    public int selectId(Member member) {
-    	return mMapper.selectId(member.getMemberId());
+
+    // 전화번호 중복 체크 메서드
+    public int checkUserByPhone(String phone) {
+        return mMapper.checkUserByPhone(phone);
     }
-    
-    public Member memberProfile(String memberId) {
-        return mMapper.memberProfile(memberId);
-    }
-    
-    public int editProfile(Member member) {
-        return mMapper.editProfile(member);
-    }
+
+	// 회원 ID 조회 메서드
+	public int selectId(Member member) {
+		return mMapper.selectId(member.getMemberId());
+	}
+
+	// 회원 정보 조회 메서드
+	public Member memberProfile(String memberId) {
+		return mMapper.memberProfile(memberId);
+	}
+
+	// 회원 정보 수정 메서드
+	public int editProfile(Member member) {
+		return mMapper.editProfile(member);
+	}
 }
