@@ -42,7 +42,7 @@ const SignIn = () => {
 
     const handlerLogin = async () => {
         try {
-            const response = await fetch("http://localhost:7777/login", {
+            const response = await fetch(`http://${window.location.hostname}:7777/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
@@ -82,7 +82,8 @@ const SignIn = () => {
 
     const checkDuplicates = async (field, value) => {
         try {
-            const response = await fetch(`http://localhost:7777/check-duplicate`, {
+            // const response = await fetch(`http://localhost:7777/check-duplicate`, {
+            const response = await fetch(`http://${window.location.hostname}:7777/check-duplicate`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ field, value })
@@ -132,7 +133,7 @@ const SignIn = () => {
         };
 
         try {
-            const response = await fetch("http://localhost:7777/signup", {
+            const response = await fetch(`http://${window.location.hostname}/signup`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(signupData)

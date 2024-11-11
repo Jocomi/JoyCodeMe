@@ -23,7 +23,7 @@ import com.jocomi.jcm.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 @RestController
 public class MemberController {
 

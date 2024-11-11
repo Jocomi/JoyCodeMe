@@ -3,7 +3,7 @@ import '../../css/user/AddressModal.css';
 
 const AddressModal = (props) => {
 
-    const complete = (data) =>{
+    const complete = (data) => {
         let fullAddress = data.address;
         let extraAddress = '';
 
@@ -20,9 +20,9 @@ const AddressModal = (props) => {
         console.log(fullAddress)
         console.log(data.zonecode)
 
-        props.setcompany({
+        props.setCompany({
             ...props.company,
-            address:fullAddress,
+            address: fullAddress,
         })
     }
 
