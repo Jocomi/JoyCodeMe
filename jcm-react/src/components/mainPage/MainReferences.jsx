@@ -112,7 +112,7 @@ const MainReferences =() => {
                     </p>
                 </div>
                 </div>
-                
+                <video className="bg-video" src="/resources/reference.mp4" muted autoPlay playsInline loop playbackRate="0.5"></video>
             </div>
     )
 }

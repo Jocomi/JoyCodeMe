@@ -349,6 +349,15 @@
     margin: 10px;
   }
 
+  .main-reference .bg-video {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -1;
+    background-size: cover;
+  }
+
   /* 메인페이지 main-describe */
   .main-describe {
     height: 100vh;
