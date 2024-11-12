@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import '../../css/post/DetailPost.css';
+import '../../../css/post/DetailPost.css';
 import PostMenu from './PostMenu';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const DetailPost = () => {
   const navigate = useNavigate();
@@ -26,6 +27,7 @@ const DetailPost = () => {
       }
     }
   };
+
   useEffect(() => {
     const fetchPost = async () => {
       try {
@@ -36,8 +38,6 @@ const DetailPost = () => {
         console.error('게시글 데이터를 가져오는 데 실패했습니다:', error);
       }
     };
-
-    
 
     fetchPost();
     fetchComment();
@@ -63,29 +63,26 @@ const DetailPost = () => {
   };
 
   const addComment = async () => {
-    
     if (!loginUser) {
       alert('로그인 후 댓글을 작성할 수 있습니다.');
       return;
     }
     if (commentText.trim() === '') return;
-  
+
     const commentData = {
       memberId: loginUser.memberId,
       postNo,
       commentText,
     };
-    console.log("Comment Data:", commentData);
-  
+
     try {
       const response = await axios.post(`http://localhost:7777/comment/${boardType}/${postNo}/add`, commentData, {
         headers: { 'Content-Type': 'application/json' },
       });
-      
-      // 응답 데이터의 result 값에 따라 알림 메시지 표시
+
       if (response.data.result === 1) {
         alert('댓글이 성공적으로 작성되었습니다.');
-        setCommentText(''); // 댓글 작성 필드 초기화
+        setCommentText('');
         fetchComment();
       } else {
         alert('댓글 작성에 실패했습니다.');
@@ -94,8 +91,8 @@ const DetailPost = () => {
       console.error('댓글 작성에 실패했습니다:', error);
       alert('댓글 작성 중 오류가 발생했습니다.');
     }
-    
   };
+
   const toggleReply = (commentId) => {
     setIsWriteReplyVisible(isWriteReplyVisible === commentId ? null : commentId);
   };
@@ -112,6 +109,18 @@ const DetailPost = () => {
     setIsWriteReplyVisible(null);
   };
 
+  const navigateToEdit = () => {
+    navigate('/enrollPost', {
+      state: {
+        postNo,
+        boardType,
+        postTitle: post.postTitle,
+        postContent: post.postContent,
+        status: post.status
+      }
+    });
+  };
+
   if (!post) {
     return <div>Loading...</div>;
   }
@@ -126,10 +135,15 @@ const DetailPost = () => {
             <span className="post-date">작성일 : {post.postTime}</span>
             <span className="view-count">조회수 : {post.countView}</span>
             <button className="file-button" onClick={toggleAttachment}>첨부파일</button>
-            {isAttachmentOpen && (
+            {isAttachmentOpen && post.imgFiles && (
               <div className="attachment">
-                <a href={`img/${post.imgFile}`} download>사진</a><br />
-                <a href="#" download>첨부파일이 어디까지 늘어날 수 있을 지 실험</a>
+                {post.imgFiles.map((file, index) => (
+                  <div key={index}>
+                    <a href={`http://localhost:7777/boardImg/${file}`} download>
+                      첨부파일 {index + 1} 다운로드
+                    </a>
+                  </div>
+                ))}
               </div>
             )}
           </div>
@@ -147,22 +161,24 @@ const DetailPost = () => {
               </tr>
               <tr>
                 <td>
-                  <img src={`img/${post.imgFile}`} alt="프로필사진" className="profile-image" />
+                  <img src={`http://localhost:7777/boardImg/${loginUser.pImg}`} alt="프로필 이미지" className="profile-image" />
                 </td>
               </tr>
             </tbody>
           </table>
           <h4>내용</h4>
-          <div className="main-content">{post.postContent}</div>
+          <div className="main-content" dangerouslySetInnerHTML={{ __html: post.postContent }}></div>
           <div className="post-actions">
-            <a href="#">수정</a>
             {loginUser && post.memberId && loginUser.memberId === post.memberId && (
-              <a onClick={deactivatePost} style={{ cursor: 'pointer' }}>삭제</a>
+              <>
+                <a onClick={navigateToEdit} style={{ cursor: 'pointer' }}>수정</a>
+                <a onClick={deactivatePost} style={{ cursor: 'pointer' }}>삭제</a>
+              </>
             )}
           </div>
         </div>
 
-        {boardType !== 'announcement' && (
+        {boardType !== 'notice' && (
           <div className="comments-section">
             <h4>댓글</h4>
             <ul className="comments-list">
@@ -213,6 +229,7 @@ const DetailPost = () => {
                   )}
                 </li>
               ))}
+
             </ul>
 
             <div className="write-comment">

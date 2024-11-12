@@ -1,9 +1,9 @@
 import '../../css/post/Notice.css';
-import PostMenu from './PostMenu';
-import AnnouncementBoard from './AnnouncementBoardTable';
+import PostMenu from './boarditems/PostMenu';
+import AnnouncementBoardTable from './AnnouncementBoardTable';
 
 
-const Notice = () => {
+const Announcement = () => {
     return (
         <div className="notice-container">
             <div className="notice-banner">
@@ -18,7 +18,7 @@ const Notice = () => {
                 </ul>
             </div>
                 <PostMenu/>
-                <AnnouncementBoard className="notice-table"/>
+                <AnnouncementBoardTable className="notice-table"/>
               
             <div className="pagination-container">
   
@@ -27,4 +27,4 @@ const Notice = () => {
     );
 };
 
-export default Notice;
+export default Announcement;

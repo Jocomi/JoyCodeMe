@@ -152,4 +152,5 @@ public class MemberController {
 			return new Gson().toJson("프로필 변경에 실패했습니다.");
 		}
 	}
+	
 }

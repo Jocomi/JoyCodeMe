@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import '../../css/post/FrequentlyQuestions.css';
+import '../../../css/post/FrequentlyQuestions.css';
 
 const FrequentlyQuestions = () => {
     const questions = [

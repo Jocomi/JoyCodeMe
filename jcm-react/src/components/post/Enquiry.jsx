@@ -1,9 +1,10 @@
 import '../../css/post/Questions.css';
-import FrequentlyQuestions from './FrequentlyQuestions';
-import PostMenu from './PostMenu';
 import EnquiryBoard from './EnquiryBoard';
+import FrequentlyQuestions from './boarditems/FrequentlyQuestions';
+import PostMenu from './boarditems/PostMenu';
 
-const Questions = () => {
+
+const Enquiry = () => {
     return (
         <div className="questions-container">
             <div className="questions-banner">
@@ -22,4 +23,4 @@ const Questions = () => {
     );
 };
 
-export default Questions;
+export default Enquiry;
