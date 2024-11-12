@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jocomi.jcm.model.mapper.MemberMapper">
+
 	<!-- 로그인 쿼리 -->
 	<select id="loginMember" resultType="Member">
-		SELECT * FROM MEMBER
-		WHERE
-		MEMBER_ID = #{memberId} AND MEMBER_PWD = #{memberPwd}
+		SELECT 
+			MEMBER_ID AS memberId,
+			MEMBER_PWD AS memberPwd,
+			MEMBER_NAME AS memberName,
+			EMAIL AS email,
+			PHONE AS phone,
+			BIRTH AS birth,
+			ADDRESS AS address,
+			STATUS AS status,
+			P_IMG AS pImg
+		FROM MEMBER
+		WHERE MEMBER_ID = #{memberId} 
+		  AND MEMBER_PWD = #{memberPwd}
 	</select>
 
 	<!-- 회원가입 쿼리 -->
@@ -16,51 +27,59 @@
 		#{birth}, #{address})
 	</insert>
 
- <!-- ID 중복 체크 쿼리 -->
-    <select id="checkUserById" parameterType="String" resultType="int">
-        SELECT COUNT(*)
-        FROM MEMBER
-        WHERE MEMBER_ID = #{value}
-    </select>
+	<!-- ID 중복 체크 쿼리 -->
+	<select id="checkUserById" parameterType="String" resultType="int">
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE MEMBER_ID = #{value}
+	</select>
 
-    <!-- 이메일 중복 체크 쿼리 -->
-    <select id="checkUserByEmail" parameterType="String" resultType="int">
-        SELECT COUNT(*)
-        FROM MEMBER
-        WHERE EMAIL = #{value}
-    </select>
+	<!-- 이메일 중복 체크 쿼리 -->
+	<select id="checkUserByEmail" parameterType="String" resultType="int">
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE EMAIL = #{value}
+	</select>
 
-    <!-- 전화번호 중복 체크 쿼리 -->
-    <select id="checkUserByPhone" parameterType="String" resultType="int">
-        SELECT COUNT(*)
-        FROM MEMBER
-        WHERE PHONE = #{value}
-    </select>
-
+	<!-- 전화번호 중복 체크 쿼리 -->
+	<select id="checkUserByPhone" parameterType="String" resultType="int">
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE PHONE = #{value}
+	</select>
 
 	<!-- 회원 ID 확인 쿼리 -->
 	<select id="selectId" parameterType="String" resultType="int">
-		SELECT
-		COUNT(*) FROM MEMBER WHERE MEMBER_ID = #{memberId}
+		SELECT COUNT(*)
+		FROM MEMBER 
+		WHERE MEMBER_ID = #{memberId}
 	</select>
 
 	<!-- 회원 정보 조회 쿼리 -->
-	<select id="memberProfile" parameterType="String"
-		resultType="Member">
-		SELECT * FROM MEMBER WHERE MEMBER_ID = #{memberId}
+	<select id="memberProfile" parameterType="String" resultType="Member">
+		SELECT 
+			MEMBER_ID AS memberId,
+			MEMBER_PWD AS memberPwd,
+			MEMBER_NAME AS memberName,
+			EMAIL AS email,
+			PHONE AS phone,
+			BIRTH AS birth,
+			ADDRESS AS address,
+			STATUS AS status,
+			P_IMG AS pImg
+		FROM MEMBER 
+		WHERE MEMBER_ID = #{memberId}
 	</select>
 
 	<!-- 회원 정보 수정 쿼리 -->
 	<update id="editProfile" parameterType="Member">
 		UPDATE MEMBER
-		SET EMAIL =
-		#{email, jdbcType=VARCHAR},
-		ADDRESS = #{address, jdbcType=VARCHAR},
-		PHONE = #{phone, jdbcType=VARCHAR},
-		P_IMG = #{pImg, jdbcType=VARCHAR}
-		WHERE MEMBER_ID = #{memberId, jdbcType=VARCHAR}
+		SET 
+			EMAIL = #{email},
+			ADDRESS = #{address},
+			PHONE = #{phone},
+			P_IMG = #{pImg}
+		WHERE MEMBER_ID = #{memberId}
 	</update>
 
-
 </mapper>
-

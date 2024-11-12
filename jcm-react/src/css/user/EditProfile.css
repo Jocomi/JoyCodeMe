@@ -1,4 +1,4 @@
-.edit-profile-container{
+.edit-profile-container {
   background-color: white;
   height: 100vh;
   display: flex;
@@ -6,8 +6,8 @@
   align-items: center;
   margin-top: 50px;
 }
+
 .edit-profile-main {
-  
   width: 50%;
   background-color: #ffffff;
   border-radius: 15px;
@@ -22,31 +22,67 @@
   color: #000000;
 }
 
+/* 텍스트와 입력 필드 정렬 */
 .edit-form-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   margin-bottom: 20px;
-  text-align: left;
 }
 
 .edit-profile-main label {
   font-size: 1rem;
   color: #000000;
-  display: block;
-  margin-bottom: 8px;
+  min-width: 80px; /* 라벨 너비 고정 */
+  text-align: right; /* 라벨 텍스트 우측 정렬 */
 }
+
+/* 주소 입력 필드 */
+#address {
+  flex: 3;
+  padding: 10px !important; /* 버튼과 동일한 높이를 유지하기 위해 조정 */
+  border: 1px solid black;
+  border-radius: 5px;
+  font-size: 1rem;
+  height: 44px !important; /* 버튼 높이와 일치하도록 설정 */
+  box-sizing: border-box;
+}
+
+/* 주소 찾기 버튼 */
+.address-btn {
+  flex: 0 1 70px; /* 너비 고정 */
+  padding: 0 !important; /* padding 제거 */
+  background-color: #ffffff;
+  border: 1px solid #000000;
+  color: #000000;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem !important; /* 글자 크기 조정 */
+  height: 44px !important; /* input과 같은 높이로 맞춤 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  margin-left: 5px; /* 오른쪽으로 이동 */
+}
+
+.address-btn:hover {
+  background-color: #c5c5c5;
+  transform: scale(1.05);
+}
+
 
 .edit-profile-main input[type="text"],
 .edit-profile-main input[type="email"],
 .edit-profile-main input[type="file"] {
   width: 100%;
   padding: 12px;
-  border: none;
+  border: 1px solid black;
   border-radius: 5px;
   background-color: #ffffff;
   color: #000000;
   font-size: 1rem;
   box-sizing: border-box;
-  margin-bottom: 10px;
-  border: 1px black solid;
 }
 
 .edit-profile-main input[type="text"]:focus,
@@ -57,7 +93,7 @@ input[type="file"]:focus {
 }
 
 .edit-profile-main button {
-  background-color:  #ffffff;
+  background-color: #ffffff;
   border: 1px solid #000000;
   color: #000000;
   padding: 12px 25px;
@@ -74,19 +110,14 @@ input[type="file"]:focus {
 }
 
 /* 프로필 사진 스타일 */
-.edit-profile-main .profile-picture-main {
-  position: relative;
-  width: 150px;
-  height: 150px;
-  margin: 0 auto 30px;
-  cursor: pointer;
-}
-.profile-picture-container{
+.profile-picture-container {
   display: flex;
   justify-content: center;
   margin-bottom: 10px;
 }
+
 .edit-profile-main .profile-picture {
+  cursor: pointer;
   width: 150px;
   height: 150px;
   border-radius: 50%;
@@ -94,30 +125,6 @@ input[type="file"]:focus {
   background-position: center;
   background-size: cover;
   border: 2px solid #000000;
-}
-
-.edit-profile-main #profile-picture-input {
-  display: none;
-}
-
-.edit-profile-main .upload-label {
-  cursor: pointer;
-  background-color: #ffffff;
-  color: #000000;
-  padding: 12px 25px;
-  border-radius: 5px;
-  transition: background-color 0.3s;
-  border: 1px solid #000000;
-  display: inline-block;
-  text-align: center;
-}
-
-.edit-profile-main .upload-label:hover {
-  background-color: #c9c9c9;
-}
-
-/* 드래그 앤 드롭 시 스타일 변경 */
-.edit-profile-main .profile-picture.dragging {
-  border-color: #eeeeee;
-  background-color: #222;
+  padding: 50px;
+  margin-bottom: 20px;
 }

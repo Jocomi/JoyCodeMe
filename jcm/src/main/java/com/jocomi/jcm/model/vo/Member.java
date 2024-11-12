@@ -5,12 +5,12 @@ import lombok.Data;
 @Data
 public class Member {
     private String memberId;
-    private String memberPwd; 
+    private String memberPwd;
     private String memberName;
     private String email;
     private String phone;
     private String birth;
     private String address;
     private String status = "Y"; // 기본값 설정
-    private String pImg = "/img/TEST.JPG"; // 기본값 설정
+    private String pImg;  // 프로필 이미지 필드
 }

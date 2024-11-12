@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import '../../css/user/SignIn.css';
 import 'font-awesome/css/font-awesome.min.css';
 import { useNavigate } from 'react-router-dom';
@@ -50,11 +50,12 @@ const SignIn = () => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
             });
-
+    
             const result = await response.json();
-
+    
             if (result.memberId) {  // 로그인 성공 시 처리
-                userLogin(result);
+                userLogin(result);  // 이 함수가 LoginUser 컨텍스트를 업데이트해야 함
+                console.log("Updated login data:", result); // 로그인 결과 로그 확인
                 navigate('/'); // 로그인 성공 후 메인 페이지로 이동
             } else {
                 alert("로그인 실패: 아이디와 비밀번호를 확인하세요.");
@@ -64,6 +65,7 @@ const SignIn = () => {
             alert("로그인 중 오류가 발생했습니다.");
         }
     };
+    
     
     const handlePasswordChange = (e) => {
         setPassword(e.target.value);
@@ -113,12 +115,7 @@ const SignIn = () => {
         }
     };
     
-    useEffect(() => {
-        validateForm();
-    }, [id, email, phone, name, address, birth, password, confirmPassword, idError, emailError, phoneError]);
-
-    // 폼 유효성 검사 함수
-    const validateForm = () => {
+    const validateForm = useCallback(() => {
         setIsFormValid(
             !idError &&
             !emailError &&
@@ -133,7 +130,11 @@ const SignIn = () => {
             confirmPassword &&
             password === confirmPassword
         );
-    };
+    }, [id, email, phone, name, address, birth, password, confirmPassword, idError, emailError, phoneError]);
+    
+    useEffect(() => {
+        validateForm();
+    }, [id, email, phone, name, address, birth, password, confirmPassword, idError, emailError, phoneError, validateForm]);
 
     const handleIdChange = async (e) => {
         const value = e.target.value;

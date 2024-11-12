@@ -4,9 +4,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,129 +28,110 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 public class MemberController {
 
-	private final MemberService mService;
+    private static final String DEFAULT_PROFILE_IMAGE_PATH = "/img/TEST.JPG";
+    private final MemberService mService;
 
-	@Autowired
-	public MemberController(MemberService mService) {
-		this.mService = mService;
-	}
+    @Autowired
+    public MemberController(MemberService mService) {
+        this.mService = mService;
+    }
 
-	@ResponseBody
-	@PostMapping(value = "/login", produces = "application/json;charset=UTF-8")
-	public String loginMember(@RequestBody Member member) {
-		Member loginMember = mService.loginMember(member);
-		return new Gson().toJson(loginMember);
-	}
+    @ResponseBody
+    @PostMapping(value = "/login", produces = "application/json;charset=UTF-8")
+    public String loginMember(@RequestBody Member member) {
+        Member loginMember = mService.loginMember(member);
+        log.info("Login Result: {}", loginMember);
+        return new Gson().toJson(loginMember);
+    }
 
-	@ResponseBody
-	@PostMapping(value = "/signup", produces = "application/json;charset=UTF-8")
-	public String signupMember(@RequestBody Member member) {
-	    log.info("Received signup data: {}", member);
+    @ResponseBody
+    @PostMapping(value = "/signup", produces = "application/json;charset=UTF-8")
+    public String signupMember(@RequestBody Member member) {
+        log.info("Received signup data: {}", member);
 
-	    // ID 중복 체크
-	    if (mService.checkUserById(member.getMemberId()) > 0) {
-	        return new Gson().toJson("중복된 아이디 입니다.");
-	    }
+        if (mService.checkUserById(member.getMemberId()) > 0) {
+            return new Gson().toJson("중복된 아이디 입니다.");
+        }
 
-	    // 이메일 중복 체크
-	    if (mService.checkUserByEmail(member.getEmail()) > 0) {
-	        return new Gson().toJson("중복된 이메일 입니다.");
-	    }
+        if (mService.checkUserByEmail(member.getEmail()) > 0) {
+            return new Gson().toJson("중복된 이메일 입니다.");
+        }
 
-	    // 전화번호 중복 체크
-	    if (mService.checkUserByPhone(member.getPhone()) > 0) {	
-	        return new Gson().toJson("중복된 전화번호 입니다.");
-	    }
+        if (mService.checkUserByPhone(member.getPhone()) > 0) {
+            return new Gson().toJson("중복된 전화번호 입니다.");
+        }
 
-	    // 중복이 없으면 회원가입 진행
-	    int result = mService.registerMember(member);
-	    return result == 1 ? new Gson().toJson("회원가입에 성공했습니다.") : new Gson().toJson("회원가입에 실패했습니다.");
-	}
+        if (member.getPImg() == null || member.getPImg().isEmpty()) {
+            member.setPImg(DEFAULT_PROFILE_IMAGE_PATH);
+        }
 
-	// 필드별 중복 확인 메서드
-	@ResponseBody
-	@PostMapping(value = "/checkUser", produces = "application/json;charset=UTF-8")
-	public String checkUser(@RequestBody Map<String, String> checkData) {
-	    String field = checkData.get("field");
-	    String value = checkData.get("value");
+        int result = mService.registerMember(member);
+        return result == 1 ? new Gson().toJson("회원가입에 성공했습니다.") : new Gson().toJson("회원가입에 실패했습니다.");
+    }
 
-	    int count = 0;
-	    switch (field) {
-	        case "id":
-	            count = mService.checkUserById(value);
-	            break;
-	        case "email":
-	            count = mService.checkUserByEmail(value);
-	            break;
-	        case "phone":
-	            count = mService.checkUserByPhone(value);
-	            break;
-	        default:
-	            throw new IllegalArgumentException("Invalid field: " + field);
-	    }
-	    return new Gson().toJson(count > 0); // true: 중복, false: 중복 아님
-	}
+    @ResponseBody
+    @GetMapping(value = "/profile", produces = "application/json;charset=UTF-8")
+    public String profile(@RequestParam("memberId") String memberId) {
+        Member member = mService.memberProfile(memberId);
+        if (member != null && (member.getPImg() == null || member.getPImg().isEmpty())) {
+            member.setPImg(DEFAULT_PROFILE_IMAGE_PATH);
+        }
+        return new Gson().toJson(member);
+    }
 
-	@ResponseBody
-	@GetMapping(value = "/profile", produces = "application/json;charset=UTF-8")
-	public String profile(@RequestParam("memberId") String memberId) {
-		Member member = mService.memberProfile(memberId);
-		if (member.getPImg() == null || member.getPImg().isEmpty()) {
-			member.setPImg("/img/TEST.JPG");
-		}
-		return new Gson().toJson(member);
-	}
+    @ResponseBody
+    @PostMapping(value = "/uploadProfileImage", produces = "application/json;charset=UTF-8")
+    public String uploadProfileImage(
+            @RequestParam("file") MultipartFile file,
+            @RequestParam("memberId") String memberId) {
 
-	@ResponseBody
-	@PostMapping(value = "/uploadProfileImage", produces = "application/json;charset=UTF-8")
-	public String uploadProfileImage(
-	        @RequestParam("file") MultipartFile file,
-	        @RequestParam("memberId") String memberId) {
+        String frontendUploadDir = "C:\\Users\\user1\\Desktop\\새 폴더\\public\\img\\";  // 프론트엔드 서버의 실제 경로
+        String fileName = System.currentTimeMillis() + file.getOriginalFilename();
+        String newPImgPath = "/img/" + fileName;  // 프론트엔드에서 접근할 수 있는 경로
 
-	    String frontendUploadDir = "C:\\Users\\user1\\Desktop\\새 폴더\\public\\img\\";
-	    String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+        try {
+            Path frontendPath = Paths.get(frontendUploadDir);
+            if (!Files.exists(frontendPath)) {
+                Files.createDirectories(frontendPath);
+            }
 
-	    try {
-	        Path frontendPath = Paths.get(frontendUploadDir);
-	        if (!Files.exists(frontendPath)) {
-	            Files.createDirectories(frontendPath);
-	        }
+            Path frontendFilePath = frontendPath.resolve(fileName);
+            file.transferTo(frontendFilePath.toFile());
 
-	        Path frontendFilePath = frontendPath.resolve(fileName);
-	        file.transferTo(frontendFilePath.toFile());
+            Member member = mService.memberProfile(memberId);
+            if (member != null) {
+                member.setPImg(newPImgPath);
+                mService.editProfile(member);
+                return new Gson().toJson(newPImgPath);  // 프론트엔드가 접근할 수 있는 상대 경로 반환
+            } else {
+                return new Gson().toJson("member-not-found");
+            }
+        } catch (IOException e) {
+            log.error("IOException during file upload: ", e);
+            return new Gson().toJson("fail");
+        }
+    }
 
-	        Member member = mService.memberProfile(memberId);
-	        if (member != null) {
-	            member.setPImg(fileName);
-	            int updateResult = mService.editProfile(member);
 
-	            if (updateResult > 0) {
-	                return new Gson().toJson(fileName);
-	            } else {
-	                log.error("DB 업데이트 실패");
-	                return new Gson().toJson("db-fail");
-	            }
-	        } else {
-	            return new Gson().toJson("member-not-found");
-	        }
-	    } catch (IOException e) {
-	        log.error("IOException during file upload: ", e);
-	        return new Gson().toJson("fail");
-	    } catch (Exception e) {
-	        log.error("Unexpected error during file upload: ", e);
-	        return new Gson().toJson("fail");
-	    }
-	}
+    @PostMapping("/editProfile")
+    @ResponseBody
+    public ResponseEntity<?> editProfile(@RequestBody Member member) {
+        try {
+            Member currentMember = mService.memberProfile(member.getMemberId());
+            if (member.getPImg() == null || member.getPImg().isEmpty()) {
+                member.setPImg(currentMember.getPImg());
+            }
 
-	@ResponseBody
-	@PostMapping(value = "/editProfile", produces = "application/json;charset=UTF-8")
-	public String editProfile(@RequestBody Member member) {
-		int result = mService.editProfile(member);
-		if (result > 0) {
-			Member updatedMember = mService.memberProfile(member.getMemberId());
-			return new Gson().toJson(updatedMember);
-		} else {
-			return new Gson().toJson("프로필 변경에 실패했습니다.");
-		}
-	}
+            int result = mService.editProfile(member);
+            if (result > 0) {
+                Member updatedMember = mService.memberProfile(member.getMemberId());
+                return ResponseEntity.ok(updatedMember);
+            } else {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("프로필 업데이트 실패");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("서버 오류가 발생했습니다.");
+        }
+    }
 }
