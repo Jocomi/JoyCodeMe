@@ -2,7 +2,9 @@ package com.jocomi.jcm.board.model.mapper;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 
 
@@ -16,4 +18,11 @@ public interface EnquiryBoardMapper {
 	
 	@Select("SELECT * FROM ENQUIRY_BOARD WHERE POST_NO = #{postNo}")
 	EnquiryBoard selectEnquiryById(int postNo);
+
+	@Insert("INSERT INTO ENQUIRY_BOARD (POST_NO, MEMBER_ID, POST_TITLE, POST_CONTENT, IMG_FILE, POST_TIME, COUNT_VIEW, PRIVATE_ENQUIRY)"
+			+ " VALUES (ENQ_POST_NO.NEXTVAL, #{memberId}, #{postTitle}, #{postContent}, #{imgFile}, DEFAULT, DEFAULT, #{status})")
+	@Options(useGeneratedKeys = true)
+	int enrollEnquiryBoard(EnquiryBoard enquiryBoard);
+	
+	
 }

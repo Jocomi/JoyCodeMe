@@ -122,6 +122,7 @@ public class MemberController {
                 member.setPImg(currentMember.getPImg());
             }
 
+<<<<<<< HEAD
             int result = mService.editProfile(member);
             if (result > 0) {
                 Member updatedMember = mService.memberProfile(member.getMemberId());
@@ -134,4 +135,18 @@ public class MemberController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("서버 오류가 발생했습니다.");
         }
     }
+=======
+	@ResponseBody
+	@PostMapping(value = "/editProfile", produces = "application/json;charset=UTF-8")
+	public String editProfile(@RequestBody Member member) {
+		int result = mService.editProfile(member);
+		if (result > 0) {
+			Member updatedMember = mService.memberProfile(member.getMemberId());
+			return new Gson().toJson(updatedMember);
+		} else {
+			return new Gson().toJson("프로필 변경에 실패했습니다.");
+		}
+	}
+	
+>>>>>>> main
 }
