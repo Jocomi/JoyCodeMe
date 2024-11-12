@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.jocomi.jcm.board.model.mapper.FreeBoardMapper;
 import com.jocomi.jcm.board.model.vo.FreeBoard;
+import com.jocomi.jcm.board.model.vo.AnnouncementBoard;
 
 import lombok.RequiredArgsConstructor;
 
@@ -20,5 +21,9 @@ public class FreeService {
 		// TODO Auto-generated method stub
 		return fMapper.detailFree(postNo);
 	}
+	public boolean enrollfreeBoard(FreeBoard freeBoard) {
+		return fMapper.enrollfreeBoard(freeBoard) > 0;
+	}
+	
 
 }

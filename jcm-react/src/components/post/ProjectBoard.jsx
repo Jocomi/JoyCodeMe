@@ -1,5 +1,5 @@
 import '../../css/post/ProjectBoard.css';
-import PostMenu from './PostMenu';
+import PostMenu from './boarditems/PostMenu';
 import ProjectBoardTable from './ProjectBoardTable';
 
 
