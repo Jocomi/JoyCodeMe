@@ -1,0 +1,135 @@
+<html>
+<head>
+    <title>Company Homepage</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('http://localhost:3000/testImg/river.jpg');
+            background-size: cover;
+            color: #fff;
+        }
+        .header {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            text-align: center;
+        }
+        .logo {
+            margin: 20px;
+        }
+        .menu {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+        }
+        .menu li {
+            margin: 0 15px;
+            cursor: pointer;
+        }
+        .menu li:hover {
+            text-decoration: underline;
+        }
+        .content {
+            padding: 20px;
+            text-align: center;
+        }
+        .section {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+        }
+        .footer {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        .footer.class-footer {
+            color: gray;
+        }
+        img {
+            width: 100%;
+            height: 30%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">(insert logo here)</div>
+        <ul class="menu">
+            <li onclick="changePage('home')">Home</li>
+            <li onclick="changePage('services')">Services</li>
+            <li onclick="changePage('portfolio')">Portfolio</li>
+            <li onclick="changePage('about')">About Us</li>
+            <li onclick="changePage('contact')">Contact</li>
+        </ul>
+    </div>
+
+    <div id="main-content" class="content">
+        <div id="home" class="section">
+            <h2>Welcome to Our Company</h2>
+            <img src="http://localhost:3000/testImg/building.jpg" alt="Building">
+            <p>We are dedicated to providing the best services in the industry. Our team of professionals is committed to excellence and ensuring your satisfaction.</p>
+            <p>With years of experience, we understand the needs of our customers. Our mission is to exceed expectations by delivering quality and reliability.</p>
+            <p>We pride ourselves on our innovative approaches and tailor-made solutions. Your success is our priority, and we strive to be your trusted partner.</p>
+            <p>Explore our website to learn more about our services and projects. We welcome you to join our journey towards success.</p>
+            <p>Feel free to reach out with any questions or inquiries. We look forward to connecting with you!</p>
+        </div>
+        <div id="services" class="section" style="display:none;">
+            <h2>Our Services</h2>
+            <img src="http://localhost:3000/testImg/conference.jpg" alt="Services">
+            <p>Our team offers a range of services tailored to meet your needs. From consulting to implementation, we have you covered.</p>
+            <p>We specialize in various industries, providing expert solutions that drive results. Our goal is to help you achieve your business objectives.</p>
+            <p>Our innovative strategies ensure efficiency and effectiveness in all our projects. We leverage the latest technologies to deliver outstanding outcomes.</p>
+            <p>Customer satisfaction is at the forefront of our operations. We work closely with our clients to ensure their expectations are met and exceeded.</p>
+            <p>Explore our service offerings to see how we can assist you in achieving success. Let's work together for a brighter future.</p>
+        </div>
+        <div id="portfolio" class="section" style="display:none;">
+            <h2>Our Portfolio</h2>
+            <img src="http://localhost:3000/testImg/factory.jpg" alt="Portfolio">
+            <p>Check out our diverse portfolio of successful projects. Each project showcases our commitment to quality and excellence.</p>
+            <p>We have collaborated with clients from various sectors, delivering tailored solutions that meet their unique needs and challenges.</p>
+            <p>View our case studies to learn more about our approach and the results we achieve.</p>
+            <p>We believe that our work speaks for itself. We take pride in the positive impact we have made on our clients’ operations.</p>
+            <p>If you’re interested in working with us, please feel free to reach out. We’d love to discuss how we can help you.</p>
+        </div>
+        <div id="about" class="section" style="display:none;">
+            <h2>About Us</h2>
+            <img src="http://localhost:3000/testImg/team.jpg" alt="About Us">
+            <p>We are a passionate team dedicated to delivering exceptional results. Our diverse backgrounds and expertise drive our innovative solutions.</p>
+            <p>Established in [year], we have built a reputation for reliability and excellence. Our commitment to our clients fuels our growth and success.</p>
+            <p>We believe in continuous improvement, always seeking new ways to enhance our services and exceed our clients' expectations.</p>
+            <p>Our core values revolve around integrity, collaboration, and excellence. We are here to make a positive impact on your business.</p>
+            <p>Join us on our journey, and let’s create success together. We look forward to the opportunity to work with you.</p>
+        </div>
+        <div id="contact" class="section" style="display:none;">
+            <h2>Contact Us</h2>
+            <img src="http://localhost:3000/testImg/cafe.jpg" alt="Contact">
+            <p>We love hearing from our clients and partners. Feel free to reach out with any inquiries you may have.</p>
+            <p>You can contact us via email or phone, or simply fill out the form below.</p>
+            <p>Our team is always ready to assist you and provide the information you need.</p>
+            <p>Your feedback is valuable to us, and we welcome any suggestions you may have.</p>
+            <p>Let’s stay connected! Follow us on our social media platforms for the latest updates and news.</p>
+        </div>
+    </div>
+
+    <div class="footer class-footer">
+        <p>&copy; 2023 Our Company. All Rights Reserved.</p>
+    </div>
+
+    <script>
+        function changePage(page) {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => section.style.display = 'none');
+            document.getElementById(page).style.display = 'block';
+        }
+    </script>
+</body>
+</html>
