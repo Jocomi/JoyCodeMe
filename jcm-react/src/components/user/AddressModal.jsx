@@ -1,7 +1,7 @@
 import DaumPostcode from "react-daum-postcode";
 import '../../css/user/AddressModal.css';
 
-const AddressModal = (props) => {
+const AddressModal = ({ setAddress, setPopup }) => {
 
     const complete = (data) => {
         let fullAddress = data.address;
@@ -16,22 +16,19 @@ const AddressModal = (props) => {
             }
             fullAddress += (extraAddress !== '' ? ` (${extraAddress})` : '');
         }
-        console.log(data)
-        console.log(fullAddress)
-        console.log(data.zonecode)
-
-        props.setCompany({
-            ...props.company,
-            address: fullAddress,
-        })
+        
+        // 주소 설정 및 모달 닫기
+        setAddress(fullAddress);
+        setPopup(false);  // 모달 닫기
     }
 
     return (
-        <div >
+        <div>
             <DaumPostcode
                 className="addressmodal"
                 autoClose
-                onComplete={complete} />
+                onComplete={complete}
+            />
         </div>
     );
 };
