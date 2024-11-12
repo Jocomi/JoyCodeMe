@@ -38,7 +38,7 @@ const EditProfile = () => {
         formData.append('memberId', profileData.memberId);
     
         try {
-            const response = await fetch('http://localhost:7777/uploadProfileImage', {
+            const response = await fetch(`http://${window.location.hostname}/uploadProfileImage`, {
                 method: 'POST',
                 body: formData,
             });
@@ -98,7 +98,7 @@ const EditProfile = () => {
         }
     
         try {
-            const response = await fetch('http://localhost:7777/editProfile', {
+            const response = await fetch(`http://${window.location.hostname}/editProfile`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(profileData),

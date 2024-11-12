@@ -16,6 +16,28 @@
 		#{birth}, #{address})
 	</insert>
 
+ <!-- ID 중복 체크 쿼리 -->
+    <select id="checkUserById" parameterType="String" resultType="int">
+        SELECT COUNT(*)
+        FROM MEMBER
+        WHERE MEMBER_ID = #{value}
+    </select>
+
+    <!-- 이메일 중복 체크 쿼리 -->
+    <select id="checkUserByEmail" parameterType="String" resultType="int">
+        SELECT COUNT(*)
+        FROM MEMBER
+        WHERE EMAIL = #{value}
+    </select>
+
+    <!-- 전화번호 중복 체크 쿼리 -->
+    <select id="checkUserByPhone" parameterType="String" resultType="int">
+        SELECT COUNT(*)
+        FROM MEMBER
+        WHERE PHONE = #{value}
+    </select>
+
+
 	<!-- 회원 ID 확인 쿼리 -->
 	<select id="selectId" parameterType="String" resultType="int">
 		SELECT
@@ -31,7 +53,8 @@
 	<!-- 회원 정보 수정 쿼리 -->
 	<update id="editProfile" parameterType="Member">
 		UPDATE MEMBER
-		SET EMAIL = #{email, jdbcType=VARCHAR},
+		SET EMAIL =
+		#{email, jdbcType=VARCHAR},
 		ADDRESS = #{address, jdbcType=VARCHAR},
 		PHONE = #{phone, jdbcType=VARCHAR},
 		P_IMG = #{pImg, jdbcType=VARCHAR}
