@@ -4,10 +4,13 @@ import 'font-awesome/css/font-awesome.min.css';
 import { useNavigate } from 'react-router-dom';
 import AddressModal from './AddressModal';
 import { LoginUser } from '../../App';
+import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
+import { jwtDecode } from 'jwt-decode';
 
 const SignIn = () => {
     const navigate = useNavigate();
     const [id, setId] = useState('');
+    const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [name, setName] = useState('');
@@ -28,13 +31,13 @@ const SignIn = () => {
         sessionStorage.setItem('loginUser', JSON.stringify(user)); // 로그인 정보 sessionStorage에 저장
     };
 
+    const handleComplete = () => {
+        setPopup(!popup);
+    };
+
     const data = {
         memberId: id,
         memberPwd: password
-    };
-
-    const handleComplete = () => {
-        setPopup(!popup);
     };
 
     const handlerLogin = async () => {
@@ -57,6 +60,15 @@ const SignIn = () => {
             console.log(e);
             alert("로그인 중 오류가 발생했습니다.");
         }
+    };
+
+    const GoogleLoginSuccess = (credentialResponse) => {
+        const decoded = jwtDecode(credentialResponse.credential);
+        setEmail(decoded.email || ''); 
+        setName(decoded.name || '');
+        setPhone(decoded.phone || '');
+        userLogin(decoded);
+        navigate('/');
     };
     
     const handlePasswordChange = (e) => {
@@ -227,6 +239,7 @@ const SignIn = () => {
 
 
     return (
+        <GoogleOAuthProvider clientId={clientId}>
         <div className="signIn-container">
             <div className='signIn-main'>
                 <div className="image-section">
@@ -296,6 +309,12 @@ const SignIn = () => {
                         </div>
                         <button type="button" className="form-btn" onClick={handlerLogin}>Sign In</button>
                     </form>
+                    <GoogleLogin
+                        onSuccess={GoogleLoginSuccess}
+                        onError={() => console.log("Google 로그인 실패")}
+                        scope="https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/user.phonenumbers.read"
+                    />
+                 
                     <div className="toggle-link" onClick={toggleForms}>Create an account?</div>
                 </div>
             </div>
@@ -311,7 +330,9 @@ const SignIn = () => {
                 </>
             )}
         </div>
+        </GoogleOAuthProvider>
     );
+
 }
 
 export default SignIn;

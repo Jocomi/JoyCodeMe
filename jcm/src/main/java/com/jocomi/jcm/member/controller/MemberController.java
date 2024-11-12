@@ -22,6 +22,11 @@ import com.jocomi.jcm.service.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
 
+
+import java.util.Base64;
+import java.util.Map;
+import org.json.JSONObject;
+
 @Slf4j
 @CrossOrigin(origins = "*")
 @RestController
@@ -153,4 +158,37 @@ public class MemberController {
 		}
 	}
 	
+	@PostMapping(value = "/api/auth/google", produces = "application/json;charset=UTF-8")
+	public String googleLogin(@RequestBody Map<String, String> payload) {
+	    try {
+	        String token = payload.get("token");
+	        String[] splitToken = token.split("\\.");
+	        String payloadJson = new String(Base64.getUrlDecoder().decode(splitToken[1]));
+	        JSONObject claims = new JSONObject(payloadJson);
+
+	        Member member = new Member();
+	        member.setMemberId(claims.getString("sub"));
+	        member.setEmail(claims.getString("email"));
+	        member.setMemberName(claims.optString("name", "Unknown"));
+	        member.setPImg(claims.optString("picture", "/img/default-profile.png"));
+	        member.setMemberPwd("default_password"); // 기본 비밀번호 설정
+
+	        // 전화번호 확인 및 기본값 설정
+	        String phoneNumber = claims.optString("phone_number", null);
+	        if (phoneNumber == null) {
+	            phoneNumber = "000-0000-0000"; // 기본 전화번호 설정
+	        }
+	        member.setPhone(phoneNumber);
+
+	        if (mService.checkUserById(member.getMemberId()) == 0) {
+	            mService.registerMember(member); // 신규 사용자 등록
+	        }
+
+	        return new Gson().toJson(member);
+	    } catch (Exception e) {
+	        log.error("Google login error:", e);
+	        return new Gson().toJson("Google 로그인에 실패했습니다.");
+	    }
+	}
+
 }
