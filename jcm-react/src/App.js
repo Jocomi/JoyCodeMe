@@ -12,9 +12,9 @@ import ChangePwd from './components/user/ChangePwd';
 import CompIntroduce from './components/CompIntroduce';
 import FreeBoard from './components/post/FreeBoard';
 import ProjectBoard from './components/post/ProjectBoard';
-import Announcement from './components/post/Announcement';
-import Enquiry from './components/post/Enquiry';
-import FrequentlyQuestions from './components/post/boarditems/FrequentlyQuestions';
+import Questions from './components/post/Questions';
+import Notice from './components/post/Notice';
+import FrequentlyQuestions from './components/post/FrequentlyQuestions';
 import AdminDashboard from './components/admin/AdminDashboard';
 import Subscribe from './components/admin/Subscribe';
 import Customer from './components/admin/Customer';
@@ -26,16 +26,15 @@ import Guide from './components/guide/Guide';
 import ProjectHistory from './components/user/ProjectHistory';
 import PaymentHistory from './components/payment/PaymentHistory';
 import PaymentMethod from './components/payment/PaymentMethod';
-import EnrollPost from './components/post/boarditems/EnrollPost';
+import EnrollPost from './components/post/EnrollPost';
 
-import DetailPost from './components/post/boarditems/DetailPost';
+import DetailPost from './components/post/DetailPost';
 
 import TechIntro from './components/techIntro/TechIntro';
 
 import WebSetUp from './components/setup/WebSetUp';
 import WebSetUpForm from './components/setup/WebSetUpForm'
 import { createContext, useEffect, useState } from 'react';
-
 
 export const LoginUser = createContext();
 export const Requested = createContext();
@@ -96,10 +95,10 @@ const [question, setQuestion] = useState("");
               <Route path='/detailpost/:boardType/:postNo' element={<DetailPost />} />
                 <Route path="/introduce" element={<CompIntroduce />} />
                 <Route path="/guide" element={<Guide />} />
-                <Route path="/announcementBoard" element={<Announcement />} />
+                <Route path="/notice" element={<Notice />} />
                 <Route path="/freeBoard" element={<FreeBoard />} />
                 <Route path="/projectBoard" element={<ProjectBoard />} />
-                <Route path="/enquiryBoard" element={<Enquiry />} />
+                <Route path="/questions" element={<Questions />} />
                 <Route path="/frequentlyQuestions" element={<FrequentlyQuestions />} />
                 <Route path="/enrollPost" element={<EnrollPost />} />
                 

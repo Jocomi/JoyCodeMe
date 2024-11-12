@@ -32,7 +32,7 @@ public class CommentService {
 			return cMapper.insertPComment(postNo, comment);
 		}else if(boardType.equals("free")) {
 			return cMapper.insertFComment(postNo, comment);
-		}else if(boardType.equals("questions")){
+		}else if(boardType.equals("enquiry")){
 			return cMapper.insertEComment(postNo, comment);
 		}else {
 			return 0;

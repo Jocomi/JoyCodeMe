@@ -25,7 +25,7 @@ const MenuBar = () => {
                 <li><Link to="techIntro">기술소개</Link></li>
                 <li><Link to="webSetUp">웹 제작</Link></li>
                 <li><Link to="paymentMethod">결제관리</Link></li>
-                <li><Link to="announcementBoard">고객지원</Link></li>
+                <li><Link to="notice">고객지원</Link></li>
                 <li><Link to="guide">가이드</Link></li>
                 {loginUser=== 'A' && (
                     <li><Link to="admin/AdminDashboard">관리자</Link></li>

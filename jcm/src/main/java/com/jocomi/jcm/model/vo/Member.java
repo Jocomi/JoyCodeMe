@@ -12,5 +12,5 @@ public class Member {
     private String birth;
     private String address;
     private String status = "Y"; // 기본값 설정
-    private String pImg = "/img/TEST.JPG"; // 기본값 설정
+    private String pImg; // 기본값 설정
 }
