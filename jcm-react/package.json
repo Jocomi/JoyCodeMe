@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@channel.io/channel-web-sdk-loader": "^2.0.0",
+    "@react-oauth/google": "^0.12.1",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -15,6 +16,7 @@
     "font-awesome": "^4.7.0",
     "framer-motion": "^11.11.10",
     "jquery": "^3.7.1",
+    "jwt-decode": "^4.0.0",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.5",
     "react-daum-postcode": "^3.1.3",
