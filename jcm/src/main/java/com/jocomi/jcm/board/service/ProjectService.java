@@ -22,5 +22,8 @@ public class ProjectService {
 		// TODO Auto-generated method stub
 		return pMapper.getProjectBoard(postNo);
 	}
+	public boolean enrollProjectBoard(ProjectBoard projectBoard) {
+		return pMapper.enrollProjectBoard(projectBoard) > 0;
+	}
 
 }
