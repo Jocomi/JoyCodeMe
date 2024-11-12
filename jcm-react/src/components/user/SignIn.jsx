@@ -23,12 +23,6 @@ const SignIn = () => {
     const [popup, setPopup] = useState(false);
     const [isFormValid, setIsFormValid] = useState(false); // 폼 유효성 검사 상태
 
-
-    // 주소 모달 열기/닫기
-    const handleComplete = () => {
-        setPopup(!popup);
-    };
-
     const userLogin = (user) => {
         userCtx.setData(user);
         sessionStorage.setItem('loginUser', JSON.stringify(user)); // 로그인 정보 sessionStorage에 저장
@@ -39,8 +33,8 @@ const SignIn = () => {
         memberPwd: password
     };
 
-    const handleInput = (e) => {
-        setAddress(e.target.value);
+    const handleComplete = () => {
+        setPopup(!popup);
     };
 
     const handlerLogin = async () => {
@@ -280,8 +274,8 @@ const SignIn = () => {
                             <label htmlFor="birth">Birth</label>
                         </div>
                         <div className="form-group">
-                            <input className="user_enroll_text" placeholder="주소" type="text" required name="address" onChange={handleInput} value={address} />
-                            <button type="button" className="address_btn" onClick={handleComplete}>우편번호 찾기</button>
+                        <input className="user_enroll_text" placeholder="주소" type="text" required name="address" onClick={handleComplete} value={address} />
+                        <button type="button" className="address_btn" onClick={handleComplete}>우편번호 찾기</button>
                         </div>
                         <button type="submit" className="form-btn" disabled={!isFormValid}>Sign Up</button>
                     </form>
@@ -310,7 +304,11 @@ const SignIn = () => {
             {popup && (
                 <>
                     <div className="addressmodal-overlay" onClick={handleComplete}></div>
-                    <AddressModal company={address} setCompany={setAddress} />
+                    <AddressModal
+                        address={address}
+                        setAddress={setAddress}
+                        setPopup={setPopup}
+                    />
                 </>
             )}
         </div>
