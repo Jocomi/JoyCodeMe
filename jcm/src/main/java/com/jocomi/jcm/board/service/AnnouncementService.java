@@ -13,31 +13,18 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class AnnouncementService {
-	 private final AnnouncementBoardMapper nMapper;
+	 private final AnnouncementBoardMapper aMapper;
 	 
 	public ArrayList<AnnouncementBoard> selsectAB() {
-		return nMapper.selectAB();
+		return aMapper.selectAB();
 	}
 	
     public AnnouncementBoard getAnnouncementById(int postNo) {
-        return nMapper.selectAnnouncementById(postNo);
+        return aMapper.selectAnnouncementById(postNo);
     }
 
     public boolean deactivatePost(String boardType, int postNo) {
-        int result = nMapper.deactivatePost(boardType, postNo);
+        int result = aMapper.deactivatePost(boardType, postNo);
         return result > 0; // STATUS 값 업데이트 성공 여부 반환
-    }
-
-	public boolean enrollAnnouncement(AnnouncementBoard announcement) {
-		return nMapper.enrollAnnouncement(announcement) > 0;
-	}
-
-	 // 게시글 수정 서비스
-    public boolean editAnnouncement(int postNo, AnnouncementBoard announcement) {
-        // 게시글의 postNo를 기준으로 수정 요청
-        int result = nMapper.updateAnnouncement(postNo, announcement);
-
-        // 업데이트 성공 시 1, 실패 시 0 반환
-        return result > 0;
     }
 }

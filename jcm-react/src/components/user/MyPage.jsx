@@ -8,14 +8,22 @@ const MyPage = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [profileImage, setProfileImage] = useState('');
+    // const defaultImg = `http://${window.location.hostname}:7777${loginUser.pImg}`;
 
+    useEffect(()=>{
+        console.log(profileImage);
+        
+    }, [profileImage])
     useEffect(() => {
+        console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+        
         if (loginUser) {
-            setName(loginUser.memberName);
-            setEmail(loginUser.email);
-
-            // DB에서 가져온 파일명을 사용하여 경로 설정
-            setProfileImage(loginUser.pImg);
+            console.log(loginUser);
+            
+            // P_IMG 경로를 백엔드 주소로 수정
+            setProfileImage(loginUser.pImg ? `http://${window.location.hostname}:7777${loginUser.pImg}` : `/img/TEST.JPG`);
+            setName(loginUser.memberName || '');
+            setEmail(loginUser.email || '');
         }
     }, [loginUser]);
 

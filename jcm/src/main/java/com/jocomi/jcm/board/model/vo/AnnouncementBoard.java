@@ -1,7 +1,5 @@
 package com.jocomi.jcm.board.model.vo;
 
-
-
 import lombok.Data;
 
 

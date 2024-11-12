@@ -204,13 +204,14 @@
   }
 
   .main-introduce .bg-video {
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
-    z-index: -1;
-    background-size: cover;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -1;
+  background-size: cover;
   }
+
 
   /* 메인페이지 main-simulation */
   .main-simulation {
@@ -241,18 +242,14 @@
     border: 2px solid #fff; /* 흰색 테두리 */
     width: 1000px;
     height: 600px;
-    padding: 0px;
+    text-align: center;
+    font-size: 1.5rem; /* 글자 크기 조정 */
+    letter-spacing: 0.2em;
+    line-height: 2em;
   }
 
-  .main-simulation .main-video {
-    margin: 0px;
-    padding:0px;
-    position: absolute;
-    width: 996px;
-    height: 596px;
-    object-fit: cover;
-    z-index: -1;
-    background-size: cover;
+  .main-simulation .box b {
+    font-size: 1.7rem; /* 'JCM' 텍스트 강조 */
   }
 
   /* 메인페이지 main-reference */
@@ -349,15 +346,6 @@
     margin: 10px;
   }
 
-  .main-reference .bg-video {
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
-    z-index: -1;
-    background-size: cover;
-  }
-
   /* 메인페이지 main-describe */
   .main-describe {
     height: 100vh;
@@ -385,21 +373,14 @@
     border: 2px solid #fff;
     width: 1000px;
     height: 600px;
+    text-align: center;
+    font-size: 1.5rem;
+    letter-spacing: 0.2em;
+    line-height: 2em;
   }
 
   .main-describe .box b {
     font-size: 1.7rem;
-  }
-
-  .main-describe .main-video {
-    margin: 0px;
-    padding:0px;
-    position: absolute;
-    width: 996px;
-    height: 596px;
-    object-fit: cover;
-    z-index: -1;
-    background-size: cover;
   }
 
    /* 메인페이지 main-method */

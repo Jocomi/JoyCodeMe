@@ -5,9 +5,7 @@ import AddressModal from './AddressModal';
 import '../../css/user/EditProfile.css';
 
 const EditProfile = () => {
-    const profilePictureContainerRef = useRef(null);
     const profilePictureInputRef = useRef(null);
-    const profilePictureRef = useRef(null);
     const navigate = useNavigate();
     const { data: loginUser, setData: setLoginUser } = useContext(LoginUser);
 
@@ -16,69 +14,70 @@ const EditProfile = () => {
         email: loginUser?.email || '',
         address: loginUser?.address || '',
         phone: loginUser?.phone || '',
-        pImg: loginUser?.pImg || '/img/TEST.JPG',
+        pImg: loginUser?.pImg || '/img/TEST.JPG',  // 기본 이미지 경로
     });
 
-    const [popup, setPopup] = useState(false); // 주소 모달 상태
-    const [imageFile, setImageFile] = useState(null); // 이미지 파일 상태
+    const [popup, setPopup] = useState(false);
+    const [imageFile, setImageFile] = useState(null);
+    const [previewImageUrl, setPreviewImageUrl] = useState('');  // 미리보기 이미지 초기화
 
+    // 로그인 시 기존 이미지 설정
     useEffect(() => {
-        // 기존 이미지를 프로필 데이터에 설정
         if (loginUser) {
             setProfileData((prevData) => ({
                 ...prevData,
-                pImg: loginUser.pImg || '/img/TEST.JPG',
+                pImg: loginUser.pImg || '/img/TEST.JPG',  // 로그인된 사용자 이미지 경로 설정
             }));
+            setPreviewImageUrl(loginUser.pImg ? `http://${window.location.hostname}:7777${loginUser.pImg}` : '/img/TEST.JPG');  // 백엔드 서버에서 제공하는 이미지 경로 설정
         }
     }, [loginUser]);
 
+    // 이미지 업로드
     const uploadImage = async (file) => {
         const formData = new FormData();
-        formData.append('file', file);
-        formData.append('memberId', profileData.memberId);
+        formData.append("file", file);
+        formData.append("memberId", profileData.memberId);
     
         try {
-            const response = await fetch(`http://${window.location.hostname}/uploadProfileImage`, {
-                method: 'POST',
+            const response = await fetch(`http://${window.location.hostname}:7777/uploadProfileImage`, {
+                method: "POST",
                 body: formData,
             });
     
             if (response.ok) {
-                const fileName = await response.json();
+                const fileName = await response.text(); 
                 setProfileData((prevData) => ({
                     ...prevData,
-                    pImg: `/img/${fileName}`, // 반환된 파일명을 경로와 결합
+                    pImg: `/img/${fileName}`,  // 업로드된 이미지 경로로 설정
                 }));
                 setLoginUser((prevData) => ({
                     ...prevData,
-                    pImg: `/img/${fileName}`, // LoginUser 상태도 업데이트
+                    pImg: `/img/${fileName}`,  // 로그인 사용자 데이터 업데이트
                 }));
             } else {
-                alert('이미지 업로드 실패');
+                alert("이미지 업로드 실패");
             }
         } catch (error) {
-            console.error('Error uploading image:', error);
-            alert('이미지 업로드 중 오류 발생');
+            console.error("Error uploading image:", error);
+            alert("이미지 업로드 중 오류 발생");
         }
     };
-    
 
+    // 이미지 미리보기
     const previewImage = (event) => {
         const file = event.target.files[0];
         if (file) {
-            setImageFile(file); // 이미지 파일 설정
+            setImageFile(file);
             const reader = new FileReader();
             reader.onload = () => {
-                if (profilePictureRef.current) {
-                    profilePictureRef.current.style.backgroundImage = `url(${reader.result})`;
-                }
+                setPreviewImageUrl(reader.result);  // 새 이미지를 미리보기로 업데이트
             };
             reader.readAsDataURL(file);
         }
     };
 
     const handleComplete = () => {
-        setPopup(!popup); // 모달 열고 닫기
+        setPopup(!popup);
     };
 
     const handleInputChange = (e) => {
@@ -92,13 +91,12 @@ const EditProfile = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
     
-        // 이미지 업로드가 완료된 후 데이터베이스 업데이트
         if (imageFile) {
-            await uploadImage(imageFile); // 이미지 업로드 후 경로 설정
+            await uploadImage(imageFile);
         }
     
         try {
-            const response = await fetch(`http://${window.location.hostname}/editProfile`, {
+            const response = await fetch(`http://${window.location.hostname}:7777/editProfile`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(profileData),
@@ -106,7 +104,7 @@ const EditProfile = () => {
     
             if (response.ok) {
                 const updatedUser = await response.json();
-                setLoginUser(updatedUser); // 상태 업데이트
+                setLoginUser(updatedUser);
                 alert('프로필이 성공적으로 변경되었습니다.');
                 navigate('/myPage');
             } else {
@@ -124,19 +122,14 @@ const EditProfile = () => {
                 <h1>Edit Profile</h1>
 
                 <form onSubmit={handleSubmit}>
-                    {/* 프로필 사진 */}
                     <div
                         className="profile-picture-container"
-                        id="profile-picture-container"
                         onClick={() => profilePictureInputRef.current.click()}
-                        ref={profilePictureContainerRef}
                     >
                         <div
-                            id="edit-profile-picture"
                             className="profile-picture"
-                            ref={profilePictureRef}
                             style={{
-                                backgroundImage: `url(${profileData.pImg})`,
+                                backgroundImage: `url(${previewImageUrl})`,  // 기존 이미지 또는 새 이미지를 미리보기
                             }}
                         ></div>
                     </div>
@@ -147,12 +140,11 @@ const EditProfile = () => {
                         type="file"
                         id="profile-picture-input"
                         accept="image/*"
-                        onChange={previewImage}
+                        onChange={previewImage}  // 이미지 선택 시 미리보기 업데이트
                         ref={profilePictureInputRef}
                         style={{ display: 'none' }}
                     />
 
-                    {/* 이메일 */}
                     <div className="edit-form-group">
                         <label htmlFor="email">이메일</label>
                         <input
@@ -165,7 +157,6 @@ const EditProfile = () => {
                         />
                     </div>
 
-                    {/* 주소 */}
                     <div className="edit-form-group">
                         <label htmlFor="address">주소</label>
                         <input
@@ -181,7 +172,6 @@ const EditProfile = () => {
                         </button>
                     </div>
 
-                    {/* 전화번호 */}
                     <div className="edit-form-group">
                         <label htmlFor="phone">전화번호</label>
                         <input
@@ -200,7 +190,6 @@ const EditProfile = () => {
                 </form>
             </div>
 
-            {/* 주소 모달 */}
             {popup && (
                 <>
                     <div className="addressmodal-overlay" onClick={handleComplete}></div>

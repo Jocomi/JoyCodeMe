@@ -50,4 +50,8 @@ public class MemberService {
 	public int editProfile(Member member) {
 		return mMapper.editProfile(member);
 	}
+	public int updateProfileImage(String memberId, String imagePath) {
+	    return mMapper.updateProfileImage(memberId, imagePath);
+	}
+
 }
