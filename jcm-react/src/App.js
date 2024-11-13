@@ -12,9 +12,9 @@ import ChangePwd from './components/user/ChangePwd';
 import CompIntroduce from './components/CompIntroduce';
 import FreeBoard from './components/post/FreeBoard';
 import ProjectBoard from './components/post/ProjectBoard';
-import Questions from './components/post/Questions';
-import Notice from './components/post/Notice';
-import FrequentlyQuestions from './components/post/FrequentlyQuestions';
+import Enquiry from './components/post/Enquiry';
+import Announcement from './components/post/Announcement';
+import FrequentlyQuestions from './components/post/boarditems/FrequentlyQuestions';
 import AdminDashboard from './components/admin/AdminDashboard';
 import Subscribe from './components/admin/Subscribe';
 import Customer from './components/admin/Customer';
@@ -26,9 +26,9 @@ import Guide from './components/guide/Guide';
 import ProjectHistory from './components/user/ProjectHistory';
 import PaymentHistory from './components/payment/PaymentHistory';
 import PaymentMethod from './components/payment/PaymentMethod';
-import EnrollPost from './components/post/EnrollPost';
+import EnrollPost from './components/post/boarditems/EnrollPost';
 
-import DetailPost from './components/post/DetailPost';
+import DetailPost from './components/post/boarditems/DetailPost';
 
 import TechIntro from './components/techIntro/TechIntro';
 
@@ -95,10 +95,10 @@ const [question, setQuestion] = useState("");
               <Route path='/detailpost/:boardType/:postNo' element={<DetailPost />} />
                 <Route path="/introduce" element={<CompIntroduce />} />
                 <Route path="/guide" element={<Guide />} />
-                <Route path="/notice" element={<Notice />} />
+                <Route path="/announcementBoard" element={<Announcement />} />
                 <Route path="/freeBoard" element={<FreeBoard />} />
                 <Route path="/projectBoard" element={<ProjectBoard />} />
-                <Route path="/questions" element={<Questions />} />
+                <Route path="/enquiryBoard" element={<Enquiry />} />
                 <Route path="/frequentlyQuestions" element={<FrequentlyQuestions />} />
                 <Route path="/enrollPost" element={<EnrollPost />} />
                 
