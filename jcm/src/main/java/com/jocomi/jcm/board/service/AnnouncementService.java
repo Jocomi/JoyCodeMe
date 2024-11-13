@@ -20,6 +20,7 @@ public class AnnouncementService {
 	}
 	
     public AnnouncementBoard getAnnouncementById(int postNo) {
+    		   nMapper.annViewCount(postNo);
         return nMapper.selectAnnouncementById(postNo);
     }
 

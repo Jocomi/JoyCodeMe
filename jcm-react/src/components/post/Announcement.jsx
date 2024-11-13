@@ -11,11 +11,7 @@ const Announcement = () => {
                 <h1>공지사항</h1>
             </div>
             <div className="notice-header">
-                <ul>
-                    <li>전체</li>
-                    <li>작업</li>
-                    <li>업데이트</li>
-                </ul>
+           
             </div>
                 <PostMenu/>
                 <AnnouncementBoardTable className="notice-table"/>

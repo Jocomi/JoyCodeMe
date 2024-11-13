@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
-
+import org.apache.ibatis.annotations.Update;
 
 import com.jocomi.jcm.board.model.vo.EnquiryBoard;
 
@@ -23,6 +23,9 @@ public interface EnquiryBoardMapper {
 			+ " VALUES (ENQ_POST_NO.NEXTVAL, #{memberId}, #{postTitle}, #{postContent}, #{imgFile}, DEFAULT, DEFAULT, #{status})")
 	@Options(useGeneratedKeys = true)
 	int enrollEnquiryBoard(EnquiryBoard enquiryBoard);
+
+	@Update("UPDATE ENQUIRY_BOARD SET COUNT_VIEW = COUNT_VIEW + 1 WHERE POST_NO = #{postNo}")
+	void enqViewCount(int postNo);
 	
 	
 }
