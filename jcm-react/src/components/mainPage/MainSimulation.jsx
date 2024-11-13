@@ -7,8 +7,7 @@ const MainSimulation = () => {
             <p>쉽고 빠르게 만드는 웹사이트</p>
             </div>
             <div className="box">
-            <video src=""></video>
-            <p>(웹사이트 제작기능 구동영상 넣고 텍스트 삭제)</p>
+                <video className="main-video" src="/resources/simulation.mp4" muted autoPlay playsInline loop></video>
             </div>
         </div>
     )
