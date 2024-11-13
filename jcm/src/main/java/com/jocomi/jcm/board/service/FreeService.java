@@ -18,7 +18,7 @@ public class FreeService {
 		return fMapper.selectFB();
 	}
 	public FreeBoard getfreeById(int postNo) {
-		// TODO Auto-gnerated method stub
+			   fMapper.freeViewCount(postNo);
 		return fMapper.detailFree(postNo);
 	}
 	public boolean enrollfreeBoard(FreeBoard freeBoard) {

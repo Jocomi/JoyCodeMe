@@ -128,7 +128,21 @@
   margin-right: 10px;
   text-decoration: none;
 }
+.detail-post-main .commend-div{
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+  align-items: center;
+}
+.detail-post-main .commend-div button{
+  margin-right: 25px;
+  width: 50px;
 
+  height: 50px;
+  border-radius: 50%;
+  background-color: #5d7ea1;
+  border-style: none;
+}
 .detail-post-main .comments-section {
   margin-top: 20px;
 }
