@@ -1,127 +1,116 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>Company HomePage</title>
-<style>
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-image: url('http://localhost:3000/testImg/river.jpg');
-    background-size: cover;
-    color: white;
-}
-
-.header, .footer {
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 20px;
-    text-align: center;
-}
-
-.menu {
-    display: flex;
-    justify-content: center;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.menu li {
-    margin: 0 20px;
-}
-
-.menu a {
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-}
-
-.content {
-    padding: 40px;
-}
-
-.section {
-    margin-bottom: 40px;
-    background-color: rgba(255, 255, 255, 0.1);
-    padding: 20px;
-    border-radius: 10px;
-}
-
-.image {
-    width: 100%;
-    height: 30%;
-    object-fit: contain;
-    border-radius: 10px;
-}
-
-.footer {
-    position: relative;
-    bottom: 0;
-    width: 100%;
-}
-
-.footer-content {
-    color: goldenrod;
-}
-
-.fade-in {
-    animation: fadeIn 2s;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Homepage</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('http://localhost:3000/testImg/sky.jpg');
+            background-size: cover;
+        }
+        .header, .footer {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            text-align: center;
+            padding: 1em;
+        }
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        .menu {
+            display: flex;
+            justify-content: center;
+            list-style-type: none;
+            padding: 0;
+        }
+        .menu li {
+            margin: 0 15px;
+        }
+        .menu a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .menu a:hover {
+            color: #f39c12;
+        }
+        .content {
+            text-align: center;
+            padding: 2em;
+        }
+        .section {
+            margin: 2em 0;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 1em;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        .image {
+            width: 100%;
+            height: 30%;
+            object-fit: cover;
+        }
+    </style>
 </head>
 <body>
-<header class="header">
-    <div>(insert logo here)</div>
-    <ul class="menu">
-        <li><a href="#home" onclick="changePage('home')">Home</a></li>
-        <li><a href="#about" onclick="changePage('about')">About Us</a></li>
-        <li><a href="#services" onclick="changePage('services')">Services</a></li>
-        <li><a href="#contact" onclick="changePage('contact')">Contact</a></li>
-    </ul>
-</header>
-
-<div class="content">
-    <div id="home" class="section fade-in">
-        <h2>Welcome to Our Company</h2>
-        <p>Our company is dedicated to delivering the best services in the industry. We strive for excellence and aim to exceed our customers' expectations. Our team of professionals is equipped with the latest tools and knowledge to ensure top-notch service. We believe in building long-lasting relationships based on trust and transparency. Join us on our journey to success.</p>
-        <img class="image" src="http://localhost:3000/testImg/company.jpg" alt="Company Image">
+    <div class="header">
+        <div>(insert logo here)</div>
+        <ul class="menu">
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
     </div>
-
-    <div id="about" class="section fade-in" style="display:none;">
-        <h2>About Us</h2>
-        <p>Founded in 2020, our company has grown rapidly, driven by a commitment to quality and customer satisfaction. Our vision is to create innovative solutions that simplify our clients' lives. We have a diverse team with various expertise contributing to our dynamic work environment. Our goal is not just to meet client needs but to anticipate them. We are proud to be part of a thriving community.</p>
-        <img class="image" src="http://localhost:3000/testImg/cafe.jpg" alt="About Us Image">
+    
+    <div class="content">
+        <div id="about" class="section">
+            <h2>About Us</h2>
+            <p>We are a forward-thinking company dedicated to providing high-quality services. Our mission is to exceed client expectations through innovative solutions. Our diverse team of professionals ensures that we meet the needs of our clients in the ever-evolving market. We prioritize sustainability and community involvement in all of our endeavors. Join us on our journey to excellence!</p>
+            <img src="http://localhost:3000/testImg/company.jpg" class="image" alt="Company Image">
+        </div>
+        
+        <div id="services" class="section">
+            <h2>Our Services</h2>
+            <p>Our services range from consulting to implementation, ensuring that we cover all aspects necessary for your business growth. We specialize in digital marketing, software development, and project management. Each service is tailored to meet the unique requirements of our clients, with a focus on delivering measurable results. Let us help you navigate your path to success. Together, we can achieve remarkable things!</p>
+            <img src="http://localhost:3000/testImg/conference.jpg" class="image" alt="Services Image">
+        </div>
+        
+        <div id="portfolio" class="section">
+            <h2>Our Portfolio</h2>
+            <p>Our portfolio showcases a variety of projects that highlight our capabilities and creativity. We have worked with numerous clients across different industries, each project reflecting our commitment to quality and design. From app development to branding, our work speaks for itself. Explore our portfolio to see the impact we have made. We look forward to partnering with you and creating something extraordinary!</p>
+            <img src="http://localhost:3000/testImg/building.jpg" class="image" alt="Portfolio Image">
+        </div>
+        
+        <div id="contact" class="section">
+            <h2>Contact Us</h2>
+            <p>If you're interested in working with us or have any questions, we would love to hear from you. You can reach us via email, phone, or through our social media channels. We believe in open communication and are always here to assist you. Let's start a conversation about how we can achieve greatness together. Your journey to success begins with a single step!</p>
+            <img src="http://localhost:3000/testImg/market.jpg" class="image" alt="Contact Image">
+        </div>
     </div>
-
-    <div id="services" class="section fade-in" style="display:none;">
-        <h2>Our Services</h2>
-        <p>We offer a range of services designed to help businesses grow and improve their operations. Our consulting services provide strategic guidance tailored to your needs. Additionally, our technical support team is available 24/7 to assist you. We also offer training programs that equip your staff with essential skills. Together, we can achieve great results.</p>
-        <img class="image" src="http://localhost:3000/testImg/conference.jpg" alt="Services Image">
+    
+    <div class="footer">
+        <p>&copy; 2023 Company Name. All rights reserved.</p>
     </div>
-
-    <div id="contact" class="section fade-in" style="display:none;">
-        <h2>Contact Us</h2>
-        <p>Have questions? We're here to help. Reach out to us via email or phone, and our team will get back to you as soon as possible. We also have a contact form available on our website for your convenience. We value your feedback and are committed to improving our services based on your input. Let’s work together to find the best solutions for your needs.</p>
-        <img class="image" src="http://localhost:3000/testImg/market.jpg" alt="Contact Us Image">
-    </div>
-</div>
-
-<footer class="footer">
-    <div class="footer-content">© 2023 Our Company. All Rights Reserved.</div>
-</footer>
-
-<script>
-function changePage(pageId) {
-    const sections = document.querySelectorAll('.section');
-    sections.forEach(section => {
-        section.style.display = 'none';
-    });
-    document.getElementById(pageId).style.display = 'block';
-}
-</script>
+    
+    <script>
+        const menuItems = document.querySelectorAll('.menu a');
+        menuItems.forEach(item => {
+            item.addEventListener('click', (event) => {
+                event.preventDefault();
+                const targetId = item.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                window.scrollTo({
+                    top: targetElement.offsetTop,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 </html>
