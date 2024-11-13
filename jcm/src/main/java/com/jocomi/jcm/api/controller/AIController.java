@@ -27,7 +27,8 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 @RestController	
 public class AIController {
 
-	private final String GPT_API_KEY ="";
+	private final String GPT_API_KEY ="";	// 깃 커밋시 삭제할 것 
+	private final String GPT_API_URL ="";				// 깃 커밋시 삭제할 것 
 	
 
     @PostMapping(value = "/view")
@@ -36,7 +37,7 @@ public class AIController {
 
         try {
             // API URL 설정
-            URL url = new URL("");
+            URL url = new URL(GPT_API_URL);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
             // 요청 헤더 설정
@@ -197,6 +198,172 @@ public class AIController {
             System.out.println("HTML file saved successfully at: " + outputPath.toAbsolutePath());
         } catch (IOException e) {
             System.out.println("Error saving HTML file: " + e.getMessage());
+        }
+    }
+    
+    @PostMapping(value = "/function")
+    public String createFunction(@RequestBody String request) {
+        System.out.println(request);
+
+        try {
+            // API URL 설정
+            URL url = new URL(GPT_API_URL);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+            // 요청 헤더 설정
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Content-Type", "application/json");
+            connection.setRequestProperty("Authorization", "Bearer " + GPT_API_KEY);
+            connection.setDoOutput(true);
+
+            // Jackson을 사용하여 JSON 요청 본문 생성
+            ObjectMapper objectMapper = new ObjectMapper();
+            ObjectNode jsonBody = objectMapper.createObjectNode();
+
+            jsonBody.put("model", "gpt-4o-mini");
+
+            ArrayNode messages = objectMapper.createArrayNode();
+
+            ObjectNode userMessage = objectMapper.createObjectNode();
+            userMessage.put("role", "user");
+            userMessage.put("content", request);
+
+            ObjectNode systemMessage = objectMapper.createObjectNode();
+            systemMessage.put("role", "system");
+            systemMessage.put("content", "You are an expert JAVA developer and need to make fully functioning code using spring maven project. "
+                    + "Answer with only JAVA codes and do not add any descriptions."
+                    + "Must make configuration files and vo, contoller, service, mapper classes, and if it's nessesary add other classes also."
+                    + "Use \n to seperate each classes so that user can read easily."
+                    + "If you do a good job, I'll give you a $20 tip. "
+                    + "Please answer in JAVA only. Please make the function sincerely, and use everything you can."); 
+
+            messages.add(userMessage);
+            messages.add(systemMessage);
+
+            jsonBody.set("messages", messages);
+            jsonBody.put("temperature", 1);
+            jsonBody.put("max_tokens", 10000);
+            jsonBody.put("top_p", 1);
+            jsonBody.put("frequency_penalty", 0);
+            jsonBody.put("presence_penalty", 0);
+
+            // 요청 본문 전송
+            try (OutputStream os = connection.getOutputStream()) {
+                byte[] input = objectMapper.writeValueAsBytes(jsonBody);
+                os.write(input, 0, input.length);
+            }
+
+            // 응답 처리
+            int responseCode = connection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream(), "utf-8"));
+                StringBuilder response = new StringBuilder();
+                String line;
+
+                while ((line = in.readLine()) != null) {
+                    response.append(line);
+                }
+                in.close();
+
+                // Jackson으로 JSON 응답 처리
+                ObjectNode jsonResponse = objectMapper.readValue(response.toString(), ObjectNode.class);
+                ArrayNode choices = (ArrayNode) jsonResponse.get("choices");
+                String answer = choices.get(0).get("message").get("content").asText(); 
+                System.out.println(answer);
+
+                return answer;
+
+            } else {
+                System.out.println("Error in API request: " + responseCode);
+                return null;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    @PostMapping(value = "/dataBase")
+    public String createDataBase(@RequestBody String request) {
+        System.out.println(request);
+
+        try {
+            // API URL 설정
+            URL url = new URL(GPT_API_URL);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+            // 요청 헤더 설정
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Content-Type", "application/json");
+            connection.setRequestProperty("Authorization", "Bearer " + GPT_API_KEY);
+            connection.setDoOutput(true);
+
+            // Jackson을 사용하여 JSON 요청 본문 생성
+            ObjectMapper objectMapper = new ObjectMapper();
+            ObjectNode jsonBody = objectMapper.createObjectNode();
+
+            jsonBody.put("model", "gpt-4o-mini");
+
+            ArrayNode messages = objectMapper.createArrayNode();
+
+            ObjectNode userMessage = objectMapper.createObjectNode();
+            userMessage.put("role", "user");
+            userMessage.put("content", request);
+
+            ObjectNode systemMessage = objectMapper.createObjectNode();
+            systemMessage.put("role", "system");
+            systemMessage.put("content", "You are an expert Oracle developer and need to make fully functioning code using sqlDeveloper. "
+                    + "Answer with only query and do not add any descriptions."
+                    + "Must create USER, and granted which USER needs."
+                    + "Create several nessesary tables, and insert columns it needs."
+                    + "If you do a good job, I'll give you a $20 tip. "
+                    + "Please answer in JAVA only. Please make the function sincerely, and use everything you can."); 
+
+            messages.add(userMessage);
+            messages.add(systemMessage);
+
+            jsonBody.set("messages", messages);
+            jsonBody.put("temperature", 1);
+            jsonBody.put("max_tokens", 10000);
+            jsonBody.put("top_p", 1);
+            jsonBody.put("frequency_penalty", 0);
+            jsonBody.put("presence_penalty", 0);
+
+            // 요청 본문 전송
+            try (OutputStream os = connection.getOutputStream()) {
+                byte[] input = objectMapper.writeValueAsBytes(jsonBody);
+                os.write(input, 0, input.length);
+            }
+
+            // 응답 처리
+            int responseCode = connection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream(), "utf-8"));
+                StringBuilder response = new StringBuilder();
+                String line;
+
+                while ((line = in.readLine()) != null) {
+                    response.append(line);
+                }
+                in.close();
+
+                // Jackson으로 JSON 응답 처리
+                ObjectNode jsonResponse = objectMapper.readValue(response.toString(), ObjectNode.class);
+                ArrayNode choices = (ArrayNode) jsonResponse.get("choices");
+                String answer = choices.get(0).get("message").get("content").asText(); 
+                System.out.println(answer);
+
+                return answer;
+
+            } else {
+                System.out.println("Error in API request: " + responseCode);
+                return null;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 }

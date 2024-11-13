@@ -429,14 +429,18 @@
     border: 2px solid #fff;
     width: 1000px;
     height: 600px;
-    text-align: center;
-    font-size: 1.5rem;
-    letter-spacing: 0.2em;
-    line-height: 2em;
   }
 
-  .main-method .box b {
-    font-size: 1.7rem;
+
+  .main-method .main-video {
+    margin: 0px;
+    padding:0px;
+    position: absolute;
+    width: 996px;
+    height: 596px;
+    object-fit: cover;
+    z-index: -1;
+    background-size: cover;
   }
 
   /* 메인페이지 main-email */

@@ -33,8 +33,12 @@ import DetailPost from './components/post/boarditems/DetailPost';
 import TechIntro from './components/techIntro/TechIntro';
 
 import WebSetUp from './components/setup/WebSetUp';
+import FunctionSetUp from './components/setup/FunctionSetUp';
+import DBSetUp from './components/setup/DBSetUp';
 import WebSetUpForm from './components/setup/WebSetUpForm'
 import { createContext, useEffect, useState } from 'react';
+import FunctionSetUpForm from './components/setup/FunctionSetUpForm';
+import DBSetUpForm from './components/setup/DBSetUpForm';
 
 export const LoginUser = createContext();
 export const Requested = createContext();
@@ -114,7 +118,11 @@ const [question, setQuestion] = useState("");
 
                 <Route path="/techIntro" element={<TechIntro />} />
                 <Route path="/webSetUp" element={<WebSetUp />} />
+                <Route path="/functionSetUp" element={<FunctionSetUp />} />
+                <Route path="/dbSetUp" element={<DBSetUp />} />
                 <Route path="/webSetUp/form" element={<WebSetUpForm question={question}/>} />
+                <Route path="/functionSetUp/form" element={<FunctionSetUpForm question={question}/>} />
+                <Route path="/dbSetUp/form" element={<DBSetUpForm question={question}/>} />
               </Routes>
             </main>
           <FooterPage />

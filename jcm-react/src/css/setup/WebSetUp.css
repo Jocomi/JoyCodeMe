@@ -20,6 +20,7 @@
   
   .websetup-container .step {
     font-weight: 400;
+    color: #a5a5a5;
   }
   
   .websetup-container .step.active {
