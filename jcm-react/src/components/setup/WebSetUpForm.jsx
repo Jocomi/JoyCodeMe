@@ -22,7 +22,9 @@ const WebSetUpForm = (props) => {
 
         console.log(result);
         if (response.status === 200) {  // 성공 시 처리
-            setResponseData(result); // 서버 응답 데이터를 state에 저장
+            setTimeout(()=>{        // 파일이 저장될 때까지 딜레이
+                setResponseData(result); // 서버 응답 데이터를 state에 저장
+            }, 5000);
         } else {
             alert("요청 실패... 요청을 확인하세요!");
         }
@@ -43,9 +45,14 @@ const WebSetUpForm = (props) => {
                 {/* 여기에 응답 내용을 출력 */}
                 <div className='viewPage' align="center">
                     {responseData !== "" ? (
-                        <div dangerouslySetInnerHTML={{ __html: responseData }} ></div> // JSON 데이터를 보기 좋게 출력
+                        // <div dangerouslySetInnerHTML={{ __html: responseData }} ></div> // JSON 데이터를 보기 좋게 출력
+                        <iframe src={"http://localhost:7777/show?name="+responseData} style={{ width: "100%", height: "100vh" }}/>
                     ) : (
+                        <>
+                        <br />
                         <FadeLoader/>
+                        <p><b>AI가 페이지를 생성중입니다! 평균적으로 1분정도 소요됩니다...</b></p>
+                        </>
                     )}
                 </div>
 
