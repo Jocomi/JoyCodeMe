@@ -34,6 +34,9 @@ public interface AnnouncementBoardMapper {
             "STATUS = #{announcement.status}, " +
             "IMG_FILE = #{announcement.imgFile} " +
             "WHERE POST_NO = #{postNo}")
-    int updateAnnouncement(@Param("postNo") int postNo, @Param("announcement") AnnouncementBoard announcement);	
+    int updateAnnouncement(@Param("postNo") int postNo, @Param("announcement") AnnouncementBoard announcement);
+    
+    @Update("UPDATE ANNOUNCEMENT_BOARD SET COUNT_VIEW = COUNT_VIEW + 1 WHERE POST_NO = #{postNo}")
+	void annViewCount(int postNo);
 
 }

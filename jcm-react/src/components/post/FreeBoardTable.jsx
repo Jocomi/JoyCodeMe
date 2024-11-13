@@ -56,7 +56,7 @@ const FreeBoardTalbe = ({ className }) => {
               <td>{post.memberId}</td>
               <td>{post.postTitle}</td>
               <td>{post.postTime}</td>
-              <td>{post.countView}</td>
+              <td>{post.postCount}</td>
             </tr>
           ))}
         </tbody>

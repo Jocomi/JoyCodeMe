@@ -55,7 +55,7 @@ const DetailPost = () => {
   };
 
   const goBack = () => {
-    navigate('/notice');
+    navigate(-1);
   };
 
   const toggleAttachment = () => {
@@ -94,6 +94,7 @@ const DetailPost = () => {
   };
 
   const toggleReply = (commentId) => {
+    if (boardType === 'enquiry') return;  // 답글 작성 비활성화
     setIsWriteReplyVisible(isWriteReplyVisible === commentId ? null : commentId);
   };
 
@@ -130,7 +131,7 @@ const DetailPost = () => {
       <PostMenu />
       <div className="detail-post">
         <div className="detail-post-header">
-          <h2>공지사항📢</h2>
+          <h2>{post.boardType}</h2>
           <div className="post-info">
             <span className="post-date">작성일 : {post.postTime}</span>
             <span className="view-count">조회수 : {post.countView}</span>
@@ -178,9 +179,10 @@ const DetailPost = () => {
           </div>
         </div>
 
-        {boardType !== 'notice' && (
+        {/* 댓글 작성 및 표시 */}
+        {boardType !== 'announcement' && (
           <div className="comments-section">
-            <h4>댓글</h4>
+            <h4>{boardType === 'enquiry' ? `답변` : `댓글`}</h4>
             <ul className="comments-list">
               {comments.map((comment) => (
                 <li key={comment.commentId} className="comment-item">
@@ -188,16 +190,23 @@ const DetailPost = () => {
                     <img src="img/profile.jpg" alt="프로필 사진" className="comment-profile-image" />
                     <div className="comment-body">
                       <div className="comment-userId">{comment.memberId || '익명'}</div>
-                      <div className="comment-content">{comment.commentText}</div>
+                      <div className="comment-content">
+                        {/* 'enquiry'일 때 댓글을 '답변' 형식으로 표시 */}
+                        {comment.commentText}
+                      </div>
                       <div className="comment-metadata">
                         <span className="comment-time">{comment.commentTime || '방금'}</span>
                         <div className="comment-actions">
-                          <a onClick={() => toggleReply(comment.commentId)}>답글</a>
+                          {/* 'enquiry'일 때는 답글을 숨깁니다. */}
+                          {boardType !== 'enquiry' && (
+                            <a onClick={() => toggleReply(comment.commentId)}>답글</a>
+                          )}
                         </div>
                       </div>
                     </div>
                   </div>
 
+                  {/* 답글 처리 */}
                   {(comment.replies || []).map((reply) => (
                     <ul key={reply.id} className="replies-list">
                       <li className="reply-item">
@@ -213,7 +222,7 @@ const DetailPost = () => {
                     </ul>
                   ))}
 
-                  {isWriteReplyVisible === comment.commentId && (
+                  {isWriteReplyVisible === comment.commentId && boardType !== 'enquiry' && (
                     <div className="write-reply">
                       <div className="input-container">
                         <textarea
