@@ -1,5 +1,5 @@
 import '../../css/post/FreeBoard.css';
-import PostMenu from './PostMenu';
+import PostMenu from './boarditems/PostMenu';
 import FreeBoardTable from './FreeBoardTable';
 
 const FreeBoard = () => {

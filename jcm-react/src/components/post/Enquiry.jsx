@@ -1,5 +1,5 @@
 import '../../css/post/Questions.css';
-import EnquiryBoard from './EnquiryBoard';
+import EnquiryBoard from './EnquiryBoardTable';
 import FrequentlyQuestions from './boarditems/FrequentlyQuestions';
 import PostMenu from './boarditems/PostMenu';
 
