@@ -63,6 +63,7 @@ public class AIController {
                     + "Answer with only codes and do not add any description or other content like '```html' or '```'. "
                     + "Logo has to be import later. Create logo position and write '(insert logo here)'. "
                     + "Header and footer must be contained, and footer must have class name and decorated by class name."
+                    + "Footer must position fixed at end of the page ."
                     + "Follow the request. For example, if user asked to make search engine, you have to make search bar to type in."
                     + "If user asked to make online shopping mall, you have to list several items to sell."
                     + "If user asked to make company homePage, you have to contain details and informations about company."
