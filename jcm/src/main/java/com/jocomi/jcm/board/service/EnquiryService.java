@@ -21,6 +21,7 @@ public class EnquiryService {
 	}
 	
 	public EnquiryBoard getEnquiryById(int postNo) {
+				qMapper.enqViewCount(postNo);
 		 return qMapper.selectEnquiryById(postNo);
 	}
 

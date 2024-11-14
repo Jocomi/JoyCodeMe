@@ -19,7 +19,7 @@ public class ProjectService {
 		return pMapper.selectPB();
 	}
 	public ProjectBoard getProjectBoard(int postNo) {
-		// TODO Auto-generated method stub
+			   pMapper.proViewCount(postNo);
 		return pMapper.getProjectBoard(postNo);
 	}
 	public boolean enrollProjectBoard(ProjectBoard projectBoard) {

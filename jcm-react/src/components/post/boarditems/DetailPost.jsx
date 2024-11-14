@@ -27,17 +27,17 @@ const DetailPost = () => {
       }
     }
   };
-
+  const fetchPost = async () => {
+    try {
+      const url = `http://localhost:7777/${boardType}/${postNo}`;
+      const response = await axios.get(url);
+      setPost(response.data);
+    } catch (error) {
+      console.error('게시글 데이터를 가져오는 데 실패했습니다:', error);
+    }
+  };
   useEffect(() => {
-    const fetchPost = async () => {
-      try {
-        const url = `http://localhost:7777/${boardType}/${postNo}`;
-        const response = await axios.get(url);
-        setPost(response.data);
-      } catch (error) {
-        console.error('게시글 데이터를 가져오는 데 실패했습니다:', error);
-      }
-    };
+    
 
     fetchPost();
     fetchComment();
@@ -126,6 +126,28 @@ const DetailPost = () => {
     return <div>Loading...</div>;
   }
 
+  const fetchCommend = async () => {
+    const commendData = {
+      memberId: loginUser.memberId,
+      postNo,
+      boardType
+    };
+    try {
+      const response = await axios.post(`http://localhost:7777/recommend`, commendData, {
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      
+        fetchPost();
+     
+    } catch (error) {
+      
+     
+      fetchPost();
+    }
+  
+  }
+
   return (
     <div className="detail-post-main">
       <PostMenu />
@@ -178,6 +200,12 @@ const DetailPost = () => {
             )}
           </div>
         </div>
+        {boardType !== 'announcement' && boardType !== 'enquiry' &&(
+          <div className='commend-div'>
+          <button onClick={fetchCommend}>추천</button> <h4>{post.recommend}</h4>
+          </div>
+        )}
+       
 
         {/* 댓글 작성 및 표시 */}
         {boardType !== 'announcement' && (

@@ -10,7 +10,7 @@ public class FreeBoard {
     private String postContent;
     private String imgFile;
     private String postTime;
-    private int postCount;
-    private int freeboardRecommend;
+    private int countView;
+    private int recommend;
     private String status;
 }

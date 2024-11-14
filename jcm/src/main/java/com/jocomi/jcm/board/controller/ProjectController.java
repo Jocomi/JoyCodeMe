@@ -43,6 +43,7 @@ public class ProjectController {
 		 ProjectBoard frojectBoard = pService.getProjectBoard(postNo);
 		 return frojectBoard;
 	 }
+	 
 	 @PostMapping(value ="/enrollproject", produces ="application/json;charset=UTF-8")
 	 public ResponseEntity<String> createProject(
 			 @RequestPart("project") ProjectBoard projectBoard,

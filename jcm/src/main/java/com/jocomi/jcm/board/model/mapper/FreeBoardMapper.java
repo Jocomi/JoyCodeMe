@@ -23,7 +23,7 @@ public interface FreeBoardMapper {
 	@Options(useGeneratedKeys = true)
 	int enrollfreeBoard(FreeBoard freeBoard);
 	
-	@Update("UPDATE FREE_BOARD SET POST_COUNT = POST_COUNT + 1 WHERE POST_NO = #{postNo}")
+	@Update("UPDATE FREE_BOARD SET COUNT_VIEW = COUNT_VIEW + 1 WHERE POST_NO = #{postNo}")
 	void freeViewCount(int postNo);
 
 }
