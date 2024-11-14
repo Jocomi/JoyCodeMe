@@ -8,9 +8,17 @@ const EnquiryBoard = ({ className }) => {
   const [tableData, setTableData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태
   const navigate = useNavigate();
-
+  const [loginUser, setLoginUser] = useState(null); // 로그인된 사용자 정보
   const postsPerPage = 5; // 페이지당 게시물 수
 
+  
+  // 로그인 사용자 정보 가져오기
+  useEffect(() => {
+    const user = JSON.parse(sessionStorage.getItem('loginUser'));
+    if (user) {
+      setLoginUser(user);
+    }
+  }, []);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -33,7 +41,20 @@ const EnquiryBoard = ({ className }) => {
 
   // 페이지 변경 핸들러
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
+ // 비공개 게시물 접근 제한
+ const handlePostClick = (post) => {
+  if (post.privateEnquiry === 'N') {
+    // 비공개 게시물 접근 제한 조건
+    if (loginUser && (loginUser.status === 'A' || loginUser.memberId === post.memberId)) {
+      navigate(`/detailpost/enquiry/${post.postNo}`);
+    } else {
+      alert("비공개 게시물입니다.");
+    }
+  } else {
+    // 공개 게시물은 누구나 접근 가능
+    navigate(`/detailpost/project/${post.postNo}`);
+  }
+};
   return (
     <div className={className}>
       <Table hover responsive borderless>
@@ -50,11 +71,11 @@ const EnquiryBoard = ({ className }) => {
           {currentPosts.map((post) => (
             <tr
               key={post.postNo}
-              onClick={() => navigate(`/detailpost/enquiry/${post.postNo}`)} // 상세보기 페이지로 이동
+              onClick={() => handlePostClick(post)} // 클릭 핸들러 적용
             >
               <td>{post.postNo}</td>
               <td>{post.memberId}</td>
-              <td>{post.privateEnquiry === 'N' ? '비공개 게시물입니다.' : post.postTitle}</td>
+              <td>{post.privateEnquiry === 'N' && post.memberId !== loginUser.memberId  ? '비공개 게시물입니다.' : post.postTitle}</td>
               <td>{post.postTime}</td>
               <td>{post.countView}</td>
             </tr>

@@ -12,7 +12,7 @@
     </select>
 
     <!-- 신규 문의 게시글 등록 -->
-    <insert id="enrollEnquiryBoard" useGeneratedKeys="true" keyProperty="postNo">
+    <insert id="enrollEnquiryBoard" >
         INSERT INTO ENQUIRY_BOARD (POST_NO, MEMBER_ID, POST_TITLE, POST_CONTENT, IMG_FILE, POST_TIME, COUNT_VIEW, PRIVATE_ENQUIRY)
         VALUES (ENQ_POST_NO.NEXTVAL, #{memberId}, #{postTitle}, #{postContent}, #{imgFile}, DEFAULT, DEFAULT, #{status})
     </insert>

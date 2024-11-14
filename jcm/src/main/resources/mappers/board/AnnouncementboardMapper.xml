@@ -18,7 +18,7 @@
     </update>
 
     <!-- 새로운 공지사항 등록 -->
-    <insert id="enrollAnnouncement" useGeneratedKeys="true" keyProperty="postNo">
+    <insert id="enrollAnnouncement">
         INSERT INTO ANNOUNCEMENT_BOARD (POST_NO, MEMBER_ID, POST_TITLE, POST_CONTENT, IMG_FILE, POST_TIME, COUNT_VIEW, STATUS)
         VALUES (ANN_POST_NO.NEXTVAL, #{memberId}, #{postTitle}, #{postContent}, #{imgFile}, DEFAULT, DEFAULT, #{status})
     </insert>
