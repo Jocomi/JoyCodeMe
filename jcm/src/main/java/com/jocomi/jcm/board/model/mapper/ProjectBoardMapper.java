@@ -23,6 +23,6 @@ public interface ProjectBoardMapper {
 	@Options(useGeneratedKeys = true)
 	int enrollProjectBoard(ProjectBoard projectBoard);
 
-	@Update("UPDATE PROJECT_BOARD SET POST_COUNT = POST_COUNT + 1 WHERE POST_NO = #{postNo}")
+	@Update("UPDATE PROJECT_BOARD SET COUNT_VIEW = COUNT_VIEW + 1 WHERE POST_NO = #{postNo}")
 	void proViewCount(int postNo);
 }

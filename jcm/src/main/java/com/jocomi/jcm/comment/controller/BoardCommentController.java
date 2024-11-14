@@ -30,7 +30,6 @@ public class BoardCommentController {
 	public ArrayList<BoardComment> selectComment(@PathVariable int postNo,@PathVariable String boardType){
 		
 		ArrayList<BoardComment> cList = cService.selectComment(postNo, boardType);
-		System.out.println(cList);
 		return cList;
 				
 				

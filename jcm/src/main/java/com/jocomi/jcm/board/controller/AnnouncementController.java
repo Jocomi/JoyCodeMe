@@ -101,23 +101,7 @@ public class AnnouncementController {
 	     }
 	 }
 
-	 @GetMapping("/boardImg/{fileName:.+}")
-	 public ResponseEntity<Resource> getFile(@PathVariable String fileName) {
-	     try {
-	         Path file = Paths.get("C:/workspace/joycodeme/jcm/src/main/resources/static/boardImg/").resolve(fileName).normalize();
-	         Resource resource = new UrlResource(file.toUri());
-
-	         if (resource.exists()) {
-	             return ResponseEntity.ok()
-	                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
-	                 .body(resource);
-	         } else {
-	             throw new RuntimeException("파일을 찾을 수 없습니다: " + fileName);
-	         }
-	     } catch (MalformedURLException e) {
-	         throw new RuntimeException("파일 경로 오류: " + fileName, e);
-	     }
-	 }
+	
 
 	// 게시글 수정 API
 	    @PutMapping("/edit/{boardType}/{postNo}")
