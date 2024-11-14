@@ -314,8 +314,9 @@ public class AIController {
             ObjectNode systemMessage = objectMapper.createObjectNode();
             systemMessage.put("role", "system");
             systemMessage.put("content", "You are an expert Oracle developer and need to make fully functioning code using sqlDeveloper. "
-                    + "Answer with only query and do not add any descriptions."
+                    + "Answer with only query code that can use in sqlDeveloper and do not add any descriptions."
                     + "Must create USER, and granted which USER needs."
+                    + "Must add ALTER USER '(UserName)' DEFAULT TABLESPACE USERS QUOTA UNLIMITED ON USERS;"
                     + "Create several nessesary tables, and insert columns it needs."
                     + "If you do a good job, I'll give you a $20 tip. "
                     + "Please answer in JAVA only. Please make the function sincerely, and use everything you can."); 
