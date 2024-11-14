@@ -13,19 +13,14 @@ import com.jocomi.jcm.board.model.vo.EnquiryBoard;
 @Mapper
 public interface EnquiryBoardMapper {
 
-	@Select("SELECT * FROM ENQUIRY_BOARD")
-	ArrayList<EnquiryBoard> selectEB();
-	
-	@Select("SELECT * FROM ENQUIRY_BOARD WHERE POST_NO = #{postNo}")
-	EnquiryBoard selectEnquiryById(int postNo);
 
-	@Insert("INSERT INTO ENQUIRY_BOARD (POST_NO, MEMBER_ID, POST_TITLE, POST_CONTENT, IMG_FILE, POST_TIME, COUNT_VIEW, PRIVATE_ENQUIRY)"
-			+ " VALUES (ENQ_POST_NO.NEXTVAL, #{memberId}, #{postTitle}, #{postContent}, #{imgFile}, DEFAULT, DEFAULT, #{status})")
-	@Options(useGeneratedKeys = true)
-	int enrollEnquiryBoard(EnquiryBoard enquiryBoard);
+    ArrayList<EnquiryBoard> selectEB();
 
-	@Update("UPDATE ENQUIRY_BOARD SET COUNT_VIEW = COUNT_VIEW + 1 WHERE POST_NO = #{postNo}")
-	void enqViewCount(int postNo);
+    EnquiryBoard selectEnquiryById(int postNo);
+
+    int enrollEnquiryBoard(EnquiryBoard enquiryBoard);
+
+    void enqViewCount(int postNo);
 	
 	
 }

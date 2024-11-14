@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jocomi.jcm.comment.mapper.CommentMapper">
+
+    <!-- FREE_COMMENT 조회 -->
+    <select id="selectFComment" resultType="BoardComment" parameterType="int">
+        SELECT * FROM FREE_COMMENT WHERE POST_NO = #{postNo}
+    </select>
+
+    <!-- PROJECT_COMMENT 조회 -->
+    <select id="selectPComment" resultType="BoardComment" parameterType="int">
+        SELECT * FROM PROJECT_COMMENT WHERE POST_NO = #{postNo}
+    </select>
+
+    <!-- ENQUIRY_COMMENT 조회 -->
+    <select id="selectEComment" resultType="BoardComment" parameterType="int">
+        SELECT * FROM ENQUIRY_COMMENT WHERE POST_NO = #{postNo}
+    </select>
+
+    <!-- PROJECT_COMMENT 삽입 -->
+    <insert id="insertPComment" parameterType="map">
+        INSERT INTO PROJECT_COMMENT (COMMENT_NO, MEMBER_ID, POST_NO, COMMENT_TEXT, COMMENT_TIME, STATUS)
+        VALUES (PROC_POST_NO.NEXTVAL, #{comment.memberId}, #{postNo}, #{comment.commentText}, SYSDATE, 'Y')
+    </insert>
+
+    <!-- FREE_COMMENT 삽입 -->
+    <insert id="insertFComment" parameterType="map">
+        INSERT INTO FREE_COMMENT (COMMENT_NO, MEMBER_ID, POST_NO, COMMENT_TEXT, COMMENT_TIME, STATUS)
+        VALUES (PROC_POST_NO.NEXTVAL, #{comment.memberId}, #{postNo}, #{comment.commentText}, SYSDATE, 'Y')
+    </insert>
+
+    <!-- ENQUIRY_COMMENT 삽입 -->
+    <insert id="insertEComment" parameterType="map">
+        INSERT INTO ENQUIRY_COMMENT (COMMENT_NO, MEMBER_ID, POST_NO, COMMENT_TEXT, COMMENT_TIME, STATUS)
+        VALUES (PROC_POST_NO.NEXTVAL, #{comment.memberId}, #{postNo}, #{comment.commentText}, SYSDATE, 'Y')
+    </insert>
+
+</mapper>

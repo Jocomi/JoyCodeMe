@@ -19,7 +19,7 @@ const DetailPost = () => {
   const fetchComment = async () => {
     if (boardType !== 'announcement') {
       try {
-        const url = `http://localhost:7777/comment/${boardType}/${postNo}`;
+        const url = `http://${window.location.hostname}:7777/comment/${boardType}/${postNo}`;
         const response = await axios.get(url);
         setComments(response.data);
       } catch (error) {
@@ -29,7 +29,7 @@ const DetailPost = () => {
   };
   const fetchPost = async () => {
     try {
-      const url = `http://localhost:7777/${boardType}/${postNo}`;
+      const url = `http://${window.location.hostname}:7777/${boardType}/${postNo}`;
       const response = await axios.get(url);
       setPost(response.data);
     } catch (error) {
@@ -45,7 +45,7 @@ const DetailPost = () => {
 
   const deactivatePost = async () => {
     try {
-      const response = await axios.put(`http://localhost:7777/${boardType}/${postNo}/deactivate`);
+      const response = await axios.put(`http://${window.location.hostname}:7777/${boardType}/${postNo}/deactivate`);
       alert(response.data);
       goBack();
     } catch (error) {
@@ -76,7 +76,7 @@ const DetailPost = () => {
     };
 
     try {
-      const response = await axios.post(`http://localhost:7777/comment/${boardType}/${postNo}/add`, commentData, {
+      const response = await axios.post(`http://${window.location.hostname}:7777/comment/${boardType}/${postNo}/add`, commentData, {
         headers: { 'Content-Type': 'application/json' },
       });
 
@@ -133,7 +133,7 @@ const DetailPost = () => {
       boardType
     };
     try {
-      const response = await axios.post(`http://localhost:7777/recommend`, commendData, {
+      const response = await axios.post(`http://${window.location.hostname}:7777/recommend`, commendData, {
         headers: { 'Content-Type': 'application/json' },
       });
 
@@ -162,7 +162,7 @@ const DetailPost = () => {
               <div className="attachment">
                 {post.imgFiles.map((file, index) => (
                   <div key={index}>
-                    <a href={`http://localhost:7777/boardImg/${file}`} download>
+                    <a href={`http://${window.location.hostname}:7777/boardImg/${file}`} download>
                       첨부파일 {index + 1} 다운로드
                     </a>
                   </div>
@@ -184,7 +184,7 @@ const DetailPost = () => {
               </tr>
               <tr>
                 <td>
-                  <img src={`http://localhost:7777/boardImg/${loginUser.pImg}`} alt="프로필 이미지" className="profile-image" />
+                  <img src={``} alt="프로필 이미지" className="profile-image" />
                 </td>
               </tr>
             </tbody>

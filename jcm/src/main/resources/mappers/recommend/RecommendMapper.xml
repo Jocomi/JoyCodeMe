@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jocomi.jcm.recommend.model.mapper.RecommendMapper">
+
+    <!-- 추천 여부 조회 -->
+    <select id="selectRecommend" resultType="int" parameterType="Recommend">
+        SELECT COUNT(*)
+        FROM USER_RECOMMEND
+        WHERE MEMBER_ID = #{memberId}
+          AND POST_NO = #{postNo}
+          AND BOARD_TYPE = #{boardType}
+    </select>
+
+    <!-- 추천 추가 -->
+    <insert id="addRecommendUser" parameterType="Recommend">
+        INSERT INTO USER_RECOMMEND (MEMBER_ID, POST_NO, BOARD_TYPE)
+        VALUES (#{memberId}, #{postNo}, #{boardType})
+    </insert>
+
+    <!-- 추천 삭제 -->
+    <delete id="deleteRecommendUser" parameterType="Recommend">
+        DELETE FROM USER_RECOMMEND
+        WHERE MEMBER_ID = #{memberId}
+          AND POST_NO = #{postNo}
+          AND BOARD_TYPE = #{boardType}
+    </delete>
+
+    <!-- 게시글 추천 수 증가 -->
+    <update id="addRecommend" parameterType="Recommend">
+        UPDATE ${boardType}_BOARD
+        SET RECOMMEND = RECOMMEND + 1
+        WHERE POST_NO = #{postNo}
+    </update>
+
+    <!-- 게시글 추천 수 감소 -->
+    <update id="deleteRecommend" parameterType="Recommend">
+        UPDATE ${boardType}_BOARD
+        SET RECOMMEND = RECOMMEND - 1
+        WHERE POST_NO = #{postNo}
+    </update>
+
+</mapper>

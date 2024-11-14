@@ -12,17 +12,11 @@ import com.jocomi.jcm.board.model.vo.ProjectBoard;
 
 @Mapper
 public interface ProjectBoardMapper {
-	@Select("SELECT * FROM PROJECT_BOARD")
-	ArrayList<ProjectBoard> selectPB();
-	
-	@Select("SELECT * FROM PROJECT_BOARD WHERE POST_NO = #{postNo}")
-	ProjectBoard getProjectBoard(int postNo);
+	  ArrayList<ProjectBoard> selectPB();
 
-	@Insert("INSERT INTO PROJECT_BOARD (POST_NO, MEMBER_ID, POST_TITLE, POST_CONTENT, IMG_FILE, POST_TIME, COUNT_VIEW, PRIVATE_PROJECT)"
-			+ " VALUES (PRO_POST_NO.NEXTVAL, #{memberId}, #{postTitle}, #{postContent}, #{imgFile}, DEFAULT, DEFAULT, #{status})")
-	@Options(useGeneratedKeys = true)
-	int enrollProjectBoard(ProjectBoard projectBoard);
+	    ProjectBoard getProjectBoard(int postNo);
 
-	@Update("UPDATE PROJECT_BOARD SET COUNT_VIEW = COUNT_VIEW + 1 WHERE POST_NO = #{postNo}")
-	void proViewCount(int postNo);
+	    int enrollProjectBoard(ProjectBoard projectBoard);
+
+	    void proViewCount(int postNo);
 }
