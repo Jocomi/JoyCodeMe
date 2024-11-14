@@ -9,6 +9,7 @@ const MainMethod =() =>{
             <div className="box">
                 <video className="main-video" src="/resources/method.mp4" muted autoPlay playsInline loop></video>
             </div>
+            <video className="bg-video" src="/resources/method-bg.mp4" muted autoPlay playsInline loop></video>
         </div>
     )
 }
