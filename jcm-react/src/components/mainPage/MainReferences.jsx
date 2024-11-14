@@ -1,45 +1,10 @@
-import { useRef, useEffect } from 'react';
+import { useRef } from 'react';
 const MainReferences =() => {
     
     const iconContainerRef = useRef(null);
     const iconsRef = useRef([]);
   
-    useEffect(() => {
-      const containerWidth = iconContainerRef.current.offsetWidth;
-      const iconWidth = iconsRef.current[0].offsetWidth;
-      const totalIcons = iconsRef.current.length;
-  
-      const iconSpacing = (containerWidth+50) / totalIcons;
-      // 초기 위치 설정
-      iconsRef.current.forEach((icon, index) => {
-        if(icon){
-            icon.style.left = `${index * iconSpacing}px`;
-        }
-      });
-  
-      // 아이콘 이동 함수
-      const moveIcons = () => {
-        iconsRef.current.forEach((icon) => {
-            if (icon) {
-              let currentPosition = parseFloat(icon.style.left);
-    
-              // 아이콘이 왼쪽 끝에 도달하면 오른쪽 끝으로 이동
-              if (currentPosition <= -iconWidth) {
-                icon.style.transition = "none";
-                icon.style.left = `${containerWidth}px`; // 오른쪽 끝으로 이동
-              } else {
-                icon.style.left = `${currentPosition - 0.5}px`; // 일정 속도로 왼쪽으로 이동
-              }
-            }
-          });
-          requestAnimationFrame(moveIcons);
-        };
-  
-      moveIcons(); // 아이콘 이동 시작
-  
-      // cleanup function
-      return () => cancelAnimationFrame(moveIcons);
-    }, []);
+   
   
     return(
         <div className="main-reference">
@@ -50,30 +15,7 @@ const MainReferences =() => {
                 AI를 사용한 개발 툴로 빠른 개발과 협업을 경험하세요!
                 </div>
 
-                <div className="icon-container" ref={iconContainerRef}>
-                    {[
-                        "css-icon.png",
-                        "html5-icon.png",
-                        "react-icon.png",
-                        "java-icon.png",
-                        "js-icon.png",
-                        "spring-icon.png",
-                        "springboot-icon.png",
-                        "db-icon.png",
-                        "tomcat-icon.png",
-                        "github-icon.png"
-                        
-                    ].map((src, index) => (
-                        <img
-                        key={index}
-                        ref={(el) => (iconsRef.current[index] = el)}
-                        src={`img/${src}`}
-                        alt={`icon-${index}`}
-                        className="icon"
-                        />
-                    ))}
-                </div>
-
+                
                 <div className="reference-list">
                 <div className="box">
                     <p>Front-end</p>
