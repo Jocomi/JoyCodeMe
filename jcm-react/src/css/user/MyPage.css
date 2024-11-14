@@ -1,74 +1,114 @@
-  .mypage-container{
-    width: 100%;
-    background-color: rgb(243, 243, 243);
-    height: 100vh;
-    display: flex;
-    justify-content: center;
- 
-    align-items: center;
-  }
-  /* 중앙에 위치하게 */
+.mypage-container {
+  width: 100%;
+  background-color: rgb(243, 243, 243);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px; /* 작은 화면에서의 여백 추가 */
+}
+
+.mypage-main {
+  width: 100%;
+  max-width: 600px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(82, 82, 82, 0.7);
+  text-align: center;
+}
+
+/* 반응형 타이포그래피 */
+.mypage-main h1 {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  color: #000000;
+}
+
+.mypage-main p {
+  font-size: 1rem;
+  margin-bottom: 20px;
+  color: #ccc;
+}
+
+.mypage-main .profile-section {
+  margin-bottom: 30px;
+}
+
+/* 프로필 사진 반응형 설정 */
+.mypage-main .profile-picture {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin: 20px auto;
+  background-color: #ffffff;
+  background-size: cover;
+  background-position: center;
+  border: 2px solid #000000;
+}
+
+.mypage-main .profile-section h2 {
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+  color: #000000;
+}
+
+.mypage-main .profile-section p {
+  font-size: 1.1rem;
+  color: #000000;
+}
+
+/* 버튼 영역 반응형 설정 */
+.button-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px; /* 버튼 사이 간격 */
+}
+
+.mypage-main button {
+  background-color: #ffffff;
+  border: 1px solid #bdbdbd;
+  color: #000000;
+  padding: 12px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  flex: 1 1 120px; /* 버튼 크기를 유동적으로 설정 */
+  max-width: 200px; /* 최대 너비 제한 */
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.mypage-main button:hover {
+  background-color: #cacaca;
+  transform: scale(1.05);
+}
+
+/* 작은 화면에서의 반응형 설정 */
+@media (max-width: 768px) {
   .mypage-main {
-    height: 60%;
-    width: 50%;
-    background-color: #ffffff;
-    border-radius: 15px;
-    padding: 40px;
-    box-shadow: 0 10px 30px rgba(82, 82, 82, 0.7);
-    text-align: center;
+      padding: 20px; /* 내부 여백 축소 */
   }
 
   .mypage-main h1 {
-    font-size: 2.8rem;
-    margin-bottom: 30px;
-    color: #000000; /* 고급스러운 금색 포인트 */
-  }
-
-  .mypage-main p {
-    font-size: 1.2rem;
-    margin-bottom: 20px;
-    color: #ccc;
+      font-size: 2rem; /* 제목 크기 줄임 */
   }
 
   .mypage-main .profile-picture {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    margin: 20px auto;
-    background-color: #ffffff;
-    background-size: cover;
-    background-position: center;
-    border: 2px solid #000000; /* 프로필 사진 테두리 금색 */
-  }
-
-  .mypage-main .profile-section {
-    margin-bottom: 40px;
+      width: 120px;
+      height: 120px;
   }
 
   .mypage-main .profile-section h2 {
-    font-size: 1.6rem;
-    margin-bottom: 10px;
-    color: #000000;
+      font-size: 1.2rem;
   }
 
   .mypage-main .profile-section p {
-    font-size: 1.1rem;
-    color: #000000;
+      font-size: 1rem;
   }
 
   .mypage-main button {
-    background-color: #ffffff;
-    border: 1px solid #bdbdbd;
-    color: #000000;
-    padding: 12px 25px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1rem;
-    margin: 10px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+      font-size: 0.9rem;
+      padding: 10px 15px;
   }
-
-  .mypage-main button:hover {
-    background-color: #cacaca;
-    transform: scale(1.05); /* 마우스를 올렸을 때 살짝 확대되는 효과 */
-  }
+}

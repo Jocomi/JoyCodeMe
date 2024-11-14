@@ -19,16 +19,16 @@ const EditProfile = () => {
 
     const [popup, setPopup] = useState(false);
     const [imageFile, setImageFile] = useState(null);
-    const [previewImageUrl, setPreviewImageUrl] = useState('');  // 미리보기 이미지 초기화
+    const [previewImageUrl, setPreviewImageUrl] = useState(profileData.pImg);  // 기본 프로필 이미지
 
     // 로그인 시 기존 이미지 설정
     useEffect(() => {
         if (loginUser) {
             setProfileData((prevData) => ({
                 ...prevData,
-                pImg: loginUser.pImg || '/img/TEST.JPG',  // 로그인된 사용자 이미지 경로 설정
+                pImg: loginUser.pImg || '/img/TEST.JPG',
             }));
-            setPreviewImageUrl(loginUser.pImg ? `http://${window.location.hostname}:7777${loginUser.pImg}` : '/img/TEST.JPG');  // 백엔드 서버에서 제공하는 이미지 경로 설정
+            setPreviewImageUrl(loginUser.pImg ? `http://${window.location.hostname}:7777${loginUser.pImg}` : '/img/TEST.JPG');
         }
     }, [loginUser]);
 
@@ -54,6 +54,7 @@ const EditProfile = () => {
                     ...prevData,
                     pImg: `/img/${fileName}`,  // 로그인 사용자 데이터 업데이트
                 }));
+                setPreviewImageUrl(`/img/${fileName}`);  // 미리보기 이미지 업데이트
             } else {
                 alert("이미지 업로드 실패");
             }
@@ -122,20 +123,15 @@ const EditProfile = () => {
                 <h1>Edit Profile</h1>
 
                 <form onSubmit={handleSubmit}>
-                    <div
-                        className="profile-picture-container"
-                        onClick={() => profilePictureInputRef.current.click()}
-                    >
+                    <div className="profile-picture-container" >
                         <div
                             className="profile-picture"
+                            onClick={() => profilePictureInputRef.current && profilePictureInputRef.current.click()}
                             style={{
-                                backgroundImage: `url(${previewImageUrl})`,  // 기존 이미지 또는 새 이미지를 미리보기
+                                backgroundImage: `url(${previewImageUrl})`,
                             }}
                         ></div>
                     </div>
-                    <label className="upload-label" htmlFor="profile-picture-input">
-                        프로필 사진 변경
-                    </label>
                     <input
                         type="file"
                         id="profile-picture-input"
@@ -159,17 +155,19 @@ const EditProfile = () => {
 
                     <div className="edit-form-group">
                         <label htmlFor="address">주소</label>
-                        <input
-                            type="text"
-                            id="address"
-                            name="address"
-                            value={profileData.address}
-                            onChange={handleInputChange}
-                            placeholder="주소를 입력하거나 버튼을 클릭하세요"
-                        />
-                        <button type="button" className="address-btn" onClick={handleComplete}>
-                            주소 찾기
-                        </button>
+                        <div className="address-group">
+                            <input
+                                type="text"
+                                id="address"
+                                name="address"
+                                value={profileData.address}
+                                onChange={handleInputChange}
+                                placeholder="주소를 입력하거나 버튼을 클릭하세요"
+                            />
+                            <button type="button" className="address-btn" onClick={handleComplete}>
+                                주소 찾기
+                            </button>
+                        </div>
                     </div>
 
                     <div className="edit-form-group">

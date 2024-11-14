@@ -8,19 +8,9 @@ const MyPage = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [profileImage, setProfileImage] = useState('');
-    // const defaultImg = `http://${window.location.hostname}:7777${loginUser.pImg}`;
 
-    useEffect(()=>{
-        console.log(profileImage);
-        
-    }, [profileImage])
     useEffect(() => {
-        console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-        
         if (loginUser) {
-            console.log(loginUser);
-            
-            // P_IMG 경로를 백엔드 주소로 수정
             setProfileImage(loginUser.pImg ? `http://${window.location.hostname}:7777${loginUser.pImg}` : `/img/TEST.JPG`);
             setName(loginUser.memberName || '');
             setEmail(loginUser.email || '');
@@ -29,7 +19,7 @@ const MyPage = () => {
 
     return (
         <div className="mypage-container">
-            <div className='mypage-main'>
+            <div className="mypage-main">
                 <h1>My Page</h1>
 
                 <div className="profile-section">
@@ -38,18 +28,19 @@ const MyPage = () => {
                     ) : (
                         <div className="profile-picture-placeholder"></div>
                     )}
-
-                    <h2>이름 : {name}</h2><br />
+                    <h2>이름 : {name}</h2>
                     <p>등급 : VIP</p>
                     <p>이메일: {email}</p>
                 </div>
 
-                <Link to='/projectHistory'><button>사용 기록</button></Link>
-                <Link to='/EditProfile'><button>프로필 수정</button></Link>
-                <Link to='/ChangePwd'><button>비밀번호 변경</button></Link>
+                <div className="button-container">
+                    <Link to='/projectHistory'><button>사용 기록</button></Link>
+                    <Link to='/EditProfile'><button>프로필 수정</button></Link>
+                    <Link to='/ChangePwd'><button>비밀번호 변경</button></Link>
+                </div>
             </div>
         </div>
     );
-}
+};
 
 export default MyPage;
