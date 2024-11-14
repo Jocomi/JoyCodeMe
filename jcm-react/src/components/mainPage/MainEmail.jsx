@@ -72,7 +72,7 @@ const MainEmail =() => {
                 <input type="text" name="name" placeholder="Name" value={formData.name} onChange={handleChange} required/>
                 <input type="text" name="role" placeholder="Your Role" value={formData.role} onChange={handleChange} required/>
                 <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} required/>
-                <input type="text" name="industry" placeholder="Industry" value={formData.industry} onChange={handleChange} required/>
+                <input type="text" name="industry" placeholder="Company" value={formData.industry} onChange={handleChange} required/>
                 <textarea name="message" placeholder="Message" value={formData.message} onChange={handleChange} required></textarea>
                 <button type="submit">Let's meet us ▶▶</button>
             </form>
