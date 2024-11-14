@@ -63,5 +63,11 @@
         SET P_IMG = #{imagePath}
         WHERE MEMBER_ID = #{memberId}
     </update>
+    
+    <update id="updatePassword" parameterType="Member">
+        UPDATE MEMBER
+        SET MEMBER_PWD = #{memberPwd}
+        WHERE MEMBER_ID = #{memberId}
+    </update>
 
 </mapper>

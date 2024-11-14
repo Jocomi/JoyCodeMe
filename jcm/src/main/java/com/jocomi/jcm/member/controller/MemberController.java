@@ -183,5 +183,21 @@ public class MemberController {
 			return new Gson().toJson("Google 로그인에 실패했습니다.");
 		}
 	}
+	
+	@PostMapping("/changePassword")
+	public ResponseEntity<String> changePassword(@RequestBody Map<String, String> passwords) {
+	    String memberId = passwords.get("memberId");
+	    String currentPwd = passwords.get("currentPwd");
+	    String newPwd = passwords.get("newPwd");
 
+	    // 비밀번호 변경 서비스 호출
+	    String resultMessage = mService.changePassword(memberId, currentPwd, newPwd);
+
+	    // 결과에 따른 응답 반환
+	    if (resultMessage.equals("비밀번호가 성공적으로 변경되었습니다. 다시 로그인해주세요.")) {
+	        return ResponseEntity.ok(new Gson().toJson(Map.of("message", resultMessage)));
+	    } else {
+	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Gson().toJson(Map.of("message", resultMessage)));
+	    }
+	}
 }

@@ -35,4 +35,6 @@ public interface MemberMapper {
     // 프로필 이미지 경로 업데이트 메서드
     int updateProfileImage(@Param("memberId") String memberId, @Param("imagePath") String imagePath);
 
+	int updatePassword(Member member);
+
 }

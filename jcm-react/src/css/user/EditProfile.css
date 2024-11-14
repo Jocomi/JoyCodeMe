@@ -1,14 +1,15 @@
-.edit-profile-container{
+.edit-profile-container {
   background-color: white;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 50px;
+  padding: 20px;
 }
+
 .edit-profile-main {
-  
-  width: 50%;
+  width: 100%;
+  max-width: 600px;
   background-color: #ffffff;
   border-radius: 15px;
   padding: 40px;
@@ -17,7 +18,7 @@
 }
 
 .edit-profile-main h1 {
-  font-size: 2.5rem;
+  font-size: 2rem;
   margin-bottom: 30px;
   color: #000000;
 }
@@ -31,7 +32,7 @@
   font-size: 1rem;
   color: #000000;
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 8px; /* 모든 필드의 라벨과 입력 필드 사이 간격을 동일하게 설정 */
 }
 
 .edit-profile-main input[type="text"],
@@ -45,8 +46,7 @@
   color: #000000;
   font-size: 1rem;
   box-sizing: border-box;
-  margin-bottom: 10px;
-  border: 1px black solid;
+  border: 1px solid black;
 }
 
 .edit-profile-main input[type="text"]:focus,
@@ -56,8 +56,40 @@ input[type="file"]:focus {
   border: 2px solid #414141;
 }
 
+/* 주소 입력 및 버튼 정렬 */
+.address-group {
+  display: flex;
+  align-items: center;
+}
+
+.address-group input[type="text"] {
+  flex: 1;
+  padding: 12px;
+  border-radius: 5px;
+  border: 1px solid black;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.address-btn {
+  padding: 12px;
+  font-size: 1rem;
+  cursor: pointer;
+  border: 1px solid #000000;
+  background-color: #ffffff;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  height: 100%; /* 버튼 높이를 input 필드와 맞춤 */
+  margin-left: 10px; /* input 필드와 버튼 사이의 간격 */
+}
+
+.address-btn:hover {
+  background-color: #c9c9c9;
+}
+
+/* 버튼 스타일 */
 .edit-profile-main button {
-  background-color:  #ffffff;
+  background-color: #ffffff;
   border: 1px solid #000000;
   color: #000000;
   padding: 12px 25px;
@@ -73,20 +105,14 @@ input[type="file"]:focus {
   transform: scale(1.05);
 }
 
-/* 프로필 사진 스타일 */
-.edit-profile-main .profile-picture-main {
-  position: relative;
-  width: 150px;
-  height: 150px;
-  margin: 0 auto 30px;
-  cursor: pointer;
-}
-.profile-picture-container{
+.profile-picture-container {
   display: flex;
   justify-content: center;
   margin-bottom: 10px;
 }
+
 .edit-profile-main .profile-picture {
+  cursor: pointer;
   width: 150px;
   height: 150px;
   border-radius: 50%;
@@ -96,28 +122,46 @@ input[type="file"]:focus {
   border: 2px solid #000000;
 }
 
-.edit-profile-main #profile-picture-input {
-  display: none;
+/* 반응형 설정 */
+@media (max-width: 768px) {
+  .edit-profile-main {
+      padding: 20px;
+  }
+
+  .edit-profile-main h1 {
+      font-size: 1.8rem;
+  }
+
+  .profile-picture-container .profile-picture {
+      width: 120px;
+      height: 120px;
+  }
+
+  .address-group {
+      flex-direction: column;
+      align-items: stretch;
+  }
+
+  .address-group input[type="text"],
+  .address-btn {
+      width: 100%;
+      margin: 5px 0;
+  }
 }
 
-.edit-profile-main .upload-label {
-  cursor: pointer;
-  background-color: #ffffff;
-  color: #000000;
-  padding: 12px 25px;
-  border-radius: 5px;
-  transition: background-color 0.3s;
-  border: 1px solid #000000;
-  display: inline-block;
-  text-align: center;
-}
+@media (max-width: 480px) {
+  .edit-profile-main h1 {
+      font-size: 1.6rem;
+  }
 
-.edit-profile-main .upload-label:hover {
-  background-color: #c9c9c9;
-}
+  .profile-picture-container .profile-picture {
+      width: 100px;
+      height: 100px;
+  }
 
-/* 드래그 앤 드롭 시 스타일 변경 */
-.edit-profile-main .profile-picture.dragging {
-  border-color: #eeeeee;
-  background-color: #222;
+  .edit-profile-main button,
+  .address-btn {
+      font-size: 0.8rem;
+      padding: 8px;
+  }
 }
