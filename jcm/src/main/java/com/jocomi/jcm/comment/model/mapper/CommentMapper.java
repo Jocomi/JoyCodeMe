@@ -12,9 +12,6 @@ import com.jocomi.jcm.comment.model.vo.BoardComment;
 @Mapper
 public interface CommentMapper {
 
-	
-		
-		
 		ArrayList<BoardComment> selectFComment(int postNo);
 		
 		ArrayList<BoardComment> selectPComment(int postNo);
