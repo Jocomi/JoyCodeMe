@@ -12,8 +12,8 @@
     </select>
 
     <!-- 신규 자유 게시글 등록 -->
-    <insert id="enrollfreeBoard" useGeneratedKeys="true" keyProperty="postNo">
-        INSERT INTO FREE_BOARD (POST_NO, MEMBER_ID, POST_TITLE, POST_CONTENT, IMG_FILE, POST_TIME, POST_COUNT, STATUS)
+    <insert id="enrollfreeBoard">
+        INSERT INTO FREE_BOARD (POST_NO, MEMBER_ID, POST_TITLE, POST_CONTENT, IMG_FILE, POST_TIME, COUNT_VIEW, STATUS)
         VALUES (FRE_POST_NO.NEXTVAL, #{memberId}, #{postTitle}, #{postContent}, #{imgFile}, DEFAULT, DEFAULT, #{status})
     </insert>
 
