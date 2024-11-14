@@ -92,8 +92,8 @@ const EnrollPost = () => {
     console.log(formData)
     try {
       const url = postNo
-        ? `http://localhost:7777/edit/${boardType}/${postNo}`
-        : `http://localhost:7777/enroll${boardType}`;
+        ? `http://${window.location.hostname}:7777/edit/${boardType}/${postNo}`
+        : `http://${window.location.hostname}:7777/enroll${boardType}`;
       
       const method = postNo ? 'put' : 'post';
 

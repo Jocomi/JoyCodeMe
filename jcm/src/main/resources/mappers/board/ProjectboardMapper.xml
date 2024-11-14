@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jocomi.jcm.board.model.mapper.ProjectBoardMapper">
+
+  <!-- 모든 프로젝트 게시글 조회 -->
+    <select id="selectPB" resultType="com.jocomi.jcm.board.model.vo.ProjectBoard">
+        SELECT * FROM PROJECT_BOARD
+    </select>
+
+    <!-- 특정 프로젝트 게시글 조회 -->
+    <select id="getProjectBoard" resultType="com.jocomi.jcm.board.model.vo.ProjectBoard">
+        SELECT * FROM PROJECT_BOARD WHERE POST_NO = #{postNo}
+    </select>
+
+    <!-- 신규 프로젝트 게시글 등록 -->
+    <insert id="enrollProjectBoard" useGeneratedKeys="true" keyProperty="postNo">
+        INSERT INTO PROJECT_BOARD (POST_NO, MEMBER_ID, POST_TITLE, POST_CONTENT, IMG_FILE, POST_TIME, COUNT_VIEW, PRIVATE_PROJECT)
+        VALUES (PRO_POST_NO.NEXTVAL, #{memberId}, #{postTitle}, #{postContent}, #{imgFile}, DEFAULT, DEFAULT, #{status})
+    </insert>
+
+    <!-- 조회수 증가 -->
+    <update id="proViewCount">
+        UPDATE PROJECT_BOARD SET COUNT_VIEW = COUNT_VIEW + 1 WHERE POST_NO = #{postNo}
+    </update>
+
+
+</mapper>

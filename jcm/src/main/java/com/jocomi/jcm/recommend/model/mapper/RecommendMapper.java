@@ -13,20 +13,19 @@ import com.jocomi.jcm.recommend.model.vo.Recommend;
 public interface RecommendMapper {
 
 	
-	@Select("SELECT COUNT(*) FROM USER_RECOMMEND WHERE MEMBER_ID = #{memberId} AND POST_NO = #{postNo} AND BOARD_TYPE = #{boardType}")
+
 	int selectRecommend(Recommend recommend);
 	
-	@Insert("INSERT INTO USER_RECOMMEND (MEMBER_ID, POST_NO, BOARD_TYPE)"
-			+ "VALUES (#{memberId}, #{postNo}, #{boardType})")
+	
 	int addRecommendUser(Recommend recommend);
 
-	@Delete("DELETE FROM USER_RECOMMEND WHERE MEMBER_ID = #{memberId}  AND POST_NO = #{postNo}  AND BOARD_TYPE = #{boardType}")
+	
 	int deleteRecommendUser(Recommend recommend);
 
-	@Update("UPDATE ${boardType}_BOARD SET RECOMMEND = RECOMMEND + 1 WHERE POST_NO = #{postNo}")
+
 	void addRecommend(Recommend recommend);
 
-	@Update("UPDATE ${boardType}_BOARD SET RECOMMEND = RECOMMEND - 1 WHERE POST_NO = #{postNo}")
+	
 	void deleteRecommend(Recommend recommend);
 	
 	

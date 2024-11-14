@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jocomi.jcm.board.model.mapper.AnnouncementBoardMapper">
+
+  <!-- 모든 공지사항 조회 -->
+    <select id="selectAB" resultType="com.jocomi.jcm.board.model.vo.AnnouncementBoard">
+        SELECT * FROM ANNOUNCEMENT_BOARD
+    </select>
+
+    <!-- 특정 게시글 조회 -->
+    <select id="selectAnnouncementById" resultType="com.jocomi.jcm.board.model.vo.AnnouncementBoard">
+        SELECT * FROM ANNOUNCEMENT_BOARD WHERE POST_NO = #{postNo}
+    </select>
+
+    <!-- 게시글 비활성화 -->
+    <update id="deactivatePost">
+        UPDATE ${boardType}_BOARD SET STATUS = 'N' WHERE POST_NO = #{postNo}
+    </update>
+
+    <!-- 새로운 공지사항 등록 -->
+    <insert id="enrollAnnouncement" useGeneratedKeys="true" keyProperty="postNo">
+        INSERT INTO ANNOUNCEMENT_BOARD (POST_NO, MEMBER_ID, POST_TITLE, POST_CONTENT, IMG_FILE, POST_TIME, COUNT_VIEW, STATUS)
+        VALUES (ANN_POST_NO.NEXTVAL, #{memberId}, #{postTitle}, #{postContent}, #{imgFile}, DEFAULT, DEFAULT, #{status})
+    </insert>
+
+    <!-- 게시글 수정 -->
+    <update id="updateAnnouncement">
+        UPDATE ANNOUNCEMENT_BOARD
+        SET POST_TITLE = #{announcement.postTitle},
+            POST_CONTENT = #{announcement.postContent},
+            STATUS = #{announcement.status},
+            IMG_FILE = #{announcement.imgFile}
+        WHERE POST_NO = #{postNo}
+    </update>
+
+    <!-- 게시글 조회수 증가 -->
+    <update id="annViewCount">
+        UPDATE ANNOUNCEMENT_BOARD SET COUNT_VIEW = COUNT_VIEW + 1 WHERE POST_NO = #{postNo}
+    </update>
+    
+</mapper>
