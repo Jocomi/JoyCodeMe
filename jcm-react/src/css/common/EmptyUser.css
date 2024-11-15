@@ -1,0 +1,25 @@
+.emptyUser-container {
+  width: 100%;
+  background-color: rgb(243, 243, 243);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px; 
+}
+
+.emptyUser-main {
+  width: 100%;
+  max-width: 1000px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(82, 82, 82, 0.7);
+  text-align: center;
+}
+
+.emptyUser-main h1 {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  color: rgb(255, 0, 0);
+}

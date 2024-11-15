@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import '../../css/payment/PaymentMethod.css';
+import instance from '../../shared/axios';
 
 const PaymentTable = ({ cards, handleDeleteCard }) => (
     <table>
@@ -78,6 +79,10 @@ const AddAccountForm = ({ newAccount, handleAccountChange, handleAddAccount }) =
 );
 
 const PaymentMethod = () => {
+    useEffect(() => {
+        instance.get("http://localhost:3000/");
+      }, []);
+
     const [activeTab, setActiveTab] = useState('card'); // 기본 탭 설정
 
     const [cards, setCards] = useState([
