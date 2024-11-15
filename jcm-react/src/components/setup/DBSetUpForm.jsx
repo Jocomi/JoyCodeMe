@@ -24,7 +24,6 @@ const DBSetUpForm = (props) => {
 
             const result = await response.text();
 
-            console.log(result);
             if (response.status === 200) {  // 성공 시 처리
                 setTimeout(() => { // 파일이 저장될 때까지 딜레이
                     setResponseData(result); // 서버 응답 데이터를 state에 저장

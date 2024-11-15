@@ -4,6 +4,7 @@ import { FadeLoader } from "react-spinners";
 import instance from '../../shared/axios';
 
 const WebSetUpForm = (props) => {
+    const request = props.question;
     useEffect(() => {
         instance.get("http://localhost:3000/");
       }, []);
@@ -13,7 +14,7 @@ const WebSetUpForm = (props) => {
     useEffect(() => {
         const fetchData = async () => {
             const data = {
-                request: props.question
+                request: request
             };
             
             const response = await fetch("http://localhost:7777/view", {
@@ -24,7 +25,6 @@ const WebSetUpForm = (props) => {
 
             const result = await response.text();
 
-            console.log(result);
             if (response.status === 200) {  // 성공 시 처리
                 setTimeout(() => { // 파일이 저장될 때까지 딜레이
                     setResponseData(result); // 서버 응답 데이터를 state에 저장
@@ -62,6 +62,31 @@ const WebSetUpForm = (props) => {
         }
     };
 
+    const saveData = async (url) => {
+        const memberObj = JSON.parse(sessionStorage.getItem('loginUser'));
+        const memberId = memberObj.memberId;
+
+        const data = {
+            memberId: memberId,
+            request: request,
+            url: url
+        };
+        
+        const response = await fetch("http://localhost:7777/save", {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+
+        const result = await response.text();
+
+        if (response.status === 200) {  // 성공 시 처리
+            alert("성공적으로 저장하였습니다.")
+        } else {
+            alert("요청 실패... 요청을 확인하세요!");
+        }
+    };
+
     return (
         <div className="websetupform-container">
             <header className="websetupform-header">
@@ -88,8 +113,11 @@ const WebSetUpForm = (props) => {
                 </div>
 
                 <p className="final-note">Once you've filled out the information, our team will guide you through the remaining steps to launch your site.</p>
-
+                <div>
+                <button onClick={() => saveData("http://localhost:7777/show?name=" + responseData)}>Save</button>
+                &nbsp;
                 <button onClick={() => downloadHandler("http://localhost:7777/show?name=" + responseData)}>Export</button>
+                </div>
             </main>
         </div>
     );

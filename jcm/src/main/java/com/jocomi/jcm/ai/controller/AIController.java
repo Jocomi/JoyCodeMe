@@ -1,4 +1,4 @@
-package com.jocomi.jcm.api.controller;
+package com.jocomi.jcm.ai.controller;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.jocomi.jcm.ai.model.vo.AI;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController	
@@ -367,4 +368,11 @@ public class AIController {
             return null;
         }
     }
+    
+    @PostMapping(value = "/save")
+    public String saveRequest(@RequestBody AI ai) {
+    	System.out.println(ai);
+    	return null;
+    }
+    
 }
