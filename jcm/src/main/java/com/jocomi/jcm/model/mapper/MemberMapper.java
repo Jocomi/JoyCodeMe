@@ -37,4 +37,10 @@ public interface MemberMapper {
 
 	int updatePassword(Member member);
 
+	int insertNaverMember(Member member);
+
+	int selectNaverMember(Member member);
+
+	int editNaverProfile(Member member);
+
 }

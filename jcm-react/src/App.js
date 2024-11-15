@@ -40,6 +40,9 @@ import { createContext, useEffect, useState } from 'react';
 import FunctionSetUpForm from './components/setup/FunctionSetUpForm';
 import DBSetUpForm from './components/setup/DBSetUpForm';
 
+import NaverLoginButton from './components/user/NaverLoginButton';
+import NaverCallback from './components/user/NaverCallback';
+
 export const LoginUser = createContext();
 export const Requested = createContext();
 
@@ -123,6 +126,9 @@ const [question, setQuestion] = useState("");
                 <Route path="/webSetUp/form" element={<WebSetUpForm question={question}/>} />
                 <Route path="/functionSetUp/form" element={<FunctionSetUpForm question={question}/>} />
                 <Route path="/dbSetUp/form" element={<DBSetUpForm question={question}/>} />
+
+                <Route path='/naver' component={NaverLoginButton} />
+                <Route path="/naver/callback" element={<NaverCallback />} />
               </Routes>
             </main>
           <FooterPage />

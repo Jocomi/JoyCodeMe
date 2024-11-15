@@ -69,5 +69,17 @@
         SET MEMBER_PWD = #{memberPwd}
         WHERE MEMBER_ID = #{memberId}
     </update>
+    
+    <!--  네이버 회원가입 쿼리  -->
+<insert id="insertNaverMember" parameterType="Member"> INSERT INTO MEMBER (MEMBER_ID, MEMBER_PWD, MEMBER_NAME, EMAIL, PHONE, BIRTH, ADDRESS, STATUS) VALUES (#{memberId}, 1234, #{memberName}, #{email}, #{phone}, SYSDATE, '역삼', #{status}) </insert>
+<!--  네이버 로그인 쿼리  -->
+<update id="editNaverProfile" parameterType="Member">
+        UPDATE MEMBER
+        SET EMAIL = #{email},
+            PHONE = #{phone}
+        WHERE MEMBER_ID = #{memberId}
+    </update>
+
+
 
 </mapper>
