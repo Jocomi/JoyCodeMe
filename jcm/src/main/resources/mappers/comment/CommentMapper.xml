@@ -27,13 +27,13 @@
     <!-- FREE_COMMENT 삽입 -->
     <insert id="insertFComment" parameterType="map">
         INSERT INTO FREE_COMMENT (COMMENT_NO, MEMBER_ID, POST_NO, COMMENT_TEXT, COMMENT_TIME, STATUS)
-        VALUES (PROC_POST_NO.NEXTVAL, #{comment.memberId}, #{postNo}, #{comment.commentText}, SYSDATE, 'Y')
+        VALUES (FREC_POST_NO.NEXTVAL, #{comment.memberId}, #{postNo}, #{comment.commentText}, SYSDATE, 'Y')
     </insert>
 
     <!-- ENQUIRY_COMMENT 삽입 -->
     <insert id="insertEComment" parameterType="map">
         INSERT INTO ENQUIRY_COMMENT (COMMENT_NO, MEMBER_ID, POST_NO, COMMENT_TEXT, COMMENT_TIME, STATUS)
-        VALUES (PROC_POST_NO.NEXTVAL, #{comment.memberId}, #{postNo}, #{comment.commentText}, SYSDATE, 'Y')
+        VALUES (PROE_POST_NO.NEXTVAL, #{comment.memberId}, #{postNo}, #{comment.commentText}, SYSDATE, 'Y')
     </insert>
 
 </mapper>
