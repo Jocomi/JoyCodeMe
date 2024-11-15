@@ -3,8 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { LoginUser } from '../../App';
 import AddressModal from './AddressModal';
 import '../../css/user/EditProfile.css';
+import instance from '../../shared/axios';
 
 const EditProfile = () => {
+    useEffect(() => {
+        instance.get("http://localhost:3000/");
+      }, []);
+
     const profilePictureInputRef = useRef(null);
     const navigate = useNavigate();
     const { data: loginUser, setData: setLoginUser } = useContext(LoginUser);

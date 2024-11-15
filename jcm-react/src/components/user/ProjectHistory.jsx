@@ -1,6 +1,12 @@
+import { useEffect } from 'react';
 import '../../css/user/ProjectHistory.css';
+import instance from '../../shared/axios';
 
 const ProjectHistory = () => {
+  useEffect(() => {
+    instance.get("http://localhost:3000/");
+  }, []);
+  
     return(
         <>
           <div className="history-main">
