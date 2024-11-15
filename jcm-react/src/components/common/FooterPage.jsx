@@ -10,22 +10,23 @@ const FooterPage = () => {
             <div className="box">
                 Learn
                 <br /><br />
-                <a href="#">Introduction</a><br />
-                <a href="#">Practice</a><br />
-                <a href="/support/questions">Ask and Questions</a><br />
+                <a href="/introduce">Introduction</a><br />
+                <a href="/suggestion">Practice</a><br />
+                <a href="/enquiryBoard">Ask and Questions</a><br />
             </div>
             <div className="box">
                 Code
                 <br /><br />
-                <a href="#">Code Management</a><br/>
-                <a href="#">Libraries</a><br/>
-                <a href="#">API</a><br/>
+                <a href="projectHistory">Code Management</a><br/>
+                <a href="techIntro">API</a><br/>
             </div>
             <div className="box">
                 More
                 <br/><br/>
-                <a href="/introduce">Logo and Brand</a><br/>
-                <a href="#">Code Producer</a><br/>
+                <a href="/webSetUp">Web Code Producer</a><br/>
+                <a href="/functionSetUp">Function Code Producer</a><br/>
+                <a href="/dbSetUp">Database Code Producer</a><br/>
+
             </div>
             <div className="box">
                 Follow

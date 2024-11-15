@@ -27,7 +27,7 @@
 }
 
 /* 기능 섹션 레이아웃 */
-.feature-section {
+.tech-intro-container .feature-section {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 30px;
@@ -37,41 +37,45 @@
 }
 
 /* 카드 스타일 */
-.feature-card {
+.tech-intro-container .feature-card {
     background-color: #ffffff; /* 카드 배경을 순백색으로 설정 */
     border-radius: 12px;
     padding: 30px;
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 효과 */
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.feature-card:hover {
+.tech-intro-container .feature-card:hover {
     transform: translateY(-8px); /* 호버 시 약간 위로 올라오는 효과 */
     box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.15); /* 호버 시 그림자 강화 */
 }
 
-.feature-icon {
+.tech-intro-container .feature-icon {
     font-size: 2.2em;
     color: #4db1f9; /* 밝은 포인트 컬러로 아이콘 강조 */
     margin-bottom: 20px;
 }
 
-.feature-card h2 {
+.tech-intro-container .feature-card h2 {
     font-size: 1.6em;
     color: #333; /* 진한 텍스트 색상 */
     margin-bottom: 15px;
     font-weight: bold;
 }
 
-.feature-card p {
+.tech-intro-container .feature-card p {
     font-size: 1em;
     line-height: 1.6;
     color: #666; /* 중간 밝기의 회색 */
     margin-bottom: 20px;
 }
 
-.feature-card img {
+.tech-intro-container .feature-card img {
     width: 100%;
     max-width: 380px;
     border-radius: 10px;
@@ -80,7 +84,7 @@
 
 /* 반응형 설정 */
 @media (max-width: 768px) {
-    .feature-section {
+    .tech-intro-container .feature-section {
         grid-template-columns: 1fr; /* 작은 화면에서는 한 줄로 정렬 */
     }
 }
