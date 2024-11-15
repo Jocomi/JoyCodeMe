@@ -6,7 +6,7 @@ import instance from '../../shared/axios';
 
 const MyPage = () => {
     useEffect(() => {
-        instance.get("http://localhost:3000/");
+        instance.get(`http://${window.location.hostname}:3000/`);
       }, []);
 
     const { data: loginUser } = useContext(LoginUser);
@@ -29,18 +29,18 @@ const MyPage = () => {
             <div className="mypage-main">
                 <h1>My Page</h1>
 
-                <div className="profile-section">
+                <div className="mypage-profile-section">
                     {profileImage ? (
-                        <img src={profileImage} alt="프로필 사진" className="profile-picture" />
+                        <img src={profileImage} alt="프로필 사진" className="mypage-profile-picture" />
                     ) : (
-                        <div className="profile-picture-placeholder"></div>
+                        <div className="mypage-profile-picture-placeholder"></div>
                     )}
                     <h2>이름 : {name}</h2>
                     <p>등급 : VIP</p>
                     <p>이메일: {email}</p>
                 </div>
 
-                <div className="button-container">
+                <div className="mypage-button-container">
                     <Link to='/projectHistory'><button>사용 기록</button></Link>
                     <Link to='/EditProfile'><button>프로필 수정</button></Link>
                     {/* 소셜 로그인이 아닌 경우에만 비밀번호 변경 버튼 표시 */}
