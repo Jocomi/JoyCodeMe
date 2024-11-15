@@ -6,7 +6,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import AddressModal from './AddressModal';
 import { LoginUser } from '../../App';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
-import { jwtDecode } from 'jwt-decode';
+import { gapi } from 'gapi-script';
 import NaverLoginButton from './NaverLoginButton';
 
 const SignIn = () => {
@@ -29,6 +29,19 @@ const SignIn = () => {
     const [popup, setPopup] = useState(false);
     const [userInfo, setUserInfo] = useState(null);
     const [isFormValid, setIsFormValid] = useState(false); // 폼 유효성 검사 상태
+
+       // gapi 초기화
+       useEffect(() => {
+        function initializeGapiClient() {
+            gapi.load('client:auth2', () => {
+                gapi.client.init({
+                    clientId,
+                    scope: 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/user.phonenumbers.read',
+                });
+            });
+        }
+        initializeGapiClient();
+    }, [clientId])
 
     const userLogin = (user) => {
         userCtx.setData(user);
@@ -92,13 +105,64 @@ const SignIn = () => {
         }
     };
     /* 구글 로그인 부분 */
-    const GoogleLoginSuccess = (credentialResponse) => {
-        const decoded = jwtDecode(credentialResponse.credential);
-        setEmail(decoded.email || ''); 
-        setName(decoded.name || '');
-        userLogin(decoded);
-        navigate('/');
+    const GoogleLoginSuccess = async (credentialResponse) => {
+        console.log("Credential Response:", credentialResponse);
+        
+        const token = credentialResponse.credential;
+        if (!token) {
+            console.error("No token received");
+            return;
+        }
+    
+        // gapi를 통해 Google 로그인 정보 및 액세스 토큰 가져오기
+        const authResponse = gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse();
+        const accessToken = authResponse.access_token;  // Access token 가져오기
+    
+        if (!accessToken) {
+            console.error("No access token received");
+            return;
+        }
+    
+        try {
+            // Google People API 호출하여 사용자 정보 받아오기
+            const peopleResponse = await axios.get('https://people.googleapis.com/v1/people/me?personFields=names,emailAddresses,phoneNumbers', {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                },
+            });
+    
+            const userData = peopleResponse.data;
+            const googleUser = {
+                token: token,
+                accessToken: accessToken,
+                email: userData.emailAddresses ? userData.emailAddresses[0].value : 'No email',
+                name: userData.names ? userData.names[0].displayName : 'No name',
+                googleId: userData.resourceName.split('/')[1],
+                phone: userData.phoneNumbers ? userData.phoneNumbers[0].value : "010-0000-0000",
+                birth: "2000-01-01", // 기본값 2000-01-01
+            };
+    
+            console.log("Google User Data:", googleUser);
+
+            const response = await axios.post('http://localhost:7777/api/auth/google', googleUser, {
+                headers: { 'Content-Type': 'application/json' },
+            });
+    
+            if (response.status === 200) {
+                console.log("User data saved successfully");
+                sessionStorage.setItem('loginUser', JSON.stringify(response.data));
+                navigate('/');
+                window.location.reload();
+            }
+        } catch (error) {
+            console.error("Error fetching user profile from Google:", error);
+            alert("Google 로그인에 실패했습니다. 다시 시도해주세요.");
+        }
     };
+    
+    
+    
+    
     
     const handlePasswordChange = (e) => {
         setPassword(e.target.value);
@@ -340,9 +404,9 @@ const SignIn = () => {
                     </form>
                     <NaverLoginButton />
                     <GoogleLogin
-                        onSuccess={GoogleLoginSuccess}
-                        onError={() => console.log("Google 로그인 실패")}
-                        scope="https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"
+                        onSuccess={GoogleLoginSuccess}  // 로그인 성공 시 호출
+                        onError={(error) => console.log("Google 로그인 실패", error)}
+                        scope="https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/user.phonenumbers.read https://www.googleapis.com/auth/user.birthday.read"
                     />
                     <div className="toggle-link" onClick={toggleForms}>Create an account?</div>
                 </div>

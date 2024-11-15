@@ -166,40 +166,6 @@ public class MemberController {
 		}
 	}
 	
-
-	@PostMapping(value = "/api/auth/google", produces = "application/json;charset=UTF-8")
-	public String googleLogin(@RequestBody Map<String, String> payload) {
-	    try {
-	        String token = payload.get("token");
-	        String[] splitToken = token.split("\\.");
-	        String payloadJson = new String(Base64.getUrlDecoder().decode(splitToken[1]));
-	        JSONObject claims = new JSONObject(payloadJson);
-
-	        Member member = new Member();
-	        member.setMemberId(claims.getString("sub"));
-	        member.setEmail(claims.getString("email"));
-	        member.setMemberName(claims.optString("name", "Unknown"));
-	        member.setPImg(claims.optString("picture", "/img/default-profile.png"));
-	        member.setMemberPwd("default_password"); // 기본 비밀번호 설정
-
-	        // 전화번호 확인 및 기본값 설정
-	        String phoneNumber = claims.optString("phone_number", null);
-	        if (phoneNumber == null) {
-	            phoneNumber = "010-0000-0000"; // 기본 전화번호 설정
-	        }
-	        member.setPhone(phoneNumber);
-
-	        if (mService.checkUserById(member.getMemberId()) == 0) {
-	            mService.registerMember(member); // 신규 사용자 등록
-	        }
-
-	        return new Gson().toJson(member);
-	    } catch (Exception e) {
-	        log.error("Google login error:", e);
-	        return new Gson().toJson("Google 로그인에 실패했습니다.");
-	    }
-	}
-	
 	@ResponseBody
 	@PostMapping(value = "/api/naver/callback", produces = "application/json;charset=UTF-8")
 	public String naverCallback(@RequestBody Map<String, String> data, HttpSession session) {
@@ -245,6 +211,68 @@ public class MemberController {
 	        }
 	    }
 	
+	@PostMapping(value = "/api/auth/google", produces = "application/json;charset=UTF-8")
+	public String googleLogin(@RequestBody Map<String, String> payload) {
+	    try {
+	        String googleId = payload.get("googleId");
+	        String accessToken = payload.get("accessToken");
+
+	        
+	        if (googleId == null || googleId.isEmpty()) {
+	            return new Gson().toJson("Google ID is missing");
+	        }
+
+	        if (accessToken == null || accessToken.isEmpty()) {
+	            return new Gson().toJson("Access token is missing");
+	        }
+
+	       
+	        String phoneNumber = "010-0000-0000";
+	        String birth = "2000-01-01";
+	        String address = "역삼";
+
+	        String apiUrl = "https://people.googleapis.com/v1/people/me?personFields=phoneNumbers,birthdays";
+	        RestTemplate restTemplate = new RestTemplate();
+	        HttpHeaders headers = new HttpHeaders();
+	        headers.set("Authorization", "Bearer " + accessToken); // Use the access token
+	        HttpEntity<String> entity = new HttpEntity<>(headers);
+
+	        ResponseEntity<String> response = restTemplate.exchange(apiUrl, HttpMethod.GET, entity, String.class);
+	        if (response.getStatusCode() == HttpStatus.OK) {
+	            JSONObject googlePersonData = new JSONObject(response.getBody());
+	            if (googlePersonData.has("phoneNumbers")) {
+	                phoneNumber = googlePersonData.getJSONArray("phoneNumbers").getJSONObject(0).getString("value");
+	            }
+	            if (googlePersonData.has("birthdays")) {
+	                birth = googlePersonData.getJSONArray("birthdays").getJSONObject(0).getString("date");
+	            }
+	        }
+
+	        
+	        Member member = new Member();
+	        member.setMemberId(googleId);
+	        member.setEmail(payload.get("email"));
+	        member.setMemberName(payload.get("name")); 
+	        member.setPhone(phoneNumber);
+	        member.setPImg(payload.get("picture"));
+	        member.setBirth(birth);
+	        member.setMemberPwd("1234");
+	        member.setAddress(address);
+
+	        
+	        if (mService.checkUserById(member.getMemberId()) == 0) {
+	            mService.registerMember(member);
+	        }
+
+	        return new Gson().toJson(member); // Return the member data as JSON
+
+	    } catch (Exception e) {
+	        log.error("Google login error:", e);
+	        return new Gson().toJson("Google 로그인에 실패했습니다.");
+	    }
+	}
+	
+
 	private NaverProfile getNaverUserProfile(String accessToken) throws Exception {
 		String url = "https://openapi.naver.com/v1/nid/me";
 

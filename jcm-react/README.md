@@ -22,3 +22,5 @@
 # [2024.11.08] axios
 # [2024.11.08] react-daum-postcode
 # [2024.11.08] npm add react-spinners
+
+# [2024.11-15] gapi-script
