@@ -8,7 +8,7 @@
   padding: 20px; /* 작은 화면에서의 여백 추가 */
 }
 
-.mypage-main {
+.mypage-container .mypage-main {
   width: 100%;
   max-width: 600px;
   background-color: #ffffff;
@@ -19,24 +19,24 @@
 }
 
 /* 반응형 타이포그래피 */
-.mypage-main h1 {
+.mypage-container .mypage-main h1 {
   font-size: 2.5rem;
   margin-bottom: 30px;
   color: #000000;
 }
 
-.mypage-main p {
+.mypage-container .mypage-main p {
   font-size: 1rem;
   margin-bottom: 20px;
   color: #ccc;
 }
 
-.mypage-main .profile-section {
+.mypage-container .mypage-main .profile-section {
   margin-bottom: 30px;
 }
 
 /* 프로필 사진 반응형 설정 */
-.mypage-main .profile-picture {
+.mypage-container .mypage-main .profile-picture {
   width: 150px;
   height: 150px;
   border-radius: 50%;
@@ -47,26 +47,26 @@
   border: 2px solid #000000;
 }
 
-.mypage-main .profile-section h2 {
+.mypage-container .mypage-main .profile-section h2 {
   font-size: 1.4rem;
   margin-bottom: 10px;
   color: #000000;
 }
 
-.mypage-main .profile-section p {
+.mypage-container .mypage-main .profile-section p {
   font-size: 1.1rem;
   color: #000000;
 }
 
 /* 버튼 영역 반응형 설정 */
-.button-container {
+.mypage-container.button-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 10px; /* 버튼 사이 간격 */
 }
 
-.mypage-main button {
+.mypage-container .mypage-main button {
   background-color: #ffffff;
   border: 1px solid #bdbdbd;
   color: #000000;
@@ -79,35 +79,35 @@
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.mypage-main button:hover {
+.mypage-container .mypage-main button:hover {
   background-color: #cacaca;
   transform: scale(1.05);
 }
 
 /* 작은 화면에서의 반응형 설정 */
 @media (max-width: 768px) {
-  .mypage-main {
+  .mypage-container .mypage-main {
       padding: 20px; /* 내부 여백 축소 */
   }
 
-  .mypage-main h1 {
+  .mypage-container .mypage-main h1 {
       font-size: 2rem; /* 제목 크기 줄임 */
   }
 
-  .mypage-main .profile-picture {
+  .mypage-container .mypage-main .profile-picture {
       width: 120px;
       height: 120px;
   }
 
-  .mypage-main .profile-section h2 {
+  .mypage-container .mypage-main .profile-section h2 {
       font-size: 1.2rem;
   }
 
-  .mypage-main .profile-section p {
+  .mypage-container .mypage-main .profile-section p {
       font-size: 1rem;
   }
 
-  .mypage-main button {
+  .mypage-container.mypage-main button {
       font-size: 0.9rem;
       padding: 10px 15px;
   }
