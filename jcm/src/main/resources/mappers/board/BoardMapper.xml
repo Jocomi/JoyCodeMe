@@ -31,30 +31,30 @@
          INSERT INTO
     <choose>
         <when test="boardType == 'announcement'">
-            ANNOUNCEMENT_BOARD (POST_NO, MEMBER_ID, POST_TITLE, POST_CONTENT, IMG_FILE, POST_TIME, COUNT_VIEW, STATUS)
+            ANNOUNCEMENT_BOARD (POST_NO, MEMBER_ID, POST_TITLE, POST_CONTENT,  POST_TIME, COUNT_VIEW, STATUS)
             VALUES (ANN_POST_NO.NEXTVAL, #{board.memberId}, #{board.postTitle}, #{board.postContent}, 
-                    #{board.imgFile}, SYSDATE, 0, 'Y')
+                    SYSDATE, 0, 'Y')
         </when>
         <when test="boardType == 'free'">
-            FREE_BOARD (POST_NO, MEMBER_ID, POST_TITLE, POST_CONTENT, IMG_FILE, POST_TIME, COUNT_VIEW, RECOMMEND, STATUS)
+            FREE_BOARD (POST_NO, MEMBER_ID, POST_TITLE, POST_CONTENT,  POST_TIME, COUNT_VIEW, RECOMMEND, STATUS)
             VALUES (FRE_POST_NO.NEXTVAL, #{board.memberId}, #{board.postTitle}, #{board.postContent}, 
-                    #{board.imgFile}, SYSDATE, 0, 0, 'Y')
+                    SYSDATE, 0, 0, 'Y')
         </when>
         <when test="boardType == 'enquiry'">
-            ENQUIRY_BOARD (POST_NO, MEMBER_ID, POST_TITLE, POST_CONTENT, IMG_FILE, POST_TIME, COUNT_VIEW, RECOMMEND, PRIVATE_BOARD, STATUS)
+            ENQUIRY_BOARD (POST_NO, MEMBER_ID, POST_TITLE, POST_CONTENT,  POST_TIME, COUNT_VIEW, RECOMMEND, PRIVATE_BOARD, STATUS)
             VALUES (ENQ_POST_NO.NEXTVAL, #{board.memberId}, #{board.postTitle}, #{board.postContent}, 
-                    #{board.imgFile}, SYSDATE, 0, 0, 'N', 'Y')
+                    SYSDATE, 0, 0, 'N', 'Y')
         </when>
         <when test="boardType == 'project'">
-            PROJECT_BOARD (POST_NO, MEMBER_ID, POST_TITLE, POST_CONTENT, IMG_FILE, POST_TIME, COUNT_VIEW, RECOMMEND, PRIVATE_BOARD, STATUS)
+            PROJECT_BOARD (POST_NO, MEMBER_ID, POST_TITLE, POST_CONTENT,  POST_TIME, COUNT_VIEW, RECOMMEND, PRIVATE_BOARD, STATUS)
             VALUES (PRO_POST_NO.NEXTVAL, #{board.memberId}, #{board.postTitle}, #{board.postContent}, 
-                    #{board.imgFile}, SYSDATE, 0, 0, 'Y', 'Y')
+                    SYSDATE, 0, 0, 'Y', 'Y')
         </when>
         <otherwise>
             <!-- 기본 값 설정 (혹은 예외 처리) -->
-            INSERT INTO DEFAULT_BOARD (POST_NO, MEMBER_ID, POST_TITLE, POST_CONTENT, IMG_FILE, POST_TIME, COUNT_VIEW, STATUS)
+            INSERT INTO DEFAULT_BOARD (POST_NO, MEMBER_ID, POST_TITLE, POST_CONTENT,  POST_TIME, COUNT_VIEW, STATUS)
             VALUES (SEQ_DEFAULT_POST_NO.NEXTVAL, #{board.memberId}, #{board.postTitle}, #{board.postContent}, 
-                    #{board.imgFile}, SYSDATE, 0, 'Y')
+                    SYSDATE, 0, 'Y')
         </otherwise>
     </choose>
     </insert>
