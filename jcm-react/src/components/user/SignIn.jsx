@@ -1,11 +1,13 @@
 import { useContext, useEffect, useState } from 'react';
 import '../../css/user/SignIn.css';
 import 'font-awesome/css/font-awesome.min.css';
-import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { useLocation, useNavigate } from 'react-router-dom'
 import AddressModal from './AddressModal';
 import { LoginUser } from '../../App';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from 'jwt-decode';
+import NaverLoginButton from './NaverLoginButton';
 
 const SignIn = () => {
     const navigate = useNavigate();
@@ -23,7 +25,9 @@ const SignIn = () => {
     const [emailError, setEmailError] = useState('');
     const [phoneError, setPhoneError] = useState('');
     const userCtx = useContext(LoginUser);
+    const location = useLocation();
     const [popup, setPopup] = useState(false);
+    const [userInfo, setUserInfo] = useState(null);
     const [isFormValid, setIsFormValid] = useState(false); // 폼 유효성 검사 상태
 
     const userLogin = (user) => {
@@ -60,6 +64,31 @@ const SignIn = () => {
         } catch (e) {
             console.log(e);
             alert("로그인 중 오류가 발생했습니다.");
+        }
+    };
+
+       // 네이버 로그인 후 URL에서 access_token을 추출하여 사용자 정보 가져오기
+       useEffect(() => {
+        const hash = location.hash;
+        if (hash.includes("access_token")) {
+            const token = new URLSearchParams(hash.substring(1)).get("access_token");
+            if (token) fetchUserProfile(token);
+        }
+    }, [location]);
+
+    const fetchUserProfile = async (token) => {
+        try {
+            const response = await axios.get("https://openapi.naver.com/v1/nid/me", {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+            const profile = response.data.response;
+            setUserInfo(profile);
+            userCtx.setData(profile); // 로그인 정보 저장
+            sessionStorage.setItem('loginUser', JSON.stringify(profile));
+            navigate('/'); // 메인 페이지로 리다이렉트
+        } catch (error) {
+            console.error("네이버 사용자 정보 가져오기 실패:", error);
+            alert("네이버 로그인에 실패했습니다. 다시 시도해주세요.");
         }
     };
     /* 구글 로그인 부분 */
@@ -309,6 +338,7 @@ const SignIn = () => {
                         </div>
                         <button type="button" className="form-btn" onClick={handlerLogin}>Sign In</button>
                     </form>
+                    <NaverLoginButton />
                     <GoogleLogin
                         onSuccess={GoogleLoginSuccess}
                         onError={() => console.log("Google 로그인 실패")}
