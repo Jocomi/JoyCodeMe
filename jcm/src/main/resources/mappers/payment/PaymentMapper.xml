@@ -7,6 +7,19 @@
         INSERT INTO PAYMENT (PAY_ID, MEMBER_ID, PAY_METHOD, PAY_PRODUCT, PAY_PRICE, PAY_TIME, PAY_STATUS)
         VALUES (PAY_CODE.NEXTVAL, #{memberId}, #{payMethod}, #{payProduct}, #{payPrice}, #{payTime}, #{payStatus})
     </insert>
+    
+    <!-- 결제 내역 조회 쿼리 -->
+    <select id="getAllPayments" resultType="Payment">
+        SELECT 
+            MEMBER_ID AS memberId,
+            PAY_METHOD AS payMethod,
+            PAY_PRODUCT AS payProduct,
+            PAY_PRICE AS payPrice,
+            PAY_TIME AS payTime,
+            PAY_STATUS AS payStatus
+        FROM 
+            PAYMENT
+    </select>
 
 </mapper>
  
