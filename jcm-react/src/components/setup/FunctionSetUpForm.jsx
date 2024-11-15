@@ -6,6 +6,7 @@ const FunctionSetUpForm = (props) => {
     const [responseData, setResponseData] = useState(""); // 서버 응답 데이터를 저장하는 state
 
     useEffect(() => {
+        console.log("여기까징");
         const fetchData = async () => {
             const data = {
                 request: props.question
@@ -19,7 +20,7 @@ const FunctionSetUpForm = (props) => {
 
             const result = await response.text();
 
-            console.log(result);
+            
            if (response.status === 200) {  // 성공 시 처리
                 setTimeout(() => { // 파일이 저장될 때까지 딜레이
                     setResponseData(result); // 서버 응답 데이터를 state에 저장

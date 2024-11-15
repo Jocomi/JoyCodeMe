@@ -1,9 +1,13 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import '../../css/setup/WebSetUp.css';
 import { Link } from 'react-router-dom';
 import { Requested } from '../../App';
+import instance from '../../shared/axios';
 
 const FunctionSetUp = () => {
+  useEffect(() => {
+    instance.get("http://localhost:3000/");
+  }, []);
 
   const [question, setQuestion] = useState("");
   const ctx = useContext(Requested);
