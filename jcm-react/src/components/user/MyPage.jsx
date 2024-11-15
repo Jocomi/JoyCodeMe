@@ -2,8 +2,13 @@ import React, { useContext, useEffect, useState } from 'react';
 import { LoginUser } from '../../App';
 import { Link } from 'react-router-dom';
 import '../../css/user/MyPage.css';
+import instance from '../../shared/axios';
 
 const MyPage = () => {
+    useEffect(() => {
+        instance.get("http://localhost:3000/");
+      }, []);
+
     const { data: loginUser } = useContext(LoginUser);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
