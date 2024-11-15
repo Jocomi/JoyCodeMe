@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import '../../css/setup/WebSetUpForm.css';
 import { FadeLoader } from "react-spinners";
+import instance from '../../shared/axios';
 
 const FunctionSetUpForm = (props) => {
+    useEffect(() => {
+        instance.get("http://localhost:3000/");
+      }, []);
+
     const [responseData, setResponseData] = useState(""); // 서버 응답 데이터를 저장하는 state
 
     useEffect(() => {

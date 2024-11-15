@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from "react-router-dom";
 import '../../css/payment/PaymentHistory.css';
+import instance from '../../shared/axios';
 
 const PaymentHistory = () => {
+    useEffect(() => {
+        instance.get("http://localhost:3000/");
+      }, []);
     return (
         <>
             <div className="payment-banner">
