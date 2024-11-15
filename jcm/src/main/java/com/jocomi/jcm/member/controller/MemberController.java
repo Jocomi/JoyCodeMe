@@ -1,9 +1,7 @@
 package com.jocomi.jcm.member.controller;
 
+import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Base64;
 import java.util.Map;
 
@@ -31,20 +29,22 @@ import com.jocomi.jcm.naver.model.vo.NaverProfile;
 import com.jocomi.jcm.naver.response.NaverProfileResponse;
 import com.jocomi.jcm.service.MemberService;
 
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
-
 
 @Slf4j
 @CrossOrigin(origins = "*")
 @RestController
 public class MemberController {
-	
+
 	private final MemberService mService;
+	private final ServletContext servletContext;
 
 	@Autowired
-	public MemberController(MemberService mService) {
+	public MemberController(MemberService mService, ServletContext servletContext) {
 		this.mService = mService;
+		this.servletContext = servletContext;
 	}
 
 	@ResponseBody
@@ -57,101 +57,94 @@ public class MemberController {
 	@ResponseBody
 	@PostMapping(value = "/signup", produces = "application/json;charset=UTF-8")
 	public String signupMember(@RequestBody Member member) {
-	    log.info("Received signup data: {}", member);
+		log.info("Received signup data: {}", member);
 
-	    // ID 중복 체크
-	    if (mService.checkUserById(member.getMemberId()) > 0) {
-	        return new Gson().toJson("중복된 아이디 입니다.");
-	    }
+		// ID 중복 체크
+		if (mService.checkUserById(member.getMemberId()) > 0) {
+			return new Gson().toJson("중복된 아이디 입니다.");
+		}
 
-	    // 이메일 중복 체크
-	    if (mService.checkUserByEmail(member.getEmail()) > 0) {
-	        return new Gson().toJson("중복된 이메일 입니다.");
-	    }
+		// 이메일 중복 체크
+		if (mService.checkUserByEmail(member.getEmail()) > 0) {
+			return new Gson().toJson("중복된 이메일 입니다.");
+		}
 
-	    // 전화번호 중복 체크
-	    if (mService.checkUserByPhone(member.getPhone()) > 0) {	
-	        return new Gson().toJson("중복된 전화번호 입니다.");
-	    }
+		// 전화번호 중복 체크
+		if (mService.checkUserByPhone(member.getPhone()) > 0) {
+			return new Gson().toJson("중복된 전화번호 입니다.");
+		}
 
-	    // 중복이 없으면 회원가입 진행
-	    int result = mService.registerMember(member);
-	    return result == 1 ? new Gson().toJson("회원가입에 성공했습니다.") : new Gson().toJson("회원가입에 실패했습니다.");
+		// 중복이 없으면 회원가입 진행
+		int result = mService.registerMember(member);
+		return result == 1 ? new Gson().toJson("회원가입에 성공했습니다.") : new Gson().toJson("회원가입에 실패했습니다.");
 	}
 
 	// 필드별 중복 확인 메서드
 	@ResponseBody
 	@PostMapping(value = "/checkUser", produces = "application/json;charset=UTF-8")
 	public String checkUser(@RequestBody Map<String, String> checkData) {
-	    String field = checkData.get("field");
-	    String value = checkData.get("value");
+		String field = checkData.get("field");
+		String value = checkData.get("value");
 
-	    int count = 0;
-	    switch (field) {
-	        case "id":
-	            count = mService.checkUserById(value);
-	            break;
-	        case "email":
-	            count = mService.checkUserByEmail(value);
-	            break;
-	        case "phone":
-	            count = mService.checkUserByPhone(value);
-	            break;
-	        default:
-	            throw new IllegalArgumentException("Invalid field: " + field);
-	    }
-	    return new Gson().toJson(count > 0); // true: 중복, false: 중복 아님
+		int count = 0;
+		switch (field) {
+		case "id":
+			count = mService.checkUserById(value);
+			break;
+		case "email":
+			count = mService.checkUserByEmail(value);
+			break;
+		case "phone":
+			count = mService.checkUserByPhone(value);
+			break;
+		default:
+			throw new IllegalArgumentException("Invalid field: " + field);
+		}
+		return new Gson().toJson(count > 0); // true: 중복, false: 중복 아님
 	}
 
 	@ResponseBody
 	@GetMapping(value = "/profile", produces = "application/json;charset=UTF-8")
 	public String profile(@RequestParam("memberId") String memberId) {
 		Member member = mService.memberProfile(memberId);
-		if (member.getPImg() == null || member.getPImg().isEmpty()) {
-			member.setPImg("/img/TEST.JPG");
-		}
+//		if (member.getPImg() == null || member.getPImg().isEmpty()) {
+//			member.setPImg("/img/TEST.JPG");
+//		}
 		return new Gson().toJson(member);
 	}
 
-	@ResponseBody
-	@PostMapping(value = "/uploadProfileImage", produces = "application/json;charset=UTF-8")
-	public String uploadProfileImage(
-	        @RequestParam("file") MultipartFile file,
-	        @RequestParam("memberId") String memberId) {
+	@PostMapping("/uploadProfileImage")
+	public ResponseEntity<String> uploadProfileImage(@RequestParam("file") MultipartFile file,
+			@RequestParam("memberId") String memberId) {
+		try {
+			// 파일 이름 생성
+			String fileName = memberId + "_" + file.getOriginalFilename();
 
-	    String frontendUploadDir = "C:\\Users\\user1\\Desktop\\새 폴더\\public\\img\\";
-	    String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+			// Spring 서버의 webapp/img 디렉토리에 이미지 저장 경로 설정
+			String uploadDir = servletContext.getRealPath("/img");
+			File directory = new File(uploadDir);
+			if (!directory.exists()) {
+				directory.mkdirs();
+			}
 
-	    try {
-	        Path frontendPath = Paths.get(frontendUploadDir);
-	        if (!Files.exists(frontendPath)) {
-	            Files.createDirectories(frontendPath);
-	        }
+			// 이미지 파일 저장
+			File targetFile = new File(directory, fileName);
+			file.transferTo(targetFile);
 
-	        Path frontendFilePath = frontendPath.resolve(fileName);
-	        file.transferTo(frontendFilePath.toFile());
+			// DB에 저장할 경로 값 반환
+			String imagePath = "/img/" + fileName;
+			int updateResult = mService.updateProfileImage(memberId, imagePath);
 
-	        Member member = mService.memberProfile(memberId);
-	        if (member != null) {
-	            member.setPImg(fileName);
-	            int updateResult = mService.editProfile(member);
+			if (updateResult > 0) {
+				return ResponseEntity.ok(fileName);
+			} else {
+				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("DB 업데이트 실패");
+			}
 
-	            if (updateResult > 0) {
-	                return new Gson().toJson(fileName);
-	            } else {
-	                log.error("DB 업데이트 실패");
-	                return new Gson().toJson("db-fail");
-	            }
-	        } else {
-	            return new Gson().toJson("member-not-found");
-	        }
-	    } catch (IOException e) {
-	        log.error("IOException during file upload: ", e);
-	        return new Gson().toJson("fail");
-	    } catch (Exception e) {
-	        log.error("Unexpected error during file upload: ", e);
-	        return new Gson().toJson("fail");
-	    }
+		} catch (IOException e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("File upload failed");
+		}
 	}
 
 	@ResponseBody
@@ -164,6 +157,23 @@ public class MemberController {
 		} else {
 			return new Gson().toJson("프로필 변경에 실패했습니다.");
 		}
+	}
+	
+	@PostMapping("/changePassword")
+	public ResponseEntity<String> changePassword(@RequestBody Map<String, String> passwords) {
+	    String memberId = passwords.get("memberId");
+	    String currentPwd = passwords.get("currentPwd");
+	    String newPwd = passwords.get("newPwd");
+
+	    // 비밀번호 변경 서비스 호출
+	    String resultMessage = mService.changePassword(memberId, currentPwd, newPwd);
+
+	    // 결과에 따른 응답 반환
+	    if (resultMessage.equals("비밀번호가 성공적으로 변경되었습니다. 다시 로그인해주세요.")) {
+	        return ResponseEntity.ok(new Gson().toJson(Map.of("message", resultMessage)));
+	    } else {
+	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Gson().toJson(Map.of("message", resultMessage)));
+	    }
 	}
 	
 	@ResponseBody
@@ -210,6 +220,32 @@ public class MemberController {
 	            return "네이버 로그인 처리 중 오류가 발생했습니다: " + e.getMessage();
 	        }
 	    }
+  
+  private NaverProfile getNaverUserProfile(String accessToken) throws Exception {
+		String url = "https://openapi.naver.com/v1/nid/me";
+
+	    RestTemplate restTemplate = new RestTemplate();
+
+	    // 헤더 설정
+	    HttpHeaders headers = new HttpHeaders();
+	    headers.add("Authorization", "Bearer " + accessToken);
+
+	    HttpEntity<String> request = new HttpEntity<>("", headers); // GET 요청에는 body가 필요 없음
+
+	    // 사용자 정보 요청
+	    ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, request, String.class); // 수정된 부분
+	    if (response.getStatusCode() == HttpStatus.OK) {
+	        ObjectMapper objectMapper = new ObjectMapper();
+	        NaverProfileResponse profileResponse = objectMapper.readValue(response.getBody(), NaverProfileResponse.class);
+	        if ("00".equals(profileResponse.getResultcode())) { // 네이버 API 응답의 resultcode는 "00"이어야 성공
+	            return profileResponse.getResponse();
+	        } else {
+	            throw new Exception("사용자 정보 조회 실패: " + profileResponse.getMessage());
+	        }
+	    } else {
+	        throw new Exception("사용자 정보 요청 실패: HTTP " + response.getStatusCode());
+	    }
+	}
 	
 	@PostMapping(value = "/api/auth/google", produces = "application/json;charset=UTF-8")
 	public String googleLogin(@RequestBody Map<String, String> payload) {
@@ -271,32 +307,4 @@ public class MemberController {
 	        return new Gson().toJson("Google 로그인에 실패했습니다.");
 	    }
 	}
-	
-
-	private NaverProfile getNaverUserProfile(String accessToken) throws Exception {
-		String url = "https://openapi.naver.com/v1/nid/me";
-
-	    RestTemplate restTemplate = new RestTemplate();
-
-	    // 헤더 설정
-	    HttpHeaders headers = new HttpHeaders();
-	    headers.add("Authorization", "Bearer " + accessToken);
-
-	    HttpEntity<String> request = new HttpEntity<>("", headers); // GET 요청에는 body가 필요 없음
-
-	    // 사용자 정보 요청
-	    ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, request, String.class); // 수정된 부분
-	    if (response.getStatusCode() == HttpStatus.OK) {
-	        ObjectMapper objectMapper = new ObjectMapper();
-	        NaverProfileResponse profileResponse = objectMapper.readValue(response.getBody(), NaverProfileResponse.class);
-	        if ("00".equals(profileResponse.getResultcode())) { // 네이버 API 응답의 resultcode는 "00"이어야 성공
-	            return profileResponse.getResponse();
-	        } else {
-	            throw new Exception("사용자 정보 조회 실패: " + profileResponse.getMessage());
-	        }
-	    } else {
-	        throw new Exception("사용자 정보 요청 실패: HTTP " + response.getStatusCode());
-	    }
-	}
-
 }
