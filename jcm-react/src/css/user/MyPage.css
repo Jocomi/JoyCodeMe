@@ -31,12 +31,12 @@
   color: #ccc;
 }
 
-.mypage-container .mypage-main .profile-section {
+.mypage-container .mypage-main .mypage-profile-section {
   margin-bottom: 30px;
 }
 
 /* 프로필 사진 반응형 설정 */
-.mypage-container .mypage-main .profile-picture {
+.mypage-container .mypage-main .mypage-profile-picture {
   width: 150px;
   height: 150px;
   border-radius: 50%;
@@ -47,19 +47,19 @@
   border: 2px solid #000000;
 }
 
-.mypage-container .mypage-main .profile-section h2 {
+.mypage-container .mypage-main .mypage-profile-section h2 {
   font-size: 1.4rem;
   margin-bottom: 10px;
   color: #000000;
 }
 
-.mypage-container .mypage-main .profile-section p {
+.mypage-container .mypage-main .mypage-profile-section p {
   font-size: 1.1rem;
   color: #000000;
 }
 
 /* 버튼 영역 반응형 설정 */
-.mypage-container.button-container {
+.mypage-button-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -94,20 +94,20 @@
       font-size: 2rem; /* 제목 크기 줄임 */
   }
 
-  .mypage-container .mypage-main .profile-picture {
+  .mypage-container .mypage-main .mypage-profile-picture {
       width: 120px;
       height: 120px;
   }
 
-  .mypage-container .mypage-main .profile-section h2 {
+  .mypage-container .mypage-main .mypage-profile-section h2 {
       font-size: 1.2rem;
   }
 
-  .mypage-container .mypage-main .profile-section p {
+  .mypage-container .mypage-main .mypage-profile-section p {
       font-size: 1rem;
   }
 
-  .mypage-container.mypage-main button {
+  .mypage-container .mypage-main button {
       font-size: 0.9rem;
       padding: 10px 15px;
   }
