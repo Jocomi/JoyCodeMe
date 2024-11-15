@@ -8,12 +8,14 @@ const MyPage = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [profileImage, setProfileImage] = useState('');
+    const [SocialLogin, setSocialLogin] = useState(false);
 
     useEffect(() => {
         if (loginUser) {
             setProfileImage(loginUser.pImg ? `http://${window.location.hostname}:7777${loginUser.pImg}` : `/img/TEST.JPG`);
             setName(loginUser.memberName || '');
             setEmail(loginUser.email || '');
+            setSocialLogin(loginUser.SocialLogin);
         }
     }, [loginUser]);
 
@@ -36,7 +38,8 @@ const MyPage = () => {
                 <div className="button-container">
                     <Link to='/projectHistory'><button>사용 기록</button></Link>
                     <Link to='/EditProfile'><button>프로필 수정</button></Link>
-                    <Link to='/ChangePwd'><button>비밀번호 변경</button></Link>
+                    {/* 소셜 로그인이 아닌 경우에만 비밀번호 변경 버튼 표시 */}
+                    {!SocialLogin && <Link to='/ChangePwd'><button>비밀번호 변경</button></Link>}
                 </div>
             </div>
         </div>

@@ -203,6 +203,7 @@ public class MemberController {
 	            member.setMemberName(profile.getName());
 	            member.setPhone(profile.getMobile());
 	            member.setPImg(profile.getProfile_image());
+	            member.setSocialLogin(true);
 	            // 임시 비밀번호 생성 및 인코딩
 
 	            System.out.println("Member Info: " + member);
@@ -294,6 +295,7 @@ public class MemberController {
 	        member.setBirth(birth);
 	        member.setMemberPwd("1234");
 	        member.setAddress(address);
+	        member.setSocialLogin(true);
 
 	        
 	        if (mService.checkUserById(member.getMemberId()) == 0) {
