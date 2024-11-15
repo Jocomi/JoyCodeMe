@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jocomi.jcm.board.model.mapper.BoardMapper">
+
+  <!-- 모든 공지사항 조회 -->
+    <select id="selectAB" resultType="com.jocomi.jcm.board.model.dto.DetailBoardDto">
+        SELECT * FROM ${boardTpye}_BOARD
+    </select>
+	
+    <!-- 특정 게시글 조회 -->
+    <select id="selectAnnouncementById" resultType="com.jocomi.jcm.board.model.dto.DetailBoardDto">
+	       SELECT b.*, 
+		    CASE 
+	        WHEN u.member_id IS NULL THEN 'false' 
+	        ELSE 'true' 
+		    END AS "isRecommend",
+		    m.P_IMG AS "pImg"
+			FROM ${boardType}_BOARD b
+			LEFT JOIN user_recommend u ON (b.member_id = u.member_id AND b.post_no = u.post_no)
+			LEFT JOIN member m ON b.member_id = m.member_id  -- member 테이블과 JOIN
+			WHERE b.POST_NO = #{postNo}
+    </select>
+
+    <!-- 게시글 비활성화 -->
+    <update id="deactivatePost">
+        UPDATE ${boardType}_BOARD SET STATUS = 'N' WHERE POST_NO = #{postNo}
+    </update>
+
+    <!-- 게시글 등록 -->
+    <insert id="insertBoard" parameterType="map">
+         INSERT INTO
+    <choose>
+        <when test="boardType == 'announcement'">
+            ANNOUNCEMENT_BOARD (POST_NO, MEMBER_ID, POST_TITLE, POST_CONTENT, IMG_FILE, POST_TIME, COUNT_VIEW, STATUS)
+            VALUES (ANN_POST_NO.NEXTVAL, #{board.memberId}, #{board.postTitle}, #{board.postContent}, 
+                    #{board.imgFile}, SYSDATE, 0, 'Y')
+        </when>
+        <when test="boardType == 'free'">
+            FREE_BOARD (POST_NO, MEMBER_ID, POST_TITLE, POST_CONTENT, IMG_FILE, POST_TIME, COUNT_VIEW, RECOMMEND, STATUS)
+            VALUES (FRE_POST_NO.NEXTVAL, #{board.memberId}, #{board.postTitle}, #{board.postContent}, 
+                    #{board.imgFile}, SYSDATE, 0, 0, 'Y')
+        </when>
+        <when test="boardType == 'enquiry'">
+            ENQUIRY_BOARD (POST_NO, MEMBER_ID, POST_TITLE, POST_CONTENT, IMG_FILE, POST_TIME, COUNT_VIEW, RECOMMEND, PRIVATE_BOARD, STATUS)
+            VALUES (ENQ_POST_NO.NEXTVAL, #{board.memberId}, #{board.postTitle}, #{board.postContent}, 
+                    #{board.imgFile}, SYSDATE, 0, 0, 'N', 'Y')
+        </when>
+        <when test="boardType == 'project'">
+            PROJECT_BOARD (POST_NO, MEMBER_ID, POST_TITLE, POST_CONTENT, IMG_FILE, POST_TIME, COUNT_VIEW, RECOMMEND, PRIVATE_BOARD, STATUS)
+            VALUES (PRO_POST_NO.NEXTVAL, #{board.memberId}, #{board.postTitle}, #{board.postContent}, 
+                    #{board.imgFile}, SYSDATE, 0, 0, 'Y', 'Y')
+        </when>
+        <otherwise>
+            <!-- 기본 값 설정 (혹은 예외 처리) -->
+            INSERT INTO DEFAULT_BOARD (POST_NO, MEMBER_ID, POST_TITLE, POST_CONTENT, IMG_FILE, POST_TIME, COUNT_VIEW, STATUS)
+            VALUES (SEQ_DEFAULT_POST_NO.NEXTVAL, #{board.memberId}, #{board.postTitle}, #{board.postContent}, 
+                    #{board.imgFile}, SYSDATE, 0, 'Y')
+        </otherwise>
+    </choose>
+    </insert>
+
+   <update id="updateBoard">
+    UPDATE 
+    <choose>
+        <when test="boardType == 'announcement'">ANNOUNCEMENT_BOARD</when>
+        <when test="boardType == 'free'">FREE_BOARD</when>
+        <when test="boardType == 'enquiry'">ENQUIRY_BOARD</when>
+        <when test="boardType == 'project'">PROJECT_BOARD</when>
+    </choose>
+    SET
+        POST_TITLE = #{boardDto.postTitle},
+        POST_CONTENT = #{boardDto.postContent}
+    WHERE POST_NO = #{postNo} AND MEMBER_ID = #{boardDto.memberId}
+</update>
+
+    <!-- 게시글 조회수 증가 -->
+    <update id="annViewCount">
+        UPDATE ${boardType}_BOARD SET COUNT_VIEW = COUNT_VIEW + 1 WHERE POST_NO = #{postNo}
+    </update>
+    
+</mapper>

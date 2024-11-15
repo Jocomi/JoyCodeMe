@@ -8,7 +8,7 @@ const FreeBoardTalbe = ({ className }) => {
   const [tableData, setTableData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1); 
   const navigate = useNavigate();
-
+  const [boardType, setBoardType] = useState('free');
 
   const postsPerPage = 5; // 페이지당 게시물 수
 
@@ -24,7 +24,7 @@ const FreeBoardTalbe = ({ className }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://${window.location.hostname}:7777/selectFB`); // 자유게시판 API 엔드포인트
+        const response = await axios.get(`http://${window.location.hostname}:7777/select${boardType}`); // 자유게시판 API 엔드포인트
         const sortedData = response.data.sort((a, b) => a.postNo - b.postNo); // postNo를 기준으로 오름차순 정렬
         setTableData(sortedData);
       } catch (error) {
@@ -50,7 +50,7 @@ const FreeBoardTalbe = ({ className }) => {
          {currentPosts.map((post) => (
             <tr
               key={post.postNo}
-              onClick={() => navigate(`/detailpost/free/${post.postNo}`)} // 상세보기 페이지로 이동
+              onClick={() => navigate(`/detailpost/${boardType}/${post.postNo}`)} // 상세보기 페이지로 이동
             >
               <td>{post.postNo}</td>
               <td>{post.memberId}</td>
