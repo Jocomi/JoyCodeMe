@@ -13,4 +13,5 @@ public class Member {
     private String address;
     private String status = "Y"; // 기본값 설정
     private String pImg; // 기본값 설정
+    private boolean SocialLogin;
 }
