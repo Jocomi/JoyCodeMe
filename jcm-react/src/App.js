@@ -42,6 +42,7 @@ import DBSetUpForm from './components/setup/DBSetUpForm';
 
 import NaverLoginButton from './components/user/NaverLoginButton';
 import NaverCallback from './components/user/NaverCallback';
+import Suggestion from './components/setup/Suggestion';
 
 export const LoginUser = createContext();
 export const Requested = createContext();
@@ -129,6 +130,7 @@ const [question, setQuestion] = useState("");
 
                 <Route path='/naver' component={NaverLoginButton} />
                 <Route path="/naver/callback" element={<NaverCallback />} />
+                <Route path="/suggestion" element={<Suggestion />} />
               </Routes>
             </main>
           <FooterPage />

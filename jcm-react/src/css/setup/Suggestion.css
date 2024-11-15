@@ -1,0 +1,118 @@
+/* 전체 컨테이너 스타일 */
+.suggestion-container {
+    background-color: #f9f9f9; /* 전체 배경을 밝은 흰색으로 */
+    color: #333; /* 어두운 텍스트 */
+    font-family: 'Roboto', sans-serif;
+    padding: 50px 20px;
+}
+
+/* 소개 섹션 스타일 */
+.suggestion-section {
+    text-align: center;
+    padding: 60px 0;
+}
+
+.suggestion-section h1 {
+    font-size: 2.8em;
+    color: #333; /* 어두운 제목 색상으로 변경 */
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.suggestion-section p {
+    font-size: 1.2em;
+    max-width: 800px;
+    margin: 0 auto;
+    color: #555; /* 중간 밝기의 회색으로 가독성 확보 */
+}
+
+/* 기능 섹션 레이아웃 */
+.suggestion-container .feature-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    padding: 50px 0;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+/* 카드 스타일 */
+.suggestion-container .feature-card {
+    background-color: #ffffff; /* 카드 배경을 순백색으로 설정 */
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 효과 */
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.suggestion-container .feature-card:hover {
+    transform: translateY(-8px); /* 호버 시 약간 위로 올라오는 효과 */
+    box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.15); /* 호버 시 그림자 강화 */
+}
+.suggestion-container .feature-video-card {
+    background-color: #333;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 효과 */
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.suggestion-container .feature-video-card:hover {
+    transform: translateY(-8px); /* 호버 시 약간 위로 올라오는 효과 */
+    box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.15); /* 호버 시 그림자 강화 */
+}
+
+.suggestion-container .feature-icon {
+    font-size: 2.2em;
+    color: #4db1f9; /* 밝은 포인트 컬러로 아이콘 강조 */
+    margin-bottom: 20px;
+}
+
+.suggestion-container .feature-card h2 {
+    font-size: 1.6em;
+    color: #333; /* 진한 텍스트 색상 */
+    margin-top: 60px;
+    margin-bottom: 50px;
+    font-weight: bold;
+}
+
+.suggestion-container .feature-card h3 {
+    color: #333; /* 진한 텍스트 색상 */
+    margin-top: 60px;
+    margin-bottom: 30px;
+}
+
+.suggestion-container .feature-video-card h2 {
+    font-size: 1.6em;
+    color: #fff;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.suggestion-container .feature-card p {
+    font-size: 1em;
+    line-height: 1.6;
+    color: #666; /* 중간 밝기의 회색 */
+}
+
+.suggestion-container .feature-card img {
+    width: 100%;
+    max-width: 380px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 */
+}
+
+.suggestion-container .feature-video-card video {
+    width: 100%;
+    max-width: 800px;
+    border-radius: 10px;
+}
+
+/* 반응형 설정 */
+@media (max-width: 768px) {
+    .suggestion-container .feature-section {
+        grid-template-columns: 1fr; /* 작은 화면에서는 한 줄로 정렬 */
+    }
+}

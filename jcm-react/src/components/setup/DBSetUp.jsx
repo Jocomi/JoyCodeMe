@@ -23,7 +23,7 @@ const DBSetUp = () => {
             <h2>What type of business are you building?</h2>
             <input type="text" value={question} onChange={(e)=>setQuestion(e.target.value)} placeholder="만들고 싶은 웹사이트의 데이터베이스를 입력해 주세요..." />
             <Link to="form"><button class="next-btn" onClick={setReqCtx}>Next →</button></Link>
-            <p class="suggestion">Not sure? <a href="#">See some suggestions</a> 🔮</p>
+            <p class="suggestion">Not sure? <Link to="/suggestion">See some suggestions</Link> 🔮</p>
             
           </div>
         </div>
