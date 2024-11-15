@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jocomi.jcm.recomment.model.mapper.RecommentMapper">
+
+
+
+   
+
+    <!-- PROJECT_COMMENT 삽입 -->
+    <insert id="insertPComment" parameterType="map">
+          INSERT INTO PROJECT_RECOMMENT (REPLY_NO, MEMBER_ID, COMMENT_NO, REPLY )
+    VALUES (PRO_RECOMMENT_NO.NEXTVAL, 
+            #{recomment.memberId}, 
+            #{recomment.commentNo},
+            #{recomment.reply}
+            )
+    </insert>
+
+    <!-- FREE_COMMENT 삽입 -->
+    <insert id="insertFRecomment" parameterType="map">
+        INSERT INTO FREE_RECOMMENT (REPLY_NO, MEMBER_ID, COMMENT_NO, REPLY)
+	    VALUES (PRO_RECOMMENT_NO.NEXTVAL, 
+	            #{recomment.memberId}, 
+	            #{recomment.commentNo},
+	            #{recomment.reply}
+	           )
+    </insert>
+   <!-- FREE_RECOMMENT에서 답글 가져오기 -->
+    <select id="getFreeRecommentsByCommentNo" parameterType="int" resultMap="recommentResultMap">
+        SELECT
+            r.REPLY_NO, 
+            r.MEMBER_ID, 
+            r.REPLY, 
+            r.REPLY_TIME, 
+            r.STATUS
+        FROM
+            FREE_RECOMMENT r
+        WHERE
+            r.COMMENT_NO = #{commentNo}
+        ORDER BY
+            r.REPLY_TIME ASC
+    </select>
+
+    <!-- PROJECT_RECOMMENT에서 답글 가져오기 -->
+    <select id="getProjectRecommentsByCommentNo" parameterType="int" resultMap="recommentResultMap">
+        SELECT
+            r.REPLY_NO, 
+            r.MEMBER_ID, 
+            r.REPLY, 
+            r.REPLY_TIME, 
+            r.STATUS
+        FROM
+            PROJECT_RECOMMENT r
+        WHERE
+            r.COMMENT_NO = #{commentNo}
+        ORDER BY
+            r.REPLY_TIME ASC
+    </select>
+
+    <!-- 답글을 매핑하기 위한 resultMap -->
+    <resultMap id="recommentResultMap" type="Recomment">
+        <result property="replyNo" column="REPLY_NO"/>
+        <result property="memberId" column="MEMBER_ID"/>
+        <result property="reply" column="REPLY"/>
+        <result property="replyTime" column="REPLY_TIME"/>
+        <result property="status" column="STATUS"/>
+    </resultMap>
+    
+
+</mapper>
