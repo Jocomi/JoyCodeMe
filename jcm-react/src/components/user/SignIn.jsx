@@ -402,12 +402,14 @@ const SignIn = () => {
                         </div>
                         <button type="button" className="form-btn" onClick={handlerLogin}>Sign In</button>
                     </form>
+                    <div className="login-buttons-container">
                     <NaverLoginButton />
                     <GoogleLogin
                         onSuccess={GoogleLoginSuccess}  // 로그인 성공 시 호출
                         onError={(error) => console.log("Google 로그인 실패", error)}
                         scope="https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/user.phonenumbers.read https://www.googleapis.com/auth/user.birthday.read"
                     />
+                    </div>
                     <div className="toggle-link" onClick={toggleForms}>Create an account?</div>
                 </div>
             </div>
