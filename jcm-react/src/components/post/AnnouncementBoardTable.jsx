@@ -8,7 +8,7 @@ const AnnouncementBoard = ({ className }) => {
   const [tableData, setTableData] = useState([]);
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1); 
-
+  const [boardType, setBoardType] = useState('announcement');
   const postsPerPage = 5; // 페이지당 게시물 수
 
     // 현재 페이지의 게시물 계산
@@ -24,7 +24,8 @@ const AnnouncementBoard = ({ className }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://${window.location.hostname}:7777/selectAB`); // 공지사항 API 엔드포인트
+        const response = await axios.get(`http://${window.location.hostname}:7777/select${boardType}`); // 공지사항 API 엔드포인트
+        console.log(response);
         const sortedData = response.data.sort((a, b) => a.postNo - b.postNo); // postNo를 기준으로 오름차순 정렬
         setTableData(sortedData);
      
@@ -51,7 +52,7 @@ const AnnouncementBoard = ({ className }) => {
         {currentPosts.map((post) => (
             <tr
               key={post.postNo}
-              onClick={() => navigate(`/detailpost/announcement/${post.postNo}`)} // 상세보기 페이지로 이동
+              onClick={() => navigate(`/detailpost/${boardType}/${post.postNo}`)} // 상세보기 페이지로 이동
             >
               <td>{post.postNo}</td>
               <td>{post.memberId}</td>

@@ -4,6 +4,7 @@ import axios from 'axios';
 import '../../../css/post/DetailPost.css';
 import PostMenu from './PostMenu';
 import { useParams } from 'react-router-dom';
+import { use } from 'framer-motion/client';
 
 const DetailPost = () => {
   const navigate = useNavigate();
@@ -14,6 +15,9 @@ const DetailPost = () => {
   const [comments, setComments] = useState([]);
   const [replyText, setReplyText] = useState('');
   const [isWriteReplyVisible, setIsWriteReplyVisible] = useState(null);
+  const [recommend, setRecommend] = useState();
+  const [isRecommend, setIsRecommend] = useState(false);
+
   const loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
 
   const fetchComment = async () => {
@@ -29,7 +33,7 @@ const DetailPost = () => {
   };
   const fetchPost = async () => {
     try {
-      const url = `http://${window.location.hostname}:7777/${boardType}/${postNo}`;
+      const url = `http://${window.location.hostname}:7777/detail/${boardType}/${postNo}`;
       const response = await axios.get(url);
       setPost(response.data);
     } catch (error) {
@@ -41,7 +45,21 @@ const DetailPost = () => {
 
     fetchPost();
     fetchComment();
-  }, [boardType, postNo]);
+  }, []);
+
+  useEffect(()=>{
+    if (post !== null) {
+
+      setRecommend(post.recommend);
+      console.log(post.isRecommend, typeof post.isRecommend);
+      
+      setIsRecommend(post.isRecommend === "true");
+
+    }
+  }, [post]);
+
+
+
 
   const deactivatePost = async () => {
     try {
@@ -138,12 +156,24 @@ const DetailPost = () => {
       });
 
       
-        fetchPost();
+        
+        
+        if(!isRecommend){
+          setRecommend(recommend+1);
+        } else{
+          setRecommend(recommend-1);
+        }
+        setIsRecommend(!isRecommend);
+
+      
      
     } catch (error) {
       
      
-      fetchPost();
+      // fetchPost();
+      console.log(error);
+      
+
     }
   
   }
@@ -157,18 +187,7 @@ const DetailPost = () => {
           <div className="post-info">
             <span className="post-date">작성일 : {post.postTime}</span>
             <span className="view-count">조회수 : {post.countView}</span>
-            <button className="file-button" onClick={toggleAttachment}>첨부파일</button>
-            {isAttachmentOpen && post.imgFiles && (
-              <div className="attachment">
-                {post.imgFiles.map((file, index) => (
-                  <div key={index}>
-                    <a href={`http://${window.location.hostname}:7777/boardImg/${file}`} download>
-                      첨부파일 {index + 1} 다운로드
-                    </a>
-                  </div>
-                ))}
-              </div>
-            )}
+            
           </div>
           <button className="go-back-button" onClick={goBack}>X</button>
         </div>
@@ -200,9 +219,9 @@ const DetailPost = () => {
             )}
           </div>
         </div>
-        {boardType !== 'announcement' && boardType !== 'enquiry' &&(
+        {boardType !== 'announcement'  &&(
           <div className='commend-div'>
-          <button onClick={fetchCommend}>추천</button> <h4>{post.recommend}</h4>
+          <button onClick={fetchCommend}>추천</button> <h4>{recommend}</h4>
           </div>
         )}
        

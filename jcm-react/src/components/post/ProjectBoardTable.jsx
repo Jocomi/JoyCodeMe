@@ -9,6 +9,7 @@ const ProjectBoardTable = ({ className }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [loginUser, setLoginUser] = useState(null); // 로그인된 사용자 정보
   const navigate = useNavigate();
+  const [boardType, setBoardType] = useState('project');
 
   const postsPerPage = 5;
 
@@ -23,7 +24,7 @@ const ProjectBoardTable = ({ className }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://${window.location.hostname}:7777/selectPB`); // 프로젝트 게시판 API 엔드포인트
+        const response = await axios.get(`http://${window.location.hostname}:7777/select${boardType}`); // 프로젝트 게시판 API 엔드포인트
         const sortedData = response.data.sort((a, b) => a.postNo - b.postNo); // postNo를 기준으로 오름차순 정렬
         setTableData(sortedData);
       } catch (error) {
@@ -42,7 +43,7 @@ const ProjectBoardTable = ({ className }) => {
 
   // 비공개 게시물 접근 제한
   const handlePostClick = (post) => {
-    if (post.privateEnquiry === 'N') {
+    if (post.privateBoard === 'N') {
       // 비공개 게시물 접근 제한 조건
       if (loginUser && (loginUser.status === 'A' || loginUser.memberId === post.memberId)) {
         navigate(`/detailpost/project/${post.postNo}`);
@@ -75,7 +76,7 @@ const ProjectBoardTable = ({ className }) => {
             >
               <td>{post.postNo}</td>
               <td>{post.memberId}</td>
-              <td>{post.privateEnquiry === 'N' ? '비공개 게시물입니다.' : post.postTitle}</td>
+              <td>{post.privateboard === 'N' ? '비공개 게시물입니다.' : post.postTitle}</td>
               <td>{post.postTime}</td>
               <td>{post.countView}</td>
             </tr>

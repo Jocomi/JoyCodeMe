@@ -10,7 +10,7 @@ const EnquiryBoard = ({ className }) => {
   const navigate = useNavigate();
   const [loginUser, setLoginUser] = useState(null); // 로그인된 사용자 정보
   const postsPerPage = 5; // 페이지당 게시물 수
-
+  const [boardType, setBoardType] = useState('enquiry');
   
   // 로그인 사용자 정보 가져오기
   useEffect(() => {
@@ -22,7 +22,7 @@ const EnquiryBoard = ({ className }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://${window.location.hostname}:7777/selectEB`); // 문의사항 API 엔드포인트
+        const response = await axios.get(`http://${window.location.hostname}:7777/select${boardType}`); // 문의사항 API 엔드포인트
         // postNo를 기준으로 오름차순 정렬
         const sortedData = response.data.sort((a, b) => a.postNo - b.postNo);
         setTableData(sortedData);
@@ -43,7 +43,7 @@ const EnquiryBoard = ({ className }) => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
  // 비공개 게시물 접근 제한
  const handlePostClick = (post) => {
-  if (post.privateEnquiry === 'N') {
+  if (post.privateBoard === 'N') {
     // 비공개 게시물 접근 제한 조건
     if (loginUser && (loginUser.status === 'A' || loginUser.memberId === post.memberId)) {
       navigate(`/detailpost/enquiry/${post.postNo}`);
@@ -52,7 +52,7 @@ const EnquiryBoard = ({ className }) => {
     }
   } else {
     // 공개 게시물은 누구나 접근 가능
-    navigate(`/detailpost/project/${post.postNo}`);
+    navigate(`/detailpost/${boardType}/${post.postNo}`);
   }
 };
   return (
@@ -75,7 +75,7 @@ const EnquiryBoard = ({ className }) => {
             >
               <td>{post.postNo}</td>
               <td>{post.memberId}</td>
-              <td>{post.privateEnquiry === 'N' && post.memberId !== loginUser.memberId  ? '비공개 게시물입니다.' : post.postTitle}</td>
+              <td>{post.privateBoard === 'N' && post.memberId !== loginUser.memberId  ? '비공개 게시물입니다.' : post.postTitle}</td>
               <td>{post.postTime}</td>
               <td>{post.countView}</td>
             </tr>
