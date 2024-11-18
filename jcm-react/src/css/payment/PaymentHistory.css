@@ -169,6 +169,29 @@
   background-color: #218838;
 }
 
+.payment-section .loading {
+  text-align: center;
+  font-size: 1.2em;
+  color: #555;
+  margin: 20px 0;
+}
+
+.payment-history .login-link {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.payment-history .login-link:hover {
+  background-color: #0056b3;
+}
+
+
 /* 미디어 쿼리 - 작은 화면 대응 */
 @media (max-width: 768px) {
   .payment-section table {

@@ -5,7 +5,8 @@ import java.util.Date;
 
 @Data
 public class Payment {
-    private String memberId; // MEMBER 테이블의 외래키
+    private String payId;
+    private String memberId;
     private String payMethod;
     private String payProduct;
     private Integer payPrice;

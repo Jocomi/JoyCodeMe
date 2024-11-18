@@ -12,6 +12,5 @@ public interface PaymentMapper {
     // 결제 정보 저장 메서드
     int insertPayment(Payment payment);
 
-
-	List<Payment> getAllPayments();
+	List<Payment> getPaymentsByMemberId(String memberId);
 }
