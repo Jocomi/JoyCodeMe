@@ -1,9 +1,10 @@
-.chat-main{
+.chat-main {
     display: flex;
     margin-top: 70px;
     color: black;
 }
-.chat-main h1{
+
+.chat-main h1 {
     color: rgb(156, 156, 156);
 }
 
@@ -15,8 +16,25 @@
     height: 100vh;
 }
 
+/* 버튼 스타일 */
+.chat-main .chat .chat-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50; /* 녹색 */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 20px;
+}
 
+.chat-main .chat .chat-button:hover {
+    background-color: #45a049; /* 약간 진한 녹색 */
+    transform: scale(1.05);
+}
 
-.chat-main .chat h2, .chat p{
-    color: black;
+.chat-main .chat .chat-button:active {
+    background-color: #3e8e41; /* 더 진한 녹색 */
 }
