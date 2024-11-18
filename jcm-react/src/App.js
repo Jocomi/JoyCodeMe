@@ -42,6 +42,7 @@ import NaverLoginButton from './components/user/NaverLoginButton';
 import NaverCallback from './components/user/NaverCallback';
 import Suggestion from './components/setup/Suggestion';
 import EmptyUser from './components/common/EmptyUser';
+import AdminChat from './components/admin/AdminChat';
 
 
 export const LoginUser = createContext();
@@ -114,6 +115,7 @@ const [question, setQuestion] = useState("");
                 <Route path="/admin/subscribe" element={<Subscribe />} />
                 <Route path="/admin/customer" element={<Customer />} />
                 <Route path="/admin/posts" element={<Posts />} />
+                <Route path="/admin/adminChat" element={<AdminChat />} />
                 <Route path="/admin/qna" element={<QnA />} />
 
                 <Route path="/paymentHistory" element={<PaymentHistory />} />
