@@ -14,19 +14,19 @@ public class PaymentService {
     @Autowired
     private PaymentMapper paymentMapper;
 
+    // 특정 사용자(memberId)의 결제 내역 가져오기
+    public List<Payment> getPaymentsByMemberId(String memberId) {
+        return paymentMapper.getPaymentsByMemberId(memberId);
+    }
+
     // 결제 처리 및 DB 저장
     public boolean processPayment(Payment payment) {
         try {
-            // DB에 결제 정보를 저장합니다.
             int result = paymentMapper.insertPayment(payment);
             return result > 0;
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
-    }
-    
-    public List<Payment> getAllPayments() {
-    	return paymentMapper.getAllPayments();
     }
 }
