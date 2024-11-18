@@ -1,12 +1,29 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import '../../css/payment/PaymentHistory.css';
-import instance from '../../shared/axios';
+import axios from 'axios'; 
 
 const PaymentHistory = () => {
+    const [paymentList, setPaymentList] = useState([]); 
+
+    // API 호출
     useEffect(() => {
-        instance.get("http://localhost:3000/");
-      }, []);
+        const fetchPayments = async () => {
+            try {
+                const response = await axios.get("http://localhost:7777/api/payment/history");
+                setPaymentList(response.data); 
+            } catch (error) {
+                console.error("Error fetching payment history:", error);
+            }
+        };
+
+        fetchPayments(); 
+    }, []);
+
+    if(paymentList != null) {
+        console.log(paymentList)
+    }
+
     return (
         <>
             <div className="payment-banner">
@@ -33,27 +50,21 @@ const PaymentHistory = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>2103141231541314</td>
-                                    <td>2024-10-30</td>
-                                    <td>고급</td>
-                                    <td>58000</td>
-                                    <td>결재 대기</td>
-                                </tr>
-                                <tr>
-                                    <td>43246543532434</td>
-                                    <td>2024-10-21</td>
-                                    <td>고급</td>
-                                    <td>58000</td>
-                                    <td>결재 완료</td>
-                                </tr>
-                                <tr>
-                                    <td>2041231412341311</td>
-                                    <td>2024-10-15</td>
-                                    <td>고급</td>
-                                    <td>58000</td>
-                                    <td>결재 완료</td>
-                                </tr>
+                                {paymentList.length > 0 ? (
+                                    paymentList.map((payment, index) => (
+                                        <tr key={index}>
+                                            <td>{payment.memberId}</td>
+                                            <td>{new Date(payment.payTime).toLocaleDateString()}</td>
+                                            <td>{payment.payProduct}</td>
+                                            <td>{payment.payPrice}</td>
+                                            <td>{payment.payStatus}</td>
+                                        </tr>
+                                    ))
+                                ) : (
+                                    <tr>
+                                        <td colSpan="5">결제 내역이 없습니다.</td>
+                                    </tr>
+                                )}
                             </tbody>
                         </table>
                     </div>

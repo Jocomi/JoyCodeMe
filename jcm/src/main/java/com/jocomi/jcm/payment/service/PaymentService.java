@@ -1,5 +1,7 @@
 package com.jocomi.jcm.payment.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,5 +24,9 @@ public class PaymentService {
             e.printStackTrace();
             return false;
         }
+    }
+    
+    public List<Payment> getAllPayments() {
+    	return paymentMapper.getAllPayments();
     }
 }

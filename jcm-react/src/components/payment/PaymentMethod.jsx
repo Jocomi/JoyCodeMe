@@ -139,19 +139,6 @@ const PaymentMethod = () => {
                     <Link to="/paymenthistory" className="header-link">결제 내역</Link>
                 </div>
 
-                <ul>
-                    <li>
-                        <button onClick={() => setActiveTab('card')} className={`method-menu ${activeTab === 'card' ? 'active' : ''}`}>
-                            카드결제
-                        </button>
-                    </li>
-                    <li>
-                        <button onClick={() => setActiveTab('account')} className={`method-menu ${activeTab === 'account' ? 'active' : ''}`}>
-                            계좌이체
-                        </button>
-                    </li>
-                </ul>
-
                 <div className="payment-section">
                     {activeTab === 'card' && (
                         <>
