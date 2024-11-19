@@ -16,7 +16,7 @@ const PaymentHistory = () => {
                 return;
             }
             try {
-                const response = await axios.get(`http://localhost:7777/api/payment/history`, {
+                const response = await axios.get(`http://${window.location.hostname}:7777/api/payment/history`, {
                     params: { memberId: loginUser.memberId } 
                 });
                 setPaymentList(response.data);

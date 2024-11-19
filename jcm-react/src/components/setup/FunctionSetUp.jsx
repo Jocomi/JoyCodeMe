@@ -6,7 +6,7 @@ import instance from '../../shared/axios';
 
 const FunctionSetUp = () => {
   useEffect(() => {
-    instance.get("http://localhost:3000/");
+    instance.get(`http://${window.location.hostname}:3000/`);
   }, []);
 
   const [question, setQuestion] = useState("");
@@ -18,16 +18,16 @@ const FunctionSetUp = () => {
 
     return (
         <div className='websetup-container'>
-          <div class="step-indicator">
-            <Link to="/webSetUp"><span class="step">Web Page</span></Link>
-            <Link to="/functionSetUp"><span class="step active">Function</span></Link>
-            <Link to="/dbSetUp"><span class="step">DataBase</span></Link>
+          <div className="step-indicator">
+            <Link to="/webSetUp"><span className="step">Web Page</span></Link>
+            <Link to="/functionSetUp"><span className="step active">Function</span></Link>
+            <Link to="/dbSetUp"><span className="step">DataBase</span></Link>
           </div>
-          <div class="card">
+          <div className="card">
             <h2>What type of business are you building?</h2>
             <input type="text" value={question} onChange={(e)=>setQuestion(e.target.value)} placeholder="만들고 싶은 웹사이트의 기능을 적어주세요..." />
-            <Link to="form"><button class="next-btn" onClick={setReqCtx}>Next →</button></Link>
-            <p class="suggestion">Not sure? <Link to="/suggestion">See some suggestions</Link> 🔮</p>
+            <Link to="form"><button className="next-btn" onClick={setReqCtx}>Next →</button></Link>
+            <p className="suggestion">Not sure? <Link to="/suggestion">See some suggestions</Link> 🔮</p>
             
           </div>
         </div>

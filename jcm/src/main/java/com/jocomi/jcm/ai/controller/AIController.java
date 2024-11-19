@@ -11,6 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,9 +25,12 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.jocomi.jcm.ai.model.vo.AI;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 @RestController	
 public class AIController {
+	
+	@Value("${server.ip}")
+    private String serverIp;
 
 	private final String GPT_API_KEY ="";	// 깃 커밋시 삭제할 것 
 	private final String GPT_API_URL ="";				// 깃 커밋시 삭제할 것 
@@ -34,6 +38,7 @@ public class AIController {
 
     @PostMapping(value = "/view")
     public String createView(@RequestBody String request) {
+    	System.out.println(serverIp);
         System.out.println(request);
 
         try {
@@ -77,42 +82,41 @@ public class AIController {
                     + "Use animation effects with JavaScript. "
                     + "Add CSS in HTML file using style tag. "
                     + "Add JS in HTML file using script tag. "
-                    + "Use images also, and file paths should be 'http:localhost:3000/testImg/meeting.jpg' or "
-                    + "'http:localhost:3000/testImg/board.jpg',"
-                    + "'http:localhost:3000/testImg/container.jpg',"
-                    + "'http:localhost:3000/testImg/building.jpg',"
-                    + "'http:localhost:3000/testImg/river.jpg',"
-                    + "'http:localhost:3000/testImg/sky.jpg',"
-                    + "'http:localhost:3000/testImg/coffee.jpg',"
-                    + "'http:localhost:3000/testImg/cafe.jpg',"
-                    + "'http:localhost:3000/testImg/market.jpg',"
-                    + "'http:localhost:3000/testImg/study.jpg',"
-                    + "'http:localhost:3000/testImg/bakery.jpg',"
-                    + "'http:localhost:3000/testImg/espresso.jpg',"
-                    + "'http:localhost:3000/testImg/trader.jpg',"
-                    + "'http:localhost:3000/testImg/stock.jpg',"
-                    + "'http:localhost:3000/testImg/factory.jpg',"
-                    + "'http:localhost:3000/testImg/credit.jpg',"
-                    + "'http:localhost:3000/testImg/cash.jpg',"
-                    + "'http:localhost:3000/testImg/fullDress.jpg',"
-                    + "'http:localhost:3000/testImg/knit.jpg',"
-                    + "'http:localhost:3000/testImg/shirt.jpg',"
-                    + "'http:localhost:3000/testImg/company.jpg',"
-                    + "'http:localhost:3000/testImg/co-work.jpg',"
-                    + "'http:localhost:3000/testImg/conference.jpg',"
-                    + "'http:localhost:3000/testImg/model.jpg',"
-                    + "'http:localhost:3000/testImg/sofa.jpg',"
-                    + "'http:localhost:3000/testImg/funiture.jpg',"
-                    + "'http:localhost:3000/testImg/chair.jpg',"
-                    + "'http:localhost:3000/testImg/table.jpg'"
-                    + ". "
+                    + "Use images also, and file paths should be 'http://" + serverIp + ":3000/testImg/meeting.jpg' or "
+                    + "'http://" + serverIp + ":3000/testImg/board.jpg',"
+                    + "'http://" + serverIp + ":3000/testImg/container.jpg',"
+                    + "'http://" + serverIp + ":3000/testImg/building.jpg',"
+                    + "'http://" + serverIp + ":3000/testImg/river.jpg',"
+                    + "'http://" + serverIp + ":3000/testImg/sky.jpg',"
+                    + "'http://" + serverIp + ":3000/testImg/coffee.jpg',"
+                    + "'http://" + serverIp + ":3000/testImg/cafe.jpg',"
+                    + "'http://" + serverIp + ":3000/testImg/market.jpg',"
+                    + "'http://" + serverIp + ":3000/testImg/study.jpg',"
+                    + "'http://" + serverIp + ":3000/testImg/bakery.jpg',"
+                    + "'http://" + serverIp + ":3000/testImg/espresso.jpg',"
+                    + "'http://" + serverIp + ":3000/testImg/trader.jpg',"
+                    + "'http://" + serverIp + ":3000/testImg/stock.jpg',"
+                    + "'http://" + serverIp + ":3000/testImg/factory.jpg',"
+                    + "'http://" + serverIp + ":3000/testImg/credit.jpg',"
+                    + "'http://" + serverIp + ":3000/testImg/cash.jpg',"
+                    + "'http://" + serverIp + ":3000/testImg/fullDress.jpg',"
+                    + "'http://" + serverIp + ":3000/testImg/knit.jpg',"
+                    + "'http://" + serverIp + ":3000/testImg/shirt.jpg',"
+                    + "'http://" + serverIp + ":3000/testImg/company.jpg',"
+                    + "'http://" + serverIp + ":3000/testImg/co-work.jpg',"
+                    + "'http://" + serverIp + ":3000/testImg/conference.jpg',"
+                    + "'http://" + serverIp + ":3000/testImg/model.jpg',"
+                    + "'http://" + serverIp + ":3000/testImg/sofa.jpg',"
+                    + "'http://" + serverIp + ":3000/testImg/funiture.jpg',"
+                    + "'http://" + serverIp + ":3000/testImg/chair.jpg',"
+                    + "'http://" + serverIp + ":3000/testImg/table.jpg'. "
                     + "Please use the appropriate image for each page through the file path name."
                     + "Use background image also to decorate pages."
                     + "You can use one image multiple times, and also you can edit file with CSS. Please use image size with 100% width and 30% height contain via CSS. "
                     + "Content alignment should be centered. "
                     + "Do not use annotations. "
                     + "If you do a good job, I'll give you a $20 tip. "
-                    + "Please answer in HTML, CSS, and JS. Please make the page sincerely, and use everything you can."); 
+                    + "Please answer in HTML, CSS, and JS. Please make the page sincerely, and use everything you can.");
 
             messages.add(userMessage);
             messages.add(systemMessage);
