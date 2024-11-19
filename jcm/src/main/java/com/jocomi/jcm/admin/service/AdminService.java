@@ -1,5 +1,8 @@
 package com.jocomi.jcm.admin.service;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +31,11 @@ public class AdminService {
     // 총 구매자 수 반환
     public int getTotalConsumers() {
         return adminMapper.calculateTotalConsumers();
+    }
+    
+    // 월별 수익 데이터 반환
+    public List<Map<String, Object>> getMonthlyEarnings() {
+        return adminMapper.getMonthlyEarnings();
     }
 }
 
