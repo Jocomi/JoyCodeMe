@@ -164,9 +164,10 @@ const Guide = () => {
                 <span className="amount">{index === 0 ? '49,900' : index === 1 ? '99,900' : '199,900'}</span>
                 <span className="after">/영구</span>
               </div>
-              <a className="price-button" onClick={() => requestPayment(index === 0 ? 49900 : index === 1 ? 99900 : 199900, plan, `VIP${index + 1}`)}>
+              <button className="price-button" onClick={() => requestPayment(index === 0 ? 49900 : index === 1 ? 99900 : 199900, plan, `VIP${index + 1}`)}
+              >
                 Get Started
-              </a>
+              </button>
             </div>
           </motion.div>
         ))}
