@@ -7,62 +7,62 @@
    
 
     <!-- PROJECT_COMMENT 삽입 -->
-    <insert id="insertPComment" parameterType="map">
-          INSERT INTO PROJECT_RECOMMENT (REPLY_NO, MEMBER_ID, COMMENT_NO, REPLY )
-    VALUES (PRO_RECOMMENT_NO.NEXTVAL, 
-            #{recomment.memberId}, 
-            #{recomment.commentNo},
-            #{recomment.reply}
-            )
+    <insert id="insertPRecomment" parameterType="map">
+          INSERT INTO PROJECT_RECOMMENT (RECOMMENT_NO, MEMBER_ID, COMMENT_NO, RECOMMENT_TEXT)
+		  VALUES (PRO_RECOMMENT_NO.NEXTVAL,
+		          #{recomment.memberId},
+		          #{recomment.commentNo},
+		          #{recomment.recommentText}
+		          )
     </insert>
 
     <!-- FREE_COMMENT 삽입 -->
     <insert id="insertFRecomment" parameterType="map">
-        INSERT INTO FREE_RECOMMENT (REPLY_NO, MEMBER_ID, COMMENT_NO, REPLY)
-	    VALUES (PRO_RECOMMENT_NO.NEXTVAL, 
-	            #{recomment.memberId}, 
+        INSERT INTO FREE_RECOMMENT (RECOMMENT_NO, MEMBER_ID, COMMENT_NO, RECOMMENT_TEXT)
+	    VALUES (PRO_RECOMMENT_NO.NEXTVAL,
+	            #{recomment.memberId},
 	            #{recomment.commentNo},
-	            #{recomment.reply}
+	            #{recomment.recommentText}
 	           )
     </insert>
    <!-- FREE_RECOMMENT에서 답글 가져오기 -->
     <select id="getFreeRecommentsByCommentNo" parameterType="int" resultMap="recommentResultMap">
         SELECT
-            r.REPLY_NO, 
+            r.RECOMMENT_NO, 
             r.MEMBER_ID, 
-            r.REPLY, 
-            r.REPLY_TIME, 
+            r.RECOMMENT_TEXT, 
+            r.RECOMMENT_TIME, 
             r.STATUS
         FROM
             FREE_RECOMMENT r
         WHERE
             r.COMMENT_NO = #{commentNo}
         ORDER BY
-            r.REPLY_TIME ASC
+            r.RECOMMENT_TIME ASC
     </select>
 
     <!-- PROJECT_RECOMMENT에서 답글 가져오기 -->
     <select id="getProjectRecommentsByCommentNo" parameterType="int" resultMap="recommentResultMap">
         SELECT
-            r.REPLY_NO, 
+            r.RECOMMENT_NO, 
             r.MEMBER_ID, 
-            r.REPLY, 
-            r.REPLY_TIME, 
+            r.RECOMMENT_TEXT, 
+            r.RECOMMENT_TIME, 
             r.STATUS
         FROM
             PROJECT_RECOMMENT r
         WHERE
             r.COMMENT_NO = #{commentNo}
         ORDER BY
-            r.REPLY_TIME ASC
+            r.RECOMMENT_TIME ASC
     </select>
 
     <!-- 답글을 매핑하기 위한 resultMap -->
     <resultMap id="recommentResultMap" type="Recomment">
-        <result property="replyNo" column="REPLY_NO"/>
+        <result property="recommentNo" column="RECOMMENT_NO"/>
         <result property="memberId" column="MEMBER_ID"/>
-        <result property="reply" column="REPLY"/>
-        <result property="replyTime" column="REPLY_TIME"/>
+        <result property="recommentText" column="RECOMMENT_TEXT"/>
+        <result property="recommentTime" column="RECOMMENT_TIME"/>
         <result property="status" column="STATUS"/>
     </resultMap>
     

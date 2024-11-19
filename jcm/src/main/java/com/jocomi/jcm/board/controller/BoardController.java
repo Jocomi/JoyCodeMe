@@ -33,7 +33,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;       
          
 @Slf4j
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 @RestController
 @RequiredArgsConstructor
 public class BoardController {
@@ -44,7 +44,6 @@ public class BoardController {
 	 @GetMapping(value = "/select{boardType}", produces = "application/json;charset=UTF-8")
 	 public ArrayList<DetailBoardDto>  selectAB( @PathVariable("boardType")  String boardType) {
 		 ArrayList<DetailBoardDto> aList = bService.selsectAB(boardType);
-		 System.out.println(aList);
 		 return aList;
 	 }
 	 // 상세 게시글 가져오기 (postNo를 통해 특정 게시글 조회)
@@ -52,7 +51,6 @@ public class BoardController {
 	 public DetailBoardDto getAnnouncementById(@PathVariable("postNo") int postNo, @PathVariable("boardType") String boardType) {
 		 
 		 DetailBoardDto announcement = bService.getAnnouncementById(postNo, boardType);
-		 System.out.println(announcement);
 			 return announcement;
 		
 	 }
@@ -67,7 +65,6 @@ public class BoardController {
 
 	 @PostMapping(value = "/create/{boardType}" , produces = "application/json;charset=UTF-8" )
 	    public ResponseEntity<Map<String, Object>> createBoard(@PathVariable String boardType, @RequestBody DetailBoardDto boardDTO) {
-		 	System.out.println(boardDTO);
 	        boolean isSaved = bService.insertBoard( boardType, boardDTO);
 	        Map<String, Object> response = new HashMap<>();
 	        response.put("success", isSaved);
@@ -90,7 +87,6 @@ public class BoardController {
 	         log.info("change name : {}", changeName);
 	         changeNameList.add(changeName);
 	     }
-
 	     return new Gson().toJson(changeNameList);  // ArrayList -> JSONArray
 	 }
 

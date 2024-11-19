@@ -35,5 +35,28 @@
         INSERT INTO ENQUIRY_COMMENT (COMMENT_NO, MEMBER_ID, POST_NO, COMMENT_TEXT, COMMENT_TIME, STATUS)
         VALUES (PROE_POST_NO.NEXTVAL, #{comment.memberId}, #{postNo}, #{comment.commentText}, SYSDATE, 'Y')
     </insert>
-
+    
+ 	<!-- PROJECT_COMMENT 상태 업데이트 -->
+	<update id="deletePComment" parameterType="int">
+	    UPDATE PROJECT_COMMENT
+	    SET STATUS = 'N'
+	    WHERE COMMENT_NO = #{commentNo}
+	</update>
+	
+	<!-- FREE_COMMENT 상태 업데이트 -->
+	<update id="deleteFComment" parameterType="int">
+	    UPDATE FREE_COMMENT
+	    SET STATUS = 'N'
+	    WHERE COMMENT_NO = #{commentNo}
+	</update>
+	
+	<!-- ENQUIRY_COMMENT 상태 업데이트 -->
+	<update id="deleteEComment" parameterType="int">
+	    UPDATE ENQUIRY_COMMENT
+	    SET STATUS = 'N'
+	    WHERE COMMENT_NO = #{commentNo}
+	</update>
+    
+	
+	
 </mapper>
