@@ -1,10 +1,9 @@
 import { Link } from 'react-router-dom';
 import '../../css/common/MenuBar.css';
-import { useContext, useState } from 'react';
-import { LoginUser } from '../../App';
+import {  useState } from 'react';
+
 
 const MenuBar = () => {
-    const userCtx = useContext(LoginUser);
     const loginUser = JSON.parse(sessionStorage.getItem('loginUser')); // loginUser 객체를 JSON.parse로 파싱
     const status = loginUser?.status || ''; // loginUser가 null일 경우 안전하게 status를 빈 문자열로 초기화
     const [menuOpen, setMenuOpen] = useState(false); // 메뉴 열고 닫기 상태 관리
