@@ -187,6 +187,7 @@
 .detail-post-main .reply-body {
   display: flex;
   flex-direction: column;
+  border-bottom: 1px solid;
 }
 
 .detail-post-main .comment-userId {
@@ -201,6 +202,7 @@
   color: #555;
 }
 
+
 .detail-post-main .comment-content {
   font-size: 14px;
   cursor: pointer;
@@ -212,6 +214,18 @@
   font-size: 13px;
   margin-bottom: 8px;
   color: #444;
+  width: 100%;
+  padding: 10px;
+}
+.detail-post-main .recomment-items{
+  display: flex;
+  justify-content: space-between;
+  margin-right: 50px;
+  
+}
+.detail-post-main .recomment-items a{
+  color: black;
+  font-weight: 500px;
 }
 
 .detail-post-main .comment-metadata,

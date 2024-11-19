@@ -11,7 +11,7 @@ const AdminSideBar = () => {
                 <li><NavLink to="/Admin/AdminDashboard">Dashboard</NavLink></li>
                 <li><NavLink to="/Admin/Subscribe">Subscribe</NavLink></li>
                 <li><NavLink to="/Admin/Customer">Customer</NavLink></li>
-                <li><NavLink to="/Admin/Posts">Posts</NavLink></li>
+                <li><NavLink to="/Admin/Posts" state={{ boardType: "project" }}>Posts</NavLink></li>
                 <li><NavLink to="/Admin/AdminChat">Chat</NavLink></li>
                 <li><NavLink to="/Admin/qna">Q & A</NavLink></li>
                 </ul>

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.jocomi.jcm.recomment.model.vo.Recomment;
@@ -27,14 +28,12 @@ public class RecommentController {
     @GetMapping("/recomment/{boardType}/{commentNo}/select")
     public ResponseEntity<List<Recomment>> getRecommentsByCommentNo(@PathVariable int commentNo, @PathVariable String boardType) {
         List<Recomment> recomments = rService.getRecommentsByCommentNo(commentNo, boardType);
-        System.out.println(recomments);
         return ResponseEntity.ok(recomments);  // 응답으로 답글 리스트 반환
     }
     
     
 	@PostMapping("/recomment/{boardType}/{commentNo}/add")
 	public ResponseEntity<Map<String, Integer>> insertRecomment(@PathVariable int commentNo, @PathVariable String boardType, @RequestBody Recomment recomment) {
-	    System.out.println(recomment);
 	    int result = rService.insertRecomment(recomment, commentNo, boardType);
 	    
 	    Map<String, Integer> response = new HashMap<>();
@@ -42,4 +41,12 @@ public class RecommentController {
 	    
 	    return ResponseEntity.ok(response);
 	}
+	@PutMapping("/recomment/{boardType}/{recommentNo}/delete")
+	public ResponseEntity<Map<String,Integer>> deleteRecomment(@PathVariable int recommentNo, @PathVariable String boardType){
+		int result = rService.deleteRecomment(recommentNo, boardType);
+		 Map<String, Integer> response = new HashMap<>();
+		    response.put("result", result);
+		    
+		    return ResponseEntity.ok(response);	
+		    }
 }

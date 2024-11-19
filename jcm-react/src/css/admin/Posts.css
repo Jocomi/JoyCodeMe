@@ -3,6 +3,15 @@
     margin-top: 70px;
     color: black;
 }
+.posts-main .main-content .post-ul li{
+    list-style: none;
+    font-size: x-large;
+    color: #2c2c2c;
+}
+.posts-main .main-content .post-ul li:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
 .posts-main h1{
     color: rgb(156, 156, 156);
 }
