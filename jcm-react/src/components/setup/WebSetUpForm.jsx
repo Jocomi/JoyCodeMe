@@ -4,9 +4,11 @@ import { FadeLoader } from "react-spinners";
 import instance from '../../shared/axios';
 
 const WebSetUpForm = (props) => {
+    const saveFileHost = `http://${window.location.hostname}:7777/show?name=`;
+
     const request = props.question;
     useEffect(() => {
-        instance.get("http://localhost:3000/");
+        instance.get(`http://${window.location.hostname}:3000/`);
       }, []);
 
     const [responseData, setResponseData] = useState(""); // 서버 응답 데이터를 저장하는 state
@@ -17,7 +19,7 @@ const WebSetUpForm = (props) => {
                 request: request
             };
             
-            const response = await fetch("http://localhost:7777/view", {
+            const response = await fetch(`http://${window.location.hostname}:7777/view`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
@@ -72,7 +74,7 @@ const WebSetUpForm = (props) => {
             url: url
         };
         
-        const response = await fetch("http://localhost:7777/save", {
+        const response = await fetch(`http://${window.location.hostname}:7777/save`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
@@ -102,7 +104,7 @@ const WebSetUpForm = (props) => {
                 {/* 여기에 응답 내용을 출력 */}
                 <div className='viewPage' align="center">
                     {responseData !== "" ? (
-                        <iframe src={"http://localhost:7777/show?name=" + responseData} style={{ width: "100%", height: "100vh" }}/>
+                        <iframe src={saveFileHost + responseData} style={{ width: "100%", height: "100vh" }}/>
                     ) : (
                         <>
                             <br />
@@ -114,9 +116,9 @@ const WebSetUpForm = (props) => {
 
                 <p className="final-note">Once you've filled out the information, our team will guide you through the remaining steps to launch your site.</p>
                 <div>
-                <button onClick={() => saveData("http://localhost:7777/show?name=" + responseData)}>Save</button>
+                <button onClick={() => saveData(saveFileHost + responseData)}>Save</button>
                 &nbsp;
-                <button onClick={() => downloadHandler("http://localhost:7777/show?name=" + responseData)}>Export</button>
+                <button onClick={() => downloadHandler(saveFileHost + responseData)}>Export</button>
                 </div>
             </main>
         </div>

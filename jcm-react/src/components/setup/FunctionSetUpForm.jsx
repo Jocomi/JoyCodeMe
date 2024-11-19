@@ -5,7 +5,7 @@ import instance from '../../shared/axios';
 
 const FunctionSetUpForm = (props) => {
     useEffect(() => {
-        instance.get("http://localhost:3000/");
+        instance.get(`http://${window.location.hostname}:3000/`);
       }, []);
 
     const [responseData, setResponseData] = useState(""); // 서버 응답 데이터를 저장하는 state
@@ -17,7 +17,7 @@ const FunctionSetUpForm = (props) => {
                 request: props.question
             };
             
-            const response = await fetch("http://localhost:7777/function", {
+            const response = await fetch(`http://${window.location.hostname}:7777/function`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)

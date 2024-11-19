@@ -21,7 +21,6 @@ public class AdminController {
 
     @GetMapping("/api/admin/total-users")
     public ResponseEntity<Integer> getTotalUsers() {
-        System.out.println("API 호출됨: /api/admin/total-users");
         int totalUsers = adminService.getTotalUsers();
         return ResponseEntity.ok(totalUsers);
     }
