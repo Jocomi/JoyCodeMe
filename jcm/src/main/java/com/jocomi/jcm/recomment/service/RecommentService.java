@@ -28,9 +28,9 @@ public class RecommentService {
 
 	public List<Recomment> getRecommentsByCommentNo(int commentNo, String boardType) {
 		 // boardType에 따라 다른 메서드를 호출하여 데이터 처리
-        if ("free".equalsIgnoreCase(boardType)) {
+        if (boardType.equals("free")) {
             return rMapper.getFreeRecommentsByCommentNo(commentNo);
-        } else if ("project".equalsIgnoreCase(boardType)) {
+        } else if (boardType.equals("project")) {
             return rMapper.getProjectRecommentsByCommentNo(commentNo);
         } else {
             throw new IllegalArgumentException("Invalid board type: " + boardType);

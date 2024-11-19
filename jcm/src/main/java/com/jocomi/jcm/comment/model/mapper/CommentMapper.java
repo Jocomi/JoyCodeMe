@@ -24,6 +24,12 @@ public interface CommentMapper {
 		
 		int insertEComment(@Param("postNo") int postNo, @Param("comment") BoardComment comment);
 
+		int deletePComment(@Param("commentNo") int commentNo);
+
+		int deleteFComment(@Param("commentNo") int commentNo);
+
+		int deleteEComment(@Param("commentNo") int commentNo);
+
 }
 
 		

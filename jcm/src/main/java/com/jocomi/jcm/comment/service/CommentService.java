@@ -39,4 +39,15 @@ public class CommentService {
 		}
 		
 	}
+	public int deleteComment(int commentNo, String boardType) {
+		if(boardType.equals("project")) {
+			return cMapper.deletePComment(commentNo);
+		}else if(boardType.equals("free")) {
+			return cMapper.deleteFComment(commentNo);
+		}else if(boardType.equals("enquiry")){
+			return cMapper.deleteEComment(commentNo);
+		}else {
+			return 0;
+		}
+	}
 }
