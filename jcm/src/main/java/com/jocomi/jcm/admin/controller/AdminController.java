@@ -1,5 +1,8 @@
 package com.jocomi.jcm.admin.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -37,6 +40,13 @@ public class AdminController {
     public ResponseEntity<Integer> getTotalConsumers() {
         int totalConsumers = adminService.getTotalConsumers();
         return ResponseEntity.ok(totalConsumers);
+    }
+    
+    // 월별 수익 데이터 반환
+    @GetMapping("/api/admin/monthly-earnings")
+    public ResponseEntity<List<Map<String, Object>>> getMonthlyEarnings() {
+        List<Map<String, Object>> monthlyEarnings = adminService.getMonthlyEarnings();
+        return ResponseEntity.ok(monthlyEarnings);
     }
 
 }
