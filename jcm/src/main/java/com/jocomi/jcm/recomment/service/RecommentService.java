@@ -36,5 +36,15 @@ public class RecommentService {
             throw new IllegalArgumentException("Invalid board type: " + boardType);
         }
     }
+
+	public int deleteRecomment(int recommentNo, String boardType) {
+		 if (boardType.equals("free")) {
+	            return rMapper.deleteFRecomment(recommentNo);
+	        } else if (boardType.equals("project")) {
+	            return rMapper.deletePRecomment(recommentNo);
+	        } else {
+	            throw new IllegalArgumentException("Invalid board type: " + boardType);
+	        }
+	}
 	
 }

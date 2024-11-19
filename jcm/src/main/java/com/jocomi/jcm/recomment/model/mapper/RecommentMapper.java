@@ -19,6 +19,10 @@ public interface RecommentMapper {
 
 	public List<Recomment> getProjectRecommentsByCommentNo(int commentNo);
 
+	public int deleteFRecomment(int recommentNo);
+
+	public int deletePRecomment(int recommentNo);
+
 	
 	
 }

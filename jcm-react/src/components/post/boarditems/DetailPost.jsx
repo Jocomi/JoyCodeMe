@@ -21,7 +21,7 @@ const DetailPost = () => {
   const [recomments, setRecomments] = useState({}); // 댓글 번호별 답글 저장
   const [isLoading, setIsLoading] = useState(false);
   const [replyTexts, setReplyTexts] = useState({});
-
+ 
   const fetchComment = async () => {
     if (boardType !== 'announcement') {
       try {
@@ -44,20 +44,14 @@ const DetailPost = () => {
   };
   
   useEffect(() => {
-    
-
     fetchPost();
     fetchComment();
   }, []);
 
   useEffect(()=>{
     if (post !== null) {
-
       setRecommend(post.recommend);
-      console.log(post.isRecommend, typeof post.isRecommend);
-      
       setIsRecommend(post.isRecommend === "true");
-
     }
   }, [post]);
 
@@ -129,7 +123,7 @@ const DetailPost = () => {
         
         alert('댓글이 성공적으로 삭제되었습니다.');
 
-        setCommentText('');
+        
         fetchComment();
       } else {
         alert('댓글 삭제에 실패했습니다.');
@@ -169,7 +163,7 @@ const DetailPost = () => {
             );
 
             if (response.data.result === 1) {
-              alert('답글이 성공적으로 작성되었습니다.');
+              
               setReplyTexts('');
               setIsWriteReplyVisible(null);
               fetchComment();
@@ -275,19 +269,38 @@ const DetailPost = () => {
   };
 
 
+const deleteRecomment = async (recommentNo, commentNo) =>{
+  const Data = {
+    recommentNo,
+    boardType
+  }
+  try{
+  const response = await axios.put(`http://${window.location.hostname}:7777/recomment/${boardType}/${recommentNo}/delete`, Data)
+  if (response.data.result === 1) {
+    alert('답글이 성공적으로 삭제되었습니다.');
+    fetchRecomments(commentNo);
+  } else {
+    alert('답글 작성에 실패했습니다.');
+  }
+} catch (error) {
+  console.error('답글 작성에 실패했습니다:', error);
+  alert('답글 작성 중 오류가 발생했습니다.');
+}
+}
+
   const Comment = ({comment, recomments}) => {
     return (
       <li key={comment.commentId} className="comment-item">
                   <div className="comment-header">
                     <img src="img/profile.jpg" alt="프로필 사진" className="comment-profile-image" />
                     <div className="comment-body">
-                      <div className="comment-userId">{comment.memberId || '익명'}</div>
+                      <div className="comment-userId">{comment.memberId}</div>
                       <div className="comment-content">
                         {/* 'enquiry'일 때 댓글을 '답변' 형식으로 표시 */}
                         {comment.commentText}
                       </div>
                       <div className="comment-metadata">
-                        <span className="comment-time">{comment.commentTime || '방금'}</span>
+                        <span className="comment-time">{comment.commentTime}</span>
                         <div className="comment-actions">
                           {/* 'enquiry'일 때는 답글을 숨깁니다. */}
                           {boardType !== 'enquiry' && (
@@ -295,7 +308,9 @@ const DetailPost = () => {
                             {isRepliesVisible[comment.commentNo] ? '답글 숨기기' : '답글 보기'}
                           </a>
                           )}
-                            <a onClick={() =>deleteComent(comment.commentNo)}>삭제</a>
+                            {(loginUser && (loginUser.memberId === comment.memberId || loginUser.status === 'A')) && (
+                              <a onClick={() => deleteComent(comment.commentNo)} style={{color : 'red'}}>삭제</a>
+                            )}
                         </div>
                       </div>
                     </div>
@@ -308,14 +323,19 @@ const DetailPost = () => {
                  <>
                 <div className="replies">
                   <ul className="replies-list">
-                    {(recomments[comment.commentNo] || []).map((recomment) => (
+                    {(recomments[comment.commentNo] || [])
+                    .filter((recomment) => recomment.status === 'Y') // status가 Y인 항목만 필터링
+                    .map((recomment) => (
                       <li key={recomment.recommentNo} className="reply-item">
                         <div className="reply-content">
                           <img src="img/profile.jpg" alt="프로필 사진" className="reply-profile-image" />
                           <div className="reply-body">
-                            <span className="reply-userId">{recomment.memberId || '익명'}</span>
-                            <span>{recomment.recommentText}</span>
+                            <span className="reply-userId">{recomment.memberId}</span>
+                            <span className='reply-text'>{recomment.recommentText}</span>
+                            <div className='recomment-items'>
                             <span className="reply-time">{new Date(recomment.recommentTime).toLocaleString()}</span>
+                            <a onClick={()=>deleteRecomment(recomment.recommentNo , recomment.commentNo)}  style={{color : 'red'}}>삭제</a>
+                            </div>
                           </div>
                         </div>
                       </li>
@@ -376,12 +396,12 @@ const DetailPost = () => {
           <h4>내용</h4>
           <div className="main-content" dangerouslySetInnerHTML={{ __html: post.postContent }}></div>
           <div className="post-actions">
-            {loginUser && post.memberId && loginUser.memberId === post.memberId && (
-              <>
-                <a onClick={navigateToEdit} style={{ cursor: 'pointer' }}>수정</a>
-                <a onClick={deactivatePost} style={{ cursor: 'pointer' }}>삭제</a>
-              </>
-            )}
+          {loginUser && post.memberId && (loginUser.memberId === post.memberId || loginUser.status === 'A') && (
+            <>
+              <a onClick={navigateToEdit} style={{ cursor: 'pointer' }}>수정</a>
+              <a onClick={deactivatePost} style={{ cursor: 'pointer' }}>삭제</a>
+            </>
+          )}
           </div>
         </div>
         {boardType !== 'announcement'  &&(
@@ -398,7 +418,7 @@ const DetailPost = () => {
             <ul className="comments-list">
               {comments.map((comment) => (
                 comment.status === 'Y' &&
-                <Comment comment={comment} recomments={recomments}/>
+                <Comment key={comment.commentNo} comment={comment} recomments={recomments}/>
               ))}
             </ul>
             <div className="write-comment">

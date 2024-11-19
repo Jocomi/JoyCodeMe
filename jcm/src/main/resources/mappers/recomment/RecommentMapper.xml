@@ -56,7 +56,21 @@
         ORDER BY
             r.RECOMMENT_TIME ASC
     </select>
+	
+	<update id="deleteFRecomment">
+	UPDATE FREE_RECOMMENT
+	SET STATUS = 'N'
+	WHERE RECOMMENT_NO = #{recommentNo}
+	</update>
 
+	<update id="deletePRecomment">
+	UPDATE PROJECT_RECOMMENT
+	SET STATUS = 'N'
+	WHERE RECOMMENT_NO = #{recommentNo}
+	</update>
+	
+	
+	
     <!-- 답글을 매핑하기 위한 resultMap -->
     <resultMap id="recommentResultMap" type="Recomment">
         <result property="recommentNo" column="RECOMMENT_NO"/>
@@ -65,6 +79,7 @@
         <result property="recommentTime" column="RECOMMENT_TIME"/>
         <result property="status" column="STATUS"/>
     </resultMap>
+    
     
 
 </mapper>
