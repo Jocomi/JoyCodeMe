@@ -122,7 +122,6 @@ public class BoardController {
 	            @PathVariable String boardType,
 	            @PathVariable int postNo,
 	            @RequestBody DetailBoardDto boardDto) {
-	        System.out.println(boardDto);
 	        Map<String, Object> response = new HashMap<>();
 	        try {
 	            boolean isUpdated = bService.updateBoard(boardType, postNo, boardDto);

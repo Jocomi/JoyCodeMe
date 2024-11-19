@@ -28,7 +28,11 @@ const SignIn = () => {
     const location = useLocation();
     const [popup, setPopup] = useState(false);
     const [userInfo, setUserInfo] = useState(null);
+    const [isIdChecked, setIsIdChecked] = useState(false);
     const [isFormValid, setIsFormValid] = useState(false); // 폼 유효성 검사 상태
+
+    
+    
 
        // gapi 초기화
        useEffect(() => {
@@ -75,7 +79,6 @@ const SignIn = () => {
                 alert("로그인 실패: 아이디와 비밀번호를 확인하세요.");
             }
         } catch (e) {
-            console.log(e);
             alert("로그인 중 오류가 발생했습니다.");
         }
     };
@@ -100,17 +103,14 @@ const SignIn = () => {
             sessionStorage.setItem('loginUser', JSON.stringify(profile));
             navigate('/'); // 메인 페이지로 리다이렉트
         } catch (error) {
-            console.error("네이버 사용자 정보 가져오기 실패:", error);
             alert("네이버 로그인에 실패했습니다. 다시 시도해주세요.");
         }
     };
     /* 구글 로그인 부분 */
     const GoogleLoginSuccess = async (credentialResponse) => {
-        console.log("Credential Response:", credentialResponse);
         
         const token = credentialResponse.credential;
         if (!token) {
-            console.error("No token received");
             return;
         }
     
@@ -119,7 +119,6 @@ const SignIn = () => {
         const accessToken = authResponse.access_token;  // Access token 가져오기
     
         if (!accessToken) {
-            console.error("No access token received");
             return;
         }
     
@@ -141,43 +140,22 @@ const SignIn = () => {
                 phone: userData.phoneNumbers ? userData.phoneNumbers[0].value : "010-0000-0000",
                 birth: "2000-01-01", // 기본값 2000-01-01
             };
-    
-            console.log("Google User Data:", googleUser);
 
             const response = await axios.post('http://localhost:7777/api/auth/google', googleUser, {
                 headers: { 'Content-Type': 'application/json' },
             });
     
             if (response.status === 200) {
-                console.log("User data saved successfully");
                 sessionStorage.setItem('loginUser', JSON.stringify(response.data));
                 navigate('/');
                 window.location.reload();
             }
         } catch (error) {
-            console.error("Error fetching user profile from Google:", error);
             alert("Google 로그인에 실패했습니다. 다시 시도해주세요.");
         }
     };
     
     
-    
-    
-    
-    const handlePasswordChange = (e) => {
-        setPassword(e.target.value);
-        validateForm();
-    };
-
-    const handleConfirmPasswordChange = (e) => {
-        setConfirmPassword(e.target.value);
-        if (e.target.value !== password) {
-            setErrorMessage("비밀번호가 일치하지 않습니다.");
-        } else {
-            setErrorMessage("");
-        }
-        validateForm();
-    };
 
     function toggleForms() {
         document.getElementById('signup-form').classList.toggle('hidden');
@@ -207,7 +185,6 @@ const SignIn = () => {
             const result = await response.json();
             return result; // true: 중복, false: 중복 아님
         } catch (e) {
-            console.error("중복 체크 오류 : ", e);
             return false;
         }
     };
@@ -230,21 +207,76 @@ const SignIn = () => {
             birth &&
             password &&
             confirmPassword &&
-            password === confirmPassword
+            password === confirmPassword &&
+            isIdChecked
         );
-    };
+    };    
 
+    const idFilters = /^[a-zA-Z](?=.*[a-zA-Z])(?=.*[0-9]).{4,12}$/;
+    const passwordFilters = /^(?=.*[a-zA-Z])(?=.*\d).{6,20}$/;
+
+    
     const handleIdChange = async (e) => {
         const value = e.target.value;
         setId(value);
-        if (value) {
-            const isCheck = await checkUser('id', value);
-            setIdError(isCheck ? "이미 사용 중인 아이디입니다." : "");
+        setIsIdChecked(false);
+        if (!idFilters.test(value)) {
+            setIdError('아이디는 5~12자, 영문자와 숫자를 포함해야 합니다.');
         } else {
-            setIdError("아이디를 입력하세요.");
+            setIdError('');
         }
         validateForm();
     };
+
+    const checkIdDuplicate = async () => {
+        if (!id || idError) {
+            alert('아이디를 다시 입력하세요.');
+            return;
+        }
+    
+        try {
+            const response = await axios.post(`http://${window.location.hostname}:7777/checkUser`, {
+              field: "id",
+              value: id,
+            });
+            const isDuplicate = response.data;
+        
+            if (isDuplicate) {
+              setIdError("이미 사용 중인 아이디입니다.");
+              setIsIdChecked(false);
+            } else {
+              setIdError("");
+              setIsIdChecked(true);
+            }
+          } catch (error) {
+            alert("중복 체크 중 오류가 발생했습니다.");
+          }
+        };
+    
+    
+    const handlePasswordChange = (e) => {
+        const value = e.target.value;
+        setPassword(value);
+        if (!passwordFilters.test(value)) {
+            setErrorMessage('비밀번호는 6~20자, 영문자와 숫자를 포함해야 합니다.');
+        } else {
+            setErrorMessage('');
+        }
+        validateForm();
+    };
+
+    const handleConfirmPasswordChange = (e) => {
+        const value = e.target.value;
+        setConfirmPassword(value);
+        if (value !== password) {
+            setErrorMessage('비밀번호가 일치하지 않습니다.');
+        } else {
+            setErrorMessage('');
+        }
+        validateForm();
+    };
+    
+    
 
     const handleEmailChange = async (e) => {
         const value = e.target.value;
@@ -301,7 +333,6 @@ const SignIn = () => {
             }
         
             const result = await response.json();
-            console.log("Signup result: ", result);  // 응답 결과 콘솔 출력
         
             alert(result); // 성공 또는 실패 메시지 알림
         
@@ -325,7 +356,6 @@ const SignIn = () => {
                 setIsFormValid(false);
             }
         } catch (e) {
-            console.error("Signup error: ", e.message || e); // 에러 메시지 출력
             alert("회원가입 중 오류가 발생했습니다.");
         }        
     };
@@ -345,13 +375,26 @@ const SignIn = () => {
                     <h1>Sign Up</h1>
                     <p>Joy Code Me의 Content 를 즐기고 싶다면 로그인하세요.</p>
                     <form id="signupForm" onSubmit={handleSignup}>
-                        <div className="form-group">
-                            <input type="text" id="id" required placeholder=" " onChange={handleIdChange} />
+                        <div className="form-group id-group">
+                            <input type="text" id="id" value={id} required placeholder=" " onChange={handleIdChange} disabled={isIdChecked} />
                             <label htmlFor="id">ID</label>
-                            {idError && <div className="error-text">{idError}</div>}
+                            <button
+                                type="button"
+                                onClick={checkIdDuplicate}
+                                disabled={isIdChecked}
+                                className={isIdChecked ? "disabled" : ""}
+                            >
+                                {isIdChecked ? "확인됨" : "중복 체크"}
+                            </button>
                         </div>
-                        <div className="form-group">
-                            <input type="password" id="signup-password" required placeholder=" " onChange={handlePasswordChange} />
+                        {!isIdChecked && id && (
+                            <div className="error-text">ID 중복체크 먼저 진행해주세요.</div>
+                        )}
+                        <div className={`message ${idError ? "error-text" : isIdChecked ? "success-text" : ""}`}>
+                            {idError ? idError : isIdChecked ? "사용 가능한 아이디입니다." : ""}
+                        </div>
+                        <div className="form-group password-group">
+                            <input type="password" id="signup-password" value={password} required placeholder=" " onChange={handlePasswordChange} />
                             <label htmlFor="signup-password">Password</label>
                             <i className="fa fa-eye-slash show-hide" onClick={(e) => togglePassword('signup-password', e.currentTarget)}></i>
                         </div>
@@ -380,7 +423,6 @@ const SignIn = () => {
                         </div>
                         <div className="form-group">
                         <input className="user_enroll_text" placeholder="주소" type="text" required name="address" onClick={handleComplete} value={address} />
-                        <button type="button" className="address_btn" onClick={handleComplete}>우편번호 찾기</button>
                         </div>
                         <button type="submit" className="form-btn" disabled={!isFormValid}>Sign Up</button>
                     </form>
@@ -406,7 +448,6 @@ const SignIn = () => {
                     <NaverLoginButton />
                     <GoogleLogin
                         onSuccess={GoogleLoginSuccess}  // 로그인 성공 시 호출
-                        onError={(error) => console.log("Google 로그인 실패", error)}
                         scope="https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/user.phonenumbers.read https://www.googleapis.com/auth/user.birthday.read"
                     />
                     </div>
