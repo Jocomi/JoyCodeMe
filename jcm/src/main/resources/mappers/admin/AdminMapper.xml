@@ -2,40 +2,69 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jocomi.jcm.admin.model.mapper.AdminMapper">
 
-	<!-- STATUS가 'Y' 또는 'A'인 회원 수 계산 -->
-	<select id="countMembersWithStatus" resultType="int">
-		SELECT COUNT(*)
-		FROM MEMBER
-		WHERE STATUS IN ('Y', 'A')
-	</select>
+    <!-- STATUS가 'Y' 또는 'A'인 회원 수 계산 -->
+    <select id="countMembersWithStatus" resultType="int">
+        SELECT COUNT(*)
+        FROM MEMBER
+        WHERE STATUS IN ('Y', 'A')
+    </select>
 
-	<!-- PAY_STATUS가 'Y'인 총 수익 계산 -->
-	<select id="calculateTotalEarnings" resultType="int">
-		SELECT
-		COALESCE(SUM(PAY_PRICE), 0)
-		FROM PAYMENT
-		WHERE PAY_STATUS = 'Y'
-	</select>
+    <!-- PAY_STATUS가 'Y'인 총 수익 계산 -->
+    <select id="calculateTotalEarnings" resultType="int">
+        SELECT COALESCE(SUM(PAY_PRICE), 0)
+        FROM PAYMENT
+        WHERE PAY_STATUS = 'Y'
+    </select>
 
-	<!-- PAY_STATUS가 'Y'인 구매자 수 계산 -->
-	<select id="calculateTotalConsumers" resultType="int">
-		SELECT
-		COUNT(DISTINCT MEMBER_ID)
-		FROM PAYMENT
-		WHERE PAY_STATUS = 'Y'
-	</select>
+    <!-- PAY_STATUS가 'Y'인 구매자 수 계산 -->
+    <select id="calculateTotalConsumers" resultType="int">
+        SELECT COUNT(DISTINCT MEMBER_ID)
+        FROM PAYMENT
+        WHERE PAY_STATUS = 'Y'
+    </select>
+    <!-- 월별 수익 계산 -->
+    <select id="getMonthlyEarnings" resultType="map">
+        SELECT
+ 		TO_CHAR(PAY_TIME, 'YYYY-MM') AS month,
+        COALESCE(SUM(PAY_PRICE), 0) AS
+        earnings
+        FROM PAYMENT
+        WHERE PAY_STATUS = 'Y'
+        GROUP BY TO_CHAR(PAY_TIME,
+        'YYYY-MM')
+        ORDER BY month
+    </select>
+       <!-- 모든 회원 조회 -->
+    <select id="getAllMembers" resultType="com.jocomi.jcm.model.vo.Member">
+        SELECT MEMBER_ID,
+               MEMBER_PWD,
+               MEMBER_NAME,
+               EMAIL,
+               PHONE,
+               BIRTH,
+               ADDRESS,
+               STATUS,
+               P_IMG
+        FROM MEMBER
+    </select>
 
-	<!-- 월별 수익 계산 -->
-	<select id="getMonthlyEarnings" resultType="map">
-		SELECT
-		TO_CHAR(PAY_TIME, 'YYYY-MM') AS month,
-		COALESCE(SUM(PAY_PRICE), 0) AS
-		earnings
-		FROM PAYMENT
-		WHERE PAY_STATUS = 'Y'
-		GROUP BY TO_CHAR(PAY_TIME,
-		'YYYY-MM')
-		ORDER BY month
-	</select>
+    <!-- 특정 회원 정보 수정 -->
+	<update id="updateMemberInfo" parameterType="com.jocomi.jcm.model.vo.Member">
+	    UPDATE MEMBER
+	    SET MEMBER_NAME = #{memberName},
+	        EMAIL = #{email},
+	        PHONE = #{phone},
+	        ADDRESS = #{address},
+	        STATUS = #{status}
+	    WHERE MEMBER_ID = #{memberId}
+	</update>
+
+
+    <!-- 특정 회원 상태 변경 -->
+		<update id="updateMemberStatus" parameterType="map">
+		    UPDATE MEMBER
+		    SET STATUS = #{status}
+		    WHERE MEMBER_ID = #{memberId}
+		</update>
 
 </mapper>

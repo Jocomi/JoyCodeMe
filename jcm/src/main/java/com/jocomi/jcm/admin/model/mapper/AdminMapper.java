@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.jocomi.jcm.model.vo.Member;
+
 @Mapper
 public interface AdminMapper {
 	// STATUS가 'Y' 또는 'A'인 회원 수 계산
@@ -18,4 +20,14 @@ public interface AdminMapper {
 
 	// 월별 수익 데이터 반환
 	List<Map<String, Object>> getMonthlyEarnings();
+	
+    // 모든 회원 조회
+    List<Member> getAllMembers();
+
+    // 특정 회원 정보 수정
+    int updateMemberInfo(Member updatedMember);
+
+    // 특정 회원 상태 변경
+    int updateMemberStatus(String memberId, String status);
+
 }

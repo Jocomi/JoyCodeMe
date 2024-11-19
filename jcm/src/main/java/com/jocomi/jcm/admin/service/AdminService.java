@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jocomi.jcm.admin.model.mapper.AdminMapper;
+import com.jocomi.jcm.model.vo.Member;
 
 @Service
 public class AdminService {
@@ -37,5 +38,21 @@ public class AdminService {
     public List<Map<String, Object>> getMonthlyEarnings() {
         return adminMapper.getMonthlyEarnings();
     }
+    
+    // 모든 회원 정보 조회
+    public List<Member> getAllMembers() {
+        return adminMapper.getAllMembers();
+    }
+
+    // 회원 정보 수정
+    public int updateMember(Member updatedMember) {
+        return adminMapper.updateMemberInfo(updatedMember);
+    }
+
+    // 회원 비활성화 (STATUS = 'N')
+    public int deactivateMember(String memberId) {
+        return adminMapper.updateMemberStatus(memberId, "N");
+    }
+
 }
 

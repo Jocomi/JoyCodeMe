@@ -87,3 +87,65 @@
     color: white;
     text-decoration: none;
 }
+
+.customer-list input {
+    width: 150px;
+    height: 30px;
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.Customer-main .customer-list .button {
+    padding: 8px 16px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.Customer-main .customer-list .save-button {
+    background-color: #28a745;
+    color: white;
+}
+
+.Customer-main .customer-list .save-button:hover {
+    background-color: #218838;
+}
+
+.Customer-main .customer-list .cancel-button {
+    background-color: #dc3545;
+    color: white;
+}
+
+.Customer-main .customer-list .cancel-button:hover {
+    background-color: #c82333;
+}
+
+.Customer-main .customer-list .delete-button {
+    background-color: #ffc107;
+    color: black;
+}
+
+.Customer-main .customer-list .delete-button:hover {
+    background-color: #e0a800;
+}
+
+.Customer-main .customer-list input {
+    width: 150px;
+    height: 30px;
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+    .Customer-main .customer-list input {
+        width: 100px;
+    }
+}
+
