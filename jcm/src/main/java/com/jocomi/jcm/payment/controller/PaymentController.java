@@ -34,7 +34,6 @@ public class PaymentController {
 
     @GetMapping("/history")
     public ResponseEntity<List<Payment>> getPaymentsByMemberId(String memberId) {
-        System.out.println("로그인한 memberId: " + memberId);
         List<Payment> payments = paymentService.getPaymentsByMemberId(memberId);
         return ResponseEntity.ok(payments);
     }
