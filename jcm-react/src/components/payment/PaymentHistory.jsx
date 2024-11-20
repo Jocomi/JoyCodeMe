@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import '../../css/payment/PaymentHistory.css';
 import axios from 'axios'; 
 import { LoginUser } from '../../App';
+import EmptyUser from '../common/EmptyUser';
 
 const PaymentHistory = () => {
     const { data: loginUser } = useContext(LoginUser)
@@ -44,7 +45,7 @@ const PaymentHistory = () => {
             <div className="payment-history">
                 <h2>결제 내역</h2>
                 <p>결제 내역을 보려면 로그인이 필요합니다.</p>
-                <Link to="/signIn" className="login-link">로그인하러 가기</Link>
+                <EmptyUser/>
             </div>
         );
     }
