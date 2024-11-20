@@ -1,7 +1,13 @@
 import AdminSideBar from "./AdminSideBar";
 import '../../css/admin/Chat.css';
+import instanceAdmin from "../../shared/axiosAdmin";
+import { useEffect } from "react";
 
 const AdminChat = () => {
+    useEffect(() => {
+        instanceAdmin.get(`http://${window.location.hostname}:3000/`);
+      }, []);
+
     const handleButtonClick = () => {
         window.open("https://desk.channel.io/#/channels/183715/team_chats/groups/417412", "_blank");
     };

@@ -2,8 +2,12 @@ import React, { useEffect, useState } from 'react';
 import '../../css/admin/Customer.css';
 import AdminSideBar from './AdminSideBar';
 import axios from 'axios';
+import instanceAdmin from '../../shared/axiosAdmin';
 
 const Customer = () => {
+    useEffect(() => {
+        instanceAdmin.get(`http://${window.location.hostname}:3000/`);
+      }, []);
     const [customers, setCustomers] = useState([]);
     const [editingIndex, setEditingIndex] = useState(null); // 현재 수정 중인 고객의 인덱스
     const [editedCustomer, setEditedCustomer] = useState({}); // 수정 중인 고객 데이터
