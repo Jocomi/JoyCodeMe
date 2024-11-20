@@ -1,14 +1,11 @@
 import { useEffect, useState } from 'react';
 import '../../css/user/ProjectHistory.css';
 import instance from '../../shared/axios';
-import { useNavigate } from 'react-router-dom';
 import { Pagination } from 'react-bootstrap';
 
 const ProjectHistory = () => {
   const [tableData, setTableData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1); 
-  const navigate = useNavigate();
-  const [boardType, setBoardType] = useState('free');
 
   const postsPerPage = 5; // 페이지당 게시물 수
 
