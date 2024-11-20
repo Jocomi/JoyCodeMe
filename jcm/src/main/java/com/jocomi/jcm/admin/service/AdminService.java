@@ -1,5 +1,7 @@
 package com.jocomi.jcm.admin.service;
 
+import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -37,6 +39,18 @@ public class AdminService {
     // 월별 수익 데이터 반환
     public List<Map<String, Object>> getMonthlyEarnings() {
         return adminMapper.getMonthlyEarnings();
+    }
+    
+    // 등급별 고객 데이터 반환
+    public Map<String, Integer> getConsumerDistribution() {
+        Map<String, Object> rawData = adminMapper.calculateUserVIPDistribution();
+        // BigDecimal 데이터를 Integer로 변환
+        Map<String, Integer> processedData = new HashMap<>();
+        processedData.put("VIP1", ((BigDecimal) rawData.get("VIP1")).intValue());
+        processedData.put("VIP2", ((BigDecimal) rawData.get("VIP2")).intValue());
+        processedData.put("VIP3", ((BigDecimal) rawData.get("VIP3")).intValue());
+        processedData.put("NOMAL", ((BigDecimal) rawData.get("NOMAL")).intValue());
+        return processedData;
     }
     
     // 모든 회원 정보 조회

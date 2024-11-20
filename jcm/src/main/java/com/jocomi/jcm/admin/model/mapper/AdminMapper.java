@@ -29,5 +29,8 @@ public interface AdminMapper {
 
     // 특정 회원 상태 변경
     int updateMemberStatus(String memberId, String status);
+    
+    // 등급별 고객 데이터 반환
+    Map<String, Object> calculateUserVIPDistribution();
 
 }
