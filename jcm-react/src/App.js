@@ -43,6 +43,7 @@ import NaverCallback from './components/user/NaverCallback';
 import Suggestion from './components/setup/Suggestion';
 import EmptyUser from './components/common/EmptyUser';
 import AdminChat from './components/admin/AdminChat';
+import EmptyAdmin from './components/common/EmptyAdmin';
 
 
 export const LoginUser = createContext();
@@ -133,6 +134,7 @@ const [question, setQuestion] = useState("");
                 <Route path="/suggestion" element={<Suggestion />} />
 
                 <Route path="/emptyUser" element={<EmptyUser />} />
+                <Route path="/emptyAdmin" element={<EmptyAdmin />} />
               </Routes>
             </main>
           <FooterPage />
