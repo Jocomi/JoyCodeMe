@@ -40,7 +40,7 @@ const ProjectHistory = () => {
   
         const result = await response.json();
         
-        const sortedData = result.sort((a, b) => a.historyNo - b.historyNo); // postNo를 기준으로 오름차순 정렬
+        const sortedData = result.sort((a, b) => b.historyNo - a.historyNo); // postNo를 기준으로 오름차순 정렬
         setTableData(sortedData);
 
       } catch (e) {
