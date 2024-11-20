@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jocomi.jcm.ai.model.mapper.AiMapper">
+
+	<insert id="insertWebHistory" parameterType="Ai">
+		INSERT INTO PROJECT_HISTORY
+		VALUES (H_SAVE_NO.NEXTVAL, #{memberId}, #{request}, #{usedFunction}, SYSDATE, 'Y')
+	</insert>
+	
+	<insert id="insertFuncHistory" parameterType="Ai">
+		INSERT INTO PROJECT_HISTORY
+		VALUES (H_SAVE_NO.NEXTVAL, #{memberId}, #{request}, #{usedFunction}, SYSDATE, 'Y')
+	</insert>
+	
+	<insert id="insertDbHistory" parameterType="Ai">
+		INSERT INTO PROJECT_HISTORY
+		VALUES (H_SAVE_NO.NEXTVAL, #{memberId}, #{request}, #{usedFunction}, SYSDATE, 'Y')
+	</insert>
+</mapper>

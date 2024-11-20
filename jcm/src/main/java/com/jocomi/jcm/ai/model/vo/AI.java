@@ -4,8 +4,10 @@ import lombok.Data;
 
 @Data
 public class AI {
+	private int historyNo;
     private String memberId; 
     private String request;
-    private String hFile;
-    private String url;
+    private String usedFunction;
+    private String historyTime;
+    private String status;
 }

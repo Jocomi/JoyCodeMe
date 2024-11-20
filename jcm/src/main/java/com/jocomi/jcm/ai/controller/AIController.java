@@ -11,6 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +25,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.jocomi.jcm.ai.model.vo.AI;
+import com.jocomi.jcm.ai.service.AiService;
 
 @CrossOrigin(origins = "*")
 @RestController	
@@ -31,15 +33,22 @@ public class AIController {
 	
 	@Value("${server.ip}")
     private String serverIp;
+	private final AiService aService;
+	
+	@Autowired
+	public AIController(AiService aService) {
+		this.aService = aService;
+	}
 
 	private final String GPT_API_KEY ="";	// 깃 커밋시 삭제할 것 
 	private final String GPT_API_URL ="";				// 깃 커밋시 삭제할 것 
 	
 
     @PostMapping(value = "/view")
-    public String createView(@RequestBody String request) {
-    	System.out.println(serverIp);
-        System.out.println(request);
+    public String createView(@RequestBody AI ai) {
+    	
+    	ai.setUsedFunction("webPage");
+    	aService.insertWebHistory(ai);
 
         try {
             // API URL 설정
@@ -62,7 +71,7 @@ public class AIController {
 
             ObjectNode userMessage = objectMapper.createObjectNode();
             userMessage.put("role", "user");
-            userMessage.put("content", request);
+            userMessage.put("content", ai.getRequest());
 
             ObjectNode systemMessage = objectMapper.createObjectNode();
             systemMessage.put("role", "system");
@@ -207,8 +216,9 @@ public class AIController {
     }
     
     @PostMapping(value = "/function")
-    public String createFunction(@RequestBody String request) {
-        System.out.println(request);
+    public String createFunction(@RequestBody AI ai) {
+    	ai.setUsedFunction("Function");
+    	aService.insertFuncHistory(ai);
 
         try {
             // API URL 설정
@@ -231,7 +241,7 @@ public class AIController {
 
             ObjectNode userMessage = objectMapper.createObjectNode();
             userMessage.put("role", "user");
-            userMessage.put("content", request);
+            userMessage.put("content", ai.getRequest());
 
             ObjectNode systemMessage = objectMapper.createObjectNode();
             systemMessage.put("role", "system");
@@ -290,8 +300,11 @@ public class AIController {
     }
     
     @PostMapping(value = "/dataBase")
-    public String createDataBase(@RequestBody String request) {
-        System.out.println(request);
+    public String createDataBase(@RequestBody AI ai) {
+    	
+    	ai.setUsedFunction("DataBase");
+    	aService.insertDbHistory(ai);
+
 
         try {
             // API URL 설정
@@ -314,7 +327,7 @@ public class AIController {
 
             ObjectNode userMessage = objectMapper.createObjectNode();
             userMessage.put("role", "user");
-            userMessage.put("content", request);
+            userMessage.put("content", ai.getRequest());
 
             ObjectNode systemMessage = objectMapper.createObjectNode();
             systemMessage.put("role", "system");
