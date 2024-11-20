@@ -103,5 +103,20 @@ public class AdminController {
             return ResponseEntity.status(500).body("오류 발생.");
         }
     }
+    
+    // 서버상태 체크 
+    @GetMapping("/status-check")
+    public ResponseEntity<Map<String, String>> checkServerHealth() {
+        try {
+            Map<String, String> healthStatus = Map.of(
+                "status", "UP",
+                "message", "Server is running!"
+            );
+            return ResponseEntity.ok(healthStatus);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Map.of("status", "DOWN", "message", "Server is not reachable!"));
+        }
+    }
 
 }

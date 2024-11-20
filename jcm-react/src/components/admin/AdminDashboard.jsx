@@ -4,6 +4,7 @@ import '../../css/admin/Admin.css';
 import AdminSideBar from './AdminSideBar';
 import instanceAdmin from '../../shared/axiosAdmin';
 
+
 const AdminDashboard = () => {
   useEffect(() => {
     instanceAdmin.get(`http://${window.location.hostname}:3000/`);
@@ -13,12 +14,44 @@ const AdminDashboard = () => {
   const consumerChartRef = useRef(null);
   const userChartRef = useRef(null);
 
+  // 서버 상태 체크
+  const [serverStatus, setServerStatus] = useState('Checking...'); // 서버 상태
+  const [serverColor, setServerColor] = useState('rgb(0, 175, 0)'); // 상태 색상 (기본값: 녹색)
+
   // Total Earnings 상태 관리
   const [totalEarnings, setTotalEarnings] = useState(0);
   const [totalConsumers, setTotalConsumers] = useState(0);
   const [totalUsers, setTotalUsers] = useState(0); // Total Users 상태 추가
 
+  // 서버 상태 체크를 위해 60초마다 새로고침
   useEffect(() => {
+    const interval = setInterval(() => {
+      window.location.reload();
+    }, 60*1000); // 60초마다 새로고침
+
+    return () => clearInterval(interval); // 컴포넌트 언마운트 시 인터벌 제거
+  }, []);
+
+  useEffect(() => {
+    // 서버 상태 체크
+    const checkServerHealth = async () => {
+      try {
+        const response = await instanceAdmin.get(`http://${window.location.hostname}:7777/api/admin/status-check`);
+        if (response.status === 200 && response.data.status === 'UP') {
+          setServerStatus('Work');
+          setServerColor('rgb(0, 175, 0)'); // 녹색
+        } else {
+          throw new Error('Health check failed');
+        }
+      } catch (error) {
+        setServerStatus('Disconnect');
+        setServerColor('red'); // 빨간색
+        console.error('서버 상태 확인 실패:', error);
+      }
+    };
+    checkServerHealth();
+
+
     // Total Earnings 데이터를 불러오는 API 호출
     const getTotalEarnings = async () => {
       try {
@@ -259,7 +292,7 @@ const AdminDashboard = () => {
                 </li>
                 <li>
                   Web Server - Status:{' '}
-                  <span style={{ color: 'rgb(0, 175, 0)' }}>Work</span>
+                  <span style={{ color: serverColor }}>{serverStatus}</span>
                 </li>
               </ul>
             </div>
