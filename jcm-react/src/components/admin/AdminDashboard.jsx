@@ -2,8 +2,13 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Chart } from 'chart.js/auto';
 import '../../css/admin/Admin.css';
 import AdminSideBar from './AdminSideBar';
+import instanceAdmin from '../../shared/axiosAdmin';
 
 const AdminDashboard = () => {
+  useEffect(() => {
+    instanceAdmin.get(`http://${window.location.hostname}:3000/`);
+  }, []);
+
   const earningsChartRef = useRef(null);
   const consumerChartRef = useRef(null);
   const userChartRef = useRef(null);
