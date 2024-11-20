@@ -44,14 +44,16 @@ const EnquiryBoard = ({ className }) => {
  // 비공개 게시물 접근 제한
  const handlePostClick = (post) => {
   if (post.privateBoard === 'N') {
-    // 비공개 게시물 접근 제한 조건
-    if (loginUser && (loginUser.status === 'A' || loginUser.memberId === post.memberId)) {
+    // **loginUser가 null인지 먼저 체크**
+    if (
+      loginUser && // loginUser가 null이면 조건을 타지 않음
+      (loginUser.status === 'A' || loginUser.memberId === post.memberId)
+    ) {
       navigate(`/detailpost/enquiry/${post.postNo}`);
     } else {
       alert("비공개 게시물입니다.");
     }
   } else {
-    // 공개 게시물은 누구나 접근 가능
     navigate(`/detailpost/${boardType}/${post.postNo}`);
   }
 };
@@ -75,7 +77,9 @@ const EnquiryBoard = ({ className }) => {
             >
               <td>{post.postNo}</td>
               <td>{post.memberId}</td>
-              <td>{post.privateBoard === 'N' && post.memberId !== loginUser.memberId  ? '비공개 게시물입니다.' : post.postTitle}</td>
+              <td>{post.privateBoard === 'N' && (!loginUser || post.memberId !== loginUser?.memberId)
+                    ? '비공개 게시물입니다.'
+                    : post.postTitle}</td>
               <td>{post.postTime}</td>
               <td>{post.countView}</td>
             </tr>
