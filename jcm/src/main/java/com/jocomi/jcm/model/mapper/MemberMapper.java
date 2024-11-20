@@ -43,4 +43,6 @@ public interface MemberMapper {
 
 	int editNaverProfile(Member member);
 
+	Member getLatestPayProduct(String memberId); // 반환 타입 수정
+
 }
