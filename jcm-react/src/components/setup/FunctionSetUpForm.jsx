@@ -64,6 +64,9 @@ const FunctionSetUpForm = (props) => {
                 </div>
 
                 <p className="final-note">Once you've filled out the information, our team will guide you through the remaining steps to launch your site.</p>
+                <div>
+                <button onClick={() => { window.location.href = "/functionSetUp"; }}>뒤로가기</button>
+                </div>
             </main>
         </div>
     );

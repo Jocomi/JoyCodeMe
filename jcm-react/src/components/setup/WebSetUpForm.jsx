@@ -64,31 +64,6 @@ const WebSetUpForm = (props) => {
         }
     };
 
-    const saveData = async (url) => {
-        const memberObj = JSON.parse(sessionStorage.getItem('loginUser'));
-        const memberId = memberObj.memberId;
-
-        const data = {
-            memberId: memberId,
-            request: request,
-            url: url
-        };
-        
-        const response = await fetch(`http://${window.location.hostname}:7777/save`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-        });
-
-        const result = await response.text();
-
-        if (response.status === 200) {  // 성공 시 처리
-            alert("성공적으로 저장하였습니다.")
-        } else {
-            alert("요청 실패... 요청을 확인하세요!");
-        }
-    };
-
     return (
         <div className="websetupform-container">
             <header className="websetupform-header">
@@ -116,7 +91,7 @@ const WebSetUpForm = (props) => {
 
                 <p className="final-note">Once you've filled out the information, our team will guide you through the remaining steps to launch your site.</p>
                 <div>
-                <button onClick={() => saveData(saveFileHost + responseData)}>Save</button>
+                <button onClick={() => { window.location.href = "/webSetUp"; }}>웹 제작으로</button>
                 &nbsp;
                 <button onClick={() => downloadHandler(saveFileHost + responseData)}>Export</button>
                 </div>
