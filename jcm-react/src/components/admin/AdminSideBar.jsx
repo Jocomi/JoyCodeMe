@@ -8,12 +8,12 @@ const AdminSideBar = () => {
             <nav className="admin-sidebar">
                 <h2>ADMIN</h2>
                 <ul>
-                <li><NavLink to="/Admin/AdminDashboard">Dashboard</NavLink></li>
-                <li><NavLink to="/Admin/Subscribe">Subscribe</NavLink></li>
-                <li><NavLink to="/Admin/Customer">Customer</NavLink></li>
-                <li><NavLink to="/Admin/Posts" state={{ boardType: "project" }}>Posts</NavLink></li>
-                <li><NavLink to="/Admin/AdminChat">Chat</NavLink></li>
-                <li><NavLink to="/Admin/qna">Q & A</NavLink></li>
+                <li><NavLink to="/adminDashboard">Dashboard</NavLink></li>
+                <li><NavLink to="/subscribe">Subscribe</NavLink></li>
+                <li><NavLink to="/customer">Customer</NavLink></li>
+                <li><NavLink to="/posts" state={{ boardType: "project" }}>Posts</NavLink></li>
+                <li><NavLink to="/adminChat">Chat</NavLink></li>
+                <li><NavLink to="/qna">Q & A</NavLink></li>
                 </ul>
             </nav>
         </>

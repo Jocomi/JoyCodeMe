@@ -38,7 +38,7 @@ const MenuBar = () => {
         <li><Link to="guide">가이드</Link></li>
         {/* status가 'A'일 때만 관리자 메뉴를 보여줌 */}
         {status === 'A' && (
-            <li><Link to="admin/AdminDashboard">관리자</Link></li>
+            <li><Link to="adminDashboard">관리자</Link></li>
         )}
         </ul>
         <div className="user-options">
