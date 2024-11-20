@@ -23,3 +23,16 @@
   margin-bottom: 30px;
   color: rgb(255, 0, 0);
 }
+
+.emptyUser-container .login-link {
+  padding: 10px;
+  height: 40px;
+  width: 140px;
+  line-height: 20px;
+  border-radius: 10px;
+  background-color: #eb2424;
+}
+
+.emptyUser-container .login-link:hover {
+  background-color: #940e0e;
+}

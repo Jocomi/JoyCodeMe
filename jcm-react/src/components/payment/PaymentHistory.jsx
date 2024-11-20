@@ -42,11 +42,7 @@ const PaymentHistory = () => {
 
     if (!loginUser) {
         return (
-            <div className="payment-history">
-                <h2>결제 내역</h2>
-                <p>결제 내역을 보려면 로그인이 필요합니다.</p>
                 <EmptyUser/>
-            </div>
         );
     }
 
