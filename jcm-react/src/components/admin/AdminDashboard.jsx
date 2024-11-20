@@ -23,6 +23,14 @@ const AdminDashboard = () => {
   const [totalConsumers, setTotalConsumers] = useState(0);
   const [totalUsers, setTotalUsers] = useState(0); // Total Users 상태 추가
 
+    // 차트2 데이터 상태 관리
+    const [consumerData, setConsumerData] = useState({
+      general: 0,
+      vip1: 0,
+      vip2: 0,
+      vip3: 0,
+    });
+
   // 서버 상태 체크를 위해 60초마다 새로고침
   useEffect(() => {
     const interval = setInterval(() => {
@@ -126,12 +134,37 @@ const AdminDashboard = () => {
       }
     };
     
+
+    // 차트2 데이터 불러오기
+    const getConsumerData = async () => {
+      try {
+        const response = await fetch(`http://${window.location.hostname}:7777/api/admin/consumer-distribution`);
+        if (response.ok) {
+          const data = await response.json();
     
+          console.log('등급별 고객 차트:', data);
+    
+          // 차트 데이터 업데이트
+          updateConsumerChart({
+            nomal: data.NOMAL,
+            vip1: data.VIP1,
+            vip2: data.VIP2,
+            vip3: data.VIP3,
+          });
+        } else {
+          console.error('Failed to fetch consumer distribution data');
+        }
+      } catch (error) {
+        console.error('Error fetching consumer distribution:', error);
+      }
+    };
+
 
     getTotalEarnings();
     getTotalConsumers();
     getTotalUsers();
     getMonthlyEarnings();
+    getConsumerData();
   }, []);
 
   const updateEarningsChart = (labels, data) => {
@@ -173,34 +206,42 @@ const AdminDashboard = () => {
     });
   };
   
+  const updateConsumerChart = (data) => {
+    const canvas = document.getElementById('consumerChart');
+    if (!canvas) {
+      console.error('consumerChart element is not found.');
+      return;
+    }
   
-
-  useEffect(() => {
-    // 기존 차트가 있다면 먼저 destroy() 호출
-    if (consumerChartRef.current) consumerChartRef.current.destroy();
-    if (userChartRef.current) userChartRef.current.destroy();
-
-
-    // 차트 2 - Doughnut Chart
-    const ctxTwo = document.getElementById('consumerChart').getContext('2d');
-    consumerChartRef.current = new Chart(ctxTwo, {
+    const ctx = canvas.getContext('2d');
+  
+    // 기존 차트를 제거
+    if (consumerChartRef.current) {
+      consumerChartRef.current.destroy();
+    }
+  
+    consumerChartRef.current = new Chart(ctx, {
       type: 'doughnut',
       data: {
-        labels: ['일반회원', 'VIP1', 'VIP2', 'VIP3'],
+        labels: ['Nomal', 'VIP1', 'VIP2', 'VIP3'],
         datasets: [
           {
-            label: 'User',
-            data: [70, 50, 25, 12],
-            backgroundColor: [
-              '#ff6384',
-              '#36a2eb',
-              '#cc65fe',
-              '#ffce56'
-            ],
+            label: 'User Distribution',
+            data: [data.nomal, data.vip1, data.vip2, data.vip3],
+            backgroundColor: ['#ff6384', '#36a2eb', '#cc65fe', '#ffce56'],
           },
         ],
       },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+      },
     });
+  };
+
+  useEffect(() => {
+    // 기존 차트가 있다면 먼저 destroy() 호출
+    if (userChartRef.current) userChartRef.current.destroy();
 
     // 차트 3 - Line Chart
     const ctx3 = document.getElementById('userChart').getContext('2d');
@@ -275,7 +316,7 @@ const AdminDashboard = () => {
 
             {/* 차트 3 */}
             <div className="chart3">
-              <canvas id="userChart"></canvas>
+              <canvas id="userChart"></canvas> 
             </div>
 
             {/* 프로젝트 리스트 */}

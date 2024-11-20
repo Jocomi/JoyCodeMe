@@ -50,13 +50,6 @@ public class AdminController {
         return ResponseEntity.ok(totalConsumers);
     }
     
-    // 월별 수익 데이터 반환
-    @GetMapping("/monthly-earnings")
-    public ResponseEntity<List<Map<String, Object>>> getMonthlyEarnings() {
-        List<Map<String, Object>> monthlyEarnings = adminService.getMonthlyEarnings();
-        return ResponseEntity.ok(monthlyEarnings);
-    }
-    
     // 모든 고객 정보 조회
     @GetMapping("/customers")
     public ResponseEntity<List<Member>> getAllCustomers() {
@@ -68,7 +61,20 @@ public class AdminController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
-
+    
+    // 차트1번 월별 수익 데이터 반환
+    @GetMapping("/monthly-earnings")
+    public ResponseEntity<List<Map<String, Object>>> getMonthlyEarnings() {
+        List<Map<String, Object>> monthlyEarnings = adminService.getMonthlyEarnings();
+        return ResponseEntity.ok(monthlyEarnings);
+    }
+    
+    // 차트2번 등급별 고객 정보 조회
+    @GetMapping("/consumer-distribution")
+    public ResponseEntity<Map<String, Integer>> getConsumerDistribution() {
+        Map<String, Integer> distribution = adminService.getConsumerDistribution();
+        return ResponseEntity.ok(distribution);
+    }
 
 
     // 고객 수정
