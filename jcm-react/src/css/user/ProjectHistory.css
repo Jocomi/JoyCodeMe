@@ -3,6 +3,7 @@
     background-color: white;
     color: black;
     padding: 100px;
+    height: 700px;
 }
 .history-list {
     min-width: 1000px;
@@ -53,4 +54,10 @@
 
   .history-list table td button:hover {
     opacity: 0.8;
+  }
+
+  .history-list .pagination-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
   }

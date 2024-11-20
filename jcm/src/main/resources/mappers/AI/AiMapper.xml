@@ -16,4 +16,9 @@
 		INSERT INTO PROJECT_HISTORY
 		VALUES (H_SAVE_NO.NEXTVAL, #{memberId}, #{request}, #{usedFunction}, SYSDATE, 'Y')
 	</insert>
+	
+	<select id="getHistory" resultType="Ai">
+		SELECT * FROM PROJECT_HISTORY
+		WHERE MEMBER_ID = #{memberId} AND STATUS='Y'
+	</select>
 </mapper>

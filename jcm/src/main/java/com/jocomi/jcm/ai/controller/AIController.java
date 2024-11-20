@@ -10,6 +10,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,12 +19,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.google.gson.Gson;
 import com.jocomi.jcm.ai.model.vo.AI;
 import com.jocomi.jcm.ai.service.AiService;
 
@@ -47,7 +50,7 @@ public class AIController {
     @PostMapping(value = "/view")
     public String createView(@RequestBody AI ai) {
     	
-    	ai.setUsedFunction("webPage");
+    	ai.setUsedFunction("WebPage");
     	aService.insertWebHistory(ai);
 
         try {
@@ -390,6 +393,13 @@ public class AIController {
     public String saveRequest(@RequestBody AI ai) {
     	System.out.println(ai);
     	return null;
+    }
+    
+    @ResponseBody
+	@PostMapping(value = "/history", produces = "application/json;charset=UTF-8")
+    public String getHistory(@RequestBody AI ai) {
+    	ArrayList<AI> UserHistory = aService.getHistory(ai);
+		return new Gson().toJson(UserHistory);
     }
     
 }
