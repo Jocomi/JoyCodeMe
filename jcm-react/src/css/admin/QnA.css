@@ -28,7 +28,7 @@
 }
 .QnA-main button {
     padding: 8px 16px;
-    background-color: #4CAF50;
+    background-color: #df5151;
     color: white;
     border: none;
     border-radius: 5px;
@@ -36,7 +36,7 @@
 }
 
 .QnA-main button:hover {
-    background-color: #45a049;
+    background-color: #ec6c6c;
     
 }
 .QnA-main h1 {

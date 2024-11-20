@@ -65,7 +65,7 @@
 
 .posts-main button {
     padding: 8px 16px;
-    background-color: #4CAF50;
+    background-color: #e04f4f;
     color: white;
     border: none;
     border-radius: 5px;
@@ -73,7 +73,7 @@
 }
 
 .posts-main button:hover {
-    background-color: #45a049;
+    background-color: #e47878;
     
 }
 

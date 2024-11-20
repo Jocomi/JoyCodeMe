@@ -330,7 +330,6 @@ const deleteRecomment = async (recommentNo, commentNo) =>{
     return (
       <li key={comment.commentId} className="comment-item">
                   <div className="comment-header">
-                    <img src="img/profile.jpg" alt="프로필 사진" className="comment-profile-image" />
                     <div className="comment-body">
                       <div className="comment-userId">{comment.memberId}</div>
                       <div className="comment-content">
@@ -366,8 +365,7 @@ const deleteRecomment = async (recommentNo, commentNo) =>{
                     .map((recomment) => (
                       <li key={recomment.recommentNo} className="reply-item">
                         <div className="reply-content">
-                          <img src="img/profile.jpg" alt="프로필 사진" className="reply-profile-image" />
-                          <div className="reply-body">
+                        <div className="reply-body">
                             <span className="reply-userId">{recomment.memberId}</span>
                             <span className='reply-text'>{recomment.recommentText}</span>
                             <div className='recomment-items'>
@@ -430,7 +428,7 @@ const deleteRecomment = async (recommentNo, commentNo) =>{
               </tr>
               <tr>
                 <td>
-                  <img src={``} alt="프로필 이미지" className="profile-image" />
+                  <img src={`http://${window.location.hostname}:7777${post.pimg}`} alt="프로필 이미지" className="profile-image" />
                 </td>
               </tr>
             </tbody>
