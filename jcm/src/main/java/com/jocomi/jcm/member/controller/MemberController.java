@@ -309,4 +309,21 @@ public class MemberController {
 	        return new Gson().toJson("Google 로그인에 실패했습니다.");
 	    }
 	}
+	
+	@ResponseBody
+	@GetMapping(value = "/latestPayProduct", produces = "application/json;charset=UTF-8")
+	public ResponseEntity<Map<String, Object>> getLatestPayProduct(@RequestParam("memberId") String memberId) {
+	    if (memberId == null || memberId.isEmpty()) {
+	        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+	                .body(Map.of("status", "error", "message", "회원 ID가 필요합니다."));
+	    }
+
+	    Member memberWithPayProduct = mService.getLatestPayProduct(memberId);
+	    if (memberWithPayProduct == null) {
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+	                .body(Map.of("status", "error", "message", "결제 내역이 없습니다."));
+	    }
+
+	    return ResponseEntity.ok(Map.of("status", "success", "data", memberWithPayProduct));
+	}
 }

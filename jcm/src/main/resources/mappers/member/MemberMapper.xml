@@ -5,7 +5,8 @@
 	<!-- 로그인 쿼리 -->
 	<select id="loginMember" resultType="Member">
 		SELECT * FROM MEMBER
-		WHERE MEMBER_ID = #{memberId} AND MEMBER_PWD = #{memberPwd}
+		WHERE
+		MEMBER_ID = #{memberId} AND MEMBER_PWD = #{memberPwd}
 	</select>
 
 	<!-- 회원가입 쿼리 -->
@@ -42,7 +43,8 @@
 
 	<!-- 회원 ID 확인 쿼리 -->
 	<select id="selectId" parameterType="String" resultType="int">
-		SELECT COUNT(*)
+		SELECT
+		COUNT(*)
 		FROM MEMBER WHERE MEMBER_ID = #{memberId}
 	</select>
 
@@ -55,40 +57,65 @@
 	<!-- 회원 정보 수정 쿼리 -->
 	<update id="editProfile" parameterType="Member">
 		UPDATE MEMBER
-		SET EMAIL = #{email},
+		SET EMAIL =
+		#{email},
 		ADDRESS = #{address},
 		PHONE = #{phone}
-		WHERE MEMBER_ID = #{memberId}
+		WHERE MEMBER_ID =
+		#{memberId}
 	</update>
 
 	<!-- 프로필 이미지 경로 업데이트 쿼리 -->
 	<update id="updateProfileImage" parameterType="map">
 		UPDATE MEMBER
-		SET P_IMG = #{imagePath}
+		SET
+		P_IMG = #{imagePath}
 		WHERE MEMBER_ID = #{memberId}
 	</update>
 
-    <!-- 비밀번호 업데이트 -->
-    <update id="updatePassword" parameterType="Member">
-        UPDATE MEMBER
-        SET MEMBER_PWD = #{memberPwd}
-        WHERE MEMBER_ID = #{memberId}
-    </update>
+	<!-- 비밀번호 업데이트 -->
+	<update id="updatePassword" parameterType="Member">
+		UPDATE MEMBER
+		SET
+		MEMBER_PWD = #{memberPwd}
+		WHERE MEMBER_ID = #{memberId}
+	</update>
 
 	<!-- 네이버 회원가입 쿼리 -->
 	<insert id="insertNaverMember" parameterType="Member"> INSERT INTO MEMBER
 		(MEMBER_ID, MEMBER_PWD, MEMBER_NAME, EMAIL, PHONE, BIRTH, ADDRESS,
 		STATUS) VALUES (#{memberId}, 1234, #{memberName}, #{email}, #{phone},
-		SYSDATE, '역삼', #{status}) </insert>
-		
+		SYSDATE, '역삼', #{status})
+	</insert>
+
 	<!-- 네이버 로그인 쿼리 -->
 	<update id="editNaverProfile" parameterType="Member">
 		UPDATE MEMBER
-		SET EMAIL = #{email},
+		SET
+		EMAIL = #{email},
 		PHONE = #{phone}
 		WHERE MEMBER_ID = #{memberId}
 	</update>
 
-
+	<select id="getLatestPayProduct" parameterType="String"
+		resultType="com.jocomi.jcm.model.vo.Member">
+		SELECT
+		M.MEMBER_ID,
+		M.MEMBER_NAME,
+		M.EMAIL,
+		M.PHONE,
+		M.BIRTH,
+		M.ADDRESS,
+		M.STATUS,
+		M.P_IMG,
+		P.PAY_PRODUCT,
+		TO_CHAR(P.PAY_TIME, 'YYYY-MM-DD HH24:MI:SS') AS PAY_TIME
+		FROM MEMBER M
+		LEFT JOIN PAYMENT P
+		ON M.MEMBER_ID = P.MEMBER_ID
+		WHERE M.MEMBER_ID = #{memberId}
+		ORDER BY P.PAY_TIME DESC
+		FETCH FIRST 1 ROWS ONLY
+	</select>
 
 </mapper>
