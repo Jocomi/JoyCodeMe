@@ -45,7 +45,6 @@ import EmptyUser from './components/common/EmptyUser';
 import AdminChat from './components/admin/AdminChat';
 import EmptyAdmin from './components/common/EmptyAdmin';
 
-
 export const LoginUser = createContext();
 export const Requested = createContext();
 
@@ -112,12 +111,12 @@ const [question, setQuestion] = useState("");
                 <Route path="/frequentlyQuestions" element={<FrequentlyQuestions />} />
                 <Route path="/enrollPost" element={<EnrollPost />} />
                 
-                <Route path="/admin/adminDashboard" element={<AdminDashboard />} />
-                <Route path="/admin/subscribe" element={<Subscribe />} />
-                <Route path="/admin/customer" element={<Customer />} />
-                <Route path="/admin/posts" element={<Posts />} />
-                <Route path="/admin/adminChat" element={<AdminChat />} />
-                <Route path="/admin/qna" element={<QnA />} />
+                <Route path="/adminDashboard" element={<AdminDashboard />} />
+                <Route path="/subscribe" element={<Subscribe />} />
+                <Route path="/customer" element={<Customer />} />
+                <Route path="/posts" element={<Posts />} />
+                <Route path="/adminChat" element={<AdminChat />} />
+                <Route path="/qna" element={<QnA />} />
 
                 <Route path="/paymentHistory" element={<PaymentHistory />} />
 
