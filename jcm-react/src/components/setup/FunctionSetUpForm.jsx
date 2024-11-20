@@ -14,6 +14,7 @@ const FunctionSetUpForm = (props) => {
         console.log("여기까징");
         const fetchData = async () => {
             const data = {
+                memberId: JSON.parse(sessionStorage.getItem('loginUser')).memberId,
                 request: props.question
             };
             
