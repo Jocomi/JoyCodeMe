@@ -5,6 +5,7 @@ import '../../../css/post/EnrollPost.css';
 import 'summernote/dist/summernote-lite.css';
 import $ from 'jquery';
 import 'summernote/dist/summernote-lite';
+import instance from '../../../shared/axios';
 
 const EnrollPost = () => {
   const location = useLocation();
@@ -30,14 +31,15 @@ const EnrollPost = () => {
   };
   // 로그인 사용자 정보 가져오기
   useEffect(() => {
+    instance.get(`http://${window.location.hostname}:3000/`);
     const loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
     if (loginUser) {
       setMemberId(loginUser.memberId);
     }
-  }, []);
-  useEffect(()=>{
     fetchPost();
-  }, [])
+   
+  }, []);
+
  
   // Summernote 초기화
   useEffect(() => {
@@ -46,7 +48,7 @@ const EnrollPost = () => {
       height: 500,
       width: '100%',
       disableResizeEditor: true,
-      placeholder: '내용을 입력해 주세요.',
+      placeholder: '2글자 이상의 내용을 입력해 주세요.',
       lang: 'ko-KR',
       callbacks: {
         onChange: (contents) => {
@@ -96,7 +98,22 @@ const EnrollPost = () => {
 
   // 공개/비공개 변경 핸들러
   const handleVisibilityChange = (e) => {
-    setVisibility(e.target.value);
+     // 자유게시판과 공지사항은 공개로 고정
+  if (boardType === 'free' || boardType === 'announcement') {
+    alert('자유게시판과 공지사항은 항상 공개로 설정됩니다.');
+    setVisibility('Y'); // 공개로 강제 설정
+    return;
+  }
+  setVisibility(e.target.value); // 기타 게시판은 선택 가능
+  };
+  const handleBoardTypeChange = (e) => {
+    const selectedBoardType = e.target.value;
+    setBoardType(selectedBoardType);
+  
+    // 자유게시판과 공지사항 선택 시 공개로 설정
+    if (selectedBoardType === 'free' || selectedBoardType === 'announcement') {
+      setVisibility('Y');
+    }
   };
 
   // 게시물 제출 핸들러
@@ -148,18 +165,19 @@ const EnrollPost = () => {
                   className="form-control"
                   value={title}
                   onChange={handleTitleChange}
+                  placeholder="2글자 이상 입력해 주세요."
                   required
                 />
               </div>
             </div>
             <div className="mb-3">
-              <div id="summernote" dangerouslySetInnerHTML={{ __html: content }}></div>
+              <div id="summernote" dangerouslySetInnerHTML={{ __html: content }} ></div>
             </div>
             <div className="mb-3">
               <select
                 className="form-select"
                 value={boardType}
-                onChange={(e) => setBoardType(e.target.value)}
+                onChange={handleBoardTypeChange}
               >
                 <option value="enquiry">문의사항</option>
                 <option value="free">자유게시판</option>
@@ -177,7 +195,9 @@ const EnrollPost = () => {
                 <option value="N">비공개</option>
               </select>
             </div>
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-primary"
+            disabled={title.trim().length < 2 || content.trim().length < 2}
+            >
               {postNo ? '수정하기' : '작성하기'}
             </button>
           </div>

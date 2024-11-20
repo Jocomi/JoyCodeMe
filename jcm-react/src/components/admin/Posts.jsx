@@ -16,7 +16,6 @@ const Posts = () => {
     const [tableData , setTableData] = useState('');
     const [ boardType , setBoardType] = useState("project"); // state에서 boardType 추출
     const fetchData = async () => {
-        console.log(boardType);
         try {
           const response = await axios.get(`http://${window.location.hostname}:7777/select${boardType}`); // 공지사항 API 엔드포인트
           console.log(response);

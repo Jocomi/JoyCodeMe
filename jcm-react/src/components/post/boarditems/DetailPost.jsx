@@ -27,7 +27,10 @@ const DetailPost = () => {
       try {
         const url = `http://${window.location.hostname}:7777/comment/${boardType}/${postNo}`;
         const response = await axios.get(url);
-        setComments(response.data);
+         // 댓글을 시간순으로 정렬 (가장 오래된 댓글이 위로)
+      const sortedComments = response.data.sort((a, b) => new Date(a.commentTime) - new Date(b.commentTime));
+      setComments(sortedComments);
+        
       } catch (error) {
         console.error('댓글을 불러오는 데 실패했습니다:', error);
       }
@@ -55,6 +58,14 @@ const DetailPost = () => {
     }
   }, [post]);
 
+  //로그인 체크 함수
+  const checkLogin = () => {
+    if (!loginUser) {
+      alert('로그인 후 작성할 수 있습니다.');
+      return false;
+    }
+    return true;
+  };
 
 
 
@@ -78,10 +89,7 @@ const DetailPost = () => {
   };
 
   const addComment = async () => {
-    if (!loginUser) {
-      alert('로그인 후 댓글을 작성할 수 있습니다.');
-      return;
-    }
+    let commentText = document.getElementById('comment-text').value;
     if (commentText.trim() === '') return;
 
     const commentData = {
@@ -96,8 +104,8 @@ const DetailPost = () => {
       });
 
       if (response.data.result === 1) {
-        alert('댓글이 성공적으로 작성되었습니다.');
-        setCommentText('');
+        
+        document.getElementById('comment-text').value = '';
         fetchComment();
       } else {
         alert('댓글 작성에 실패했습니다.');
@@ -196,6 +204,10 @@ const DetailPost = () => {
   }
 
   const fetchCommend = async () => {
+    if (!loginUser) {
+      alert('로그인 후 추천을 누를 수 있습니다.');
+      return;
+    }
     const commendData = {
       memberId: loginUser.memberId,
       postNo,
@@ -255,6 +267,31 @@ const DetailPost = () => {
       setIsLoading(false);
     }
   };
+  const ReFetchRecomments = async (commentNo) => {
+    setIsLoading(true);
+    const data = {
+      boardType,
+      commentNo
+    }
+    try {
+      const url = `http://${window.location.hostname}:7777/recomment/${boardType}/${commentNo}/select`;
+      const response = await axios.get(url,data);
+
+      if (response.status === 200) {
+        console.log(response.data);
+    
+        setRecomments({
+  [commentNo]: response.data, // 댓글 번호별 답글 저장
+});
+      } else {
+        throw new Error('답글 데이터를 가져오는 데 실패했습니다.');
+      }
+    } catch (error) {
+      console.error('답글 데이터를 가져오는 데 실패했습니다:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
   const toggleRepliesVisibility = async (commentNo) => {
     const isVisible = isRepliesVisible[commentNo] || false;
     if (!isVisible) {
@@ -278,13 +315,14 @@ const deleteRecomment = async (recommentNo, commentNo) =>{
   const response = await axios.put(`http://${window.location.hostname}:7777/recomment/${boardType}/${recommentNo}/delete`, Data)
   if (response.data.result === 1) {
     alert('답글이 성공적으로 삭제되었습니다.');
-    fetchRecomments(commentNo);
+    setIsRepliesVisible(true);
+    ReFetchRecomments(commentNo);
   } else {
-    alert('답글 작성에 실패했습니다.');
+    alert('답글 삭제에 실패했습니다.');
   }
 } catch (error) {
-  console.error('답글 작성에 실패했습니다:', error);
-  alert('답글 작성 중 오류가 발생했습니다.');
+  console.error('답글 삭제에 실패했습니다:', error);
+  alert('답글 삭제 중 오류가 발생했습니다.');
 }
 }
 
@@ -352,7 +390,11 @@ const deleteRecomment = async (recommentNo, commentNo) =>{
                   maxLength="50"
                   style={{ resize: 'none' }}
                 />
-                  <button  onClick={() => recomment(comment.commentNo)}>등록</button>
+                  <button   onClick={() => {
+                    // 로그인 여부 확인
+                    if (!checkLogin()) return;
+                    recomment(comment.commentNo); // 답글 작성 로직 실행
+                  }}>등록</button>
                 </div>
               </div>
             )}
@@ -424,13 +466,17 @@ const deleteRecomment = async (recommentNo, commentNo) =>{
             <div className="write-comment">
               <div className="input-container">
                 <textarea
+                  id='comment-text'
                   placeholder="댓글작성"
                   maxLength="50"
                   style={{ resize: 'none' }}
-                  value={commentText}
-                  onChange={(e) => setCommentText(e.target.value)}
                 ></textarea>
-                <button onClick={addComment}>등록</button>
+                <button 
+                  onClick={() => {
+                    // 로그인 여부 확인
+                    if (!checkLogin()) return;
+                    addComment(); // 답글 작성 로직 실행
+                  }}>등록</button>
               </div>
             </div>
           </div>
