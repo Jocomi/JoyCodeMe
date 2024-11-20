@@ -3,10 +3,15 @@ import '../../css/admin/Posts.css';
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Navigate, useNavigate } from "react-router-dom";
+import instanceAdmin from "../../shared/axiosAdmin";
 
 
 
 const Posts = () => {
+    useEffect(() => {
+        instanceAdmin.get(`http://${window.location.hostname}:3000/`);
+      }, []);
+
     const navigate = useNavigate(); // useNavigate 훅으로 네비게이션 기능 추가
     const [tableData , setTableData] = useState('');
     const [ boardType , setBoardType] = useState("project"); // state에서 boardType 추출

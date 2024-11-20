@@ -1,8 +1,13 @@
 import AdminSideBar from "./AdminSideBar";
 
 import '../../css/admin/QnA.css';
+import { useEffect } from "react";
+import instanceAdmin from "../../shared/axiosAdmin";
 
 const QnA = () => {
+    useEffect(() => {
+        instanceAdmin.get(`http://${window.location.hostname}:3000/`);
+      }, []);
     return(
         <>
         <div className="QnA-main">

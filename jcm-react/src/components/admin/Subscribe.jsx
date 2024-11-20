@@ -2,10 +2,14 @@ import { ArcElement, Chart, DoughnutController, Legend, Tooltip } from 'chart.js
 import '../../css/admin/Subscribe.css';
 import AdminSideBar from './AdminSideBar';
 import { useEffect, useRef } from 'react';
+import instanceAdmin from '../../shared/axiosAdmin';
 
 Chart.register(DoughnutController, ArcElement, Tooltip, Legend);
 
 const Subscribe = () => {
+    useEffect(() => {
+        instanceAdmin.get(`http://${window.location.hostname}:3000/`);
+      }, []);
     const chartRef = useRef(null);
     const chartInstance = useRef(null); // Chart 인스턴스를 저장할 ref
 
