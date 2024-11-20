@@ -13,7 +13,7 @@ public interface BoardMapper {
 
 		ArrayList<DetailBoardDto> selectAB(String boardType);
 
-	 	DetailBoardDto selectAnnouncementById(int postNo, String boardType);
+	 	DetailBoardDto selectAnnouncementById(int postNo, String boardType, String memberId);
 	 	
 	    int deactivatePost(@Param("boardType") String boardType, @Param("postNo") int postNo);
 

@@ -11,7 +11,7 @@ const EnrollPost = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { state } = location;
-
+  const loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
   const [content, setContent] = useState(state?.postContent || '');
   const [title, setTitle] = useState(state?.postTitle || '');
   const [memberId, setMemberId] = useState('');
@@ -37,7 +37,6 @@ const EnrollPost = () => {
       setMemberId(loginUser.memberId);
     }
     fetchPost();
-   
   }, []);
 
  
@@ -100,7 +99,7 @@ const EnrollPost = () => {
   const handleVisibilityChange = (e) => {
      // 자유게시판과 공지사항은 공개로 고정
   if (boardType === 'free' || boardType === 'announcement') {
-    alert('자유게시판과 공지사항은 항상 공개로 설정됩니다.');
+    alert('자유게시판은 항상 공개로 설정됩니다.');
     setVisibility('Y'); // 공개로 강제 설정
     return;
   }
@@ -179,10 +178,16 @@ const EnrollPost = () => {
                 value={boardType}
                 onChange={handleBoardTypeChange}
               >
+                 {loginUser?.status === 'Y' && (
+                  <>
                 <option value="enquiry">문의사항</option>
                 <option value="free">자유게시판</option>
                 <option value="project">프로젝트</option>
-                <option value="announcement">공지사항</option>
+                </>
+              )}
+                {loginUser?.status === 'A' && (
+                  <option value="announcement">공지사항</option>
+                )}
               </select>
             </div>
             <div className="mb-3">

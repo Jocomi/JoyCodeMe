@@ -19,9 +19,9 @@ public class BoardService {
 		return nMapper.selectAB(boardType);
 	}
 	
-    public DetailBoardDto getAnnouncementById(int postNo, String boardType) {
+    public DetailBoardDto getAnnouncementById(int postNo, String boardType,String memberId) {
     		   nMapper.annViewCount(postNo, boardType);
-        return nMapper.selectAnnouncementById(postNo, boardType);
+        return nMapper.selectAnnouncementById(postNo, boardType, memberId);
     }
 
     public boolean deactivatePost(String boardType, int postNo) {

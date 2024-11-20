@@ -37,8 +37,12 @@ const DetailPost = () => {
     }
   };
   const fetchPost = async () => {
+    const data = {
+      memberId: loginUser.memberId // 로그인된 유저의 ID
+    };
+    
     try {
-      const url = `http://${window.location.hostname}:7777/detail/${boardType}/${postNo}`;
+      const url = `http://${window.location.hostname}:7777/detail/${boardType}/${postNo}?memberId=${data.memberId}`;
       const response = await axios.get(url);
       setPost(response.data);
     } catch (error) {
@@ -54,7 +58,7 @@ const DetailPost = () => {
   useEffect(()=>{
     if (post !== null) {
       setRecommend(post.recommend);
-      setIsRecommend(post.isRecommend === "true");
+      setIsRecommend(post.isRecommend === 'true');
     }
   }, [post]);
 
@@ -121,12 +125,10 @@ const DetailPost = () => {
       commentNo : commentNo,
       boardType
     }
-    console.log(commentNo);
     try {
       const response = await axios.put(`http://${window.location.hostname}:7777/comment/${boardType}/${commentNo}/delete`, Data, {
         headers: { 'Content-Type': 'application/json' },
       });
-      console.log(response.data)
       if (response.data === 1) {
         
         alert('댓글이 성공적으로 삭제되었습니다.');
@@ -150,7 +152,6 @@ const DetailPost = () => {
         // 답글 작성
         const recomment = async (commentNo) => {
           let recommentText = document.getElementById(`recomment-${commentNo}`).value;
-          console.log()
           if (!loginUser) {
             alert('로그인 후 답글을 작성할 수 있습니다.');
             return;
@@ -221,12 +222,12 @@ const DetailPost = () => {
       
         
         
-        if(!isRecommend){
-          setRecommend(recommend+1);
-        } else{
-          setRecommend(recommend-1);
-        }
-        setIsRecommend(!isRecommend);
+      if(!isRecommend){
+        setRecommend(recommend+1);
+      } else{
+        setRecommend(recommend-1);
+      }
+      setIsRecommend(!isRecommend);
 
       
      
