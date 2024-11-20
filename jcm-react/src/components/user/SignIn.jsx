@@ -29,6 +29,7 @@ const SignIn = () => {
     const [popup, setPopup] = useState(false);
     const [userInfo, setUserInfo] = useState(null);
     const [isIdChecked, setIsIdChecked] = useState(false);
+    const [isPasswordChecked, setisPasswordChecked] = useState(false);
     const [isFormValid, setIsFormValid] = useState(false); // 폼 유효성 검사 상태
 
     
@@ -36,16 +37,20 @@ const SignIn = () => {
 
        // gapi 초기화
        useEffect(() => {
-        function initializeGapiClient() {
+        if (clientId) {
             gapi.load('client:auth2', () => {
                 gapi.client.init({
-                    clientId,
-                    scope: 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/user.phonenumbers.read',
+                    clientId: clientId,
+                    scope: 'https://www.googleapis.com/auth/userinfo.email',
+                }).then(() => {
+                    console.log('Google API initialized');
+                }).catch((error) => {
+                    console.error('Google API initialization error:', error);
                 });
             });
         }
-        initializeGapiClient();
-    }, [clientId])
+    }, [clientId]);
+    
 
     const userLogin = (user) => {
         userCtx.setData(user);
@@ -208,7 +213,8 @@ const SignIn = () => {
             password &&
             confirmPassword &&
             password === confirmPassword &&
-            isIdChecked
+            isIdChecked &&
+            isPasswordChecked
         );
     };    
 
@@ -221,7 +227,7 @@ const SignIn = () => {
         setId(value);
         setIsIdChecked(false);
         if (!idFilters.test(value)) {
-            setIdError('아이디는 5~12자, 영문자와 숫자를 포함해야 합니다.');
+            setIdError('아이디는 5~12자, 영문자로 시작하여 숫자를 포함해야 합니다.');
         } else {
             setIdError('');
         }
@@ -230,7 +236,7 @@ const SignIn = () => {
 
     const checkIdDuplicate = async () => {
         if (!id || idError) {
-            alert('아이디를 다시 입력하세요.');
+            alert('아이디의 형식이 다르거나 사용 중인 아이디입니다.');
             return;
         }
     
@@ -254,27 +260,39 @@ const SignIn = () => {
         };
     
     
-    const handlePasswordChange = (e) => {
-        const value = e.target.value;
-        setPassword(value);
-        if (!passwordFilters.test(value)) {
-            setErrorMessage('비밀번호는 6~20자, 영문자와 숫자를 포함해야 합니다.');
-        } else {
-            setErrorMessage('');
-        }
-        validateForm();
-    };
+        const handlePasswordChange = (e) => {
+            const value = e.target.value;
+            setPassword(value);
+        
+            if (value.length < 6 || value.length > 20) {
+                setErrorMessage('비밀번호는 6~20자로 설정해야 합니다.');
+                setisPasswordChecked(false);
+            } else if (!passwordFilters.test(value)) {
+                setErrorMessage('비밀번호는 영문자와 숫자를 포함해야 합니다.');
+                setisPasswordChecked(false);
+            } else {
+                setErrorMessage('');
+                setisPasswordChecked(true);
+            }
+            validateForm();
+        };
 
-    const handleConfirmPasswordChange = (e) => {
-        const value = e.target.value;
-        setConfirmPassword(value);
-        if (value !== password) {
-            setErrorMessage('비밀번호가 일치하지 않습니다.');
-        } else {
-            setErrorMessage('');
-        }
-        validateForm();
-    };
+        const handleConfirmPasswordChange = (e) => {
+            const value = e.target.value;
+            setConfirmPassword(value);
+        
+            if (value !== password) {
+                setErrorMessage('비밀번호가 일치하지 않습니다.');
+                setisPasswordChecked(false);
+            } else if (value.length < 6 || value.length > 20) {
+                setErrorMessage('비밀번호는 6~20자로 설정해야 합니다.');
+                setisPasswordChecked(false);
+            } else {
+                setErrorMessage('');
+                setisPasswordChecked(true);
+            }
+            validateForm();
+        };
     
     
 
@@ -376,7 +394,7 @@ const SignIn = () => {
                     <p>Joy Code Me의 Content 를 즐기고 싶다면 로그인하세요.</p>
                     <form id="signupForm" onSubmit={handleSignup}>
                         <div className="form-group id-group">
-                            <input type="text" id="id" value={id} required placeholder=" " onChange={handleIdChange} disabled={isIdChecked} />
+                            <input type="text" id="id" value={id || ''} required placeholder=" " onChange={handleIdChange} disabled={isIdChecked} />
                             <label htmlFor="id">ID</label>
                             <button
                                 type="button"
@@ -394,7 +412,7 @@ const SignIn = () => {
                             {idError ? idError : isIdChecked ? "사용 가능한 아이디입니다." : ""}
                         </div>
                         <div className="form-group password-group">
-                            <input type="password" id="signup-password" value={password} required placeholder=" " onChange={handlePasswordChange} />
+                            <input type="password" id="signup-password" value={password || ''} required placeholder=" " onChange={handlePasswordChange} />
                             <label htmlFor="signup-password">Password</label>
                             <i className="fa fa-eye-slash show-hide" onClick={(e) => togglePassword('signup-password', e.currentTarget)}></i>
                         </div>
@@ -422,7 +440,7 @@ const SignIn = () => {
                             <label htmlFor="birth">Birth</label>
                         </div>
                         <div className="form-group">
-                        <input className="user_enroll_text" placeholder="주소" type="text" required name="address" onClick={handleComplete} value={address} />
+                        <input className="user_enroll_text" placeholder="주소" type="text" required name="address" onClick={handleComplete} value={address || ''} onChange={(e) => setAddress(e.target.value)} />
                         </div>
                         <button type="submit" className="form-btn" disabled={!isFormValid}>Sign Up</button>
                     </form>

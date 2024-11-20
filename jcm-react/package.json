@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@bootpay/client-js": "^5.0.1",
     "@channel.io/channel-web-sdk-loader": "^2.0.0",
     "@react-oauth/google": "^0.12.1",
     "@testing-library/jest-dom": "^5.17.0",
@@ -10,7 +11,6 @@
     "@testing-library/user-event": "^13.5.0",
     "@types/jquery": "^3.5.32",
     "@types/summernote": "^0.8.10",
-    "@bootpay/client-js":"^5.0.1",
     "axios": "^1.7.7",
     "bootstrap": "^5.3.3",
     "chart.js": "^4.4.6",
@@ -26,6 +26,7 @@
     "react-fullpage": "^0.1.19",
     "react-helmet": "^6.1.0",
     "react-icons": "^5.3.0",
+    "react-naver-login": "^0.1.4",
     "react-quill": "^2.0.0",
     "react-router-dom": "^6.27.0",
     "react-scripts": "5.0.1",
