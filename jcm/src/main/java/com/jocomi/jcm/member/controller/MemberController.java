@@ -326,4 +326,39 @@ public class MemberController {
 
 	    return ResponseEntity.ok(Map.of("status", "success", "data", memberWithPayProduct));
 	}
+	
+	@PostMapping("/findId")
+	public ResponseEntity<Map<String, Object>> findId(@RequestBody Map<String, String> requestData) {
+	    log.info("Request received for findId with data: {}", requestData);
+
+	    String email = requestData.get("email");
+	    String phone = requestData.get("phone");
+
+	    log.info("Searching for Member ID with email: {} and phone: {}", email, phone);
+
+	    String memberId = mService.findId(email, phone);
+	    if (memberId != null) {
+	        log.info("Member ID found: {}", memberId);
+	        return ResponseEntity.ok(Map.of("status", "success", "memberId", memberId));
+	    } else {
+	        log.warn("Member ID not found for email: {} and phone: {}", email, phone);
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("status", "error", "message", "아이디를 찾을 수 없습니다."));
+	    }
+	}
+
+
+	
+	
+	
+	@PostMapping("/resetPassword")
+	public ResponseEntity<String> resetPassword(@RequestBody Map<String, String> request) {
+        String memberId = request.get("memberId");
+        String newPassword = request.get("newPassword");
+
+        // 비밀번호 변경 서비스 호출
+        String resultMessage = mService.resetPassword(memberId, newPassword);
+
+        return ResponseEntity.ok(new Gson().toJson(Map.of("message", resultMessage)));
+    }
+
 }

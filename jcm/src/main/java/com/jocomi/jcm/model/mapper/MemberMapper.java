@@ -1,5 +1,7 @@
 package com.jocomi.jcm.model.mapper;
 
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -44,5 +46,11 @@ public interface MemberMapper {
 	int editNaverProfile(Member member);
 
 	Member getLatestPayProduct(String memberId); // 반환 타입 수정
+	
+	int resetPassword(String memberId, String memberPwd);
+
+	int resetPassword(Map<String, String> of);
+
+	String findIdByEmailAndPhone(Map<String, String> of);
 
 }

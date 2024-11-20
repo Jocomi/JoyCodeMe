@@ -44,6 +44,8 @@ import Suggestion from './components/setup/Suggestion';
 import EmptyUser from './components/common/EmptyUser';
 import AdminChat from './components/admin/AdminChat';
 import EmptyAdmin from './components/common/EmptyAdmin';
+import FindId from './components/user/FindId';
+import SetPassword from './components/user/SetPassword';
 
 export const LoginUser = createContext();
 export const Requested = createContext();
@@ -134,6 +136,9 @@ const [question, setQuestion] = useState("");
 
                 <Route path="/emptyUser" element={<EmptyUser />} />
                 <Route path="/emptyAdmin" element={<EmptyAdmin />} />
+
+                <Route path="/findId" element={<FindId />} />
+                <Route path="/setPassword" element={<SetPassword />} />
               </Routes>
             </main>
           <FooterPage />

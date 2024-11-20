@@ -8,6 +8,7 @@ import { LoginUser } from '../../App';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import { gapi } from 'gapi-script';
 import NaverLoginButton from './NaverLoginButton';
+import { Link } from 'react-router-dom';
 
 const SignIn = () => {
     const navigate = useNavigate();
@@ -449,8 +450,8 @@ const SignIn = () => {
 
                 <div className="form-section" id="login-form">
                     <h1>Sign In</h1>
-                    <p>Welcome Back!</p>
-                    <form id="loginForm">
+                        <p>Welcome Back!</p>
+                        <form id="loginForm">
                         <div className="form-group">
                             <input type="text" id="userId" required placeholder=" " value={id} onChange={(e) => setId(e.target.value)} />
                             <label htmlFor="userId">ID</label>
@@ -470,6 +471,11 @@ const SignIn = () => {
                     />
                     </div>
                     <div className="toggle-link" onClick={toggleForms}>Create an account?</div>
+                    <div className="link-container">
+                        {/* Link를 사용하여 라우팅 */}
+                        <Link to="/findId" className="link">아이디 찾기</Link>
+                        <Link to="/setPassword" className="link">비밀번호 변경</Link>
+                    </div>   
                 </div>
             </div>
             {/* Address Modal 렌더링 */}

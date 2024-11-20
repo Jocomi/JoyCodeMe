@@ -1,6 +1,8 @@
 package com.jocomi.jcm.service;
 
 
+import java.util.Map;
+
 import org.springframework.stereotype.Service;
 
 import com.jocomi.jcm.model.mapper.MemberMapper;
@@ -67,26 +69,37 @@ public class MemberService {
 	
 	// 비밀번호 변경
 	public String changePassword(String memberId, String currentPwd, String newPwd) {
-        // 현재 비밀번호가 맞는지 확인
-        Member member = mMapper.memberProfile(memberId); // 회원 정보를 가져옴
-        if (member == null || member.getMemberPwd() == null || !member.getMemberPwd().equals(currentPwd)) {
-            return "현재 비밀번호가 틀렸습니다."; // 현재 비밀번호가 틀리면 오류 메시지 반환
-        }
+	    Member member = mMapper.memberProfile(memberId); // 회원 정보 조회
+	    if (member == null || !PasswordUtils.checkPassword(currentPwd, member.getMemberPwd())) {
+	        return "현재 비밀번호가 틀렸습니다."; // 비밀번호가 틀린 경우
+	    }
 
-        // 새로운 비밀번호로 업데이트
-        member.setMemberPwd(newPwd);
-        int result = mMapper.updatePassword(member); // 비밀번호 업데이트
-        if (result > 0) {
-            // 비밀번호가 성공적으로 변경되었으면, 세션을 삭제하고 로그인 페이지로 리다이렉트
-            session.invalidate();  // 세션 무효화 (로그아웃)
-            return "비밀번호가 성공적으로 변경되었습니다. 다시 로그인해주세요.";  // 메시지 전달
-        } else {
-            return "비밀번호 변경에 실패했습니다.";
-        }
-    }
+	    // 새로운 비밀번호 암호화 후 업데이트
+	    member.setMemberPwd(PasswordUtils.hashPassword(newPwd));
+	    int result = mMapper.updatePassword(member);
+	    return result > 0 ? "비밀번호가 성공적으로 변경되었습니다. 다시 로그인해주세요." : "비밀번호 변경에 실패했습니다.";
+	}
+
 	
 	public Member getLatestPayProduct(String memberId) {
 	    return mMapper.getLatestPayProduct(memberId);
 	}
+	
+	public String findId(String email, String phone) {
+	    return mMapper.findIdByEmailAndPhone(Map.of("email", email, "phone", phone));
+	}
+
+	public String resetPassword(String memberId, String newPassword) {
+	    // 비밀번호 암호화
+	    String hashedPassword = PasswordUtils.hashPassword(newPassword);
+
+	    // DB 업데이트 호출
+	    int result = mMapper.resetPassword(Map.of("memberId", memberId, "memberPwd", hashedPassword));
+	    return result > 0 ? "비밀번호가 성공적으로 변경되었습니다." : "비밀번호 변경에 실패했습니다.";
+	}
+
+	
+
+
 
 }
