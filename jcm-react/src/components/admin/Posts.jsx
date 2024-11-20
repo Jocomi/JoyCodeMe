@@ -15,7 +15,6 @@ const Posts = () => {
   const fetchData = async () => {
     try {
       const response = await axios.get(`http://${window.location.hostname}:7777/select${boardType}`);
-      console.log(response);
       const sortedData = response.data.sort((a, b) => a.postNo - b.postNo);
       setTableData(sortedData);
     } catch (error) {
@@ -35,6 +34,7 @@ const Posts = () => {
 
   useEffect(() => {
     fetchData(boardType);
+    instanceAdmin.get(`http://${window.location.hostname}:3000/`);
   }, [boardType]);
 
   // 날짜와 월을 필터링하는 로직

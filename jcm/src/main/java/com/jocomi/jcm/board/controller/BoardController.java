@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -48,9 +49,9 @@ public class BoardController {
 	 }
 	 // 상세 게시글 가져오기 (postNo를 통해 특정 게시글 조회)
 	 @GetMapping(value = "/detail/{boardType}/{postNo}", produces = "application/json;charset=UTF-8")
-	 public DetailBoardDto getAnnouncementById(@PathVariable("postNo") int postNo, @PathVariable("boardType") String boardType) {
+	 public DetailBoardDto getAnnouncementById(@PathVariable("postNo") int postNo, @PathVariable("boardType") String boardType , @RequestParam("memberId") String memberId) {
 		 
-		 DetailBoardDto announcement = bService.getAnnouncementById(postNo, boardType);
+		 DetailBoardDto announcement = bService.getAnnouncementById(postNo, boardType, memberId);
 			 return announcement;
 		
 	 }

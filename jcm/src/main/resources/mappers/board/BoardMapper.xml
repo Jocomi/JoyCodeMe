@@ -8,18 +8,22 @@
     </select>
 	
     <!-- 특정 게시글 조회 -->
-    <select id="selectAnnouncementById" resultType="com.jocomi.jcm.board.model.dto.DetailBoardDto">
-	       SELECT b.*, 
-		    CASE 
-	        WHEN u.member_id IS NULL THEN 'false' 
-	        ELSE 'true' 
-		    END AS "isRecommend",
-		    m.P_IMG AS "pImg"
-			FROM ${boardType}_BOARD b
-			LEFT JOIN user_recommend u ON (b.member_id = u.member_id AND b.post_no = u.post_no)
-			LEFT JOIN member m ON b.member_id = m.member_id  -- member 테이블과 JOIN
-			WHERE b.POST_NO = #{postNo}
-    </select>
+   <select id="selectAnnouncementById" resultType="com.jocomi.jcm.board.model.dto.DetailBoardDto">
+	SELECT b.*, 
+	       CASE 
+	           WHEN u.member_id IS NOT NULL THEN 'true'  -- 추천 정보가 있으면 true
+	           ELSE 'false'  -- 없으면 false
+	       END AS "isRecommend",
+	       m.P_IMG AS "pImg"
+	FROM ${boardType}_BOARD b
+	LEFT JOIN user_recommend u 
+	    ON (b.post_no = u.post_no 
+	        AND u.member_id = #{memberId}  -- 로그인된 유저와 비교
+	        AND UPPER(u.board_type) = UPPER(#{boardType}))  -- boardType 비교
+	LEFT JOIN member m 
+	    ON b.member_id = m.member_id
+	WHERE b.POST_NO = #{postNo}
+	</select>
 
     <!-- 게시글 비활성화 -->
     <update id="deactivatePost">

@@ -16,7 +16,6 @@ const QnA = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`http://${window.location.hostname}:7777/select${boardType}`);
-        console.log(response);
         const sortedData = response.data.sort((a, b) => a.postNo - b.postNo);
         setTableData(sortedData);
       } catch (error) {

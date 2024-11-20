@@ -25,7 +25,7 @@ const ProjectBoardTable = ({ className }) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`http://${window.location.hostname}:7777/select${boardType}`); // 프로젝트 게시판 API 엔드포인트
-        const sortedData = response.data.sort((a, b) => a.postNo - b.postNo); // postNo를 기준으로 오름차순 정렬
+        const sortedData = response.data.sort((a, b) => b.postNo - a.postNo); // postNo를 기준으로 오름차순 정렬
         setTableData(sortedData);
       } catch (error) {
         console.error("데이터를 가져오는 데 실패했습니다:", error);
