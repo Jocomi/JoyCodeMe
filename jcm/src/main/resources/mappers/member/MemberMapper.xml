@@ -3,10 +3,10 @@
 <mapper namespace="com.jocomi.jcm.model.mapper.MemberMapper">
 
 	<!-- 로그인 쿼리 -->
-	<select id="loginMember" resultType="Member">
-		SELECT * FROM MEMBER
-		WHERE
-		MEMBER_ID = #{memberId} AND MEMBER_PWD = #{memberPwd}
+	<select id="loginMember" parameterType="Member" resultType="Member">
+	    SELECT MEMBER_ID, MEMBER_PWD
+	    FROM MEMBER
+	    WHERE MEMBER_ID = #{memberId}
 	</select>
 
 	<!-- 회원가입 쿼리 -->
@@ -117,5 +117,21 @@
 		ORDER BY P.PAY_TIME DESC
 		FETCH FIRST 1 ROWS ONLY
 	</select>
+	
+	<!-- 아이디 찾기 -->
+	<select id="findIdByEmailAndPhone" parameterType="map" resultType="String">
+	    SELECT MEMBER_ID
+	    FROM MEMBER
+	    WHERE EMAIL = #{email} AND PHONE = #{phone}
+	</select>
+
+	
+	<!-- 비밀번호 변경 -->
+	<update id="resetPassword" parameterType="map">
+	    UPDATE MEMBER
+	    SET MEMBER_PWD = #{memberPwd}
+	    WHERE MEMBER_ID = #{memberId}
+	</update>
+	
 
 </mapper>

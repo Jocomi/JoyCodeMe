@@ -203,3 +203,8 @@
 .login-buttons-container > * {
   flex-shrink: 0; /* 버튼 크기가 작아지지 않도록 설정 */
 }
+
+.signIn-container .link {
+
+  color: #333;
+}
