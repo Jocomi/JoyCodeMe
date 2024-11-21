@@ -137,6 +137,7 @@ const [question, setQuestion] = useState("");
                 <Route path="/emptyUser" element={<EmptyUser />} />
                 <Route path="/emptyAdmin" element={<EmptyAdmin />} />
 
+
                 <Route path="/findId" element={<FindId />} />
                 <Route path="/setPassword" element={<SetPassword />} />
               </Routes>

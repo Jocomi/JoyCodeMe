@@ -27,7 +27,7 @@
 		FROM (
 		    SELECT *
 		    FROM PAYMENT
-		    WHERE MEMBER_ID = #{memberId}
+		    WHERE MEMBER_ID = #{memberId} AND PAY_STATUS = 'Y'
 		    ORDER BY PAY_PRICE DESC
 		)
 		WHERE ROWNUM = 1
