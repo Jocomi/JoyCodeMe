@@ -68,8 +68,6 @@ const Guide = () => {
           escrow: false
         }
       });
-
-      console.log('결제 성공:', response);
       openSuccessModal();
 
       const paymentData = {
@@ -108,7 +106,6 @@ const Guide = () => {
         throw new Error("Failed to save payment info to the server");
       }
 
-      console.log("Payment information saved successfully");
     } catch (error) {
       console.error("Error saving payment information:", error);
     }
@@ -122,7 +119,6 @@ const Guide = () => {
     document.body.appendChild(script);
 
     script.onload = () => {
-      console.log("Bootpay script loaded");
       setBootpayLoaded(true);
     };
 

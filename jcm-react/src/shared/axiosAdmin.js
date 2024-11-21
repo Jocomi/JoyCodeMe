@@ -8,7 +8,6 @@ const instanceAdmin = axios.create({
 instanceAdmin.interceptors.request.use((config) => {
   const loginObj = JSON.parse(sessionStorage.getItem('loginUser') || '{}');
   const loginStatus = loginObj.status; // 올바르게 status에 접근
-  console.log(loginStatus);
     if (loginStatus !== 'A') {
         window.location.href = "/emptyAdmin";  // 페이지 리로드
         return Promise.reject("Not logged in");  
