@@ -18,4 +18,5 @@ public class DetailBoardDto {
 	    private String boardType;
 	    private String isRecommend;
 	    private String pImg;
+	    private String email;
 }

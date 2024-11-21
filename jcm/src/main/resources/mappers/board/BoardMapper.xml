@@ -4,7 +4,12 @@
 
   <!-- 모든 공지사항 조회 -->
     <select id="selectAB" resultType="com.jocomi.jcm.board.model.dto.DetailBoardDto">
-        SELECT * FROM ${boardTpye}_BOARD
+        SELECT 
+	    b.*, 
+	    m.EMAIL AS "email"  -- 게시글 작성자의 이메일 추가
+		FROM ${boardType}_BOARD b
+		LEFT JOIN member m 
+		ON b.member_id = m.member_id  -- 게시글 작성자의 memberId와 매칭
     </select>
 	
     <!-- 특정 게시글 조회 -->
@@ -14,7 +19,8 @@
 	           WHEN u.member_id IS NOT NULL THEN 'true'  -- 추천 정보가 있으면 true
 	           ELSE 'false'  -- 없으면 false
 	       END AS "isRecommend",
-	       m.P_IMG AS "pImg"
+	       m.P_IMG AS "pImg",
+	        m.EMAIL AS "email"  -- 이메일 추가
 	FROM ${boardType}_BOARD b
 	LEFT JOIN user_recommend u 
 	    ON (b.post_no = u.post_no 
@@ -74,7 +80,7 @@
     SET
         POST_TITLE = #{boardDto.postTitle},
         POST_CONTENT = #{boardDto.postContent}
-    WHERE POST_NO = #{postNo} AND MEMBER_ID = #{boardDto.memberId}
+    WHERE POST_NO = #{postNo}
 </update>
 
     <!-- 게시글 조회수 증가 -->
