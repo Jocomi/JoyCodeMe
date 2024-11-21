@@ -11,7 +11,7 @@ const EnquiryBoard = ({ className }) => {
   const [loginUser, setLoginUser] = useState(null); // 로그인된 사용자 정보
   const postsPerPage = 5; // 페이지당 게시물 수
   const [boardType, setBoardType] = useState('enquiry');
-  
+  const idFilters = /^[a-zA-Z](?=.*[a-zA-Z])(?=.*[0-9]).{4,12}$/;
   // 로그인 사용자 정보 가져오기
   useEffect(() => {
     const user = JSON.parse(sessionStorage.getItem('loginUser'));
@@ -76,7 +76,11 @@ const EnquiryBoard = ({ className }) => {
               onClick={() => handlePostClick(post)} // 클릭 핸들러 적용
             >
               <td>{post.postNo}</td>
-              <td>{post.memberId}</td>
+              <td>
+                {idFilters.test(post.memberId)
+                ? post.memberId  // memberId가 조건에 맞으면 그대로 출력
+                : post.email.split('@')[0]}
+              </td>
               <td>{post.privateBoard === 'N' && (!loginUser || post.memberId !== loginUser?.memberId)
                     ? '비공개 게시물입니다.'
                     : post.postTitle}</td>

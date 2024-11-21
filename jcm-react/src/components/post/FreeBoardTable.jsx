@@ -9,7 +9,7 @@ const FreeBoardTalbe = ({ className }) => {
   const [currentPage, setCurrentPage] = useState(1); 
   const navigate = useNavigate();
   const [boardType, setBoardType] = useState('free');
-
+  const idFilters = /^[a-zA-Z](?=.*[a-zA-Z])(?=.*[0-9]).{4,12}$/;
   const postsPerPage = 5; // 페이지당 게시물 수
 
     // 현재 페이지의 게시물 계산
@@ -53,7 +53,11 @@ const FreeBoardTalbe = ({ className }) => {
               onClick={() => navigate(`/detailpost/${boardType}/${post.postNo}`)} // 상세보기 페이지로 이동
             >
               <td>{post.postNo}</td>
-              <td>{post.memberId}</td>
+              <td>
+                {idFilters.test(post.memberId)
+                ? post.memberId  // memberId가 조건에 맞으면 그대로 출력
+                : post.email.split('@')[0]}
+              </td>
               <td>{post.postTitle}</td>
               <td>{post.postTime}</td>
               <td>{post.countView}</td>
