@@ -3,6 +3,7 @@ package com.jocomi.jcm.email.service;
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 @Service
 public class EmailService {
@@ -11,7 +12,9 @@ public class EmailService {
     private final String host = "smtp.gmail.com";
     private final int port = 465;
     private final String username = "ljw1031801@gmail.com";
-    private final String password = "";
+	
+	@Value("${email.password-key}")
+	private String password;
 
     public boolean sendEmail(String to, String subject, String message) {
         try {
