@@ -37,30 +37,6 @@ const DBSetUpForm = (props) => {
         fetchData();
     }, []);
 
-    const downloadHandler = async (url) => {
-        try {
-            const response = await fetch(url, {
-                method: 'GET',
-            });
-
-            if (!response.ok) {
-                throw new Error('파일 다운로드에 실패했습니다.');
-            }
-
-            const blob = await response.blob(); // 응답을 Blob 형태로 변환
-            const downloadUrl = window.URL.createObjectURL(blob); // Blob으로부터 객체 URL 생성
-
-            const link = document.createElement('a');
-            link.href = downloadUrl;
-            link.setAttribute('download', 'test.html'); // 다운로드 파일 이름 설정
-            document.body.appendChild(link);
-            link.click();
-            link.remove();
-            window.URL.revokeObjectURL(downloadUrl); // 사용한 URL 객체를 해제하여 메모리 사용 최소화
-        } catch (error) {
-            console.error('파일 다운로드 중 오류 발생:', error);
-        }
-    };
 
     return (
         <div className="websetupform-container">
@@ -89,7 +65,7 @@ const DBSetUpForm = (props) => {
 
                 <p className="final-note">Once you've filled out the information, our team will guide you through the remaining steps to launch your site.</p>
                 <div>
-                <button onClick={() => { window.location.href = "/dbSetUp"; }}>뒤로가기</button>
+                <button className='btn' onClick={() => { window.location.href = "/dbSetUp"; }}>뒤로가기</button>
                 </div>
             </main>
         </div>

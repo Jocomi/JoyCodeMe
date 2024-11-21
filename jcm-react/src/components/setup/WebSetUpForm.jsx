@@ -91,10 +91,8 @@ const WebSetUpForm = (props) => {
                 </div>
 
                 <p className="final-note">Once you've filled out the information, our team will guide you through the remaining steps to launch your site.</p>
-                <div>
-                <button onClick={() => { window.location.href = "/webSetUp"; }}>뒤로가기</button>
-                &nbsp;
-                <button onClick={() => downloadHandler(saveFileHost + responseData)}>Export</button>
+                <div className='btn-section'>
+                <button className='btn' onClick={() => { window.location.href = "/webSetUp"; }}>뒤로가기</button><button className='btn' onClick={() => downloadHandler(saveFileHost + responseData)}>Export</button>
                 </div>
             </main>
         </div>
