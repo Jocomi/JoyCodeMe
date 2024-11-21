@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jocomi.jcm.payment.model.Payment;
+import com.jocomi.jcm.payment.model.vo.Payment;
 import com.jocomi.jcm.payment.service.PaymentService;
 
 @RestController

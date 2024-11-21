@@ -11,7 +11,6 @@ const FunctionSetUpForm = (props) => {
     const [responseData, setResponseData] = useState(""); // 서버 응답 데이터를 저장하는 state
 
     useEffect(() => {
-        console.log("여기까징");
         const fetchData = async () => {
             const data = {
                 memberId: JSON.parse(sessionStorage.getItem('loginUser')).memberId,

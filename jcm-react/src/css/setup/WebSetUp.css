@@ -99,4 +99,8 @@
     height: auto;
     border: 1px solid #000;
   }
+
+  .websetup-container .grade {
+    color: #888;
+  }
   

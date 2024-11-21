@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.jocomi.jcm.ai.model.mapper.AiMapper;
 import com.jocomi.jcm.ai.model.vo.AI;
+import com.jocomi.jcm.payment.model.vo.Payment;
 
 import lombok.RequiredArgsConstructor;
 
@@ -29,6 +30,10 @@ public class AiService {
 	public ArrayList<AI> getHistory(AI ai) {
 		// TODO Auto-generated method stub
 		return aMapper.getHistory(ai);
+	}
+
+	public Payment getGrade(Payment payment) {
+		return aMapper.getGrade(payment);
 	}
 	
 
