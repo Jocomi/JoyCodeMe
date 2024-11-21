@@ -59,7 +59,7 @@ const FunctionSetUp = () => {
           </div>
           <div className="card">
             <h2>What type of business are you building?</h2>
-            <input type="text" value={question} onChange={(e)=>setQuestion(e.target.value)} placeholder="만들고 싶은 웹사이트의 기능을 적어주세요..." />
+            <input type="text" value={question} onChange={(e)=>setQuestion(e.target.value)} placeholder="만들고 싶은 웹사이트의 기능을 적어주세요..." required/>
             <Link to={['VIP2', 'VIP3'].includes(grade) ? "form" : "/guide"}>
               <button 
                 className="next-btn" 
