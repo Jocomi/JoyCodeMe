@@ -36,8 +36,6 @@ public class MemberService {
 	// 회원가입 기능 유지 (필요 시 사용 가능)
     public int registerMember(Member member) {
         // 비밀번호 암호화
-        String hashedPassword = PasswordUtils.hashPassword(member.getMemberPwd());
-        member.setMemberPwd(hashedPassword);
         return mMapper.insertMember(member);
     }
 
