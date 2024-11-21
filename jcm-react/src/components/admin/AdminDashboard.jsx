@@ -112,15 +112,10 @@ const AdminDashboard = () => {
         if (response.ok) {
           const data = await response.json();
     
-          console.log('API 응답 데이터:', data); // 응답 데이터를 콘솔에 출력
-    
           // 데이터 확인 및 변환
           if (Array.isArray(data) && data.length > 0) {
             const labels = data.map(item => item.MONTH); // 대소문자를 정확히 맞춤
             const earnings = data.map(item => item.EARNINGS); // 대소문자를 정확히 맞춤
-    
-            console.log('차트 라벨:', labels);
-            console.log('차트 수익 데이터:', earnings);
     
             updateEarningsChart(labels, earnings);
           } else {
@@ -141,8 +136,6 @@ const AdminDashboard = () => {
         const response = await fetch(`http://${window.location.hostname}:7777/api/admin/consumer-distribution`);
         if (response.ok) {
           const data = await response.json();
-    
-          console.log('등급별 고객 차트:', data);
     
           // 차트 데이터 업데이트
           updateConsumerChart({
@@ -165,7 +158,6 @@ const AdminDashboard = () => {
       const response = await fetch(`http://${window.location.hostname}:7777/api/admin/monthly-members`);
       if (response.ok) {
         const data = await response.json();
-        console.log('월별 가입 고객 차트:', data);
 
         // 데이터에서 라벨과 값을 추출
         const labels = data.map(item => item.MONTH); // "YYYY-MM" 형식의 월 데이터

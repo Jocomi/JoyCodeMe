@@ -1,7 +1,13 @@
 import { NavLink } from "react-router-dom";
 import '../../css/admin/AdminSideBar.css';
+import { useEffect } from "react";
+import instanceAdmin from "../../shared/axiosAdmin";
 
 const AdminSideBar = () => {
+    useEffect(() => {
+        instanceAdmin.get(`http://${window.location.hostname}:3000/`);
+      }, []);
+
     return(
         <>
                 {/* 사이드바 */}

@@ -28,9 +28,7 @@ const NaverCallback = () => {
                 body: JSON.stringify({ access_token, state }),
             });
 
-            const result = await response.json();            
-            console.log(result);
-            
+            const result = await response.json();
 
             if (result !== null) {
                 sessionStorage.setItem("loginUser", JSON.stringify(result));

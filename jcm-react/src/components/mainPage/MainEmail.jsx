@@ -48,7 +48,6 @@ const MainEmail =() => {
             
             // 응답이 JSON 형식이 아니면 텍스트 응답을 그대로 처리
             if (response.ok) {
-              console.log('Response:', responseText);  // 응답 내용 출력
               window.location.reload();
               alert('Your mail is sent!');
             } else {

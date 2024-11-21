@@ -44,8 +44,6 @@ const SignIn = () => {
                 gapi.client.init({
                     clientId: clientId,
                     scope: 'https://www.googleapis.com/auth/userinfo.email',
-                }).then(() => {
-                    console.log('Google API initialized');
                 }).catch((error) => {
                     console.error('Google API initialization error:', error);
                 });
