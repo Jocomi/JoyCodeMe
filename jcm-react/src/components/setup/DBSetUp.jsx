@@ -59,7 +59,7 @@ const DBSetUp = () => {
           </div>
           <div className="card">
             <h2>What type of business are you building?</h2>
-            <input type="text" value={question} onChange={(e)=>setQuestion(e.target.value)} placeholder="만들고 싶은 웹사이트의 데이터베이스를 입력해 주세요..." />
+            <input type="text" value={question} onChange={(e)=>setQuestion(e.target.value)} placeholder="만들고 싶은 웹사이트의 데이터베이스를 입력해 주세요..." required/>
             <Link to={grade === 'VIP3' ? "form" : "/guide"}>
               <button 
                 className="next-btn" 
