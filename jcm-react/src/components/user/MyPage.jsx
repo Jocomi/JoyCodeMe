@@ -5,39 +5,50 @@ import '../../css/user/MyPage.css';
 import instance from '../../shared/axios';
 
 const MyPage = () => {
-    // 초기 데이터 상태 설정
-    const { data: loginUser } = useContext(LoginUser);
+    useEffect(() => {
+        instance.get(`http://${window.location.hostname}:3000/`);
+      }, []);
+      
+    const { data: loginUser, setData: setLoginUser } = useContext(LoginUser);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [profileImage, setProfileImage] = useState('');
-    const [SocialLogin, setSocialLogin] = useState(false);
-    const [latestPayProduct, setLatestPayProduct] = useState('Nomal'); // 기본값으로 'Nomal'
+    const [socialLogin, setSocialLogin] = useState(false);
+    const [latestPayProduct, setLatestPayProduct] = useState('Nomal');
 
-    instance.get(`http://${window.location.hostname}:3000/`);
-
-    // 사용자 로그인 정보를 기반으로 상태 초기화
     useEffect(() => {
-        if (loginUser) {
-            setProfileImage(
-                loginUser.pImg
-                    ? `http://${window.location.hostname}:7777${loginUser.pImg}`
-                    : `/img/TEST.JPG`
-            );
-            setName(loginUser.memberName || '');
-            setEmail(loginUser.email || '');
-            setSocialLogin(loginUser.SocialLogin);
+        const fetchUserData = async () => {
+            if (!loginUser) return;
 
-            // 최신 결제 내역 가져오기
-            instance
-                .get(`http://${window.location.hostname}:7777/latestPayProduct?memberId=${loginUser.memberId}`)
-                .then((response) => {
-                    // API 응답 데이터를 'latestPayProduct'로 설정
-                    setLatestPayProduct(response.data?.data?.payProduct || 'Nomal'); // 데이터 없으면 기본값 유지
-                })
-                .catch((error) => {
-                    console.error('결제 내역 가져오기 실패:', error);
-                });
-        }
+            try {
+                // 최신 사용자 데이터를 서버에서 가져오기
+                const response = await instance.get(
+                    `http://${window.location.hostname}:7777/profile?memberId=${loginUser.memberId}`
+                );
+                const userData = response.data;
+
+                // Context와 상태 업데이트
+                setLoginUser(userData);
+                setName(userData.memberName || '');
+                setEmail(userData.email || '');
+                setProfileImage(
+                    userData.pImg
+                        ? `http://${window.location.hostname}:7777${userData.pImg}`
+                        : `/img/TEST.JPG`
+                );
+                setSocialLogin(userData.socialLogin);
+
+                // 최신 결제 내역 가져오기
+                const payResponse = await instance.get(
+                    `http://${window.location.hostname}:7777/latestPayProduct?memberId=${loginUser.memberId}`
+                );
+                setLatestPayProduct(payResponse.data?.data?.payProduct || 'Nomal');
+            } catch (error) {
+                console.error('사용자 데이터 또는 결제 내역 가져오기 실패:', error);
+            }
+        };
+
+        fetchUserData();
     }, [loginUser]);
 
     return (
@@ -46,11 +57,11 @@ const MyPage = () => {
                 <h1>My Page</h1>
 
                 <div className="mypage-profile-section">
-                    {profileImage ? (
-                        <img src={profileImage} alt="프로필 사진" className="mypage-profile-picture" />
-                    ) : (
-                        <div className="mypage-profile-picture-placeholder"></div>
-                    )}
+                    <img
+                        src={profileImage}
+                        alt="프로필 사진"
+                        className="mypage-profile-picture"
+                    />
                     <h2>이름 : {name}</h2>
                     <p>등급 : {latestPayProduct}</p>
                     <p>이메일: {email}</p>
@@ -63,8 +74,7 @@ const MyPage = () => {
                     <Link to="/EditProfile">
                         <button>프로필 수정</button>
                     </Link>
-                    {/* 소셜 로그인이 아닌 경우에만 비밀번호 변경 버튼 표시 */}
-                    {!SocialLogin && (
+                    {!socialLogin && (
                         <Link to="/ChangePwd">
                             <button>비밀번호 변경</button>
                         </Link>
