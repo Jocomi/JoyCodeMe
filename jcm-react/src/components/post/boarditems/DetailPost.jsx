@@ -21,8 +21,8 @@ const DetailPost = () => {
   const [recomments, setRecomments] = useState({}); // 댓글 번호별 답글 저장
   const [isLoading, setIsLoading] = useState(false);
   const [replyTexts, setReplyTexts] = useState({});
- 
-  
+  const [profileImage, setProfileImage] = useState('');
+  const idFilters = /^[a-zA-Z](?=.*[a-zA-Z])(?=.*[0-9]).{4,12}$/;
   const fetchComment = async () => {
     if (boardType !== 'announcement') {
       try {
@@ -48,6 +48,11 @@ const DetailPost = () => {
   };
   
   useEffect(() => {
+    setProfileImage(
+      loginUser.pImg
+          ? `http://${window.location.hostname}:7777${loginUser.pImg}`
+          : `/img/TEST.JPG`
+  );
     fetchPost();
     fetchComment();
   }, []);
@@ -423,11 +428,17 @@ const deleteRecomment = async (recommentNo, commentNo) =>{
                 <td><h2>{post.postTitle}</h2></td>
               </tr>
               <tr>
-                <td><h3>{post.memberId}</h3></td>
+              <td>
+              <h3>
+                {idFilters.test(post.memberId)
+                ? post.memberId  // memberId가 조건에 맞으면 그대로 출력
+                : post.email.split('@')[0]}
+              </h3>
+              </td>
               </tr>
               <tr>
                 <td>
-                  <img src={`http://${window.location.hostname}:7777${post.pimg}`} alt="프로필 이미지" className="profile-image" />
+                  <img src={profileImage} alt="프로필 이미지" className="profile-image" />
                 </td>
               </tr>
             </tbody>

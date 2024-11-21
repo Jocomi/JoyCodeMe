@@ -56,24 +56,17 @@ const EnrollPost = () => {
           setContent(contents);
         },
         onImageUpload: async function (files) {
-          // files가 배열인지 확인하고, 배열이 아니면 배열로 변환
-          // const fileArray = Array.isArray(files) ? files : [files];  // 파일이 배열이 아니면 배열로 변환
-      
           const formData = new FormData();
           
           Array.from(files).forEach(file => {
             formData.append('imgList', file);  // imgList로 여러 파일 전송
           });
 
-          // console.log(files);
-          // console.log(fileArray);
+        
       
           try {
             const response = await axios.postForm(`http://${window.location.hostname}:7777/upload`, formData);
-            // const response = await axios.post(`http://${window.location.hostname}:7777/upload`, formData, {
-            //   headers: { 'Content-Type': 'multipart/form-data' },
-            // });
-      
+          
             const imageUrls = response.data; // 서버에서 반환된 이미지 URL 목록
             imageUrls.forEach(url => {
               $('#summernote').summernote('editor.insertImage', `http://${window.location.hostname}:7777/${url}`); // 섬머노트에 이미지 삽입
