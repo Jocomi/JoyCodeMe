@@ -24,6 +24,7 @@
 		FROM PAYMENT
 		WHERE PAY_STATUS = 'Y'
 	</select>
+
 	<!-- 월별 수익 계산 -->
 	<select id="getMonthlyEarnings" resultType="map">
 		SELECT
@@ -36,6 +37,18 @@
 		'YYYY-MM')
 		ORDER BY month
 	</select>
+
+	<!-- 월별 가입 고객 조회 -->
+	<select id="getMonthlyMembers" resultType="map">
+		SELECT
+		TO_CHAR(MEMBER_DATE, 'YYYY-MM') AS MONTH,
+		COUNT(*) AS MEMBER_COUNT
+		FROM MEMBER
+		WHERE STATUS IN ('Y', 'A')
+		GROUP BY TO_CHAR(MEMBER_DATE, 'YYYY-MM')
+		ORDER BY MONTH
+	</select>
+
 	<!-- 모든 회원 조회 -->
 	<select id="getAllMembers"
 		resultType="com.jocomi.jcm.model.vo.Member">
@@ -86,15 +99,18 @@
 		SUM(CASE WHEN PAY_PRODUCT = 'VIP1' THEN 1 ELSE 0 END) AS VIP1,
 		SUM(CASE WHEN PAY_PRODUCT = 'VIP2' THEN 1 ELSE 0 END) AS VIP2,
 		SUM(CASE WHEN PAY_PRODUCT = 'VIP3' THEN 1 ELSE 0 END) AS VIP3
-		FROM PAYMENT
+		FROM
+		PAYMENT
 		WHERE PAY_STATUS = 'Y'
 		) VIP_SUM
 		CROSS JOIN (
 		SELECT
-		COUNT(*) AS GENERAL_COUNT
+		COUNT(*) AS
+		GENERAL_COUNT
 		FROM MEMBER
 		WHERE MEMBER_ID NOT IN (
-		SELECT DISTINCT MEMBER_ID
+		SELECT DISTINCT
+		MEMBER_ID
 		FROM PAYMENT
 		)
 		) GENERAL_SUM
