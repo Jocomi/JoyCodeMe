@@ -191,8 +191,6 @@ public class MemberController {
 		 	String access_token = data.get("access_token");
 	        String state = data.get("state");
 
-	        System.out.println("Access Token: " + access_token + ", State: " + state);
-
 	        if (access_token == null || access_token.isEmpty()) {
 	            return "Access Token이 제공되지 않았습니다.";
 	        }
@@ -214,8 +212,6 @@ public class MemberController {
 	            member.setPImg(profile.getProfile_image());
 	            member.setSocialLogin(true);
 	            // 임시 비밀번호 생성 및 인코딩
-
-	            System.out.println("Member Info: " + member);
 
 	            if (mService.checkUserById(member.getMemberId()) == 0) {
 	                mService.registerNaverMember(member);
