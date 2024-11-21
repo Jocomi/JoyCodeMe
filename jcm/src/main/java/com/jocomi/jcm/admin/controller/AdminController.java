@@ -75,6 +75,13 @@ public class AdminController {
         Map<String, Integer> distribution = adminService.getConsumerDistribution();
         return ResponseEntity.ok(distribution);
     }
+    
+    // 차트3번 월별 가입 고객 정보 조회
+    @GetMapping("/monthly-members")
+    public ResponseEntity<List<Map<String, Object>>> getMonthlyMembers() {
+        List<Map<String, Object>> monthlyMembers = adminService.getMonthlyMembers();
+        return ResponseEntity.ok(monthlyMembers);
+    }
 
 
     // 고객 수정

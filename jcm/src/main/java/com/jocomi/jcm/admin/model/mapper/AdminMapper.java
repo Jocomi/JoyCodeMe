@@ -33,4 +33,6 @@ public interface AdminMapper {
     // 등급별 고객 데이터 반환
     Map<String, Object> calculateUserVIPDistribution();
 
+	List<Map<String, Object>> getMonthlyMembers();
+
 }

@@ -159,12 +159,34 @@ const AdminDashboard = () => {
       }
     };
 
+      // 월별 가입 회원 데이터 가져오기
+  const getMonthlyMembers = async () => {
+    try {
+      const response = await fetch(`http://${window.location.hostname}:7777/api/admin/monthly-members`);
+      if (response.ok) {
+        const data = await response.json();
+        console.log('월별 가입 고객 차트:', data);
+
+        // 데이터에서 라벨과 값을 추출
+        const labels = data.map(item => item.MONTH); // "YYYY-MM" 형식의 월 데이터
+        const memberCounts = data.map(item => item.MEMBER_COUNT); // 월별 회원 수
+
+        updateUserChart(labels, memberCounts); // 차트 업데이트
+      } else {
+        console.error('월별 회원 데이터 요청 실패');
+      }
+    } catch (error) {
+      console.error('월별 회원 데이터를 가져오는 중 오류 발생:', error);
+    }
+  };
+
 
     getTotalEarnings();
     getTotalConsumers();
     getTotalUsers();
     getMonthlyEarnings();
     getConsumerData();
+    getMonthlyMembers();
   }, []);
 
   const updateEarningsChart = (labels, data) => {
@@ -239,34 +261,45 @@ const AdminDashboard = () => {
     });
   };
 
-  useEffect(() => {
-    // 기존 차트가 있다면 먼저 destroy() 호출
-    if (userChartRef.current) userChartRef.current.destroy();
-
-    // 차트 3 - Line Chart
-    const ctx3 = document.getElementById('userChart').getContext('2d');
-    userChartRef.current = new Chart(ctx3, {
-      type: 'line',
+  const updateUserChart = (labels, data) => {
+    const canvas = document.getElementById('userChart');
+    if (!canvas) {
+      console.error('userChart 요소를 찾을 수 없습니다.');
+      return;
+    }
+  
+    const ctx = canvas.getContext('2d');
+  
+    // 기존 차트 제거
+    if (userChartRef.current) {
+      userChartRef.current.destroy();
+    }
+  
+    userChartRef.current = new Chart(ctx, {
+      type: 'line', // 선형 차트
       data: {
-        labels: ['회원 1', '회원 2', '회원 3', '회원 4'],
+        labels: labels, // 월별 라벨
         datasets: [
           {
-            label: '회원관리',
-            data: [10, 15, 20, 25],
-            borderColor: 'rgb(75, 192, 192)',
-            tension: 0.1,
+            label: '월별 가입 회원 수',
+            data: data, // 회원 수 데이터
+            borderColor: 'rgb(75, 192, 192)', // 선 색상
+            backgroundColor: 'rgba(75, 192, 192, 0.5)', // 투명한 배경색
+            tension: 0.1, // 곡선 부드러움
           },
         ],
       },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true, // Y축 0부터 시작
+          },
+        },
+      },
     });
-
-    // 컴포넌트 언마운트 시 차트 인스턴스 삭제
-    return () => {
-      if (earningsChartRef.current) earningsChartRef.current.destroy();
-      if (consumerChartRef.current) consumerChartRef.current.destroy();
-      if (userChartRef.current) userChartRef.current.destroy();
-    };
-  }, []);
+  };
 
   return (
     <div className="admin-main">

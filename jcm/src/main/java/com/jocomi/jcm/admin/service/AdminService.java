@@ -53,6 +53,11 @@ public class AdminService {
         return processedData;
     }
     
+    // 월별 가입 고객 데이터 반환
+    public List<Map<String, Object>> getMonthlyMembers() {
+        return adminMapper.getMonthlyMembers();
+    }
+    
     // 모든 회원 정보 조회
     public List<Member> getAllMembers() {
         return adminMapper.getAllMembers();
