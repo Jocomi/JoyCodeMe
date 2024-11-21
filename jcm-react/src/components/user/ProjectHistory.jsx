@@ -18,7 +18,7 @@ const ProjectHistory = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   useEffect(() => {
-    instance.get("http://localhost:3000/");
+    instance.get(`http://${window.location.hostname}:3000/`);
 
     const fetchData = async () => {
       try {

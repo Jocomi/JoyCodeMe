@@ -15,7 +15,7 @@ const SetPassword = () => {
         }
 
         try {
-            const response = await axios.post("http://localhost:7777/setPassword", {
+            const response = await axios.post(`http://${window.location.hostname}:7777/setPassword`, {
                 memberId,
                 newPassword,
             });

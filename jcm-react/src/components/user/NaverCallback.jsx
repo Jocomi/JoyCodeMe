@@ -20,7 +20,7 @@ const NaverCallback = () => {
 
     const fetchAccessToken = async (access_token, state) => {
         try {
-            const response = await fetch("http://localhost:7777/api/naver/callback", {
+            const response = await fetch(`http://${window.location.hostname}:7777/api/naver/callback`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

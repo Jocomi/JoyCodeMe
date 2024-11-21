@@ -12,7 +12,7 @@ const FindId = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post("http://localhost:7777/findId", {
+            const response = await axios.post(`http://${window.location.hostname}:7777/findId`, {
                 email: email,
                 phone: phone
             });

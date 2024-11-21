@@ -15,7 +15,7 @@ const Customer = () => {
 
     const loadCustomers = async () => {
         try {
-            const response = await axios.get('http://localhost:7777/api/admin/customers');
+            const response = await axios.get(`http://${window.location.hostname}:7777/api/admin/customers`);
             setCustomers(response.data);
         } catch (err) {
             console.error('고객 데이터를 불러오는 데 실패했습니다:', err);
@@ -30,7 +30,7 @@ const Customer = () => {
     const handleDelete = async (memberId) => {
         if (window.confirm('정말로 이 회원을 비활성화하시겠습니까?')) {
             try {
-                const response = await axios.patch(`http://localhost:7777/api/admin/customers/${memberId}/deactivate`);
+                const response = await axios.patch(`http://${window.location.hostname}:7777/api/admin/customers/${memberId}/deactivate`);
                 alert(response.data);
                 loadCustomers();
             } catch (err) {
@@ -52,7 +52,7 @@ const Customer = () => {
 
     const handleSave = async (memberId) => {
         try {
-            const response = await axios.put(`http://localhost:7777/api/admin/customers/${memberId}`, editedCustomer);
+            const response = await axios.put(`http://${window.location.hostname}:7777/api/admin/customers/${memberId}`, editedCustomer);
             alert(response.data);
             setEditingIndex(null); // 수정 상태 해제
             loadCustomers();
