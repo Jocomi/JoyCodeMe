@@ -69,7 +69,8 @@
 	<!-- Subscribe 페이지 회원 조회 -->
 	<select id="getSubscribeDistribution" resultType="map">
 		SELECT
-		COUNT(*) AS TOTAL_USERS,
+		COUNT(*)
+		AS TOTAL_USERS,
 		COUNT(CASE
 		WHEN m.MEMBER_ID NOT IN (
 		SELECT MEMBER_ID
@@ -77,15 +78,31 @@
 		WHERE PAY_STATUS = 'Y'
 		) THEN 1
 		ELSE NULL
-		END) AS GENERAL_USERS,
+		END) AS
+		GENERAL_USERS,
 		COUNT(DISTINCT CASE
-		WHEN p.PAY_STATUS = 'Y' THEN m.MEMBER_ID
+		WHEN p.PAY_STATUS = 'Y' THEN
+		m.MEMBER_ID
 		ELSE NULL
 		END) AS SUBSCRIBED_USERS
 		FROM MEMBER m
-		LEFT JOIN PAYMENT p
+		LEFT JOIN
+		PAYMENT p
 		ON m.MEMBER_ID = p.MEMBER_ID
 		WHERE m.STATUS IN ('Y', 'A')
+	</select>
+
+	<!-- 일반 회원 쿼리 -->
+	<select id="getGeneralUsers" resultType="int">
+		SELECT COUNT(*)
+		FROM MEMBER m
+		WHERE m.STATUS IN ('Y', 'A')
+		AND NOT EXISTS (
+		SELECT 1
+		FROM PAYMENT p
+		WHERE p.MEMBER_ID = m.MEMBER_ID
+		AND p.PAY_STATUS = 'Y'
+		)
 	</select>
 
 
