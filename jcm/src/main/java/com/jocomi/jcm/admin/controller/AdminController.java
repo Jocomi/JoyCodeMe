@@ -142,5 +142,16 @@ public class AdminController {
                     .body(Map.of("status", "DOWN", "message", "Server is not reachable!"));
         }
     }
+    
+    @GetMapping("/general-users")
+    public ResponseEntity<Integer> getGeneralUsers() {
+        try {
+            int generalUsers = adminService.getGeneralUsers();
+            return ResponseEntity.ok(generalUsers);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
 
 }

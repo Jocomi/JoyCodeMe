@@ -64,7 +64,6 @@ public class AdminService {
         Map<String, Integer> processedData = new HashMap<>();
 
         // BigDecimal 데이터를 Integer로 변환
-        processedData.put("TOTAL_USERS", ((BigDecimal) rawData.get("TOTAL_USERS")).intValue());
         processedData.put("GENERAL_USERS", ((BigDecimal) rawData.get("GENERAL_USERS")).intValue());
         processedData.put("SUBSCRIBED_USERS", ((BigDecimal) rawData.get("SUBSCRIBED_USERS")).intValue());
 
@@ -84,6 +83,10 @@ public class AdminService {
     // 회원 비활성화 (STATUS = 'N')
     public int deactivateMember(String memberId) {
         return adminMapper.updateMemberStatus(memberId, "N");
+    }
+    
+    public int getGeneralUsers() {
+        return adminMapper.getGeneralUsers();
     }
 
 }

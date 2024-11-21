@@ -38,5 +38,7 @@ public interface AdminMapper {
 
 	// Subscribe 페이지 고객 데이터 반환
 	Map<String, Object> getSubscribeDistribution();
+	
+	int getGeneralUsers();
 
 }

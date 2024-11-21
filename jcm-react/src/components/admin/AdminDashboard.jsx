@@ -180,7 +180,6 @@ const AdminDashboard = () => {
     }
   };
 
-
     getTotalEarnings();
     getTotalConsumers();
     getTotalUsers();
