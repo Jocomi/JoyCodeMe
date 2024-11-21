@@ -166,7 +166,6 @@ public class AIController {
                 ObjectNode jsonResponse = objectMapper.readValue(response.toString(), ObjectNode.class);
                 ArrayNode choices = (ArrayNode) jsonResponse.get("choices");
                 String answer = choices.get(0).get("message").get("content").asText(); 
-                System.out.println(answer);
                 
                 
                 String fileName = "test.html";
@@ -206,7 +205,6 @@ public class AIController {
         if (Files.notExists(directory)) {
             try {
                 Files.createDirectories(directory);
-                System.out.println("Directory created at: " + directory.toAbsolutePath());
             } catch (IOException e) {
                 System.out.println("Error creating directory: " + e.getMessage());
             }
@@ -216,7 +214,6 @@ public class AIController {
         Path outputPath = Paths.get(directoryPath, fileName);
         try (BufferedWriter writer = Files.newBufferedWriter(outputPath)) {
             writer.write(content);
-            System.out.println("HTML file saved successfully at: " + outputPath.toAbsolutePath());
         } catch (IOException e) {
             System.out.println("Error saving HTML file: " + e.getMessage());
         }
@@ -291,7 +288,6 @@ public class AIController {
                 ObjectNode jsonResponse = objectMapper.readValue(response.toString(), ObjectNode.class);
                 ArrayNode choices = (ArrayNode) jsonResponse.get("choices");
                 String answer = choices.get(0).get("message").get("content").asText(); 
-                System.out.println(answer);
 
                 return answer;
 
@@ -378,7 +374,6 @@ public class AIController {
                 ObjectNode jsonResponse = objectMapper.readValue(response.toString(), ObjectNode.class);
                 ArrayNode choices = (ArrayNode) jsonResponse.get("choices");
                 String answer = choices.get(0).get("message").get("content").asText(); 
-                System.out.println(answer);
 
                 return answer;
 
@@ -391,12 +386,6 @@ public class AIController {
             e.printStackTrace();
             return null;
         }
-    }
-    
-    @PostMapping(value = "/save")
-    public String saveRequest(@RequestBody AI ai) {
-    	System.out.println(ai);
-    	return null;
     }
     
     @ResponseBody
