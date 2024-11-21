@@ -148,12 +148,12 @@ const Guide = () => {
             <div className={`pricing-table ${index === 0 ? 'purple' : index === 1 ? 'turquoise' : 'red'}`}>
               <div className="pricing-label">Fixed Price</div>
               <h2>{plan}</h2>
-              <h5>{index === 0 ? '초보자를 위해 만들어졌습니다.' : index === 1 ? '숙련된 사용자를 위해 만들어졌습니다.' : '전문가/기관 사용자를 위해 제작됨'}</h5>
+              <h5>{index === 0 ? 'UI 사용자를 위한 패키지' : index === 1 ? 'UI 및 기능 구현 전문가' : '웹 페이지 풀 제작기능'}</h5>
               <div className="pricing-features">
-                <div className="feature">대역폭<span>{index === 0 ? '50 GB' : index === 1 ? '150 GB' : '250 GB'}</span></div>
-                <div className="feature">추가 도메인<span>{index === 0 ? '10' : index === 1 ? '25' : '50'}</span></div>
-                <div className="feature">저장 스토리지<span>{index === 0 ? '250 GB' : index === 1 ? '500 GB' : '1 TB'}</span></div>
-                <div className="feature">메일 주소<span>{index === 0 ? '25' : index === 1 ? '50' : '75'}</span></div>
+                <div className="feature">사용기능 <span>{index === 0 ? 'Web Page 제작' : index === 1 ? 'UI 및 기능 제작' : 'UI, 기능, DB 관리까지'}</span></div>
+                <div className="feature">추가기능 <span>{index === 0 ? 'UI파일 다운로드' : index === 1 ? 'UI파일 다운로드' : 'UI파일 다운로드'}</span></div>
+                <div className="feature">기존 구독자 <span>{index === 0 ? '없음' : index === 1 ? 'VIP1 환불' : 'VIP1, VIP2 환불'}</span></div>
+                <div className="feature">상세문의 <span>eoms1014@gmail.com</span></div>
               </div>
               <div className="price-tag">
                 <span className="symbol">₩</span>
@@ -192,12 +192,12 @@ const Guide = () => {
           <h3 className="section-head">All plans include</h3>
           <div className="all-plans-features">
             <div className="feature">
-              <h4>Free domain hosting</h4>
-              <p>Host your project for free on a subdomain. You can always move to domains.</p>
+              <h4>Free HTML File Download</h4>
+              <p>You can always save new HTML files for free. Create and save your favorite files with multiple new file requests. An easy and fast-generated page will give you a whole new experience.</p>
             </div>
             <div className="feature">
               <h4>Google Fonts</h4>
-              <p>Access a wide selection of Google Web Fonts without needing to install anything.</p>
+              <p>You can always save new HTML files for free.</p>
             </div>
             <div className="feature">
               <h4>Interactions and states</h4>
