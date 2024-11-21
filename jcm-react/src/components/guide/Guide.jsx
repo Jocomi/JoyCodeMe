@@ -41,7 +41,7 @@ const Guide = () => {
 
     try {
       const response = await window.Bootpay.requestPayment({
-        application_id: '키값',
+        application_id: process.env.REACT_APP_GUIDE_APPLICATION_ID,
         price: price,
         order_name: productName,
         order_id: productId,
