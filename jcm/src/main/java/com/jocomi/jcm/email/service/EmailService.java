@@ -11,7 +11,7 @@ public class EmailService {
     private final String host = "smtp.gmail.com";
     private final int port = 465;
     private final String username = "ljw1031801@gmail.com";
-    private final String password = "pziq knou ggbr yjcm";
+    private final String password = "";
 
     public boolean sendEmail(String to, String subject, String message) {
         try {
