@@ -407,7 +407,10 @@ public class AIController {
 	@PostMapping(value = "/grade", produces = "application/json;charset=UTF-8")
     public String getGrade(@RequestBody Payment payment) {
     	Payment grade = aService.getGrade(payment);
-    	System.out.println(grade);
+    	if(grade == null) {
+    		grade = payment;
+    		grade.setPayProduct("일반회원");
+    	}
 		return new Gson().toJson(grade);
     }
     
