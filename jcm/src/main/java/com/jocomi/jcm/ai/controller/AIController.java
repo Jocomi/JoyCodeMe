@@ -29,6 +29,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.gson.Gson;
 import com.jocomi.jcm.ai.model.vo.AI;
 import com.jocomi.jcm.ai.service.AiService;
+import com.jocomi.jcm.payment.model.vo.Payment;
 
 @CrossOrigin(origins = "*")
 @RestController	
@@ -400,6 +401,14 @@ public class AIController {
     public String getHistory(@RequestBody AI ai) {
     	ArrayList<AI> UserHistory = aService.getHistory(ai);
 		return new Gson().toJson(UserHistory);
+    }
+    
+    @ResponseBody
+	@PostMapping(value = "/grade", produces = "application/json;charset=UTF-8")
+    public String getGrade(@RequestBody Payment payment) {
+    	Payment grade = aService.getGrade(payment);
+    	System.out.println(grade);
+		return new Gson().toJson(grade);
     }
     
 }

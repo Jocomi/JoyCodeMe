@@ -21,4 +21,15 @@
 		SELECT * FROM PROJECT_HISTORY
 		WHERE MEMBER_ID = #{memberId} AND STATUS='Y'
 	</select>
+	
+	<select id="getGrade" resultType="Payment">
+		SELECT *
+		FROM (
+		    SELECT *
+		    FROM PAYMENT
+		    WHERE MEMBER_ID = #{memberId}
+		    ORDER BY PAY_PRICE DESC
+		)
+		WHERE ROWNUM = 1
+	</select>
 </mapper>

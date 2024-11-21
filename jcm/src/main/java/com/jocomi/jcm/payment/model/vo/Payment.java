@@ -1,4 +1,4 @@
-package com.jocomi.jcm.payment.model;
+package com.jocomi.jcm.payment.model.vo;
 
 import lombok.Data;
 import java.util.Date;

@@ -1,10 +1,10 @@
-package com.jocomi.jcm.payment.mapper;
+package com.jocomi.jcm.payment.model.mapper;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.jocomi.jcm.payment.model.Payment;
+import com.jocomi.jcm.payment.model.vo.Payment;
 
 @Mapper
 public interface PaymentMapper {

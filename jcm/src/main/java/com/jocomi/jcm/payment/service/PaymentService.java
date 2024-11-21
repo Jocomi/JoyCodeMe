@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.jocomi.jcm.payment.mapper.PaymentMapper;
-import com.jocomi.jcm.payment.model.Payment;
+import com.jocomi.jcm.payment.model.mapper.PaymentMapper;
+import com.jocomi.jcm.payment.model.vo.Payment;
 
 @Service
 public class PaymentService {

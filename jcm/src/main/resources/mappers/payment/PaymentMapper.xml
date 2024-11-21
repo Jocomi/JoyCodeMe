@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.jocomi.jcm.payment.mapper.PaymentMapper">
+<mapper namespace="com.jocomi.jcm.payment.model.mapper.PaymentMapper">
 
     <!-- 결제 정보 저장 쿼리 -->
     <insert id="insertPayment" parameterType="Payment">
@@ -9,7 +9,7 @@
     </insert>
     
     <!-- 특정 사용자(memberId)의 결제 내역 가져오기 -->
-    <select id="getPaymentsByMemberId" parameterType="string" resultType="com.jocomi.jcm.payment.model.Payment">
+    <select id="getPaymentsByMemberId" parameterType="string" resultType="Payment">
         SELECT * FROM payment WHERE member_id = #{memberId}
     </select>
 
