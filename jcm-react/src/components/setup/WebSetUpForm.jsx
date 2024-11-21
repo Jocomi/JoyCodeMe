@@ -7,9 +7,9 @@ const WebSetUpForm = (props) => {
     const saveFileHost = `http://${window.location.hostname}:7777/show?name=`;
 
     const request = props.question;
-    useEffect(() => {
-        instance.get(`http://${window.location.hostname}:3000/`);
-      }, []);
+
+    instance.get(`http://${window.location.hostname}:3000/`);
+
 
     const [responseData, setResponseData] = useState(""); // 서버 응답 데이터를 저장하는 state
 

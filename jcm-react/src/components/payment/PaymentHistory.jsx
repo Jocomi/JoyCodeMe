@@ -4,11 +4,14 @@ import '../../css/payment/PaymentHistory.css';
 import axios from 'axios'; 
 import { LoginUser } from '../../App';
 import EmptyUser from '../common/EmptyUser';
+import instance from '../../shared/axios';
 
 const PaymentHistory = () => {
     const { data: loginUser } = useContext(LoginUser)
     const [paymentList, setPaymentList] = useState([]); 
     const [loading, setLoading] = useState(true);
+
+    instance.get(`http://${window.location.hostname}:3000/`);
 
     useEffect(() => {
         const fetchPayments = async () => {
@@ -37,12 +40,6 @@ const PaymentHistory = () => {
             <div className="loading">
                 <p>로딩 중...</p>
             </div>
-        );
-    }
-
-    if (!loginUser) {
-        return (
-                <EmptyUser/>
         );
     }
 

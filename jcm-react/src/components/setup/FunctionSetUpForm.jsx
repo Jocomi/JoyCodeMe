@@ -4,9 +4,9 @@ import { FadeLoader } from "react-spinners";
 import instance from '../../shared/axios';
 
 const FunctionSetUpForm = (props) => {
-    useEffect(() => {
-        instance.get(`http://${window.location.hostname}:3000/`);
-      }, []);
+
+    instance.get(`http://${window.location.hostname}:3000/`);
+
 
     const [responseData, setResponseData] = useState(""); // 서버 응답 데이터를 저장하는 state
 

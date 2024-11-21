@@ -5,9 +5,9 @@ import { Requested } from '../../App';
 import instance from '../../shared/axios';
 
 const WebSetUp = () => {
-  useEffect(() => {
-    instance.get(`http://${window.location.hostname}:3000/`);
-  }, []);
+
+  instance.get(`http://${window.location.hostname}:3000/`);
+
 
   const [question, setQuestion] = useState("");
   const ctx = useContext(Requested);
