@@ -7,7 +7,6 @@ import { useParams } from 'react-router-dom';
 import instance from '../../../shared/axios';
 
 const DetailPost = () => {
-  instance.get(`http://${window.location.hostname}:3000/`);
 
   const navigate = useNavigate();
   const { boardType, postNo } = useParams();
@@ -39,12 +38,8 @@ const DetailPost = () => {
     }
   };
   const fetchPost = async () => {
-      const data = {
-        memberId: loginUser.memberId // 로그인된 유저의 ID
-      };
-      
       try {
-        const url = `http://${window.location.hostname}:7777/detail/${boardType}/${postNo}?memberId=${data.memberId}`;
+        const url = `http://${window.location.hostname}:7777/detail/${boardType}/${postNo}?memberId=${loginUser ? loginUser.memberId : ''}`;
         const response = await axios.get(url);
         setPost(response.data);
       } catch (error) {
