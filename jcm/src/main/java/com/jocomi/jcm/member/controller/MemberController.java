@@ -57,8 +57,14 @@ public class MemberController {
 	                .body(Map.of("message", "아이디 또는 비밀번호가 일치하지 않습니다."));
 	    }
 
+	    // pImg가 없는 경우 기본 이미지 설정
+	    if (loginMember.getPImg() == null || loginMember.getPImg().isEmpty()) {
+	        loginMember.setPImg("/img/TEST.JPG");
+	    }
+
 	    return ResponseEntity.ok(loginMember);
 	}
+
 
 
 	@ResponseBody
