@@ -24,25 +24,23 @@ public class MemberService {
 
 
     public Member loginMember(Member member) {
-        Member dbMember = mMapper.memberProfile(member.getMemberId());
-
-        if (dbMember == null) {
-            return null;
+        Member storedMember = mMapper.memberProfile(member.getMemberId());
+        if (storedMember != null && PasswordUtils.checkPassword(member.getMemberPwd(), storedMember.getMemberPwd())) {
+            return storedMember;
         }
-
-        // 비밀번호 검증
-        if (!PasswordUtils.checkPassword(member.getMemberPwd(), dbMember.getMemberPwd())) {
-            return null;
-        }
-
-        return dbMember;
+        return null; // 로그인 실패
     }
 
 
+
 	// 회원가입 기능 유지 (필요 시 사용 가능)
-	public int registerMember(Member member) {
-		return mMapper.insertMember(member);
-	}
+    public int registerMember(Member member) {
+        // 비밀번호 암호화
+        String hashedPassword = PasswordUtils.hashPassword(member.getMemberPwd());
+        member.setMemberPwd(hashedPassword);
+        return mMapper.insertMember(member);
+    }
+
 
 	// ID 중복 체크 메서드
     public int checkUserById(String id) {
