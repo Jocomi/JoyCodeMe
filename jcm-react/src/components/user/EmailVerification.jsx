@@ -16,7 +16,7 @@ const EmailVerification = () => {
         e.preventDefault();
         setErrorMessage("");
         try {
-            await axios.post(`http://${window.location.hostname}:7777/endCode`, { memberId, email });
+            await axios.post(`http://${window.location.hostname}:7777/sendCode`, {memberId, email });
             setVerificationCodeSent(true);
             alert("인증 코드가 이메일로 전송되었습니다.");
         } catch (error) {
