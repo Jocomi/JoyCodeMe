@@ -82,7 +82,18 @@ public class AdminController {
         List<Map<String, Object>> monthlyMembers = adminService.getMonthlyMembers();
         return ResponseEntity.ok(monthlyMembers);
     }
-
+    
+    // Subscribe 페이지 회원 정보 조회
+    @GetMapping("/subscribe-distribution")
+    public ResponseEntity<Map<String, Integer>> getSubscribeDistribution() {
+        try {
+            Map<String, Integer> distribution = adminService.getSubscribeDistribution();
+            return ResponseEntity.ok(distribution);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
 
     // 고객 수정
     @PutMapping("/customers/{memberId}")

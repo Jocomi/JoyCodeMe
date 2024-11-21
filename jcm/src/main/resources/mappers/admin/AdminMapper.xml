@@ -43,9 +43,11 @@
 		SELECT
 		TO_CHAR(MEMBER_DATE, 'YYYY-MM') AS MONTH,
 		COUNT(*) AS MEMBER_COUNT
-		FROM MEMBER
+		FROM
+		MEMBER
 		WHERE STATUS IN ('Y', 'A')
-		GROUP BY TO_CHAR(MEMBER_DATE, 'YYYY-MM')
+		GROUP BY TO_CHAR(MEMBER_DATE,
+		'YYYY-MM')
 		ORDER BY MONTH
 	</select>
 
@@ -63,6 +65,29 @@
 		P_IMG
 		FROM MEMBER
 	</select>
+
+	<!-- Subscribe 페이지 회원 조회 -->
+	<select id="getSubscribeDistribution" resultType="map">
+		SELECT
+		COUNT(*) AS TOTAL_USERS,
+		COUNT(CASE
+		WHEN m.MEMBER_ID NOT IN (
+		SELECT MEMBER_ID
+		FROM PAYMENT
+		WHERE PAY_STATUS = 'Y'
+		) THEN 1
+		ELSE NULL
+		END) AS GENERAL_USERS,
+		COUNT(DISTINCT CASE
+		WHEN p.PAY_STATUS = 'Y' THEN m.MEMBER_ID
+		ELSE NULL
+		END) AS SUBSCRIBED_USERS
+		FROM MEMBER m
+		LEFT JOIN PAYMENT p
+		ON m.MEMBER_ID = p.MEMBER_ID
+		WHERE m.STATUS IN ('Y', 'A')
+	</select>
+
 
 	<!-- 특정 회원 정보 수정 -->
 	<update id="updateMemberInfo"
