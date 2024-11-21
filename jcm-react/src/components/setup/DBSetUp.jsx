@@ -60,11 +60,10 @@ const DBSetUp = () => {
           <div className="card">
             <h2>What type of business are you building?</h2>
             <input type="text" value={question} onChange={(e)=>setQuestion(e.target.value)} placeholder="만들고 싶은 웹사이트의 데이터베이스를 입력해 주세요..." />
-            <Link to={grade === 'VIP3' ? "form" : "#"}>
+            <Link to={grade === 'VIP3' ? "form" : "/guide"}>
               <button 
                 className="next-btn" 
-                onClick={setReqCtx} 
-                disabled={grade !== 'VIP3'}
+                onClick={grade === 'VIP3' ? setReqCtx : ()=>alert("사용 가능한 등급이 아닙니다.")}
               >
                 Next →
               </button>

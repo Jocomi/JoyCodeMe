@@ -60,11 +60,10 @@ const FunctionSetUp = () => {
           <div className="card">
             <h2>What type of business are you building?</h2>
             <input type="text" value={question} onChange={(e)=>setQuestion(e.target.value)} placeholder="만들고 싶은 웹사이트의 기능을 적어주세요..." />
-            <Link to={['VIP2', 'VIP3'].includes(grade) ? "form" : "#"}>
+            <Link to={['VIP2', 'VIP3'].includes(grade) ? "form" : "/guide"}>
               <button 
                 className="next-btn" 
-                onClick={setReqCtx} 
-                disabled={!['VIP2', 'VIP3'].includes(grade)}
+                onClick={['VIP2', 'VIP3'].includes(grade) ? setReqCtx : ()=>alert("사용 가능한 등급이 아닙니다.")}
               >
                 Next →
               </button>
