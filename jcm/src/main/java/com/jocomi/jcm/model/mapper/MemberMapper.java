@@ -47,9 +47,9 @@ public interface MemberMapper {
 
 	Member getLatestPayProduct(String memberId); // 반환 타입 수정
 	
-	int resetPassword(String memberId, String memberPwd);
+	int setPassword(String memberId, String memberPwd);
 
-	int resetPassword(Map<String, String> of);
+	int setPassword(Map<String, String> of);
 
 	String findIdByEmailAndPhone(Map<String, String> of);
 

@@ -32,6 +32,7 @@ const SignIn = () => {
     const [isIdChecked, setIsIdChecked] = useState(false);
     const [isPasswordChecked, setisPasswordChecked] = useState(false);
     const [isFormValid, setIsFormValid] = useState(false); // 폼 유효성 검사 상태
+    const [isPhone, setIsPhone] = useState(false);
 
     
     
@@ -221,6 +222,7 @@ const SignIn = () => {
 
     const idFilters = /^[a-zA-Z](?=.*[a-zA-Z])(?=.*[0-9]).{4,12}$/;
     const passwordFilters = /^(?=.*[a-zA-Z])(?=.*\d).{6,20}$/;
+    const phoneRegex = /^010-\d{4}-\d{4}$/;
 
     
     const handleIdChange = async (e) => {
@@ -310,16 +312,40 @@ const SignIn = () => {
     };
 
     const handlePhoneChange = async (e) => {
-        const value = e.target.value;
-        setPhone(value);
-        if (value) {
-            const isCheck = await checkUser('phone', value);
+        const rawValue = e.target.value;
+    
+        // 전화번호 형식 변경 (자동 하이픈 추가)
+        const formattedPhone = formatPhoneNumber(rawValue);
+        setPhone(formattedPhone);
+    
+        // 유효성 검사
+        if (!phoneRegex.test(formattedPhone)) {
+            setPhoneError("유효한 전화번호를 입력하세요. 예: 010-1234-5678");
+            return;
+        }
+    
+        // 중복 확인
+        if (formattedPhone) {
+            const isCheck = await checkUser("phone", formattedPhone);
             setPhoneError(isCheck ? "이미 사용 중인 전화번호입니다." : "");
         } else {
             setPhoneError("전화번호를 입력하세요.");
         }
+    
         validateForm();
     };
+
+    const formatPhoneNumber = (value) => {
+        value = value.replace(/\D/g, ''); // 숫자만 남기기
+        if (value.length <= 3) {
+            return value;
+        } else if (value.length <= 7) {
+            return `${value.slice(0, 3)}-${value.slice(3)}`;
+        } else {
+            return `${value.slice(0, 3)}-${value.slice(3, 7)}-${value.slice(7, 11)}`;
+        }
+    };
+    
 
     const handleSignup = async (e) => {
         e.preventDefault();
@@ -432,7 +458,7 @@ const SignIn = () => {
                             {emailError && <div className="error-text">{emailError}</div>}
                         </div>
                         <div className="form-group">
-                            <input type="text" id="phone" required placeholder=" " onChange={handlePhoneChange} />
+                            <input type="phone" id="phone" required placeholder=" " onChange={handlePhoneChange} />
                             <label htmlFor="phone">Phone</label>
                             {phoneError && <div className="error-text">{phoneError}</div>}
                         </div>
@@ -474,7 +500,7 @@ const SignIn = () => {
                     <div className="link-container">
                         {/* Link를 사용하여 라우팅 */}
                         <Link to="/findId" className="link">아이디 찾기</Link>
-                        <Link to="/setPassword" className="link">비밀번호 변경</Link>
+                        <Link to="/emailVerification" className="link">비밀번호 변경</Link>
                     </div>   
                 </div>
             </div>

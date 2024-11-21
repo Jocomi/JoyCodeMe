@@ -127,7 +127,7 @@
 
 	
 	<!-- 비밀번호 변경 -->
-	<update id="resetPassword" parameterType="map">
+	<update id="setPassword" parameterType="map">
 	    UPDATE MEMBER
 	    SET MEMBER_PWD = #{memberPwd}
 	    WHERE MEMBER_ID = #{memberId}

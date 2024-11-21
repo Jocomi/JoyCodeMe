@@ -28,6 +28,7 @@ import com.jocomi.jcm.model.vo.Member;
 import com.jocomi.jcm.naver.model.vo.NaverProfile;
 import com.jocomi.jcm.naver.response.NaverProfileResponse;
 import com.jocomi.jcm.service.MemberService;
+import com.jocomi.jcm.service.PasswordUtils;
 
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpSession;
@@ -49,10 +50,17 @@ public class MemberController {
 
 	@ResponseBody
 	@PostMapping(value = "/login", produces = "application/json;charset=UTF-8")
-	public String loginMember(@RequestBody Member member) {
-		Member loginMember = mService.loginMember(member);
-		return new Gson().toJson(loginMember);
+	public ResponseEntity<?> loginMember(@RequestBody Member member) {
+	    Member loginMember = mService.loginMember(member);
+
+	    if (loginMember == null) {
+	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+	                .body(Map.of("message", "아이디 또는 비밀번호가 일치하지 않습니다."));
+	    }
+
+	    return ResponseEntity.ok(loginMember);
 	}
+
 
 	@ResponseBody
 	@PostMapping(value = "/signup", produces = "application/json;charset=UTF-8")
@@ -302,7 +310,7 @@ public class MemberController {
 	            mService.registerMember(member);
 	        }
 
-	        return new Gson().toJson(member); // Return the member data as JSON
+	        return new Gson().toJson(member);
 
 	    } catch (Exception e) {
 	        log.error("Google login error:", e);
@@ -329,36 +337,60 @@ public class MemberController {
 	
 	@PostMapping("/findId")
 	public ResponseEntity<Map<String, Object>> findId(@RequestBody Map<String, String> requestData) {
-	    log.info("Request received for findId with data: {}", requestData);
 
 	    String email = requestData.get("email");
 	    String phone = requestData.get("phone");
 
-	    log.info("Searching for Member ID with email: {} and phone: {}", email, phone);
-
 	    String memberId = mService.findId(email, phone);
 	    if (memberId != null) {
-	        log.info("Member ID found: {}", memberId);
 	        return ResponseEntity.ok(Map.of("status", "success", "memberId", memberId));
 	    } else {
-	        log.warn("Member ID not found for email: {} and phone: {}", email, phone);
 	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("status", "error", "message", "아이디를 찾을 수 없습니다."));
 	    }
 	}
 
+	@PostMapping("/setPassword")
+	public ResponseEntity<String> setPassword(@RequestBody Map<String, String> request) {
+	    String memberId = request.get("memberId");
+	    String newPassword = request.get("newPassword");
+
+	    if (memberId == null || newPassword == null) {
+	        return ResponseEntity.badRequest().body("memberId 또는 newPassword가 비어 있습니다.");
+	    }
+
+	    String resultMessage = mService.setPassword(memberId, newPassword);
+	    return ResponseEntity.ok(new Gson().toJson(Map.of("message", resultMessage)));
+	}
+
+
 
 	
-	
-	
-	@PostMapping("/resetPassword")
-	public ResponseEntity<String> resetPassword(@RequestBody Map<String, String> request) {
-        String memberId = request.get("memberId");
-        String newPassword = request.get("newPassword");
+	@PostMapping("/sendCode")
+	public ResponseEntity<String> sendCode(@RequestBody Map<String, String> requestData) {
+	    String memberId = requestData.get("memberId");
+	    String email = requestData.get("email");
 
-        // 비밀번호 변경 서비스 호출
-        String resultMessage = mService.resetPassword(memberId, newPassword);
+	    // 인증 코드 생성 및 저장
+	    String verificationCode = mService.generateVerificationCode(memberId);
+	    boolean emailSent = mService.sendVerificationCode(email, verificationCode);
 
-        return ResponseEntity.ok(new Gson().toJson(Map.of("message", resultMessage)));
-    }
+	    if (emailSent) {
+	        return ResponseEntity.ok("인증 코드가 이메일로 전송되었습니다.");
+	    } else {
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+	                .body("인증 코드 전송에 실패했습니다.");
+	    }
+	}
+	
+	@PostMapping("/verifyCode")
+	public ResponseEntity<Boolean> verifyCode(@RequestBody Map<String, String> requestData) {
+	    String memberId = requestData.get("memberId");
+	    String code = requestData.get("code");
+
+	    boolean isValid = mService.verifyCode(memberId, code);
+	    return ResponseEntity.ok(isValid);
+	}
+
+
 
 }

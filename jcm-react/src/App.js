@@ -46,6 +46,7 @@ import AdminChat from './components/admin/AdminChat';
 import EmptyAdmin from './components/common/EmptyAdmin';
 import FindId from './components/user/FindId';
 import SetPassword from './components/user/SetPassword';
+import EmailVerification from './components/user/EmailVerification';
 
 export const LoginUser = createContext();
 export const Requested = createContext();
@@ -140,6 +141,7 @@ const [question, setQuestion] = useState("");
 
                 <Route path="/findId" element={<FindId />} />
                 <Route path="/setPassword" element={<SetPassword />} />
+                <Route path="/emailVerification" element={<EmailVerification />} />
               </Routes>
             </main>
           <FooterPage />
