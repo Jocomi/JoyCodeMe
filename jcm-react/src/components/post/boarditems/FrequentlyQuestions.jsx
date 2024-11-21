@@ -20,9 +20,9 @@ const FrequentlyQuestions = () => {
       };
     return (
 
-        <div class="questions-div">
-            <h3 class="questions-left">자주 묻는 질문을 확인하세요!</h3>
-            <div class="questions-right">
+        <div className="questions-div">
+            <h3 className="questions-left">자주 묻는 질문을 확인하세요!</h3>
+            <div className="questions-right">
             <ol>
                     {questions.map((item, index) => (
                         <li key={index} className="question-item" onClick={() => toggleAnswer(index)}>
