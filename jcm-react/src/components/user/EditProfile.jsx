@@ -7,7 +7,7 @@ import instance from '../../shared/axios';
 
 const EditProfile = () => {
     useEffect(() => {
-        instance.get("http://localhost:3000/");
+        instance.get(`http://${window.location.hostname}:3000/`);
       }, []);
 
     const profilePictureInputRef = useRef(null);
@@ -33,7 +33,7 @@ const EditProfile = () => {
                 ...prevData,
                 pImg: loginUser.pImg || '/img/TEST.JPG',
             }));
-            setPreviewImageUrl(loginUser.pImg ? `http://${window.location.hostname}:7777${loginUser.pImg}` : '/img/TEST.JPG');
+            setPreviewImageUrl(loginUser.pImg ? `http://${window.location.hostname}:7777/${loginUser.pImg}` : '/img/TEST.JPG');
         }
     }, [loginUser]);
 

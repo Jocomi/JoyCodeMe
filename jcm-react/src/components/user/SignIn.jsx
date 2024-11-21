@@ -147,7 +147,7 @@ const SignIn = () => {
                 birth: "2000-01-01", // 기본값 2000-01-01
             };
 
-            const response = await axios.post('http://localhost:7777/api/auth/google', googleUser, {
+            const response = await axios.post(`http://${window.location.hostname}:7777/api/auth/google`, googleUser, {
                 headers: { 'Content-Type': 'application/json' },
             });
     

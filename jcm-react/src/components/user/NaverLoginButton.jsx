@@ -18,7 +18,7 @@ const NaverLoginButton = () => {
             // Naver 로그인 초기화
             const naverLogin = new window.naver.LoginWithNaverId({
                 clientId: process.env.REACT_APP_NAVER_CLIENT_ID,
-                callbackUrl: "http://localhost:3000/naver/callback",
+                callbackUrl: `http://${window.location.hostname}:3000/naver/callback`,
                 isPopup: false,
                 loginButton: { color: "green", type: 2, height: 40 },
                 callbackHandle: false,
