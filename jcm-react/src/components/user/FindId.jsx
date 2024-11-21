@@ -17,7 +17,7 @@ const FindId = () => {
                 phone: phone
             });
             setResult(response.data.memberId);
-            setShowModal(true); // 결과를 찾은 후 모달 창 열기
+            setShowModal(true);
         } catch (error) {
             alert("아이디를 찾을 수 없습니다.");
         }

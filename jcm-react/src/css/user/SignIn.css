@@ -201,10 +201,15 @@
 }
 
 .login-buttons-container > * {
-  flex-shrink: 0; /* 버튼 크기가 작아지지 않도록 설정 */
+  flex-shrink: 0;
+}
+
+.signIn-container .link-container {
+  text-align: center;
 }
 
 .signIn-container .link {
-
-  color: #333;
+  color: #777777;
+  margin: 0 10px;
+  font-size: 0.75em;
 }

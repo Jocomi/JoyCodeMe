@@ -474,7 +474,7 @@ const SignIn = () => {
                     <div className="link-container">
                         {/* Link를 사용하여 라우팅 */}
                         <Link to="/findId" className="link">아이디 찾기</Link>
-                        <Link to="/setPassword" className="link">비밀번호 변경</Link>
+                        <Link to="/emailVerification" className="link">비밀번호 변경</Link>
                     </div>   
                 </div>
             </div>
