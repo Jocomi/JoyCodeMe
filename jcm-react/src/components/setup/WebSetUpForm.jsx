@@ -14,6 +14,11 @@ const WebSetUpForm = (props) => {
     const [responseData, setResponseData] = useState(""); // 서버 응답 데이터를 저장하는 state
 
     useEffect(() => {
+        if (request === ""){
+            alert("요청을 작성해 주세요.");
+            window.location.href = "/webSetUp";
+        } else{
+
         const fetchData = async () => {
             const data = {
                 memberId: JSON.parse(sessionStorage.getItem('loginUser')).memberId,
@@ -38,6 +43,7 @@ const WebSetUpForm = (props) => {
         };
 
         fetchData();
+    }
     }, []);
 
     const downloadHandler = async (url) => {
