@@ -11,6 +11,10 @@ const FunctionSetUpForm = (props) => {
     const [responseData, setResponseData] = useState(""); // 서버 응답 데이터를 저장하는 state
 
     useEffect(() => {
+        if (props.question === ""){
+            alert("요청을 작성해 주세요.");
+            window.location.href = "/functionSetUp";
+        } else{
         const fetchData = async () => {
             const data = {
                 memberId: JSON.parse(sessionStorage.getItem('loginUser')).memberId,
@@ -36,6 +40,7 @@ const FunctionSetUpForm = (props) => {
         };
 
         fetchData();
+    }
     }, []);
 
     return (
