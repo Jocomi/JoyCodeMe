@@ -4,14 +4,15 @@ import axios from 'axios';
 import '../../../css/post/DetailPost.css';
 import PostMenu from './PostMenu';
 import { useParams } from 'react-router-dom';
-import { use } from 'framer-motion/client';
+import instance from '../../../shared/axios';
 
 const DetailPost = () => {
+  instance.get(`http://${window.location.hostname}:3000/`);
+
   const navigate = useNavigate();
   const { boardType, postNo } = useParams();
   const [post, setPost] = useState(null);
   const [isAttachmentOpen, setIsAttachmentOpen] = useState(false);
-  const [commentText, setCommentText] = useState('');
   const [comments, setComments] = useState([]);
   const [isWriteReplyVisible, setIsWriteReplyVisible] = useState(null);
   const [recommend, setRecommend] = useState();
@@ -22,6 +23,7 @@ const DetailPost = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [replyTexts, setReplyTexts] = useState({});
  
+  
   const fetchComment = async () => {
     if (boardType !== 'announcement') {
       try {
@@ -37,17 +39,17 @@ const DetailPost = () => {
     }
   };
   const fetchPost = async () => {
-    const data = {
-      memberId: loginUser.memberId // 로그인된 유저의 ID
-    };
-    
-    try {
-      const url = `http://${window.location.hostname}:7777/detail/${boardType}/${postNo}?memberId=${data.memberId}`;
-      const response = await axios.get(url);
-      setPost(response.data);
-    } catch (error) {
-      console.error('게시글 데이터를 가져오는 데 실패했습니다:', error);
-    }
+      const data = {
+        memberId: loginUser.memberId // 로그인된 유저의 ID
+      };
+      
+      try {
+        const url = `http://${window.location.hostname}:7777/detail/${boardType}/${postNo}?memberId=${data.memberId}`;
+        const response = await axios.get(url);
+        setPost(response.data);
+      } catch (error) {
+        console.error('게시글 데이터를 가져오는 데 실패했습니다:', error);
+      }
   };
   
   useEffect(() => {
@@ -60,6 +62,7 @@ const DetailPost = () => {
       setRecommend(post.recommend);
       setIsRecommend(post.isRecommend === 'true');
     }
+  
   }, [post]);
 
   //로그인 체크 함수

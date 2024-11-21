@@ -8,6 +8,8 @@ import 'summernote/dist/summernote-lite';
 import instance from '../../../shared/axios';
 
 const EnrollPost = () => {
+  instance.get(`http://${window.location.hostname}:3000/`);
+
   const location = useLocation();
   const navigate = useNavigate();
   const { state } = location;
