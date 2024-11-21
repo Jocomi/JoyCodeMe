@@ -35,6 +35,12 @@ import com.jocomi.jcm.payment.model.vo.Payment;
 @RestController	
 public class AIController {
 	
+	@Value("${openai.api-key}")
+	private String GPT_API_KEY;
+
+	@Value("${openai.api-url}")
+	private String GPT_API_URL;
+	
 	@Value("${server.ip}")
     private String serverIp;
 	private final AiService aService;
@@ -43,9 +49,6 @@ public class AIController {
 	public AIController(AiService aService) {
 		this.aService = aService;
 	}
-
-	private final String GPT_API_KEY ="";	// 깃 커밋시 삭제할 것 
-	private final String GPT_API_URL ="";				// 깃 커밋시 삭제할 것 
 	
 
     @PostMapping(value = "/view")
