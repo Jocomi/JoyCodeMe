@@ -4,9 +4,9 @@
 
 	<!-- 로그인 쿼리 -->
 	<select id="loginMember" parameterType="Member" resultType="Member">
-	    SELECT MEMBER_ID, MEMBER_PWD
-	    FROM MEMBER
-	    WHERE MEMBER_ID = #{memberId}
+		SELECT * FROM MEMBER
+		WHERE
+		MEMBER_ID = #{memberId} AND MEMBER_PWD = #{memberPwd}
 	</select>
 
 	<!-- 회원가입 쿼리 -->
