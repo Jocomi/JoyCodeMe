@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const MainEmail =() => {
-    
+
     const [formData, setFormData] = useState({
         name: '',
         role: '',
@@ -23,9 +23,9 @@ const MainEmail =() => {
     
         // EmailJS에 보내는 데이터 객체
         const data = {
-          service_id: '',
-          template_id: '',
-          user_id: '',
+          service_id: process.env.REACT_APP_MAIL_SERVICE_ID,
+          template_id: process.env.REACT_APP_MAIL_TEMPLATE_ID,
+          user_id: process.env.REACT_APP_MAIL_USER_ID,
           template_params: {
             name: formData.name,
             role: formData.role,
