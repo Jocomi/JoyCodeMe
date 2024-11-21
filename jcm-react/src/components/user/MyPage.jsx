@@ -13,6 +13,8 @@ const MyPage = () => {
     const [SocialLogin, setSocialLogin] = useState(false);
     const [latestPayProduct, setLatestPayProduct] = useState('Nomal'); // 기본값으로 'Nomal'
 
+    instance.get(`http://${window.location.hostname}:3000/`);
+
     // 사용자 로그인 정보를 기반으로 상태 초기화
     useEffect(() => {
         if (loginUser) {

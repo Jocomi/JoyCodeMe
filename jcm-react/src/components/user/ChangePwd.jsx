@@ -3,6 +3,7 @@ import { LoginUser } from '../../App'; // LoginUser Context import
 import '../../css/user/ChangePwd.css'; 
 import 'font-awesome/css/font-awesome.min.css'; 
 import { useNavigate } from 'react-router-dom';
+import instance from '../../shared/axios';
 
 
 const ChangePwd = () => {
@@ -21,6 +22,8 @@ const ChangePwd = () => {
         currentPwdError: '',
         confirmPwdError: ''
     });
+
+    instance.get(`http://${window.location.hostname}:3000/`);
 
 const handleSubmit = async (e) => {
     e.preventDefault();
