@@ -2,7 +2,6 @@ package com.jocomi.jcm.member.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Base64;
 import java.util.Map;
 
 import org.json.JSONObject;
@@ -83,6 +82,8 @@ public class MemberController {
 		}
 
 		// 중복이 없으면 회원가입 진행
+		 String hashedPassword = PasswordUtils.hashPassword(member.getMemberPwd());
+	        member.setMemberPwd(hashedPassword);
 		int result = mService.registerMember(member);
 		return result == 1 ? new Gson().toJson("회원가입에 성공했습니다.") : new Gson().toJson("회원가입에 실패했습니다.");
 	}
