@@ -1,7 +1,7 @@
 import { ArcElement, Chart, DoughnutController, Legend, Tooltip } from 'chart.js';
 import '../../css/admin/Subscribe.css';
 import AdminSideBar from './AdminSideBar';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import instanceAdmin from '../../shared/axiosAdmin';
 
 Chart.register(DoughnutController, ArcElement, Tooltip, Legend);
@@ -10,18 +10,43 @@ const Subscribe = () => {
     useEffect(() => {
         instanceAdmin.get(`http://${window.location.hostname}:3000/`);
       }, []);
-    const chartRef = useRef(null);
-    const chartInstance = useRef(null); // Chart 인스턴스를 저장할 ref
+      const chartRef = useRef(null);
+      const chartInstance = useRef(null);
+  
+      const [totalUsers, setTotalUsers] = useState(0);
+      const [generalUsers, setGeneralUsers] = useState(0);
+      const [subscribedUsers, setSubscribedUsers] = useState(0);
 
     useEffect(() => {
+        const getSubscribeData = async () => {
+            try {
+                const response = await fetch(`http://${window.location.hostname}:7777/api/admin/subscribe-distribution`);
+                if (response.ok) {
+                    const data = await response.json();
+                    setTotalUsers(data.TOTAL_USERS);
+                    setGeneralUsers(data.GENERAL_USERS);
+                    setSubscribedUsers(data.SUBSCRIBED_USERS);
+
+                    updateChart([data.TOTAL_USERS, data.GENERAL_USERS, data.SUBSCRIBED_USERS]);
+                } else {
+                    console.error('구독 데이터 요청 실패');
+                }
+            } catch (error) {
+                console.error('구독 데이터를 가져오는 중 오류 발생:', error);
+            }
+        };
+
+        getSubscribeData();
+    }, []);
+
+    const updateChart = (data) => {
         const ctx = chartRef.current.getContext('2d');
 
-        // 기존의 차트 인스턴스가 존재하면 제거
+        // 기존의 차트를 제거
         if (chartInstance.current) {
             chartInstance.current.destroy();
         }
 
-        // 새 차트 인스턴스를 생성하고 chartInstance에 저장
         chartInstance.current = new Chart(ctx, {
             type: 'doughnut',
             data: {
@@ -29,7 +54,7 @@ const Subscribe = () => {
                 datasets: [
                     {
                         label: '회원 분포',
-                        data: [120, 70, 50],
+                        data: data,
                         backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
                         hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
                     },
@@ -47,14 +72,7 @@ const Subscribe = () => {
                 },
             },
         });
-
-        // 컴포넌트 언마운트 시 차트 인스턴스 제거
-        return () => {
-            if (chartInstance.current) {
-                chartInstance.current.destroy();
-            }
-        };
-    }, []); // 빈 의존성 배열을 넣어 차트가 한 번만 생성되도록 함
+    };
     return(
         <>
         <div className="subscribe-main">
@@ -72,15 +90,15 @@ const Subscribe = () => {
                 <div className="dashboard-cards">
                     <div className="card">
                         <h3>총 회원</h3>
-                        <p>120</p>
+                        <p>{totalUsers}</p>
                     </div>
                     <div className="card">
                         <h3>일반 회원</h3>
-                        <p>70</p>
+                        <p>{generalUsers}</p>
                     </div>
                     <div className="card">
                         <h3>구독 회원</h3>
-                        <p>50</p>
+                        <p>{subscribedUsers}</p>
                     </div>
                 </div>
                 <div className="chart-container">

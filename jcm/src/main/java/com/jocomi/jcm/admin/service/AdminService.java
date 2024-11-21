@@ -58,6 +58,19 @@ public class AdminService {
         return adminMapper.getMonthlyMembers();
     }
     
+    // Subscribe 페이지 회원 고객 데이터 반환
+    public Map<String, Integer> getSubscribeDistribution() {
+        Map<String, Object> rawData = adminMapper.getSubscribeDistribution(); // Map<String, Object>로 받음
+        Map<String, Integer> processedData = new HashMap<>();
+
+        // BigDecimal 데이터를 Integer로 변환
+        processedData.put("TOTAL_USERS", ((BigDecimal) rawData.get("TOTAL_USERS")).intValue());
+        processedData.put("GENERAL_USERS", ((BigDecimal) rawData.get("GENERAL_USERS")).intValue());
+        processedData.put("SUBSCRIBED_USERS", ((BigDecimal) rawData.get("SUBSCRIBED_USERS")).intValue());
+
+        return processedData; // Map<String, Integer>로 변환 후 반환
+    }
+    
     // 모든 회원 정보 조회
     public List<Member> getAllMembers() {
         return adminMapper.getAllMembers();
