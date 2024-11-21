@@ -80,7 +80,9 @@ const ProjectBoardTable = ({ className }) => {
                 ? post.memberId  // memberId가 조건에 맞으면 그대로 출력
                 : post.email.split('@')[0]}
               </td>
-              <td>{post.privateboard === 'N' ? '비공개 게시물입니다.' : post.postTitle}</td>
+              <td>{post.privateBoard === 'N' && (!loginUser || post.memberId !== loginUser?.memberId)
+                    ? '비공개 게시물입니다.'
+                    : post.postTitle}</td>
               <td>{post.postTime}</td>
               <td>{post.countView}</td>
             </tr>
