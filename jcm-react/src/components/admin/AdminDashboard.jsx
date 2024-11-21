@@ -13,6 +13,7 @@ const AdminDashboard = () => {
   const earningsChartRef = useRef(null);
   const consumerChartRef = useRef(null);
   const userChartRef = useRef(null);
+  
 
   // 서버 상태 체크
   const [serverStatus, setServerStatus] = useState('Checking...'); // 서버 상태
@@ -22,6 +23,8 @@ const AdminDashboard = () => {
   const [totalEarnings, setTotalEarnings] = useState(0);
   const [totalConsumers, setTotalConsumers] = useState(0);
   const [totalUsers, setTotalUsers] = useState(0); // Total Users 상태 추가
+  const [totalTasks, setTotalTasks] = useState(0); // Total Tasks 상태 추가
+
 
     // 차트2 데이터 상태 관리
     const [consumerData, setConsumerData] = useState({
@@ -172,12 +175,27 @@ const AdminDashboard = () => {
     }
   };
 
+  const getTotalTasks = async () => {
+    try {
+      const response = await fetch(`http://${window.location.hostname}:7777/api/admin/total-tasks`);
+      if (response.ok) {
+        const data = await response.json();
+        setTotalTasks(data); // 상태 업데이트
+      } else {
+        console.error('Failed to fetch total tasks');
+      }
+    } catch (error) {
+      console.error('Error fetching total tasks:', error);
+    }
+  };
+
     getTotalEarnings();
     getTotalConsumers();
     getTotalUsers();
     getMonthlyEarnings();
     getConsumerData();
     getMonthlyMembers();
+    getTotalTasks();
   }, []);
 
   const updateEarningsChart = (labels, data) => {
@@ -323,7 +341,7 @@ const AdminDashboard = () => {
             {/* Total Tasks */}
             <div className="card">
               <h3>Total Tasks</h3>
-              <p>25</p>
+              <p>{totalTasks}</p>
             </div>
           </div>
 

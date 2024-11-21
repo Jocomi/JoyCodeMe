@@ -95,11 +95,13 @@
 	<!-- 일반 회원 쿼리 -->
 	<select id="getGeneralUsers" resultType="int">
 		SELECT COUNT(*)
-		FROM MEMBER m
+		FROM
+		MEMBER m
 		WHERE m.STATUS IN ('Y', 'A')
 		AND NOT EXISTS (
 		SELECT 1
-		FROM PAYMENT p
+		FROM
+		PAYMENT p
 		WHERE p.MEMBER_ID = m.MEMBER_ID
 		AND p.PAY_STATUS = 'Y'
 		)
@@ -156,6 +158,13 @@
 		FROM PAYMENT
 		)
 		) GENERAL_SUM
+	</select>
+
+	<!-- 사용 기록 총 카운트 -->
+	<select id="countTotalTasks" resultType="int">
+		SELECT COUNT(*)
+		FROM PROJECT_HISTORY
+		WHERE STATUS = 'Y'
 	</select>
 
 </mapper>

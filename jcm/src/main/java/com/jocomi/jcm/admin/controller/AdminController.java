@@ -153,5 +153,18 @@ public class AdminController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
+    
+ // 모든 사용 기록의 총 카운트 반환
+    @GetMapping("/total-tasks")
+    public ResponseEntity<Integer> getTotalTasks() {
+        try {
+            int totalTasks = adminService.getTotalTasks();
+            return ResponseEntity.ok(totalTasks);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+
 
 }

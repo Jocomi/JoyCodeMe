@@ -40,5 +40,9 @@ public interface AdminMapper {
 	Map<String, Object> getSubscribeDistribution();
 	
 	int getGeneralUsers();
+	
+	// 사용 기록 총 카운트 반환
+	int countTotalTasks();
+
 
 }
