@@ -21,6 +21,7 @@ import Customer from './components/admin/Customer';
 import Posts from './components/admin/Posts';
 import FooterPage from './components/common/FooterPage';
 import QnA from './components/admin/QnA';
+import Report from './components/admin/Report';
 import Guide from './components/guide/Guide';
 import ProjectHistory from './components/user/ProjectHistory';
 import PaymentHistory from './components/payment/PaymentHistory';
@@ -120,6 +121,7 @@ const [question, setQuestion] = useState("");
                 <Route path="/posts" element={<Posts />} />
                 <Route path="/adminChat" element={<AdminChat />} />
                 <Route path="/qna" element={<QnA />} />
+                <Route path="/report" element={<Report />} />
 
                 <Route path="/paymentHistory" element={<PaymentHistory />} />
 

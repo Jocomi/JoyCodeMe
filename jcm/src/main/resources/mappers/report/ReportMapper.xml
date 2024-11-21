@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jocomi.jcm.report.model.mapper.ReportMapper">
+
+    <!-- 신고 처리 -->
+    <insert id="insertReport" parameterType="map">
+        INSERT INTO REPORT_BOARD (
+            REPORT_NO,
+            POST_NO,
+            REPORT_ID,
+            REPORT_TEXT,
+            REPORT_TIME,
+            BOARD_TYPE,
+            STATUS
+        ) 
+        VALUES (
+            REPORT_NO.NEXTVAL,    <!-- 시퀀스 사용 -->
+            #{postNo},                 <!-- 게시물 번호 -->
+            #{report.reportId},               <!-- 신고자 ID -->
+            #{report.reportText},
+            DEFAULT,                   <!-- 신고 시간 -->
+           UPPER(#{boardType}),              <!-- 게시판 유형 -->
+            DEFAULT                       <!-- 신고 상태 (기본값: Y) -->
+        )
+    </insert>
+    
+
+    <!-- 모든 신고 게시물 조회 -->
+    <select id="findAllReports" resultType="com.jocomi.jcm.report.model.vo.ReportVo">
+        SELECT REPORT_NO, POST_NO, REPORT_ID,REPORT_TEXT, REPORT_TIME, BOARD_TYPE, STATUS
+        FROM REPORT_BOARD
+        ORDER BY POST_NO
+    </select>
+    
+     <!-- 신고 비활성화 -->
+    <update id="deactivateReport">
+        UPDATE REPORT_BOARD SET STATUS = 'N' 
+        WHERE POST_NO = #{report.postNo} AND REPORT_ID = #{report.reportId} AND BOARD_TYPE =  UPPER(#{report.boardType})
+    </update>
+
+
+	
+</mapper>
