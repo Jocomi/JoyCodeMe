@@ -24,7 +24,7 @@ const Suggestions = () => {
                 <h3>Environments and Tools</h3>
                 <p>
                     Language : HTML/CSS/JS<br/>
-                    Recommend Tools : VScode
+                    Recommend Tools : <a href="https://code.visualstudio.com/download">VS code</a>
                 </p>
             </div>
 
@@ -34,9 +34,9 @@ const Suggestions = () => {
                 The location of each code is written at the beginning of the code. Simply copy and paste it into the corresponding path! It is not difficult to implement features using JCM!</b></p>
                 <h3>Environments and Tools</h3>
                 <p>
-                    Language : Java<br/>
+                    Language : <a href="https://www.oracle.com/kr/java/technologies/downloads/">Java</a><br/>
                     Framework : spring-framework<br/>
-                    Recommend Tools : eclipes
+                    Recommend Tools : <a href="https://spring.io/tools">Spring Tool Suite</a>
                 </p>
             </div>
 
@@ -55,8 +55,8 @@ const Suggestions = () => {
                 <p><b>Ask for the database you want to create. It can also be created automatically, and you can specify the required tables and columns. It can be designed flexibly according to the Entity Relationship Diagram, Company request, or even your imagination . More and more DataBase experiences will be provided!</b></p>
                 <h3>Environments and Tools</h3>
                 <p>
-                    DataBase : Oracle<br/>
-                    Recommend Tools : SqlDeveloper
+                    DataBase : <a href="https://www.oracle.com/kr/database/technologies/xe-downloads.html">Oracle</a><br/>
+                    Recommend Tools : <a href="https://www.oracle.com/kr/database/sqldeveloper/technologies/download/">SQL Developer</a>
                 </p>
             </div>
         </section>
