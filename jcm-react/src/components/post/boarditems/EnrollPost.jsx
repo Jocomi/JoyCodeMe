@@ -69,7 +69,14 @@ const EnrollPost = () => {
           
             const imageUrls = response.data; // 서버에서 반환된 이미지 URL 목록
             imageUrls.forEach(url => {
-              $('#summernote').summernote('editor.insertImage', `http://${window.location.hostname}:7777/${url}`); // 섬머노트에 이미지 삽입
+              const imgElement = document.createElement('img');
+              imgElement.src = `http://${window.location.hostname}:7777/${url}`;
+              imgElement.style.width = '25%'; // 이미지 크기를 25%로 고정
+              imgElement.style.height = 'auto';
+              imgElement.draggable = false; // 드래그앤드롭 비활성화
+  
+              // 섬머노트에 이미지 삽입
+              $('#summernote').summernote('editor.insertNode', imgElement);
             });
           } catch (error) {
             console.error('이미지 업로드 실패:', error);
@@ -111,31 +118,42 @@ const EnrollPost = () => {
   };
 
   // 게시물 제출 핸들러
-  const handleSubmit = async (e) => {
+ const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // 서버로 보낼 데이터 구성
-    const postData = {
-      postTitle : title,
-      memberId,
-      postContent : content,
-      privateBoard: visibility,
-      boardType,
-    };
+    // 작성한 내용을 파일로 변환
+    const blob = new Blob([content], { type: 'text/plain' });
+    const file = new File([blob], 'postContent.txt');
+
+    const formData = new FormData();
+    formData.append('contentFile', file);
 
     try {
+      // 파일 업로드 API 호출
+      const response = await axios.post(`http://${window.location.hostname}:7777/uploadPostContent`, formData);
+      const filePath = response.data; // 서버에서 반환된 파일 경로
+
+      // 게시물 저장 시 파일 경로 포함하여 전송
+      const postData = {
+        postTitle: title,
+        memberId,
+        postContent: filePath,  // DB에 저장될 파일 경로
+        privateBoard: visibility,
+        boardType,
+      };
+
       const url = postNo
         ? `http://${window.location.hostname}:7777/update/${boardType}/${postNo}`
         : `http://${window.location.hostname}:7777/create/${boardType}`;
       const method = postNo ? 'put' : 'post';
 
-      const response = await axios({
+      const saveResponse = await axios({
         method,
         url,
         data: postData,
         headers: {
           'Content-Type': 'application/json',
-        }
+        },
       });
 
       alert(postNo ? '게시물이 수정되었습니다.' : '게시물이 등록되었습니다.');

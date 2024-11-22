@@ -3,6 +3,7 @@ package com.jocomi.jcm.board.controller;
 
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -52,9 +53,39 @@ public class BoardController {
 	 public DetailBoardDto getAnnouncementById(@PathVariable("postNo") int postNo, @PathVariable("boardType") String boardType , @RequestParam("memberId") String memberId) {
 		 
 		 DetailBoardDto announcement = bService.getAnnouncementById(postNo, boardType, memberId);
+		 // 게시물 내용에 해당하는 텍스트 파일 경로
+		    String postContentFilePath = announcement.getPostContent();  // 텍스트 파일 경로
+
+		    // 파일 경로가 있으면 파일을 읽어서 HTML로 변환
+		    if (postContentFilePath != null && !postContentFilePath.isEmpty()) {
+		        try {
+		            // 텍스트 파일을 읽고 HTML로 변환하는 메서드 호출
+		            String htmlContent = convertTextToHtml(postContentFilePath);
+		            announcement.setPostContent(htmlContent);  // 변환된 HTML로 업데이트
+		        } catch (IOException e) {
+		            e.printStackTrace();
+		            // 파일 읽기 실패 시 기본 메시지 반환
+		            announcement.setPostContent(postContentFilePath);
+		        }
+		    }
+		    System.out.println(announcement);
 			 return announcement;
 		
 	 }
+	 private String convertTextToHtml(String filePath) throws IOException {
+		    // 파일 경로를 기반으로 파일을 읽어옵니다.
+		    Path path = Paths.get(filePath);
+		    
+		    // 파일 내용을 읽기
+		    String content = new String(Files.readAllBytes(path), StandardCharsets.UTF_8);
+		    
+		    // 텍스트 내용을 HTML로 변환하는 간단한 방법 (필요에 따라 HTML로 포맷팅을 추가)
+		    // 예: 줄바꿈을 <br> 태그로 변환
+		    content = content.replace("\n", "<br>");
+
+		    // 필요에 따라 더 복잡한 HTML로 포맷을 변경할 수 있습니다.
+		    return content;
+		}
 	 @PutMapping(value = "/{boardType}/{postNo}/deactivate" , produces = "application/json;charset=UTF-8")
 	    public String deactivatePost(@PathVariable String boardType, @PathVariable int postNo) {
 	        boolean isUpdated = bService.deactivatePost(boardType, postNo);
@@ -66,6 +97,7 @@ public class BoardController {
 
 	 @PostMapping(value = "/create/{boardType}" , produces = "application/json;charset=UTF-8" )
 	    public ResponseEntity<Map<String, Object>> createBoard(@PathVariable String boardType, @RequestBody DetailBoardDto boardDTO) {
+		 System.out.println(boardDTO);
 	        boolean isSaved = bService.insertBoard( boardType, boardDTO);
 	        Map<String, Object> response = new HashMap<>();
 	        response.put("success", isSaved);
@@ -133,7 +165,16 @@ public class BoardController {
 	            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
 	        }
 	    }
-	}
+	
+	 @ResponseBody
+	 @PostMapping(value = "/uploadPostContent", produces = "application/json;charset=UTF-8")
+	 public String uploadPostContent(@RequestParam("contentFile") MultipartFile contentFile) {
+	     String uploadedFilePath = saveFile(contentFile);
+	     return new Gson().toJson(uploadedFilePath);  // 업로드된 파일 경로를 반환
+	 }
+
+	
+}
 
 
 
