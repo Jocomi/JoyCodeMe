@@ -42,7 +42,6 @@ public class ReportController {
 	    }
 	 @PutMapping(value = "/{boardType}/{postNo}/deactivate/report" , produces = "application/json;charset=UTF-8")
 	    public String deactivatePost(@PathVariable String boardType, @PathVariable int postNo, @RequestBody ReportVo report) {
-		 System.out.println(report);
 	        boolean isUpdated = rService.deactivateReport(boardType, postNo, report);
 	        return isUpdated ? "신고 처리가 완료 되었습니다." : "게시글 삭제에 실패했습니다.";
 	    }
