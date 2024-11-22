@@ -202,7 +202,6 @@
   box-shadow: 0px 1px 10px -6px rgba(0, 0, 0, 0.15);
   padding: 40px;
   width: 650px;
-  height: 200px;
   border-radius: 5px;
 }
 
@@ -215,7 +214,14 @@
 
 .guide-container .all-plans-features .feature p {
   font-size: 14px;
-  color: #b3b3b3;
+  color: #888;
+  margin: 30px 0;
+}
+
+.guide-container .all-plans-features .feature p a {
+  font-size: 14px;
+  color: blue;
+  text-decoration: underline;
   margin: 30px 0;
 }
 

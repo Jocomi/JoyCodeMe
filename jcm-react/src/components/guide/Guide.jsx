@@ -196,12 +196,21 @@ const Guide = () => {
               <p>You can always save new HTML files for free. Create and save your favorite files with multiple new file requests. An easy and fast-generated page will give you a whole new experience.</p>
             </div>
             <div className="feature">
-              <h4>Google Fonts</h4>
-              <p>You can always save new HTML files for free.</p>
+              <h4>Free Test Images</h4>
+              <p>The free images provided by JCM allow you to implement various web pages in web page production. The images you provide can only be retrieved from them. So, users can download the project and use the images they want for the right path to create more customized, customized pages!</p>
             </div>
             <div className="feature">
-              <h4>Interactions and states</h4>
-              <p>Visual indicators for component states and interactive elements.</p>
+              <h4>Sepportive Development Environment</h4>
+              <p>
+                JCM's code allows even beginners to easily access development using a free development environment provided to developers.The provided development environment is easily accessible at each site, so users can build development environments and use our programs through each site!<br/><br/>
+                necessary tools:<br/>
+                <a href="https://www.oracle.com/kr/java/technologies/downloads/">Java</a> <br/>
+                <a href="https://spring.io/tools">SpringFramework</a><br/>
+                <a href="https://code.visualstudio.com/download">VS code</a><br/>
+                <a href="https://www.oracle.com/kr/database/technologies/xe-downloads.html">Oracle</a><br/>
+                <a href="https://www.oracle.com/kr/database/sqldeveloper/technologies/download/">SQL Developer</a><br/><br/>
+                Please refer to each website for detailed configuration information.
+              </p>
             </div>
           </div>
         </div>
