@@ -63,7 +63,6 @@ public class BoardController {
 		            String htmlContent = convertTextToHtml(postContentFilePath);
 		            announcement.setPostContent(htmlContent);  // 변환된 HTML로 업데이트
 		        } catch (IOException e) {
-		            e.printStackTrace();
 		            // 파일 읽기 실패 시 기본 메시지 반환
 		            announcement.setPostContent(postContentFilePath);
 		        }
