@@ -5,7 +5,6 @@ import 'font-awesome/css/font-awesome.min.css';
 import { useNavigate } from 'react-router-dom';
 import instance from '../../shared/axios';
 
-
 const ChangePwd = () => {
     const navigate = useNavigate();
     const { data: loginUser } = useContext(LoginUser);
@@ -16,57 +15,63 @@ const ChangePwd = () => {
     const [isCurrentPwdVisible, setCurrentPwdVisible] = useState(false);
     const [isNewPwdVisible, setNewPwdVisible] = useState(false);
     const [isConfirmPwdVisible, setConfirmPwdVisible] = useState(false);
-    
+
+    const passwordFilters = /^(?=.*[a-zA-Z])(?=.*\d).{6,20}$/;
 
     const [errors, setErrors] = useState({
         currentPwdError: '',
+        newPwdError: '',
         confirmPwdError: ''
     });
 
-    instance.get(`http://${window.location.hostname}:3000/`);
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
-const handleSubmit = async (e) => {
-    e.preventDefault();
+        const errorObj = { currentPwdError: '', newPwdError: '', confirmPwdError: '' };
+        let isValid = true;
 
-    // 비밀번호 확인 로직
-    const errorObj = { currentPwdError: '', newPwdError: '', confirmPwdError: '' };
-    let isValid = true;
-
-    if (newPwd !== confirmPwd) {
-        errorObj.confirmPwdError = '새로운 비밀번호가 일치하지 않습니다.';
-        isValid = false;
-    }
-
-    if (!isValid) {
-        setErrors(errorObj);
-        return;
-    }
-
-    try {
-        const response = await fetch(`http://${window.location.hostname}:7777/changePassword`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                memberId: loginUser.memberId, // 로그인된 사용자 ID 전달
-                currentPwd: currentPwd, // 사용자가 입력한 현재 비밀번호
-                newPwd: newPwd // 사용자가 입력한 새로운 비밀번호
-            })
-        });
-
-        const result = await response.json();
-
-        if (response.ok) {
-            alert('비밀번호가 성공적으로 변경되었습니다. 다시 로그인 해주세요.');
-            sessionStorage.removeItem('loginUser');  // 세션 정보 삭제
-            window.location.href = '/signIn';  // 로그인 페이지로 리다이렉트
-        } else {
-            alert(result.message || '비밀번호 변경에 실패했습니다.');
+        // 새 비밀번호 제약 조건 검증
+        if (!passwordFilters.test(newPwd)) {
+            errorObj.newPwdError = '비밀번호는 영문자와 숫자를 포함하여 6~20자여야 합니다.';
+            isValid = false;
         }
-    } catch (error) {
-        console.error('비밀번호 변경 오류:', error);
-        alert('서버 오류가 발생했습니다.');
-    }
-};
+
+        // 새 비밀번호와 확인 비밀번호 일치 여부 검증
+        if (newPwd !== confirmPwd) {
+            errorObj.confirmPwdError = '새로운 비밀번호가 일치하지 않습니다.';
+            isValid = false;
+        }
+
+        if (!isValid) {
+            setErrors(errorObj);
+            return;
+        }
+
+        try {
+            const response = await fetch(`http://${window.location.hostname}:7777/changePassword`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    memberId: loginUser.memberId, // 로그인된 사용자 ID 전달
+                    currentPwd: currentPwd, // 사용자가 입력한 현재 비밀번호
+                    newPwd: newPwd // 사용자가 입력한 새로운 비밀번호
+                })
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                alert('비밀번호가 성공적으로 변경되었습니다. 다시 로그인 해주세요.');
+                sessionStorage.removeItem('loginUser');  // 세션 정보 삭제
+                window.location.href = '/signIn';  // 로그인 페이지로 리다이렉트
+            } else {
+                alert(result.message || '비밀번호 변경에 실패했습니다.');
+            }
+        } catch (error) {
+            console.error('비밀번호 변경 오류:', error);
+            alert('서버 오류가 발생했습니다.');
+        }
+    };
 
     return (
         <div className="password-container">
@@ -98,12 +103,23 @@ const handleSubmit = async (e) => {
                             id="new-password"
                             placeholder="새로운 비밀번호"
                             value={newPwd}
-                            onChange={(e) => setNewPwd(e.target.value)}
+                            onChange={(e) => {
+                                setNewPwd(e.target.value);
+                                if (!passwordFilters.test(e.target.value)) {
+                                    setErrors((prev) => ({
+                                        ...prev,
+                                        newPwdError: '비밀번호는 영문자와 숫자를 포함하여 6~20자여야 합니다.'
+                                    }));
+                                } else {
+                                    setErrors((prev) => ({ ...prev, newPwdError: '' }));
+                                }
+                            }}
                         />
                         <i
                             className={`fa ${isNewPwdVisible ? "fa-eye" : "fa-eye-slash"} show-hide`}
                             onClick={() => setNewPwdVisible(!isNewPwdVisible)}
                         ></i>
+                        {errors.newPwdError && <div className="error">{errors.newPwdError}</div>}
                     </div>
 
                     {/* 비밀번호 확인 */}
@@ -114,7 +130,17 @@ const handleSubmit = async (e) => {
                             id="confirm-password"
                             placeholder="새로운 비밀번호 확인"
                             value={confirmPwd}
-                            onChange={(e) => setConfirmPwd(e.target.value)}
+                            onChange={(e) => {
+                                setConfirmPwd(e.target.value);
+                                if (e.target.value !== newPwd) {
+                                    setErrors((prev) => ({
+                                        ...prev,
+                                        confirmPwdError: '새로운 비밀번호가 일치하지 않습니다.'
+                                    }));
+                                } else {
+                                    setErrors((prev) => ({ ...prev, confirmPwdError: '' }));
+                                }
+                            }}
                         />
                         <i
                             className={`fa ${isConfirmPwdVisible ? "fa-eye" : "fa-eye-slash"} show-hide`}
@@ -122,7 +148,6 @@ const handleSubmit = async (e) => {
                         ></i>
                         {errors.confirmPwdError && <div className="error">{errors.confirmPwdError}</div>}
                     </div>
-
 
                     {/* 저장 및 취소 버튼 */}
                     <button type="submit">저장</button>
