@@ -95,7 +95,7 @@ const Report = () => {
                                         filteredData.map((post) => (
                                             <tr
                                                 key={post.reportNo}
-                                                onClick={() => navigate(`/detailpost/${boardType}/${post.postNo}`)}
+                                                onClick={() => navigate(`/detailpost/${post.boardType}/${post.postNo}`)}
                                                 style={{ cursor: "pointer" }}
                                             >
                                                 <td>{post.postNo}</td>
