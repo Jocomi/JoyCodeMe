@@ -85,7 +85,7 @@ const Customer = () => {
                                     <th>주소</th>
                                     <th>생년월일</th>
                                     <th>수정</th>
-                                    <th>삭제</th>
+                                    <th>비활성</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -130,15 +130,7 @@ const Customer = () => {
                                                         className="small-input"
                                                     />
                                                 </td>
-                                                <td>
-                                                    <input
-                                                        type="date"
-                                                        name="birth"
-                                                        value={editedCustomer.birth}
-                                                        onChange={handleInputChange}
-                                                        className="small-input"
-                                                    />
-                                                </td>
+                                                <td>{new Date(customer.birth).toISOString().split('T')[0]}</td>
                                                 <td>
                                                     <button
                                                         onClick={() => handleSave(customer.memberId)}
@@ -158,7 +150,7 @@ const Customer = () => {
                                                         onClick={() => handleDelete(customer.memberId)}
                                                         className="button delete-button"
                                                     >
-                                                        삭제
+                                                        비활성
                                                     </button>
                                                 </td>
                                             </>
@@ -174,7 +166,7 @@ const Customer = () => {
                                                     <button onClick={() => handleEdit(index, customer)} >수정</button>
                                                 </td>
                                                 <td>
-                                                    <button onClick={() => handleDelete(customer.memberId)}className="button delete-button">삭제</button>
+                                                    <button onClick={() => handleDelete(customer.memberId)}className="button delete-button">비활성</button>
                                                 </td>
                                             </>
                                         )}
