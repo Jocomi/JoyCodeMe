@@ -46,6 +46,11 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.suggestion-container .feature-card a {
+    color: blue;
+    text-decoration: underline;
+}
+
 .suggestion-container .feature-card:hover {
     transform: translateY(-8px); /* 호버 시 약간 위로 올라오는 효과 */
     box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.15); /* 호버 시 그림자 강화 */
