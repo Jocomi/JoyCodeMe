@@ -19,21 +19,20 @@
   }
 }
 
-.go-back-button {
-  position: absolute; /* 오른쪽 상단에 배치 */
-  top: 10px;
-  right: 38px;
+.detail-post-main .report-button {
   background: transparent;
   border: none;
-  font-size: 24px; /* X의 크기 */
-  font-weight: bold;
+  font-size: 13px; /* X의 크기 */;
   cursor: pointer;
-  color: #333; /* 텍스트 색상 */
+  color: #fa0202; /* 텍스트 색상 */
 
 }
 
-.go-back-button:hover {
-  color: #555; /* 마우스 오버 시 색상 */
+.detail-post-main .report-button:hover {
+  color: #eb6a6a; /* 마우스 오버 시 색상 */
+}
+.detail-post-main .report-modal button{
+  border: none;
 }
 .detail-post-main .detail-post {
   width: 85%; /* 전체 너비를 넓혀줌 */
@@ -309,3 +308,23 @@
   border-bottom: 1px solid #eee;
   color: #000;
 }
+
+.detail-post-main .report-modal{
+  display: flex;
+  align-items: flex-end;
+    flex-direction: column;
+    
+}
+
+/* 텍스트 입력창 */
+.detail-post-main textarea {
+  
+  width: 100%;
+  height: 100px;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  resize: none;
+}
+

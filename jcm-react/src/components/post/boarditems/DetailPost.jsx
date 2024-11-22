@@ -5,6 +5,7 @@ import '../../../css/post/DetailPost.css';
 import PostMenu from './PostMenu';
 import { useParams } from 'react-router-dom';
 import instance from '../../../shared/axios';
+import { div } from 'framer-motion/client';
 
 const DetailPost = () => {
 
@@ -23,6 +24,11 @@ const DetailPost = () => {
   const [replyTexts, setReplyTexts] = useState({});
   const [profileImage, setProfileImage] = useState('');
   const idFilters = /^[a-zA-Z](?=.*[a-zA-Z])(?=.*[0-9]).{4,12}$/;
+  const [isOpen, setIsOpen] = useState(false);
+
+  const openModalHandler = () => {
+    setIsOpen(!isOpen);
+  };
   const fetchComment = async () => {
     if (boardType !== 'announcement') {
       try {
@@ -48,11 +54,7 @@ const DetailPost = () => {
   };
   
   useEffect(() => {
-    setProfileImage(
-      loginUser.pImg
-          ? `http://${window.location.hostname}:7777${loginUser.pImg}`
-          : `/img/TEST.JPG`
-  );
+   
     fetchPost();
     fetchComment();
   }, []);
@@ -91,6 +93,70 @@ const DetailPost = () => {
     navigate(-1);
   };
 
+
+  const report = async (postNo) => {
+    if (!loginUser) {
+      alert('로그인 후 게시물을 신고할 수 있습니다.');
+      return;
+    }
+    const confirmReport = window.confirm("이 게시물을 신고하시겠습니까?");
+  
+    if (!confirmReport) {
+        // 사용자가 신고를 취소하면 종료
+       
+        alert("신고가 취소되었습니다.");
+        return;
+    }
+    
+    // 이미 신고된 게시물인지 확인
+    try {
+        const response = await axios.get(`http://${window.location.hostname}:7777/select/report`);
+        const existingReports = response.data; // 이미 신고된 게시물 목록
+
+        // 로그인된 사용자 정보
+        const memberId = loginUser ? loginUser.memberId : '';
+        console.log(response.data);
+        
+        // 이미 신고한 게시물인지 확인
+        const isAlreadyReported = existingReports.some(report => 
+            report.reportId === memberId && 
+            report.postNo === postNo && 
+            report.boardType.toUpperCase() === boardType.toUpperCase()
+        );
+
+        if (isAlreadyReported) {
+            alert("이미 신고한 게시물입니다.");
+            return; // 이미 신고한 경우 신고를 진행하지 않음
+        }
+
+      
+    } catch (error) {
+        console.error("신고 데이터 가져오기 실패:", error);
+        alert('신고 데이터를 가져오는 데 실패했습니다.');
+    }
+    openModalHandler();
+}
+const goReport = async () => {
+  let reportText = document.getElementById('report-text').value;
+  const memberId = loginUser ? loginUser.memberId : '';
+ 
+  const data = {
+    reportId : memberId,
+    reportText :  reportText
+  }
+  console.log(data);
+   // 신고가 이루어지지 않았다면 새로운 신고 처리
+   try {
+    const postResponse = await axios.post(
+        `http://${window.location.hostname}:7777/${boardType}/${postNo}/report`, data
+    );
+    alert('게시물이 신고 되었습니다.');
+    openModalHandler();
+} catch (error) {
+    console.error('게시글 신고 실패:', error);
+    alert('게시글 신고 중 오류가 발생했습니다.');
+}
+}
   const toggleAttachment = () => {
     setIsAttachmentOpen(!isAttachmentOpen);
   };
@@ -104,6 +170,7 @@ const DetailPost = () => {
       postNo,
       commentText,
     };
+   
 
     try {
       const response = await axios.post(`http://${window.location.hostname}:7777/comment/${boardType}/${postNo}/add`, commentData, {
@@ -256,6 +323,7 @@ const DetailPost = () => {
       const response = await axios.get(url,data);
 
       if (response.status === 200) {
+        console.log(response.data);
     
         setRecomments((prev) => ({
           ...prev,
@@ -416,8 +484,22 @@ const deleteRecomment = async (recommentNo, commentNo) =>{
           <div className="post-info">
             <span className="post-date">작성일 : {post.postTime}</span>
             <span className="view-count">조회수 : {post.countView}</span>
+            {boardType !== 'enquiry' && boardType !== 'announcement' && (
+                <button className="report-button" onClick={()=>report(post.postNo)}>신고</button>
+            )}
+            {isOpen && (
+              <div >
+              <div  onClick={openModalHandler}>
+                <div className="report-modal" onClick={(e) => e.stopPropagation()}>
+                  <button className='close-report' onClick={openModalHandler}>닫기</button>
+                  <textarea placeholder='50자 이내로 신고 내용을 작성 해주세요.' name="" id="report-text"  ></textarea>
+                  <button className='report-button' onClick={goReport}>신고하기</button>
+                </div>
+              </div>
+              </div>
+            )}
           </div>
-          <button className="go-back-button" onClick={goBack}>X</button>
+          
         </div>
 
         <div className="detail-post-content">
@@ -437,7 +519,7 @@ const deleteRecomment = async (recommentNo, commentNo) =>{
               </tr>
               <tr>
                 <td>
-                  <img src={profileImage} alt="프로필 이미지" className="profile-image" />
+                <img src={`http://${window.location.hostname}:7777${post.pimg || '/img/TEST.JPG'}`} alt="" className="profile-image" />
                 </td>
               </tr>
             </tbody>
