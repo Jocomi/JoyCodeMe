@@ -17,4 +17,6 @@ public class Member {
     // 추가된 결제 정보
     private String payProduct;   // 결제 상품
     private String payTime;      // 결제 시간
+    private int payPrice;
+    private String payStatus;
 }

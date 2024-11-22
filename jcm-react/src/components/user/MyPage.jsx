@@ -14,7 +14,7 @@ const MyPage = () => {
     const [email, setEmail] = useState('');
     const [profileImage, setProfileImage] = useState('');
     const [socialLogin, setSocialLogin] = useState(false);
-    const [latestPayProduct, setLatestPayProduct] = useState('Nomal');
+    const [latestPayProduct, setLatestPayProduct] = useState('Normal');
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -42,7 +42,7 @@ const MyPage = () => {
                 const payResponse = await instance.get(
                     `http://${window.location.hostname}:7777/latestPayProduct?memberId=${loginUser.memberId}`
                 );
-                setLatestPayProduct(payResponse.data?.data?.payProduct || 'Nomal');
+                setLatestPayProduct(payResponse.data?.data?.payProduct || 'Normal');
             } catch (error) {
                 console.error('사용자 데이터 또는 결제 내역 가져오기 실패:', error);
             }
