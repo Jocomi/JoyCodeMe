@@ -68,7 +68,6 @@ public class BoardController {
 		            announcement.setPostContent(postContentFilePath);
 		        }
 		    }
-		    System.out.println(announcement);
 			 return announcement;
 		
 	 }
@@ -97,7 +96,6 @@ public class BoardController {
 
 	 @PostMapping(value = "/create/{boardType}" , produces = "application/json;charset=UTF-8" )
 	    public ResponseEntity<Map<String, Object>> createBoard(@PathVariable String boardType, @RequestBody DetailBoardDto boardDTO) {
-		 System.out.println(boardDTO);
 	        boolean isSaved = bService.insertBoard( boardType, boardDTO);
 	        Map<String, Object> response = new HashMap<>();
 	        response.put("success", isSaved);
