@@ -65,7 +65,7 @@ public class BoardController {
 		        } catch (IOException e) {
 		            e.printStackTrace();
 		            // 파일 읽기 실패 시 기본 메시지 반환
-		            announcement.setPostContent("게시물 내용 로드 실패");
+		            announcement.setPostContent(postContentFilePath);
 		        }
 		    }
 		    System.out.println(announcement);
