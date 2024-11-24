@@ -13,7 +13,7 @@ const AdminDashboard = () => {
   const earningsChartRef = useRef(null);
   const consumerChartRef = useRef(null);
   const userChartRef = useRef(null);
-  
+
 
   // 서버 상태 체크
   const [serverStatus, setServerStatus] = useState('Checking...'); // 서버 상태
@@ -26,19 +26,19 @@ const AdminDashboard = () => {
   const [totalTasks, setTotalTasks] = useState(0); // Total Tasks 상태 추가
 
 
-    // 차트2 데이터 상태 관리
-    const [consumerData, setConsumerData] = useState({
-      general: 0,
-      vip1: 0,
-      vip2: 0,
-      vip3: 0,
-    });
+  // 차트2 데이터 상태 관리
+  const [consumerData, setConsumerData] = useState({
+    general: 0,
+    vip1: 0,
+    vip2: 0,
+    vip3: 0,
+  });
 
   // 서버 상태 체크를 위해 60초마다 새로고침
   useEffect(() => {
     const interval = setInterval(() => {
       window.location.reload();
-    }, 60*1000); // 60초마다 새로고침
+    }, 60 * 1000); // 60초마다 새로고침
 
     return () => clearInterval(interval); // 컴포넌트 언마운트 시 인터벌 제거
   }, []);
@@ -94,7 +94,7 @@ const AdminDashboard = () => {
 
     const getTotalUsers = async () => {
       const url = `http://${window.location.hostname}:7777/api/admin/total-users`;
-    
+
       try {
         const response = await fetch(url);
         if (response.ok) {
@@ -108,18 +108,18 @@ const AdminDashboard = () => {
       }
     };
 
-     // 월별 수익 데이터를 불러오는 API 호출
-     const getMonthlyEarnings = async () => {
+    // 월별 수익 데이터를 불러오는 API 호출
+    const getMonthlyEarnings = async () => {
       try {
         const response = await fetch(`http://${window.location.hostname}:7777/api/admin/monthly-earnings`);
         if (response.ok) {
           const data = await response.json();
-    
+
           // 데이터 확인 및 변환
           if (Array.isArray(data) && data.length > 0) {
             const labels = data.map(item => item.MONTH); // 대소문자를 정확히 맞춤
             const earnings = data.map(item => item.EARNINGS); // 대소문자를 정확히 맞춤
-    
+
             updateEarningsChart(labels, earnings);
           } else {
             console.error('Invalid data format received from API');
@@ -131,7 +131,7 @@ const AdminDashboard = () => {
         console.error('Error fetching monthly earnings:', error);
       }
     };
-    
+
 
     // 차트2 데이터 불러오기
     const getConsumerData = async () => {
@@ -139,7 +139,7 @@ const AdminDashboard = () => {
         const response = await fetch(`http://${window.location.hostname}:7777/api/admin/consumer-distribution`);
         if (response.ok) {
           const data = await response.json();
-    
+
           // 차트 데이터 업데이트
           updateConsumerChart({
             nomal: data.NOMAL,
@@ -155,39 +155,39 @@ const AdminDashboard = () => {
       }
     };
 
-      // 월별 가입 회원 데이터 가져오기
-  const getMonthlyMembers = async () => {
-    try {
-      const response = await fetch(`http://${window.location.hostname}:7777/api/admin/monthly-members`);
-      if (response.ok) {
-        const data = await response.json();
+    // 월별 가입 회원 데이터 가져오기
+    const getMonthlyMembers = async () => {
+      try {
+        const response = await fetch(`http://${window.location.hostname}:7777/api/admin/monthly-members`);
+        if (response.ok) {
+          const data = await response.json();
 
-        // 데이터에서 라벨과 값을 추출
-        const labels = data.map(item => item.MONTH); // "YYYY-MM" 형식의 월 데이터
-        const memberCounts = data.map(item => item.MEMBER_COUNT); // 월별 회원 수
+          // 데이터에서 라벨과 값을 추출
+          const labels = data.map(item => item.MONTH); // "YYYY-MM" 형식의 월 데이터
+          const memberCounts = data.map(item => item.MEMBER_COUNT); // 월별 회원 수
 
-        updateUserChart(labels, memberCounts); // 차트 업데이트
-      } else {
-        console.error('월별 회원 데이터 요청 실패');
+          updateUserChart(labels, memberCounts); // 차트 업데이트
+        } else {
+          console.error('월별 회원 데이터 요청 실패');
+        }
+      } catch (error) {
+        console.error('월별 회원 데이터를 가져오는 중 오류 발생:', error);
       }
-    } catch (error) {
-      console.error('월별 회원 데이터를 가져오는 중 오류 발생:', error);
-    }
-  };
+    };
 
-  const getTotalTasks = async () => {
-    try {
-      const response = await fetch(`http://${window.location.hostname}:7777/api/admin/total-tasks`);
-      if (response.ok) {
-        const data = await response.json();
-        setTotalTasks(data); // 상태 업데이트
-      } else {
-        console.error('Failed to fetch total tasks');
+    const getTotalTasks = async () => {
+      try {
+        const response = await fetch(`http://${window.location.hostname}:7777/api/admin/total-tasks`);
+        if (response.ok) {
+          const data = await response.json();
+          setTotalTasks(data); // 상태 업데이트
+        } else {
+          console.error('Failed to fetch total tasks');
+        }
+      } catch (error) {
+        console.error('Error fetching total tasks:', error);
       }
-    } catch (error) {
-      console.error('Error fetching total tasks:', error);
-    }
-  };
+    };
 
     getTotalEarnings();
     getTotalConsumers();
@@ -204,14 +204,14 @@ const AdminDashboard = () => {
       console.error('earningsChart element is not found.');
       return;
     }
-  
+
     const ctx = canvas.getContext('2d');
-  
+
     // 기존 차트를 제거
     if (earningsChartRef.current) {
       earningsChartRef.current.destroy();
     }
-  
+
     earningsChartRef.current = new Chart(ctx, {
       type: 'bar',
       data: {
@@ -236,25 +236,25 @@ const AdminDashboard = () => {
       },
     });
   };
-  
+
   const updateConsumerChart = (data) => {
     const canvas = document.getElementById('consumerChart');
     if (!canvas) {
       console.error('consumerChart element is not found.');
       return;
     }
-  
+
     const ctx = canvas.getContext('2d');
-  
+
     // 기존 차트를 제거
     if (consumerChartRef.current) {
       consumerChartRef.current.destroy();
     }
-  
+
     consumerChartRef.current = new Chart(ctx, {
       type: 'doughnut',
       data: {
-        labels: ['Nomal', 'VIP1', 'VIP2', 'VIP3'],
+        labels: ['Normal', 'VIP1', 'VIP2', 'VIP3'],
         datasets: [
           {
             label: 'User Distribution',
@@ -276,14 +276,14 @@ const AdminDashboard = () => {
       console.error('userChart 요소를 찾을 수 없습니다.');
       return;
     }
-  
+
     const ctx = canvas.getContext('2d');
-  
+
     // 기존 차트 제거
     if (userChartRef.current) {
       userChartRef.current.destroy();
     }
-  
+
     userChartRef.current = new Chart(ctx, {
       type: 'line', // 선형 차트
       data: {
@@ -358,7 +358,7 @@ const AdminDashboard = () => {
 
             {/* 차트 3 */}
             <div className="chart3">
-              <canvas id="userChart"></canvas> 
+              <canvas id="userChart"></canvas>
             </div>
 
             {/* 프로젝트 리스트 */}
