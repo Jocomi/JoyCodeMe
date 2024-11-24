@@ -186,22 +186,24 @@ const EnrollPost = () => {
               <div id="summernote" dangerouslySetInnerHTML={{ __html: content }} ></div>
             </div>
             <div className="mb-3">
+            {!postNo &&(
               <select
-                className="form-select"
-                value={boardType}
-                onChange={handleBoardTypeChange}
+              className="form-select"
+              value={boardType}
+              onChange={handleBoardTypeChange}
               >
-                 {loginUser?.status === 'Y' && (
-                  <>
-                <option value="enquiry">문의사항</option>
-                <option value="free">자유게시판</option>
-                <option value="project">프로젝트</option>
-                </>
+                {loginUser?.status === 'Y' && (
+                <>
+              <option value="enquiry">문의사항</option>
+              <option value="free">자유게시판</option>
+              <option value="project">프로젝트</option>
+              </>
               )}
-                {loginUser?.status === 'A' && (
-                  <option value="announcement">공지사항</option>
-                )}
+              {loginUser?.status === 'A' && (
+                <option value="announcement">공지사항</option>
+              )}
               </select>
+            )}
             </div>
             <div className="mb-3">
               <select

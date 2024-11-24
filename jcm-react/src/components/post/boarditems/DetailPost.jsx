@@ -441,7 +441,9 @@ const deleteRecomment = async (recommentNo, commentNo) =>{
                             <span className='reply-text'>{recomment.recommentText}</span>
                             <div className='recomment-items'>
                             <span className="reply-time">{new Date(recomment.recommentTime).toLocaleString()}</span>
+                            {(loginUser && (loginUser.memberId === comment.memberId || loginUser.status === 'A')) && (
                             <a onClick={()=>deleteRecomment(recomment.recommentNo , recomment.commentNo)}  style={{color : 'red'}}>삭제</a>
+                            )}
                             </div>
                           </div>
                         </div>
