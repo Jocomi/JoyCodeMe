@@ -130,37 +130,48 @@ public class MemberController {
 
 	@PostMapping("/uploadProfileImage")
 	public ResponseEntity<String> uploadProfileImage(@RequestParam("file") MultipartFile file,
-			@RequestParam("memberId") String memberId) {
-		try {
-			// 파일 이름 생성
-			String fileName = memberId + "_" + file.getOriginalFilename();
+	        @RequestParam("memberId") String memberId) {
+	    try {
+	        // 랜덤 숫자 생성
+	        int randomNum = (int) (Math.random() * 10000); // 0부터 9999 사이의 랜덤 숫자
+	        String fileExtension = ""; 
+	        
+	        // 파일 확장자 추출
+	        String originalFileName = file.getOriginalFilename();
+	        if (originalFileName != null && originalFileName.contains(".")) {
+	            fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
+	        }
 
-			// Spring 서버의 webapp/img 디렉토리에 이미지 저장 경로 설정
-			String uploadDir = servletContext.getRealPath("/img");
-			File directory = new File(uploadDir);
-			if (!directory.exists()) {
-				directory.mkdirs();
-			}
+	        // 파일 이름 생성: 닉네임_랜덤숫자.확장자
+	        String fileName = memberId + "_" + randomNum + fileExtension;
 
-			// 이미지 파일 저장
-			File targetFile = new File(directory, fileName);
-			file.transferTo(targetFile);
+	        // Spring 서버의 webapp/img 디렉토리에 이미지 저장 경로 설정
+	        String uploadDir = servletContext.getRealPath("/img");
+	        File directory = new File(uploadDir);
+	        if (!directory.exists()) {
+	            directory.mkdirs();
+	        }
 
-			// DB에 저장할 경로 값 반환
-			String imagePath = "/img/" + fileName;
-			int updateResult = mService.updateProfileImage(memberId, imagePath);
+	        // 이미지 파일 저장
+	        File targetFile = new File(directory, fileName);
+	        file.transferTo(targetFile);
 
-			if (updateResult > 0) {
-				return ResponseEntity.ok(fileName);
-			} else {
-				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("DB 업데이트 실패");
-			}
+	        // DB에 저장할 경로 값 반환
+	        String imagePath = "/img/" + fileName;
+	        int updateResult = mService.updateProfileImage(memberId, imagePath);
 
-		} catch (IOException e) {
-			e.printStackTrace();
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("File upload failed");
-		}
+	        if (updateResult > 0) {
+	            return ResponseEntity.ok(fileName);
+	        } else {
+	            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("DB 업데이트 실패");
+	        }
+
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("File upload failed");
+	    }
 	}
+
 
 	@ResponseBody
 	@PostMapping(value = "/editProfile", produces = "application/json;charset=UTF-8")
