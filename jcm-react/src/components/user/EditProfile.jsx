@@ -8,7 +8,7 @@ import instance from '../../shared/axios';
 const EditProfile = () => {
     useEffect(() => {
         instance.get(`http://${window.location.hostname}:3000/`);
-      }, []);
+    }, []);
 
     const profilePictureInputRef = useRef(null);
     const navigate = useNavigate();
@@ -42,15 +42,15 @@ const EditProfile = () => {
         const formData = new FormData();
         formData.append("file", file);
         formData.append("memberId", profileData.memberId);
-    
+
         try {
             const response = await fetch(`http://${window.location.hostname}:7777/uploadProfileImage`, {
                 method: "POST",
                 body: formData,
             });
-    
+
             if (response.ok) {
-                const fileName = await response.text(); 
+                const fileName = await response.text();
                 setProfileData((prevData) => ({
                     ...prevData,
                     pImg: `/img/${fileName}`,  // 업로드된 이미지 경로로 설정
@@ -88,26 +88,36 @@ const EditProfile = () => {
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setProfileData((prevData) => ({
-            ...prevData,
-            [name]: value,
-        }));
+
+        // 전화번호 필드에 숫자만 허용
+        if (name === "phone") {
+            const onlyNumbers = value.replace(/[^0-9]/g, ""); // 숫자만 남기기
+            setProfileData((prevData) => ({
+                ...prevData,
+                [name]: onlyNumbers,
+            }));
+        } else {
+            setProfileData((prevData) => ({
+                ...prevData,
+                [name]: value,
+            }));
+        }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-    
+
         if (imageFile) {
             await uploadImage(imageFile);
         }
-    
+
         try {
             const response = await fetch(`http://${window.location.hostname}:7777/editProfile`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(profileData),
             });
-    
+
             if (response.ok) {
                 const updatedUser = await response.json();
                 setLoginUser(updatedUser);
@@ -121,6 +131,8 @@ const EditProfile = () => {
             alert('서버 오류가 발생했습니다.');
         }
     };
+
+
 
     return (
         <div className="edit-profile-container">
@@ -155,6 +167,7 @@ const EditProfile = () => {
                             value={profileData.email}
                             onChange={handleInputChange}
                             placeholder="honggildong@example.com"
+                            readOnly
                         />
                     </div>
 
@@ -183,6 +196,7 @@ const EditProfile = () => {
                             name="phone"
                             value={profileData.phone}
                             onChange={handleInputChange}
+                            placeholder="숫자만 입력하세요"
                         />
                     </div>
 
@@ -197,13 +211,13 @@ const EditProfile = () => {
                 <>
                     <div className="addressmodal-overlay" onClick={handleComplete}></div>
                     <AddressModal
-                        company={{ address: profileData.address }}
-                        setcompany={(data) =>
+                        setAddress={(address) =>
                             setProfileData((prevData) => ({
                                 ...prevData,
-                                address: data.address,
+                                address, // address 값 업데이트
                             }))
                         }
+                        setPopup={setPopup} // 모달 닫기 함수 전달
                     />
                 </>
             )}
