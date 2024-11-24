@@ -95,12 +95,12 @@ const Report = () => {
                                         filteredData.map((post) => (
                                             <tr
                                                 key={post.reportNo}
-                                                onClick={() => navigate(`/detailpost/${post.boardType}/${post.postNo}`)}
+                                                onClick={() => navigate(`/detailpost/${post.boardType.toLowerCase()}/${post.postNo}`)}
                                                 style={{ cursor: "pointer" }}
                                             >
                                                 <td>{post.postNo}</td>
                                                 <td>{post.reportId}</td>
-                                                <td>{post.boardType}</td> {/* boardType을 표시 */}
+                                                <td>{post.boardType.toLowerCase()}</td> {/* boardType을 표시 */}
                                                 <td>{post.reportText}</td>
                                                 <td>{new Date(post.reportTime).toISOString().split("T")[0]}</td>
                                                 <td>
@@ -109,7 +109,7 @@ const Report = () => {
                                                         style={{ backgroundColor: post.status === 'N' ? '#4CAF50' : '#FF9800'}}
                                                         onClick={(event) => {
                                                             event.stopPropagation(); // 이벤트 전파 중단
-                                                            deactivateReport(post.postNo, post.reportId, post.boardType);
+                                                            deactivateReport(post.postNo, post.reportId, post.boardType.toLowerCase());
                                                         }}
                                                     >
                                                         {post.status === 'N' ? '처리 완료' : '처리 중'}
