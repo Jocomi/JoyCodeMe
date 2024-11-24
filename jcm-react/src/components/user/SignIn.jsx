@@ -34,6 +34,10 @@ const SignIn = () => {
     const [isFormValid, setIsFormValid] = useState(false); // 폼 유효성 검사 상태
     const [isPhone, setIsPhone] = useState(false);
 
+    const [verificationCodeSent, setVerificationCodeSent] = useState(false);
+    const [confirmCode, setConfirmCode] = useState('');
+    const [isCodeVerified, setIsCodeVerified] = useState(false);
+
     
     
 
@@ -50,6 +54,46 @@ const SignIn = () => {
             });
         }
     }, [clientId]);
+
+    const handleSendCodeEmail = async (e) => {
+        e.preventDefault();
+        setErrorMessage('');
+        setVerificationCodeSent(false);
+        setIsCodeVerified(false);
+        try {
+            const response = await axios.post(`http://${window.location.hostname}:7777/send`, { email });
+            if (response.status === 200) {
+                setVerificationCodeSent(true);
+                alert("인증 코드가 이메일로 전송되었습니다.");
+            } else {
+                throw new Error(response.data || "인증 코드 전송 실패");
+            }
+        } catch (error) {
+            console.error(error);
+            setErrorMessage("인증 코드 전송에 실패했습니다. 다시 시도해주세요.");
+        }
+    };
+
+    const handleVerifyCodeEmail = async (e) => {
+        e.preventDefault();
+        setErrorMessage('');
+        try {
+            const response = await axios.post(`http://${window.location.hostname}:7777/verify`, {
+                email,
+                code: confirmCode,
+            });
+            if (response.data) {
+                setIsCodeVerified(true);
+                alert("인증 코드가 확인되었습니다.");
+            } else {
+                setErrorMessage("인증 코드가 일치하지 않습니다.");
+            }
+        } catch (error) {
+            console.error(error);
+            setErrorMessage("인증 코드 확인에 실패했습니다. 다시 시도해주세요.");
+        }
+    };
+
     
 
     const userLogin = (user) => {
@@ -214,7 +258,8 @@ const SignIn = () => {
             confirmPassword &&
             password === confirmPassword &&
             isIdChecked &&
-            isPasswordChecked
+            isPasswordChecked &&
+            isCodeVerified
         );
     };    
 
@@ -455,6 +500,45 @@ const SignIn = () => {
                             <label htmlFor="email">Email</label>
                             {emailError && <div className="error-text">{emailError}</div>}
                         </div>
+                        {!verificationCodeSent && (
+                            <div className="form-group">
+                                <button
+                                    type="button"
+                                    onClick={handleSendCodeEmail}
+                                    className="form-btn"
+                                >
+                                    인증 코드 전송
+                                </button>
+                                {errorMessage && <div className="error-text">{errorMessage}</div>}
+                            </div>
+                        )}
+
+                        {verificationCodeSent && !isCodeVerified && (
+                            <div className="form-group">
+                                <input
+                                    type="text"
+                                    placeholder="인증 코드"
+                                    value={confirmCode}
+                                    onChange={(e) => setConfirmCode(e.target.value)}
+                                    required
+                                />
+                                <button
+                                    type="button"
+                                    onClick={handleVerifyCodeEmail}
+                                    className="form-btn"
+                                >
+                                    인증 코드 확인
+                                </button>
+                                {errorMessage && <div className="error-text">{errorMessage}</div>}
+                            </div>
+                        )}
+
+                        // 인증 완료 메시지
+                        {isCodeVerified && (
+                            <div className="success-text">이메일 인증이 완료되었습니다.</div>
+                        )}
+
+
                         <div className="form-group">
                             <input type="phone" id="phone" required placeholder=" " onChange={handlePhoneChange} />
                             <label htmlFor="phone">Phone</label>

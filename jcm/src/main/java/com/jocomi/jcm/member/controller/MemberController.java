@@ -404,6 +404,41 @@ public class MemberController {
 	    boolean isValid = mService.verifyCode(memberId, code);
 	    return ResponseEntity.ok(isValid);
 	}
+	
+
+    
+    // 이메일 인증 코드 전송
+    @PostMapping("/send")
+    public ResponseEntity<String> sendEmailVerificationCode(@RequestBody Map<String, String> request) {
+        String email = request.get("email");
+        if (email == null || email.isEmpty()) {
+            return ResponseEntity.badRequest().body("이메일은 필수 입력 값입니다.");
+        }
+
+        // 인증 코드 생성 및 이메일 전송
+        String verificationCode = mService.createVerificationCodeForEmail(email);
+        boolean isEmailSent = mService.sendCodeToEmail(email, verificationCode);
+
+        if (isEmailSent) {
+            return ResponseEntity.ok("인증 코드가 이메일로 전송되었습니다.");
+        } else {
+            return ResponseEntity.status(500).body("인증 코드 전송 실패");
+        }
+    }
+
+    // 이메일 인증 코드 검증
+    @PostMapping("/verify")
+    public ResponseEntity<Boolean> verifyEmailCode(@RequestBody Map<String, String> request) {
+        String email = request.get("email");
+        String code = request.get("code");
+
+        if (email == null || email.isEmpty() || code == null || code.isEmpty()) {
+            return ResponseEntity.badRequest().body(false);
+        }
+
+        boolean isVerified = mService.validateEmailCode(email, code);
+        return ResponseEntity.ok(isVerified);
+    }
 
 
 
