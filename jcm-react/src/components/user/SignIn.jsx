@@ -57,7 +57,6 @@ const SignIn = () => {
 
     const handleSendCodeEmail = async (e) => {
         e.preventDefault();
-        setErrorMessage('');
         setVerificationCodeSent(false);
         setIsCodeVerified(false);
         try {
@@ -70,13 +69,12 @@ const SignIn = () => {
             }
         } catch (error) {
             console.error(error);
-            setErrorMessage("인증 코드 전송에 실패했습니다. 다시 시도해주세요.");
+            alert("인증 코드 전송에 실패했습니다. 다시 시도해주세요.");
         }
     };
 
     const handleVerifyCodeEmail = async (e) => {
         e.preventDefault();
-        setErrorMessage('');
         try {
             const response = await axios.post(`http://${window.location.hostname}:7777/verify`, {
                 email,
@@ -86,7 +84,7 @@ const SignIn = () => {
                 setIsCodeVerified(true);
                 alert("인증 코드가 확인되었습니다.");
             } else {
-                setErrorMessage("인증 코드가 일치하지 않습니다.");
+                alert("인증 코드가 일치하지 않습니다.");
             }
         } catch (error) {
             console.error(error);
@@ -498,7 +496,6 @@ const SignIn = () => {
                         <div className="form-group">
                             <input type="text" id="email" required placeholder=" " onChange={handleEmailChange} />
                             <label htmlFor="email">Email</label>
-                            {emailError && <div className="error-email">{emailError}</div>}
                         </div>
                         {!verificationCodeSent && (
                             <div className="form-group">
@@ -509,7 +506,6 @@ const SignIn = () => {
                                 >
                                     인증 코드 전송
                                 </button>
-                                {errorMessage && <div className="error-text">{errorMessage}</div>}
                             </div>
                         )}
 
@@ -529,11 +525,10 @@ const SignIn = () => {
                                 >
                                     인증 코드 확인
                                 </button>
-                                {errorMessage && <div className="error-text">{errorMessage}</div>}
                             </div>
                         )}
                         {isCodeVerified && (
-                            <div className="success-text">이메일 인증이 완료되었습니다.</div>
+                            <div className="success-email">이메일 인증이 완료되었습니다.</div>
                         )}
 
 
