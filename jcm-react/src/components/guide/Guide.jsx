@@ -188,7 +188,7 @@ const Guide = () => {
                 <span className="amount">{index === 0 ? '49,900' : index === 1 ? '99,900' : '199,900'}</span>
                 <span className="after">/영구</span>
               </div>
-              <button className="price-button"  disabled={disabledStatus[index]}  onClick={() => requestPayment(index === 0 ? 49900 : index === 1 ? 99900 : 199900, plan, `VIP${index + 1}`)}
+              <button className="price-button"  disabled={disabledStatus[index]}  onClick={() => requestPayment(index === 0 ? 100 : index === 1 ? 200 : 300, plan, `VIP${index + 1}`)}
               >
                  {disabledStatus[index] ? 'Purchased' : 'Get Started'} {/* 버튼 텍스트 변경 */}
               </button>
