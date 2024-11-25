@@ -30,8 +30,8 @@ public class PaymentService {
         }
     }
 
-	public Payment selectPayment(String memberId) {
-		Payment payment = paymentMapper.selectPayment(memberId);
+	public List<Payment> selectPayment(String memberId) {
+		List<Payment> payment = paymentMapper.selectPayment(memberId);
 		return payment;
 	}
 }

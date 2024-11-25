@@ -18,7 +18,7 @@ const EnrollPost = () => {
   const [title, setTitle] = useState(state?.postTitle || '');
   const [memberId, setMemberId] = useState('');
   const [visibility, setVisibility] = useState(state?.status || 'Y');
-  const [boardType, setBoardType] = useState(state?.boardType || 'enquiry');
+  const [boardType, setBoardType] = useState(state?.boardType || '');
   const [post, setPost] = useState('');
   const postNo = state?.postNo;
 
@@ -108,7 +108,7 @@ const EnrollPost = () => {
   setVisibility(e.target.value); // 기타 게시판은 선택 가능
   };
   const handleBoardTypeChange = (e) => {
-    const selectedBoardType = e.target.value;
+    const selectedBoardType = e;
     setBoardType(selectedBoardType);
   
     // 자유게시판과 공지사항 선택 시 공개로 설정
@@ -190,7 +190,7 @@ const EnrollPost = () => {
               <select
               className="form-select"
               value={boardType}
-              onChange={handleBoardTypeChange}
+              onChange={(e)=>handleBoardTypeChange(e.target.value)}
               >
                 {loginUser?.status === 'Y' && (
                 <>
@@ -200,7 +200,12 @@ const EnrollPost = () => {
               </>
               )}
               {loginUser?.status === 'A' && (
+                <>
+                 <option value="enquiry">문의사항</option>
+                 <option value="free">자유게시판</option>
+                 <option value="project">프로젝트</option>
                 <option value="announcement">공지사항</option>
+                </>
               )}
               </select>
             )}

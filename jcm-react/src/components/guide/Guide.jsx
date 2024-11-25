@@ -10,7 +10,7 @@ const Guide = () => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
   const [isSuccessModalOpen, setSuccessModalOpen] = useState(false);
-  const [payProduct , setPayProduct] = useState();
+  const [payProduct , setPayProduct] = useState([]);
 
   const openModal = (message) => {
     setModalMessage(message);
@@ -135,9 +135,16 @@ const Guide = () => {
         const response = await axios.get(`http://${window.location.hostname}:7777/api/payment/select`, {
             params: loginUser ? { memberId: loginUser.memberId } : {},
         });
-        setPayProduct(response.data.payProduct);
-        console.log(response.data.payProduct);
-    } catch (error) {
+        const payments = response.data;
+        if (Array.isArray(payments) && payments.length > 0) {
+          // 최신 날짜 데이터 찾기
+          const latestPayment = payments.reduce((latest, current) => {
+            return new Date(current.payTime) > new Date(latest.payTime) ? current : latest;
+          });
+          setPayProduct(latestPayment.payProduct); // 최신 데이터의 payProduct 설정
+          console.log("Latest Payment:", latestPayment);
+    } 
+    }catch (error) {
         // 오류 처리
         console.error("Error fetching payment information:", error.message);
         if (error.response) {
