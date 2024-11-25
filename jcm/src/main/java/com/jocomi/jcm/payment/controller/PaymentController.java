@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jocomi.jcm.payment.model.vo.Payment;
@@ -36,6 +37,14 @@ public class PaymentController {
     public ResponseEntity<List<Payment>> getPaymentsByMemberId(String memberId) {
         List<Payment> payments = paymentService.getPaymentsByMemberId(memberId);
         return ResponseEntity.ok(payments);
+    }
+    
+    
+    @GetMapping("/select")
+    public Payment selectPayment(@RequestParam("memberId") String memberId){
+    	System.out.println(memberId);
+    	Payment payment = paymentService.selectPayment(memberId);
+    	return payment;
     }
 
 }

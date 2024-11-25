@@ -13,4 +13,8 @@ public interface PaymentMapper {
     int insertPayment(Payment payment);
 
 	List<Payment> getPaymentsByMemberId(String memberId);
+
+	Payment selectPayment(String memberId);
+	
+	
 }

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { motion } from 'framer-motion';
 import { LoginUser } from '../../App'; // 로그인 상태 확인용 컨텍스트
 import '../../css/guide/Guide.css';
+import axios from 'axios';
 
 const Guide = () => {
   const { data: loginUser } = useContext(LoginUser);
@@ -9,6 +10,7 @@ const Guide = () => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
   const [isSuccessModalOpen, setSuccessModalOpen] = useState(false);
+  const [payProduct , setPayProduct] = useState();
 
   const openModal = (message) => {
     setModalMessage(message);
@@ -113,6 +115,7 @@ const Guide = () => {
 
   // Bootpay 스크립트 로드
   useEffect(() => {
+    selsectPaymentToServer()
     const script = document.createElement('script');
     script.src = 'https://js.bootpay.co.kr/bootpay-5.0.1.min.js';
     script.async = true;
@@ -126,6 +129,31 @@ const Guide = () => {
       document.body.removeChild(script);
     };
   }, []);
+    // 로그인 유저의 결재정보 받아오는 api
+    const selsectPaymentToServer = async () => {
+      try {
+        const response = await axios.get(`http://${window.location.hostname}:7777/api/payment/select`, {
+            params: loginUser ? { memberId: loginUser.memberId } : {},
+        });
+        setPayProduct(response.data.payProduct);
+        console.log(response.data.payProduct);
+    } catch (error) {
+        // 오류 처리
+        console.error("Error fetching payment information:", error.message);
+        if (error.response) {
+            console.error("Server error details:", error.response.data);
+        }
+    }
+    };
+  
+  // payProduct와 현재 플랜 비교하여 버튼 비활성화 상태 결정
+  const disabledStatus = ['VIP1', 'VIP2', 'VIP3'].map((vip, idx) => {
+    if (!payProduct) return false; // 결제 정보가 없으면 모두 활성화
+    if (payProduct === vip) return true; // 현재 요금제와 동일한 경우
+    if (payProduct === 'VIP2' && idx === 0) return true; // VIP2일 경우 VIP1 비활성화
+    if (payProduct === 'VIP3' && idx < 2) return true; // VIP3일 경우 VIP1, VIP2 비활성화
+    return false; // 기본적으로 활성화
+  });
 
   return (
     <div className='guide-container'>
@@ -160,9 +188,9 @@ const Guide = () => {
                 <span className="amount">{index === 0 ? '49,900' : index === 1 ? '99,900' : '199,900'}</span>
                 <span className="after">/영구</span>
               </div>
-              <button className="price-button" onClick={() => requestPayment(index === 0 ? 49900 : index === 1 ? 99900 : 199900, plan, `VIP${index + 1}`)}
+              <button className="price-button"  disabled={disabledStatus[index]}  onClick={() => requestPayment(index === 0 ? 49900 : index === 1 ? 99900 : 199900, plan, `VIP${index + 1}`)}
               >
-                Get Started
+                 {disabledStatus[index] ? 'Purchased' : 'Get Started'} {/* 버튼 텍스트 변경 */}
               </button>
             </div>
           </motion.div>

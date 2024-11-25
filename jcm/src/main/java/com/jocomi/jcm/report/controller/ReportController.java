@@ -28,7 +28,6 @@ public class ReportController {
 		
 	 @PostMapping(value = "/{boardType}/{postNo}/report" , produces = "application/json;charset=UTF-8" )
 	    public ResponseEntity<Map<String, Integer>> createReport(@PathVariable String boardType, @PathVariable int postNo, @RequestBody ReportVo report){
-		 System.out.println(report);
 		int result = rService.createReport(boardType, postNo, report);
 		Map<String, Integer> response = new HashMap<>();
 	    response.put("result", result);

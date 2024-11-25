@@ -126,6 +126,10 @@
   cursor: pointer;
   text-decoration: none;
 }
+.guide-container .pricing-table .price-button:disabled{
+  color: #b3b3b3;
+  text-decoration: none;
+}
 
 .guide-container .purple .pricing-label {
   background: #cad2ff;
@@ -138,6 +142,12 @@
 
 .guide-container .purple .price-button {
   background: #627afe;
+}
+.guide-container .purple .price-button:disabled {
+  background: #a0a2ad;
+}
+.guide-container .purple .price-button:disabled:hover {
+  background: #a0a2ad;
 }
 
 .guide-container .purple .price-button:hover {
@@ -155,6 +165,12 @@
 
 .guide-container .turquoise .price-button {
   background: #44cdd2;
+}
+.guide-container .turquoise .price-button:disabled {
+  background: #809292;
+}
+.guide-container .turquoise .price-button:disabled:hover {
+  background: #809292;
 }
 
 .guide-container .turquoise .price-button:hover {
@@ -176,6 +192,12 @@
 
 .guide-container .red .price-button:hover {
   background: #f23c3c; /* 빨간색 버튼 hover */
+}
+.guide-container .red .price-button:disabled {
+  background: #aca1a1; /* 빨간색 버튼 hover */
+}
+.guide-container .red .price-button:disabled:hover {
+  background: #aca1a1; /* 빨간색 버튼 hover */
 }
 
 /* All plans */

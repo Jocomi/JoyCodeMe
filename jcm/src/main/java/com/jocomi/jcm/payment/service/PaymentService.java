@@ -29,4 +29,9 @@ public class PaymentService {
             return false;
         }
     }
+
+	public Payment selectPayment(String memberId) {
+		Payment payment = paymentMapper.selectPayment(memberId);
+		return payment;
+	}
 }

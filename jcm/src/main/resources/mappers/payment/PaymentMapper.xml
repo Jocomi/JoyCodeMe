@@ -13,5 +13,10 @@
         SELECT * FROM payment WHERE member_id = #{memberId}
     </select>
 
+	 <select id="selectPayment" parameterType="String" resultType="com.jocomi.jcm.payment.model.vo.Payment">
+        SELECT PAY_ID, MEMBER_ID, PAY_METHOD, PAY_PRODUCT, PAY_PRICE, PAY_TIME, PAY_STATUS
+        FROM PAYMENT
+        WHERE MEMBER_ID = #{memberId} AND PAY_STATUS = 'Y'
+    </select>
 </mapper>
  
