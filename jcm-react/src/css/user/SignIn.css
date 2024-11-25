@@ -139,6 +139,12 @@
   margin-top: 0;
 }
 
+.signIn-container .error-email {
+  color: red;
+  font-size: 0.6rem;
+  margin-top: 0;
+}
+
 .signIn-container #loginForm {
   margin: 80px auto;
 }
