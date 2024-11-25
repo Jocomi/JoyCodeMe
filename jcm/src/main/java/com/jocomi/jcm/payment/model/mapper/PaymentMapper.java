@@ -14,7 +14,7 @@ public interface PaymentMapper {
 
 	List<Payment> getPaymentsByMemberId(String memberId);
 
-	Payment selectPayment(String memberId);
+	List<Payment> selectPayment(String memberId);
 	
 	
 }

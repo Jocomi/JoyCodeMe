@@ -41,9 +41,8 @@ public class PaymentController {
     
     
     @GetMapping("/select")
-    public Payment selectPayment(@RequestParam("memberId") String memberId){
-    	System.out.println(memberId);
-    	Payment payment = paymentService.selectPayment(memberId);
+    public List<Payment> selectPayment(@RequestParam("memberId") String memberId) {
+    	List<Payment> payment = paymentService.selectPayment(memberId);
     	return payment;
     }
 
