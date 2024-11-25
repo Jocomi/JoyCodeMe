@@ -498,7 +498,7 @@ const SignIn = () => {
                         <div className="form-group">
                             <input type="text" id="email" required placeholder=" " onChange={handleEmailChange} />
                             <label htmlFor="email">Email</label>
-                            {emailError && <div className="error-text">{emailError}</div>}
+                            {emailError && <div className="error-email">{emailError}</div>}
                         </div>
                         {!verificationCodeSent && (
                             <div className="form-group">
@@ -532,8 +532,6 @@ const SignIn = () => {
                                 {errorMessage && <div className="error-text">{errorMessage}</div>}
                             </div>
                         )}
-
-                        // 인증 완료 메시지
                         {isCodeVerified && (
                             <div className="success-text">이메일 인증이 완료되었습니다.</div>
                         )}

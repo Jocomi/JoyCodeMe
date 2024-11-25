@@ -189,7 +189,7 @@ public class MemberService {
                 "</div>" +
                 "<div style='padding: 20px; color: #333333;'>" +
                 "<p style='font-size: 16px; line-height: 1.6;'>안녕하세요,</p>" +
-                "<p style='font-size: 16px; line-height: 1.6;'>비밀번호를 변경하기 이메일 인증이 필요합니다. 아래의 인증 코드를 사용하여 계속 진행해 주세요:</p>" +
+                "<p style='font-size: 16px; line-height: 1.6;'>회원가입을 진행하기 위해 이메일 인증이 필요합니다. 아래의 인증 코드를 사용하여 계속 진행해 주세요:</p>" +
                 "<div style='text-align: center; background-color: #f0f0f0; padding: 15px; font-size: 24px; letter-spacing: 4px; border-radius: 8px; margin: 20px 0; font-weight: bold;'>" + verificationCode + "</div>" +
                 "<p style='font-size: 16px; line-height: 1.6;'>이 인증 코드는 10분 동안 유효합니다. 만약 요청하지 않았다면, 이 메일을 무시해 주세요.</p>" +
                 "<p style='font-size: 16px; line-height: 1.6;'>감사합니다,<br>Joy Code Me</p>" +
